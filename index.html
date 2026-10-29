@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programación Estructurada con Python — Guía Interactiva</title>
+    <style>
+        :root{
+            --primary:#2563eb;
+            --primary-dark:#1d4ed8;
+            --ink:#1e293b;
+            --muted:#64748b;
+            --bg:#f1f5f9;
+            --card:#ffffff;
+            --border:#e2e8f0;
+            --code:#0f172a;
+            --ok:#16a34a;
+            --ok-bg:#dcfce7;
+            --bad:#dc2626;
+            --bad-bg:#fee2e2;
+            --accent:#f59e0b;
+        }
+        *{box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        body{
+            margin:0;
+            font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+            background:var(--bg);
+            color:var(--ink);
+            line-height:1.65;
+        }
+        /* ---------- Encabezado ---------- */
+        header.hero{
+            background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#3b82f6 100%);
+            color:#fff;
+            padding:3rem 1rem 2.5rem;
+            text-align:center;
+        }
+        header.hero h1{margin:0 0 .6rem;font-size:clamp(1.6rem,4vw,2.4rem);}
+        header.hero p{margin:0;opacity:.92;font-size:1.05rem;}
+        .badge{
+            display:inline-block;margin-top:1.1rem;padding:.35rem .9rem;
+            background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);
+            border-radius:999px;font-size:.85rem;letter-spacing:.3px;
+        }
+        a.hero-link{
+            display:inline-block;margin-top:1rem;color:#fff;font-weight:600;
+            font-size:.9rem;text-decoration:none;border-bottom:1px dashed rgba(255,255,255,.6);
+        }
+        a.hero-link:hover{border-bottom-style:solid;}
+        /* ---------- Navegación ---------- */
+        nav.sumario{
+            position:sticky;top:0;z-index:20;
+            background:rgba(255,255,255,.95);
+            backdrop-filter:blur(8px);
+            border-bottom:1px solid var(--border);
+            padding:.6rem 1rem;
+            display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;
+        }
+        nav.sumario a{
+            color:var(--primary);text-decoration:none;font-weight:600;font-size:.9rem;
+            padding:.35rem .75rem;border-radius:6px;transition:background .2s;
+        }
+        nav.sumario a:hover{background:#dbeafe;}
+        /* ---------- Layout ---------- */
+        main{max-width:920px;margin:0 auto;padding:2rem 1rem 4rem;}
+        section{margin-bottom:3rem;}
+        h2.section-title{
+            font-size:1.5rem;color:#1e3a8a;margin:0 0 .4rem;
+            padding-bottom:.5rem;border-bottom:3px solid var(--primary);
+        }
+        .section-sub{color:var(--muted);margin:0 0 1.5rem;font-size:.95rem;}
+        /* ---------- Tarjetas ---------- */
+        .card{
+            background:var(--card);border:1px solid var(--border);border-radius:12px;
+            padding:1.4rem 1.5rem;margin-bottom:1.25rem;
+            box-shadow:0 1px 3px rgba(15,23,42,.06);
+            transition:box-shadow .2s, transform .2s;
+        }
+        .card:hover{box-shadow:0 8px 24px rgba(15,23,42,.09);}
+        .card h3{
+            display:flex;align-items:center;gap:.6rem;
+            margin:0 0 .8rem;font-size:1.15rem;color:var(--primary);
+        }
+        .num{
+            flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+            width:28px;height:28px;border-radius:50%;
+            background:var(--primary);color:#fff;font-size:.85rem;font-weight:700;
+        }
+        .concept{
+            background:#eff6ff;border-left:4px solid var(--primary);
+            padding:.8rem 1rem;border-radius:0 8px 8px 0;margin:0 0 1rem;
+        }
+        .concept strong{color:#1e3a8a;}
+        .syntax{
+            background:#f8fafc;border:1px dashed #94a3b8;border-radius:8px;
+            padding:.7rem .9rem;margin:0 0 1rem;font-family:Consolas,Monaco,monospace;
+            font-size:.9rem;color:#334155;overflow-x:auto;
+        }
+        .syntax-label{
+            display:block;font-family:system-ui,sans-serif;font-size:.75rem;
+            text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.35rem;
+        }
+        /* ---------- Código ---------- */
+        pre{
+            background:var(--code);color:#e2e8f0;border-radius:10px;
+            padding:1rem 1.1rem;overflow-x:auto;margin:0 0 1rem;
+            font-family:"Fira Code",Consolas,Monaco,monospace;
+            font-size:.86rem;line-height:1.55;tab-size:4;
+        }
+        pre code{font-family:inherit;background:none;padding:0;}
+        .cmt{color:#94a3b8;font-style:italic;}
+        .kw{color:#7dd3fc;font-weight:600;}
+        .str{color:#fde68a;}
+        .fn{color:#86efac;}
+        .nu{color:#fca5a5;}
+        code.inline{
+            background:#e2e8f0;color:#0f172a;padding:.1rem .35rem;
+            border-radius:4px;font-family:Consolas,Monaco,monospace;font-size:.88em;
+        }
+        ul.explain{margin:0;padding-left:1.1rem;}
+        ul.explain li{margin:.35rem 0;font-size:.93rem;}
+        ul.explain li strong{color:#0f172a;}
+        ol.explain{margin:.3rem 0 0;padding-left:1.2rem;}
+        ol.explain li{margin:.3rem 0;font-size:.93rem;}
+        .example-label{
+            display:inline-block;font-size:.78rem;font-weight:700;text-transform:uppercase;
+            letter-spacing:.06em;color:#fff;background:var(--primary);border-radius:4px;
+            padding:.15rem .5rem;margin:0 0 .5rem;
+        }
+        .example-label.alt{background:#0ea5e9;}
+        .example-label.alt2{background:#8b5cf6;}
+        .example-label.alt3{background:#059669;}
+        .note{
+            background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;
+            padding:.75rem .95rem;font-size:.9rem;margin:0 0 1rem;
+        }
+        .note strong{color:#92400e;}
+        /* ---------- Sub-bloques dentro de un tema ---------- */
+        .sub{
+            font-size:.98rem;color:#0f172a;margin:1.4rem 0 .5rem;
+            padding-left:.6rem;border-left:4px solid #93c5fd;
+        }
+        .sub:first-child{margin-top:.2rem;}
+        /* ---------- Bloques de color ---------- */
+        .okbox{
+            border-left:4px solid var(--ok);background:#f0fdf4;border-radius:0 8px 8px 0;
+            padding:.7rem .95rem;font-size:.9rem;margin:.8rem 0;
+        }
+        .okbox strong{color:#15803d;}
+        .alerta{
+            border-left:4px solid var(--bad);background:#fef2f2;border-radius:0 8px 8px 0;
+            padding:.7rem .95rem;font-size:.9rem;margin:.8rem 0;
+        }
+        .alerta strong{color:#b91c1c;}
+        .buenas{
+            border-left:4px solid var(--accent);background:#fffbeb;border-radius:0 8px 8px 0;
+            padding:.7rem .95rem;font-size:.9rem;margin:.8rem 0;
+        }
+        .buenas strong{color:#b45309;}
+        /* ---------- Tablas ---------- */
+        table.datos{width:100%;border-collapse:collapse;font-size:.87rem;margin:.5rem 0 .8rem;}
+        table.datos th{
+            text-align:left;color:#1e3a8a;background:#eff6ff;
+            border-bottom:2px solid var(--border);padding:.4rem .55rem;
+        }
+        table.datos td{border-bottom:1px solid var(--border);padding:.4rem .55rem;vertical-align:top;}
+        table.datos tr:nth-child(even) td{background:#f8fafc;}
+        .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+        /* ---------- Temas en acordeón ---------- */
+        .card.topic{padding:0;overflow:hidden;scroll-margin-top:80px;}
+        .card.topic h3{
+            margin:0;padding:1.15rem 1.5rem;cursor:pointer;user-select:none;
+            border-bottom:1px solid transparent;transition:background .15s;
+        }
+        .card.topic h3:hover{background:#f8fafc;}
+        .card.topic h3:focus-visible{outline:2px solid var(--primary);outline-offset:-2px;}
+        .card.topic.open h3{border-bottom-color:var(--border);}
+        .chevron{
+            margin-left:auto;color:var(--muted);font-size:.85rem;
+            transition:transform .2s;
+        }
+        .card.topic.open .chevron{transform:rotate(180deg);}
+        .topic-tabs{display:flex;gap:.45rem;flex-wrap:wrap;padding:1rem 1.5rem .2rem;}
+        .topic-tab{
+            border:1.5px solid var(--border);background:#fff;color:var(--muted);
+            font-weight:600;font-size:.85rem;padding:.45rem .9rem;border-radius:999px;
+            cursor:pointer;transition:all .15s;
+        }
+        .topic-tab:hover{border-color:#93c5fd;color:var(--primary);}
+        .topic-tab.active{background:var(--primary);border-color:var(--primary);color:#fff;}
+        .topic-panel{padding:.8rem 1.5rem 1.5rem;}
+        .topic-panel[hidden]{display:none;}
+        .topic-panel-ejercicio .exercise{margin-top:0;}
+        .card.topic.closed .topic-tabs,
+        .card.topic.closed .topic-panel{display:none;}
+        /* ---------- Quiz ---------- */
+        .quiz-question{border-bottom:1px dashed var(--border);padding-bottom:1.1rem;margin-bottom:1.1rem;}
+        .quiz-question:last-of-type{border-bottom:none;}
+        .q-text{margin:0 0 .7rem;font-weight:600;}
+        .options-list{list-style:none;margin:0;padding:0;display:grid;gap:.5rem;}
+        .options-list li{
+            border:1.5px solid var(--border);border-radius:8px;
+            padding:.6rem .8rem;cursor:pointer;font-size:.93rem;
+            background:#fff;transition:all .15s;user-select:none;
+        }
+        .options-list li:hover{border-color:#93c5fd;background:#f8fbff;}
+        .options-list li.selected{border-color:var(--primary);background:#dbeafe;font-weight:600;}
+        .options-list li.correct{border-color:var(--ok);background:var(--ok-bg);color:#14532d;font-weight:600;}
+        .options-list li.incorrect{border-color:var(--bad);background:var(--bad-bg);color:#7f1d1d;}
+        .btn{
+            border:none;border-radius:8px;padding:.7rem 1.4rem;font-size:.95rem;
+            font-weight:600;cursor:pointer;transition:background .2s, transform .1s;
+        }
+        .btn:active{transform:scale(.98);}
+        .btn-primary{background:var(--primary);color:#fff;}
+        .btn-primary:hover{background:var(--primary-dark);}
+        .btn-ghost{background:#e2e8f0;color:#334155;}
+        .btn-ghost:hover{background:#cbd5e1;}
+        .quiz-actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.2rem;}
+        #score-banner, #score-parteA{
+            display:none;margin-top:1.2rem;padding:1rem;border-radius:10px;
+            text-align:center;font-weight:700;font-size:1.05rem;
+        }
+        /* ---------- Ejercicios autocorregibles ---------- */
+        .exercise{
+            margin-top:1.1rem;padding:1rem 1.1rem;border:2px solid #10b981;
+            border-radius:10px;background:#f0fdf4;
+        }
+        .exercise h4{margin:0 0 .35rem;color:#047857;font-size:1rem;}
+        .ex-goal{font-size:.92rem;margin:0 0 .6rem;}
+        .code-input{
+            width:100%;min-height:150px;resize:vertical;
+            font-family:"Fira Code",Consolas,Monaco,monospace;font-size:.85rem;
+            line-height:1.5;padding:.7rem .8rem;border:1.5px solid #a7f3d0;
+            border-radius:8px;background:#fff;color:#0f172a;tab-size:4;
+        }
+        .code-input:focus{outline:none;border-color:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.15);}
+        .ex-actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem;}
+        .ex-actions .btn{padding:.5rem 1rem;font-size:.88rem;}
+        .result{display:none;margin-top:.8rem;}
+        .result.show{display:block;}
+        .result-head{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.5rem;}
+        .result-score{font-weight:700;font-size:.95rem;white-space:nowrap;}
+        .score-bar{flex:1 1 160px;height:10px;border-radius:999px;background:#e5e7eb;overflow:hidden;min-width:120px;}
+        .score-fill{height:100%;width:0;background:linear-gradient(90deg,#34d399,#10b981);transition:width .35s;}
+        .result ul{list-style:none;margin:0;padding:0;font-size:.88rem;}
+        .result li{padding:.25rem 0;}
+        .result li.ok{color:#166534;}
+        .result li.fail{color:#991b1b;}
+        .result-msg{margin-top:.5rem;font-size:.9rem;font-weight:600;}
+        /* ---------- Resumen de progreso ---------- */
+        .progress-card{
+            border:2px solid #0ea5e9;border-radius:12px;
+            background:linear-gradient(135deg,#f0f9ff,#e0f2fe);
+            padding:1.4rem 1.5rem;margin-top:1.5rem;
+        }
+        .progress-card h3{color:#0369a1;margin:0 0 .3rem;}
+        .progress-top{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin:.7rem 0 1rem;}
+        .progress-top .score-bar{height:12px;}
+        .progress-pct{font-weight:700;color:#075985;white-space:nowrap;}
+        ul.progress-list{list-style:none;margin:0;padding:0;display:grid;gap:.4rem;}
+        ul.progress-list li{
+            display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;
+            font-size:.9rem;padding:.35rem .1rem;
+        }
+        ul.progress-list a{color:#0c4a6e;font-weight:600;text-decoration:none;flex:1 1 220px;}
+        ul.progress-list a:hover{text-decoration:underline;}
+        .pill{
+            font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+            padding:.15rem .55rem;border-radius:999px;white-space:nowrap;border:1px solid transparent;
+        }
+        .pill.todo{background:#f1f5f9;color:#64748b;border-color:#cbd5e1;}
+        .pill.progress{background:#fef3c7;color:#92400e;border-color:#fcd34d;}
+        .pill.done{background:#dcfce7;color:#166534;border-color:#86efac;}
+        /* ---------- Entrega final ---------- */
+        .delivery{border:2px dashed #7c3aed;background:#faf5ff;}
+        .delivery h3{color:#6d28d9;}
+        .delivery .exercise{border-color:#8b5cf6;background:#fdfbff;}
+        .delivery .exercise h4{color:#6d28d9;}
+        .delivery .code-input{border-color:#ddd6fe;}
+        .delivery .code-input:focus{border-color:#8b5cf6;box-shadow:0 0 0 3px rgba(139,92,246,.15);}
+        /* ---------- Simuladores ---------- */
+        .sim{padding:1.2rem 1.3rem;}
+        .sim h3{color:#0369a1;}
+        .sim-row{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin:.6rem 0;}
+        .sim input[type=text]{
+            width:110px;padding:.55rem .7rem;border:1.5px solid var(--border);
+            border-radius:8px;font-size:.95rem;font-family:inherit;
+        }
+        .sim input[type=text]:focus{outline:none;border-color:var(--primary);}
+        #reloj-num{font-size:2.2rem;font-weight:700;color:var(--primary);margin:.1rem 0;}
+        .sim-msg{display:none;margin-top:.6rem;padding:.6rem .85rem;border-radius:0 8px 8px 0;font-size:.9rem;font-weight:600;}
+        .sim-msg.ok{display:block;background:#f0fdf4;border-left:4px solid var(--ok);color:#15803d;}
+        .sim-msg.bad{display:block;background:#fef2f2;border-left:4px solid var(--bad);color:#b91c1c;}
+        /* ---------- Footer ---------- */
+        footer.pie{
+            text-align:center;color:var(--muted);font-size:.85rem;
+            margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);
+        }
+        /* ---------- Responsive ---------- */
+        @media (max-width:640px){
+            main{padding:1.2rem .7rem 3rem;}
+            .card{padding:1.1rem;}
+            pre{font-size:.78rem;}
+            .card.topic h3{padding:1rem 1.1rem;}
+            .topic-tabs{padding:.9rem 1.1rem 0;}
+            .topic-panel{padding:.7rem 1.1rem 1.2rem;}
+        }
+        @media print{
+            nav.sumario, .quiz-actions, .btn, #score-banner, #score-parteA{display:none !important;}
+            body{background:#fff;}
+            .card{box-shadow:none;break-inside:avoid;}
+            .topic-tabs, .chevron{display:none !important;}
+            .card.topic.closed .topic-panel,
+            .topic-panel[hidden]{display:block !important;}
+            .card.topic h3{border-bottom:1px solid var(--border);}
+            header.hero{background:#1e3a8a !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+            pre{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+            .code-input{min-height:90px;}
+        }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <h1>Fundamentos de Programación con Python</h1>
+    <p>Aprende lógica y domina Python desde cero</p>
+    <span class="badge">Guía teórico-práctica · 5to año · Escuela Técnica</span>
+    <p><a class="hero-link" href="parte2.html">Ir a Parte 2 · Listas, tuplas, diccionarios, Canvas y base de datos →</a></p>
+</header>
+
+<nav class="sumario">
+    <a href="#teoria">📘 Teoría</a>
+    <a href="#quiz">📝 Autoevaluación</a>
+    <a href="#simuladores">🧪 Simuladores</a>
+    <a href="#entrega">📤 Actividad final</a>
+    <a href="parte2.html">➡️ Parte 2</a>
+</nav>
+
+<main>
+
+    <!-- ================= SECCIÓN 1 ================= -->
+    <section id="teoria">
+        <h2 class="section-title">SECCIÓN 1 · Contenido Explicativo</h2>
+        <p class="section-sub">
+            Los temas están ordenados en <strong>secuencia de aprendizaje</strong>: primero guardar datos,
+            luego decidir, repetir, interactuar, modularizar y finalmente construir una interfaz.
+            <strong>Tocá un tema</strong> para abrirlo y usá las pestañas
+            <strong>📘 Teoría</strong> y <strong>✍️ Ejercitación</strong>.
+            Cada ejercicio se corrige al instante en esta página, sin descargar nada.
+        </p>
+
+        <!-- 1 -->
+        <article class="card">
+            <h3><span class="num">1</span> Variables y tipos de datos</h3>
+            <p class="concept">
+                Una <strong>variable</strong> es una <strong>caja etiquetada</strong> donde el programa guarda un dato
+                para usarlo después. El signo <code class="inline">=</code> no significa "igual" como en matemática:
+                significa <em>guardá esto acá adentro</em>.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis</span>
+                nombre_variable = valor
+            </div>
+            <div class="sub">Asignación y tipos</div>
+            <pre><code>nombre = <span class="str">"Ana"</span>       <span class="cmt"># str   (texto)</span>
+edad = <span class="nu">15</span>           <span class="cmt"># int   (entero)</span>
+altura = <span class="nu">1.62</span>        <span class="cmt"># float (decimal)</span>
+aprobado = <span class="kw">True</span>     <span class="cmt"># bool  (verdadero/falso)</span></code></pre>
+            <ul class="explain">
+                <li><strong>str:</strong> texto entre comillas. Puede tener letras, números y símbolos.</li>
+                <li><strong>int:</strong> número entero, sin coma decimal.</li>
+                <li><strong>float:</strong> número con parte decimal (se escribe con punto).</li>
+                <li><strong>bool:</strong> solo dos valores posibles: <code class="inline">True</code> o <code class="inline">False</code>.</li>
+            </ul>
+            <div class="okbox">
+                <strong>La caja cambia:</strong> <code class="inline">edad = edad + 1</code> toma lo que había,
+                le suma 1 y vuelve a guardar el resultado en la misma caja.
+            </div>
+
+            <div class="sub">Reglas para los nombres</div>
+            <table class="datos">
+                <tr><th>Regla</th><th>Ejemplo mal</th><th>Ejemplo bien</th></tr>
+                <tr><td>sin espacios</td><td><code class="inline">mi edad</code></td><td><code class="inline">mi_edad</code></td></tr>
+                <tr><td>no arranca con número</td><td><code class="inline">2do_parcial</code></td><td><code class="inline">parcial_2</code></td></tr>
+                <tr><td>distingue mayúsculas</td><td colspan="2"><code class="inline">Nota</code> y <code class="inline">nota</code> son DOS variables distintas</td></tr>
+                <tr><td>descriptivo &gt; corto</td><td><code class="inline">x</code></td><td><code class="inline">precio_final</code></td></tr>
+            </table>
+            <div class="buenas">
+                <strong>Buena práctica:</strong> en Python el tipo se deduce solo (no se declara como en otros
+                lenguajes), pero conviene que cada variable guarde siempre el mismo tipo de dato para no confundirse.
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Ejercicio: tus datos en cajas</h4>
+                <p class="ex-goal">
+                    Escribí un programa que guarde en <code class="inline">nombre</code> un texto,
+                    en <code class="inline">edad</code> un número entero y en <code class="inline">altura</code>
+                    un número decimal. Al final, mostralos con <code class="inline">print()</code>.
+                </p>
+                <textarea class="code-input" id="in-variables" spellcheck="false" placeholder="# Escribí tu código acá&#10;nombre = ...&#10;print(nombre)"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('variables')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('variables')">Limpiar</button>
+                </div>
+                <div class="result" id="res-variables"></div>
+            </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="card">
+            <h3><span class="num">2</span> Toma de decisiones: if / elif / else</h3>
+            <p class="concept">
+                Un programa casi nunca hace siempre lo mismo: tiene que <strong>decidir</strong>.
+                Pensalo como una bifurcación en el camino: según una condición
+                (verdadera o falsa), el programa toma un camino u otro.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis general</span>
+                if condición:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;instrucciones<br>
+                elif otra_condición:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;instrucciones<br>
+                else:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;instrucciones
+            </div>
+            <pre><code><span class="kw">if</span> condicion:
+    <span class="cmt"># se ejecuta solo si la condicion es True</span>
+    instrucciones
+<span class="kw">elif</span> otra_condicion:
+    <span class="cmt"># se ejecuta si la primera fue False y esta es True</span>
+    instrucciones
+<span class="kw">else</span>:
+    <span class="cmt"># si nada anterior se cumplió</span>
+    instrucciones</code></pre>
+            <ul class="explain">
+                <li><strong>Línea 1:</strong> se evalúa la condición. Si es verdadera, entra al bloque con sangría.</li>
+                <li><strong>elif:</strong> se prueba solo si la anterior falló. Podés encadenar varios.</li>
+                <li><strong>else:</strong> es el "si no se cumplió nada". Va al final y sin condición.</li>
+            </ul>
+
+            <div class="sub">Operadores de comparación y lógicos</div>
+            <table class="datos">
+                <tr><th>Operador</th><th>Significado</th><th>Ejemplo que da True</th></tr>
+                <tr><td><code class="inline">==</code></td><td>igual a</td><td><code class="inline">edad == 15</code></td></tr>
+                <tr><td><code class="inline">!=</code></td><td>distinto a</td><td><code class="inline">nombre != "Ana"</code></td></tr>
+                <tr><td><code class="inline">&lt; &nbsp; &gt;</code></td><td>menor / mayor</td><td><code class="inline">nota &lt; 6</code></td></tr>
+                <tr><td><code class="inline">&lt;= &nbsp;&gt;=</code></td><td>menor o igual / mayor o igual</td><td><code class="inline">nota &gt;= 6</code></td></tr>
+                <tr><td><code class="inline">and</code></td><td>las dos condiciones</td><td><code class="inline">nota &gt;= 6 and asistio</code></td></tr>
+                <tr><td><code class="inline">or</code></td><td>al menos una</td><td><code class="inline">dia == "sabado" or dia == "domingo"</code></td></tr>
+                <tr><td><code class="inline">not</code></td><td>niega la condición</td><td><code class="inline">not aprobado</code></td></tr>
+            </table>
+
+            <div class="sub">Ejemplo: aprobó o reprobó</div>
+            <pre><code>nota = <span class="nu">8</span>
+
+<span class="kw">if</span> nota &gt;= <span class="nu">6</span>:
+    <span class="fn">print</span>(<span class="str">"Aprobó"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"Reprobó"</span>)</code></pre>
+            <p style="font-size:.93rem;margin:.2rem 0 .5rem;">Con varias salidas posibles conviene encadenar <code class="inline">elif</code>:</p>
+            <pre><code><span class="kw">if</span> nota &gt;= <span class="nu">8</span>:
+    <span class="fn">print</span>(<span class="str">"Sobresaliente"</span>)
+<span class="kw">elif</span> nota &gt;= <span class="nu">6</span>:
+    <span class="fn">print</span>(<span class="str">"Aprobó"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"Reprobó"</span>)</code></pre>
+            <div class="okbox">
+                <strong>Ojo:</strong> Python evalúa de arriba hacia abajo y entra solo al primer bloque
+                que cumpla. Con nota 8 nunca llega al <code class="inline">elif</code>.
+            </div>
+
+            <div class="sub">Diagrama de flujo del if / else</div>
+            <svg viewBox="0 0 420 190" role="img" aria-label="Diagrama if else" style="max-width:430px;width:100%">
+                <polygon points="210,10 300,55 210,100 120,55" fill="none" stroke="#f59e0b" stroke-width="2"/>
+                <text x="210" y="59" text-anchor="middle" fill="#1e293b" font-size="12">condición?</text>
+                <line x1="300" y1="55" x2="370" y2="55" stroke="#16a34a" stroke-width="2"/>
+                <text x="330" y="47" text-anchor="middle" fill="#15803d" font-size="11">True</text>
+                <rect x="310" y="110" width="120" height="40" rx="8" fill="none" stroke="#16a34a" stroke-width="2"/>
+                <text x="370" y="134" text-anchor="middle" fill="#1e293b" font-size="11">bloque SI</text>
+                <line x1="370" y1="55" x2="370" y2="110" stroke="#16a34a" stroke-width="2"/>
+                <line x1="120" y1="55" x2="50" y2="55" stroke="#dc2626" stroke-width="2"/>
+                <text x="85" y="47" text-anchor="middle" fill="#b91c1c" font-size="11">False</text>
+                <line x1="50" y1="55" x2="50" y2="130" stroke="#dc2626" stroke-width="2"/>
+                <line x1="50" y1="130" x2="115" y2="130" stroke="#dc2626" stroke-width="2"/>
+                <text x="82" y="134" text-anchor="middle" fill="#1e293b" font-size="11">bloque NO</text>
+                <line x1="210" y1="100" x2="210" y2="160" stroke="#64748b" stroke-width="2"/>
+                <line x1="50" y1="160" x2="370" y2="160" stroke="#64748b" stroke-width="2"/>
+                <text x="210" y="180" text-anchor="middle" fill="#64748b" font-size="11">el programa sigue</text>
+            </svg>
+            <p style="font-size:.92rem;margin:.2rem 0 0;">
+                El rombo es la pregunta; los caminos son los bloques <code class="inline">if</code> (SI) y
+                <code class="inline">else</code> (NO). Siempre se vuelve al mismo punto.
+            </p>
+
+            <div class="sub">Errores típicos</div>
+            <table class="datos">
+                <tr><th>Mal</th><th>Bien</th><th>Por qué</th></tr>
+                <tr><td><code class="inline">if edad = 15:</code></td><td><code class="inline">if edad == 15:</code></td><td><code class="inline">=</code> asigna, <code class="inline">==</code> compara</td></tr>
+                <tr><td><code class="inline">if edad &gt; 15</code></td><td><code class="inline">if edad &gt; 15:</code></td><td>faltan los dos puntos</td></tr>
+                <tr><td>instrucciones sin sangría</td><td>4 espacios de sangría</td><td>en Python la sangría define el bloque</td></tr>
+            </table>
+            <div class="alerta">
+                <strong>Cuidado:</strong> mezclar tabuladores y espacios da error.
+                Configurá el editor para insertar 4 espacios con la tecla Tab.
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Ejercicio: mayor, adolescente o niño</h4>
+                <p class="ex-goal">
+                    Pedí una edad con <code class="inline">int(input(...))</code> y mostrá
+                    <strong>"Mayor"</strong> si es 18 o más, <strong>"Adolescente"</strong> si es 13 o más,
+                    y <strong>"Niño"</strong> en cualquier otro caso. Usá <code class="inline">if / elif / else</code>.
+                </p>
+                <textarea class="code-input" id="in-decisiones" spellcheck="false" placeholder="# Pedí la edad y decidí&#10;edad = int(input(&quot;Edad: &quot;))&#10;if ...:"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('decisiones')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('decisiones')">Limpiar</button>
+                </div>
+                <div class="result" id="res-decisiones"></div>
+            </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="card">
+            <h3><span class="num">3</span> Ciclos: while, for, contador y acumulador</h3>
+            <p class="concept">
+                El <code class="inline">while</code> repite un bloque <strong>mientras</strong> una condición
+                siga siendo verdadera. Analogía: <em>mientras llueva, quedate bajo el techo; cuando pare, salí.</em>
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis</span>
+                while condición:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;instrucciones
+            </div>
+            <div class="okbox">
+                <strong>Idea clave:</strong> algo <em>dentro</em> del ciclo tiene que cambiar para que la
+                condición en algún momento sea False. Si nada cambia: ciclo infinito.
+            </div>
+
+            <div class="sub">Forma 1: con contador (sabés cuántas vueltas)</div>
+            <pre><code>i = <span class="nu">1</span>
+<span class="kw">while</span> i &lt;= <span class="nu">5</span>:
+    <span class="fn">print</span>(<span class="str">"Vuelta"</span>, i)
+    i = i + <span class="nu">1</span>            <span class="cmt"># sin esta línea: bucle infinito</span></code></pre>
+            <div class="sub">Forma 2: con centinela (no sabés cuántas vueltas)</div>
+            <pre><code>clave = <span class="str">""</span>
+<span class="kw">while</span> clave != <span class="str">"1234"</span>:
+    clave = <span class="fn">input</span>(<span class="str">"Clave: "</span>)
+<span class="fn">print</span>(<span class="str">"Acceso permitido"</span>)</code></pre>
+
+            <div class="sub">for: cuando sabés cuántas vueltas</div>
+            <pre><code><span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">1</span>, <span class="nu">11</span>):
+    <span class="fn">print</span>(<span class="fn">f"7 x {i} = {7*i}"</span>)   <span class="cmt"># la tabla del 7, completa</span></code></pre>
+            <table class="datos">
+                <tr><th>Escritura</th><th>Valores que genera i</th></tr>
+                <tr><td><code class="inline">range(5)</code></td><td>0, 1, 2, 3, 4 &nbsp;(arranca en 0)</td></tr>
+                <tr><td><code class="inline">range(1, 6)</code></td><td>1, 2, 3, 4, 5 &nbsp;(el final NUNCA se incluye)</td></tr>
+                <tr><td><code class="inline">range(0, 10, 2)</code></td><td>0, 2, 4, 6, 8 &nbsp;(tercer dato = paso)</td></tr>
+            </table>
+            <table class="datos">
+                <tr><th></th><th>while</th><th>for + range</th></tr>
+                <tr><td>Cuándo usarlo</td><td>repetición condicionada (no sabés cuántas veces)</td><td>cantidad conocida de vueltas</td></tr>
+                <tr><td>Ejemplo</td><td>menú hasta elegir SALIR</td><td>las tablas del 1 al 10</td></tr>
+            </table>
+
+            <div class="sub">Contador y acumulador: dos cajas que crecen en el ciclo</div>
+            <table class="datos">
+                <tr><th></th><th>Contador</th><th>Acumulador</th></tr>
+                <tr><td>Arranca en</td><td>0 (o 1)</td><td>0</td></tr>
+                <tr><td>Qué suma</td><td>siempre 1</td><td>un valor que cambia</td></tr>
+                <tr><td>Sirve para</td><td>contar vueltas o casos</td><td>sumar totales</td></tr>
+                <tr><td>Ejemplo mental</td><td>"voy por el alumno 25"</td><td>"ya junté $4300"</td></tr>
+            </table>
+            <pre><code>total = <span class="nu">0</span>                          <span class="cmt"># acumulador, arranca vacío</span>
+aprobados = <span class="nu">0</span>                      <span class="cmt"># contador</span>
+
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">3</span>):
+    nota = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Nota: "</span>))
+    total = total + nota           <span class="cmt"># acumula: suma CADA nota</span>
+    <span class="kw">if</span> nota &gt;= <span class="nu">6</span>:
+        aprobados = aprobados + <span class="nu">1</span>  <span class="cmt"># cuenta UNO más</span>
+
+<span class="fn">print</span>(<span class="str">"Promedio:"</span>, total / <span class="nu">3</span>)
+<span class="fn">print</span>(<span class="str">"Aprobados:"</span>, aprobados)</code></pre>
+            <div class="alerta">
+                <strong>Error clásico:</strong> olvidar inicializar antes del ciclo. Si
+                <code class="inline">total = 0</code> está DENTRO del for, se borra en cada vuelta
+                y al final vale solo la última nota.
+            </div>
+
+            <div class="sub">break: corta el ciclo en el momento</div>
+            <pre><code><span class="kw">while</span> <span class="kw">True</span>:              <span class="cmt"># bucle "infinito" a propósito</span>
+    opcion = <span class="fn">input</span>(<span class="str">"Opción (S para salir): "</span>)
+    <span class="kw">if</span> opcion == <span class="str">"S"</span>:
+        <span class="kw">break</span>             <span class="cmt"># abandona el while acá mismo</span>
+    <span class="fn">print</span>(<span class="str">"Elegiste:"</span>, opcion)
+<span class="fn">print</span>(<span class="str">"Fin del programa"</span>)</code></pre>
+            <div class="buenas">
+                <strong>Buena práctica:</strong> el patrón <code class="inline">while True</code> +
+                <code class="inline">break</code> es el estándar para menús. Deja la condición de salida
+                junta con la lectura del dato.
+            </div>
+
+            <div class="sub">Diagrama de flujo del while</div>
+            <svg viewBox="0 0 420 230" role="img" aria-label="Diagrama while" style="max-width:430px;width:100%">
+                <polygon points="210,15 320,62 210,109 100,62" fill="none" stroke="#f59e0b" stroke-width="2"/>
+                <text x="210" y="66" text-anchor="middle" fill="#1e293b" font-size="12">condición?</text>
+                <text x="330" y="52" text-anchor="middle" fill="#15803d" font-size="11">True</text>
+                <line x1="320" y1="62" x2="380" y2="62" stroke="#16a34a" stroke-width="2"/>
+                <line x1="380" y1="62" x2="380" y2="140" stroke="#16a34a" stroke-width="2"/>
+                <rect x="320" y="140" width="120" height="40" rx="8" fill="none" stroke="#16a34a" stroke-width="2"/>
+                <text x="380" y="164" text-anchor="middle" fill="#1e293b" font-size="11">instrucciones</text>
+                <path d="M 380 180 L 380 210 L 210 210 L 210 109" fill="none" stroke="#16a34a" stroke-width="2"/>
+                <text x="295" y="204" text-anchor="middle" fill="#64748b" font-size="11">vuelve a preguntar</text>
+                <line x1="100" y1="62" x2="30" y2="62" stroke="#dc2626" stroke-width="2"/>
+                <text x="65" y="54" text-anchor="middle" fill="#b91c1c" font-size="11">False</text>
+                <line x1="30" y1="62" x2="30" y2="160" stroke="#dc2626" stroke-width="2"/>
+                <line x1="30" y1="160" x2="105" y2="160" stroke="#dc2626" stroke-width="2"/>
+                <text x="68" y="178" text-anchor="middle" fill="#1e293b" font-size="11">sale del ciclo</text>
+            </svg>
+
+            <div class="exercise">
+                <h4>✍️ Ejercicio: contar hasta cinco</h4>
+                <p class="ex-goal">
+                    Escribí un programa que muestre los números del <strong>1 al 5</strong> usando un
+                    <code class="inline">while</code>. El contador arranca en 1 y aumenta de a uno
+                    dentro del ciclo.
+                </p>
+                <textarea class="code-input" id="in-ciclos" spellcheck="false" placeholder="# Contador con while&#10;i = 1&#10;while ...:"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('ciclos')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('ciclos')">Limpiar</button>
+                </div>
+                <div class="result" id="res-ciclos"></div>
+            </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="card">
+            <h3><span class="num">4</span> Ingreso y salida de datos</h3>
+            <p class="concept">
+                Todo programa interactivo hace lo mismo: <strong>ingresa</strong> un dato
+                (<code class="inline">input()</code>), <strong>procesa</strong> y
+                <strong>muestra</strong> el resultado (<code class="inline">print()</code>).
+                Ojo: <code class="inline">input()</code> siempre devuelve texto (str),
+                aunque escriban números.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Patrón</span>
+                dato = int(input("Mensaje: "))<br>
+                resultado = dato * 2<br>
+                print(f"El doble es {resultado}")
+            </div>
+
+            <div class="sub">Ingreso: input() y conversiones</div>
+            <table class="datos">
+                <tr><th>Función</th><th>Convierte a</th><th>Ejemplo</th></tr>
+                <tr><td><code class="inline">int()</code></td><td>entero</td><td><code class="inline">int("15") -&gt; 15</code></td></tr>
+                <tr><td><code class="inline">float()</code></td><td>decimal</td><td><code class="inline">float("1.75") -&gt; 1.75</code></td></tr>
+                <tr><td><code class="inline">str()</code></td><td>texto</td><td><code class="inline">str(21) -&gt; "21"</code></td></tr>
+            </table>
+
+            <div class="sub">Salida: print() y f-strings</div>
+            <pre><code><span class="fn">print</span>(<span class="str">"Hola"</span>, nombre)          <span class="cmt"># separa con espacio</span>
+<span class="fn">print</span>(<span class="fn">f"El doble es {doble}"</span>)  <span class="cmt"># f-string: mete variables adentro</span>
+<span class="fn">print</span>(<span class="fn">f"{n}x{i}={n*i}"</span>)         <span class="cmt"># así se arman las tablas</span></code></pre>
+            <ul class="explain">
+                <li>La <code class="inline">f</code> antes de las comillas permite poner variables entre llaves sin cortar el texto.</li>
+                <li>Sin la <code class="inline">f</code>, las llaves se muestran como texto común.</li>
+                <li><code class="inline">print(a, b)</code> separa los valores con un espacio.</li>
+            </ul>
+
+            <div class="sub">Patrón completo</div>
+            <pre><code><span class="cmt"># leer - convertir - calcular - mostrar</span>
+numero = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Ingrese un número: "</span>))
+doble = numero * <span class="nu">2</span>
+<span class="fn">print</span>(<span class="fn">f"El doble es {doble}"</span>)</code></pre>
+            <div class="alerta">
+                <strong>Error clásico:</strong> <code class="inline">"2" + "3"</code> da
+                <code class="inline">"23"</code> (concatena texto) porque input trajo str.
+                Sin <code class="inline">int()</code>, el programa corre pero calcula mal.
+            </div>
+            <div class="buenas">
+                <strong>Buenas prácticas con input:</strong>
+                <ol class="explain">
+                    <li>Mensaje claro que diga qué dato se espera.</li>
+                    <li>Convertí apenas leés: <code class="inline">int(input(...))</code>.</li>
+                    <li>Si puede fallar la conversión, protegé con <code class="inline">try / except</code>.</li>
+                </ol>
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Ejercicio: el doble de un número</h4>
+                <p class="ex-goal">
+                    Pedí un número por teclado, convertilo a entero, calculá su doble
+                    y mostralo con un <strong>f-string</strong>.
+                </p>
+                <textarea class="code-input" id="in-entrada" spellcheck="false" placeholder="# Pedí, convertí, calculá y mostrá&#10;numero = int(input(&quot;Número: &quot;))"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('entrada')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('entrada')">Limpiar</button>
+                </div>
+                <div class="result" id="res-entrada"></div>
+            </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="card">
+            <h3><span class="num">5</span> Modularización: funciones con def</h3>
+            <p class="concept">
+                Una función es una <strong>caja con nombre</strong> que guarda instrucciones para
+                <strong>reutilizarlas</strong>. Analogía: la receta de unas tortas fritas se escribe
+                una vez y se usa cada vez que haga falta.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis</span>
+                def nombre(parámetros):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;instrucciones<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;return resultado
+            </div>
+
+            <div class="sub">Partes de una función</div>
+            <pre><code><span class="kw">def</span> <span class="fn">es_par</span>(n):                <span class="cmt"># def + nombre + (parámetros):</span>
+    <span class="kw">if</span> n % <span class="nu">2</span> == <span class="nu">0</span>:        <span class="cmt"># cuerpo (con sangría)</span>
+        <span class="kw">return</span> <span class="kw">True</span>       <span class="cmt"># devuelve un valor a quien llamó</span>
+    <span class="kw">else</span>:
+        <span class="kw">return</span> <span class="kw">False</span>
+
+resultado = <span class="fn">es_par</span>(<span class="nu">8</span>)         <span class="cmt"># llamada: el valor queda en resultado</span>
+<span class="fn">print</span>(resultado)               <span class="cmt"># True</span></code></pre>
+            <div class="okbox">
+                <strong>Definir no es ejecutar:</strong> el cuerpo corre recién cuando alguien
+                llama a la función por su nombre.
+            </div>
+
+            <div class="sub">Parámetros y argumentos</div>
+            <table class="datos">
+                <tr><th>Concepto</th><th>Qué es</th><th>Dónde vive</th><th>Ejemplo</th></tr>
+                <tr><td>Parámetro</td><td>la variable que la función recibe</td><td>en la definición</td><td><code class="inline">def tabla(n):</code></td></tr>
+                <tr><td>Argumento</td><td>el valor concreto enviado</td><td>en la llamada</td><td><code class="inline">tabla(7)</code></td></tr>
+            </table>
+            <pre><code><span class="kw">def</span> <span class="fn">tabla</span>(n):                  <span class="cmt"># n es el parámetro</span>
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">1</span>, <span class="nu">11</span>):
+        <span class="fn">print</span>(<span class="fn">f"{n}*{i}={n*i}"</span>)
+
+<span class="fn">tabla</span>(<span class="nu">7</span>)                       <span class="cmt"># 7 es el argumento</span></code></pre>
+
+            <div class="sub">Valor por defecto (default)</div>
+            <pre><code><span class="kw">def</span> <span class="fn">saludo</span>(nombre=<span class="str">"mundo"</span>):
+    <span class="fn">print</span>(<span class="str">"Hola"</span>, nombre)
+
+<span class="fn">saludo</span>(<span class="str">"Ana"</span>)     <span class="cmt"># Hola Ana</span>
+<span class="fn">saludo</span>()           <span class="cmt"># Hola mundo   (usa el default)</span></code></pre>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                Un parámetro puede traer un valor precargado: si la llamada no lo envía, se usa ese.
+            </p>
+
+            <div class="sub">return: devolver un resultado</div>
+            <pre><code><span class="kw">def</span> <span class="fn">area_rectangulo</span>(base, altura):
+    <span class="kw">return</span> base * altura
+
+a = <span class="fn">area_rectangulo</span>(<span class="nu">5</span>, <span class="nu">3</span>)   <span class="cmt"># a vale 15</span></code></pre>
+            <table class="datos">
+                <tr><th></th><th>print</th><th>return</th></tr>
+                <tr><td>Qué hace</td><td>muestra en pantalla</td><td>entrega el valor al programa</td></tr>
+                <tr><td>Se puede guardar</td><td>no</td><td>sí: <code class="inline">x = funcion()</code></td></tr>
+                <tr><td>Sirve para seguir calculando</td><td>no</td><td>sí</td></tr>
+            </table>
+            <div class="alerta">
+                <strong>Sin return:</strong> toda función devuelve <code class="inline">None</code>
+                aunque tenga print. Print muestra; return entrega.
+            </div>
+
+            <div class="sub">Variables locales y globales</div>
+            <ul class="explain">
+                <li><strong>Local:</strong> nace dentro de la función, muere al terminar.</li>
+                <li><strong>Global:</strong> nace fuera; todas las funciones pueden leerla.</li>
+                <li><strong>Para modificarla</strong> dentro de una función hay que declarar <code class="inline">global</code>.</li>
+            </ul>
+            <pre><code>intentos = <span class="nu">0</span>                 <span class="cmt"># global</span>
+
+<span class="kw">def</span> <span class="fn">sumar_intento</span>():
+    <span class="kw">global</span> intentos
+    intentos = intentos + <span class="nu">1</span></code></pre>
+            <div class="buenas">
+                <strong>Buena práctica:</strong> usá <code class="inline">global</code> solo cuando sea
+                necesario; lo ideal es pasar datos por parámetros y recibir resultados con
+                <code class="inline">return</code>.
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Ejercicio: función es_par</h4>
+                <p class="ex-goal">
+                    Creá una función <code class="inline">es_par(n)</code> que devuelva
+                    <code class="inline">True</code> si el número es par y <code class="inline">False</code>
+                    si no. Después llamala con un número y mostrá el resultado con
+                    <code class="inline">print()</code>.
+                </p>
+                <textarea class="code-input" id="in-funciones" spellcheck="false" placeholder="# Definí la función y llamala&#10;def es_par(n):&#10;    ..."></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('funciones')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('funciones')">Limpiar</button>
+                </div>
+                <div class="result" id="res-funciones"></div>
+            </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="card">
+            <h3><span class="num">6</span> Integración: interfaz con Tkinter</h3>
+            <p class="concept">
+                Hasta acá el programa conversaba por consola. Con <strong>Tkinter</strong>
+                (viene incluido en Python) armamos ventanas con etiquetas, campos y botones:
+                el usuario interactúa y el programa <strong>reacciona a eventos</strong>.
+            </p>
+
+            <div class="sub">Ventana base</div>
+            <pre><code><span class="kw">from</span> tkinter <span class="kw">import</span> *
+
+ventana = <span class="fn">Tk</span>()
+ventana.title(<span class="str">"Mi app"</span>)
+ventana.geometry(<span class="str">"400x300"</span>)
+
+ventana.mainloop()      <span class="cmt"># deja la ventana viva, escuchando eventos</span></code></pre>
+            <div class="okbox">
+                <strong>mainloop()</strong> es el motor: un ciclo oculto que espera clicks y teclas
+                para disparar las funciones que indicaste.
+            </div>
+
+            <div class="sub">Widgets y eventos</div>
+            <table class="datos">
+                <tr><th>Widget</th><th>Para qué</th><th>Típico</th></tr>
+                <tr><td><code class="inline">Label</code></td><td>mostrar texto</td><td><code class="inline">Label(ventana, text="Hola")</code></td></tr>
+                <tr><td><code class="inline">Entry</code></td><td>campo de escritura</td><td><code class="inline">entrada.get()</code> lee su contenido</td></tr>
+                <tr><td><code class="inline">Button</code></td><td>disparar acción</td><td><code class="inline">command=verificar</code></td></tr>
+                <tr><td><code class="inline">Frame</code></td><td>agrupar / ordenar</td><td><code class="inline">frame1.pack(fill="both")</code></td></tr>
+            </table>
+            <pre><code><span class="cmt"># Patrón completo (versión Adivina el número)</span>
+<span class="kw">def</span> <span class="fn">verificar</span>():
+    <span class="kw">try</span>:
+        intento = <span class="fn">int</span>(entrada.get())          <span class="cmt"># lee el Entry</span>
+        <span class="kw">if</span> intento == numero_secreto:
+            resultado.config(text=<span class="str">"¡Correcto!"</span>, bg=<span class="str">"green"</span>, fg=<span class="str">"white"</span>)
+        <span class="kw">else</span>:
+            resultado.config(text=<span class="str">"No es ese..."</span>, bg=<span class="str">"orange"</span>)
+    <span class="kw">except</span>:
+        resultado.config(text=<span class="str">"Escribí un número válido"</span>, bg=<span class="str">"red"</span>, fg=<span class="str">"white"</span>)
+
+boton = <span class="fn">Button</span>(ventana, text=<span class="str">"Verificar"</span>, command=verificar)</code></pre>
+            <div class="alerta">
+                <strong>Error clásico Nº1:</strong> <code class="inline">command=verificar()</code>
+                con paréntesis ejecuta la función UNA vez al crear el botón y luego no hace nada.
+                Sin paréntesis (<code class="inline">command=verificar</code>) entregás la función
+                para que el click la llame. Si necesitás enviarle datos:
+                <code class="inline">command=lambda: tabla(7)</code>.
+            </div>
+
+            <div class="sub">Después de un rato: after(milisegundos, función)</div>
+            <pre><code><span class="kw">def</span> <span class="fn">subir</span>():
+    <span class="kw">global</span> segundos
+    segundos = segundos + <span class="nu">1</span>
+    reloj.config(text=str(segundos))
+    ventana.after(<span class="nu">1000</span>, subir)   <span class="cmt"># se re-agenda: repite cada 1 s</span>
+
+segundos = <span class="nu">0</span>
+ventana.after(<span class="nu">1000</span>, subir)       <span class="cmt"># primera llamada: arranca el ciclo</span></code></pre>
+            <table class="datos">
+                <tr><th></th><th>while + time.sleep</th><th>after()</th></tr>
+                <tr><td>Consola</td><td>sí</td><td>—</td></tr>
+                <tr><td>Ventana Tkinter</td><td><strong>NO: congela todo</strong></td><td>sí, sin congelar</td></tr>
+            </table>
+            <div class="okbox">
+                <strong>Truco pro:</strong> <code class="inline">after</code> agenda UNA sola ejecución.
+                Para repetir, la función se llama de nuevo al final (se re-agenda). Es como tirar la
+                pelota contra la pared: cada rebote vuelve a programar el próximo.
+            </div>
+
+            <div class="sub">Herramientas: random, try / except y delete</div>
+            <pre><code><span class="kw">import</span> random
+
+numero_secreto = random.<span class="fn">randint</span>(<span class="nu">1</span>, <span class="nu">10</span>)   <span class="cmt"># incluye AMBOS extremos</span></code></pre>
+            <table class="datos">
+                <tr><th>Error</th><th>Cuándo pasa</th><th>Ejemplo</th></tr>
+                <tr><td><code class="inline">ValueError</code></td><td>conversión imposible</td><td><code class="inline">int("hola")</code></td></tr>
+                <tr><td><code class="inline">ZeroDivisionError</code></td><td>división por cero</td><td><code class="inline">total / 0</code></td></tr>
+                <tr><td><code class="inline">NameError</code></td><td>variable sin definir</td><td>usar <code class="inline">tota1</code> en vez de <code class="inline">total</code></td></tr>
+            </table>
+            <pre><code><span class="kw">try</span>:
+    intento = <span class="fn">int</span>(entrada.get())   <span class="cmt"># zona protegida: puede fallar</span>
+<span class="kw">except</span>:
+    resultado.config(text=<span class="str">"Escribí un número válido"</span>)  <span class="cmt"># plan B sin crash</span></code></pre>
+            <table class="datos">
+                <tr><th>Acción</th><th>Línea</th><th>Widget</th></tr>
+                <tr><td>leer lo escrito</td><td><code class="inline">entrada.get()</code></td><td>Entry</td></tr>
+                <tr><td>vaciar el campo</td><td><code class="inline">entrada.delete(0, END)</code></td><td>Entry</td></tr>
+                <tr><td>cambiar texto/color</td><td><code class="inline">resultado.config(text=..., bg=...)</code></td><td>Label</td></tr>
+            </table>
+
+            <div class="sub">Reglas de oro de Tkinter</div>
+            <div class="buenas">
+                <ol class="explain">
+                    <li>Nada de <code class="inline">while</code> ni <code class="inline">input()</code>
+                        dentro de una app de ventanas: bloquean el mainloop. El reemplazo del while es
+                        <code class="inline">after()</code>; el del input es el <code class="inline">Entry</code>.</li>
+                    <li>Los datos viven en widgets: <code class="inline">.get()</code> para leer,
+                        <code class="inline">.config()</code> para cambiar,
+                        <code class="inline">.delete(0, END)</code> para vaciar.</li>
+                    <li>El botón lleva la función SIN paréntesis; con datos, usá
+                        <code class="inline">lambda</code>.</li>
+                    <li>Si una función cambia una variable global, declará <code class="inline">global</code>.</li>
+                    <li><code class="inline">mainloop()</code> siempre al final del archivo.</li>
+                </ol>
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Ejercicio: ventana con Entry, botón y Label</h4>
+                <p class="ex-goal">
+                    Armá una ventana con un <code class="inline">Entry</code>, un
+                    <code class="inline">Button</code> conectado con <code class="inline">command=</code>
+                    (sin paréntesis) y un <code class="inline">Label</code> que se actualice con
+                    <code class="inline">.config()</code> leyendo el campo con <code class="inline">.get()</code>.
+                    Cerrá con <code class="inline">mainloop()</code>.
+                </p>
+                <textarea class="code-input" id="in-tkinter" spellcheck="false" placeholder="# Ventana mínima con Tkinter&#10;from tkinter import *&#10;ventana = Tk()"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('tkinter')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('tkinter')">Limpiar</button>
+                </div>
+                <div class="result" id="res-tkinter"></div>
+            </div>
+        </article>
+
+        <!-- Progreso -->
+        <div class="progress-card" id="progreso">
+            <h3>📊 Tu progreso en la guía</h3>
+            <p style="margin:0;font-size:.9rem;color:#0c4a6e;">
+                Se guarda automáticamente en este navegador. Tocá un tema para ir directo a su ejercicio.
+            </p>
+            <div class="progress-top">
+                <div class="score-bar"><div class="score-fill" id="progreso-barra" style="width:0%"></div></div>
+                <span class="progress-pct" id="progreso-texto">0 de 8 completos</span>
+            </div>
+            <ul class="progress-list" id="progreso-lista"></ul>
+            <div class="quiz-actions">
+                <button class="btn btn-ghost" onclick="reiniciarTodo()">🔄 Reiniciar progreso</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SECCIÓN 2 ================= -->
+    <section id="quiz">
+        <h2 class="section-title">SECCIÓN 2 · Autoevaluación</h2>
+        <p class="section-sub">
+            Doce preguntas sobre todos los temas. Elegí una opción por pregunta y presioná
+            <strong>Calificar</strong>: la página te muestra cuáles están bien y cuáles revisar.
+        </p>
+        <div class="card">
+            <div class="quiz-question" data-answer="b">
+                <p class="q-text">1. ¿Qué número muestra este programa?</p>
+                <pre><code>a = <span class="nu">5</span>
+b = a + <span class="nu">2</span>
+a = <span class="nu">10</span>
+<span class="fn">print</span>(b)</code></pre>
+                <ul class="options-list">
+                    <li data-opt="a">12</li>
+                    <li data-opt="b">7</li>
+                    <li data-opt="c">10</li>
+                    <li data-opt="d">Da error</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="b">
+                <p class="q-text">2. Con <code class="inline">edad = 15</code>, ¿qué texto aparece?</p>
+                <pre><code><span class="kw">if</span> edad &gt;= <span class="nu">18</span>:
+    <span class="fn">print</span>(<span class="str">"Mayor"</span>)
+<span class="kw">elif</span> edad &gt;= <span class="nu">13</span>:
+    <span class="fn">print</span>(<span class="str">"Adolescente"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"Niño"</span>)</code></pre>
+                <ul class="options-list">
+                    <li data-opt="a">Mayor</li>
+                    <li data-opt="b">Adolescente</li>
+                    <li data-opt="c">Niño</li>
+                    <li data-opt="d">Nada, da error</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="c">
+                <p class="q-text">3. El usuario escribe <code class="inline">7</code> en
+                    <code class="inline">n = input("Número: ")</code>. ¿Qué produce <code class="inline">n * 2</code>?</p>
+                <ul class="options-list">
+                    <li data-opt="a">14, porque convierte solo</li>
+                    <li data-opt="b">Da error de sintaxis</li>
+                    <li data-opt="c">"77", porque input devuelve texto</li>
+                    <li data-opt="d">0</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="b">
+                <p class="q-text">4. ¿Cuántas vueltas da y qué valores toma <code class="inline">i</code> en
+                    <code class="inline">for i in range(1, 6):</code>?</p>
+                <ul class="options-list">
+                    <li data-opt="a">6 vueltas: 1, 2, 3, 4, 5, 6</li>
+                    <li data-opt="b">5 vueltas: 1, 2, 3, 4, 5</li>
+                    <li data-opt="c">6 vueltas: 0, 1, 2, 3, 4, 5</li>
+                    <li data-opt="d">4 vueltas: 0, 1, 2, 3</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="b">
+                <p class="q-text">5. ¿Qué imprime este acumulador?</p>
+                <pre><code>total = <span class="nu">0</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">3</span>):
+    total = total + i
+<span class="fn">print</span>(total)</code></pre>
+                <ul class="options-list">
+                    <li data-opt="a">6</li>
+                    <li data-opt="b">3</li>
+                    <li data-opt="c">0</li>
+                    <li data-opt="d">Error: range necesita dos datos</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="c">
+                <p class="q-text">6. Las notas ingresadas son 4, 8 y 9. ¿Cuánto vale
+                    <code class="inline">aprobados</code> al final?</p>
+                <pre><code>aprobados = <span class="nu">0</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">3</span>):
+    nota = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Nota: "</span>))
+    <span class="kw">if</span> nota &gt;= <span class="nu">6</span>:
+        aprobados = aprobados + <span class="nu">1</span></code></pre>
+                <ul class="options-list">
+                    <li data-opt="a">0</li>
+                    <li data-opt="b">3</li>
+                    <li data-opt="c">2</li>
+                    <li data-opt="d">9</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="a">
+                <p class="q-text">7. Con <code class="inline">promedio = 7.5</code>, ¿qué línea imprime
+                    exactamente <code class="inline">Promedio: 7.5</code>?</p>
+                <ul class="options-list">
+                    <li data-opt="a">print(f"Promedio: {promedio}")</li>
+                    <li data-opt="b">print("Promedio: {promedio}")</li>
+                    <li data-opt="c">print("Promedio: " + promedio)</li>
+                    <li data-opt="d">print(Promedio: promedio)</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="b">
+                <p class="q-text">8. Necesitás un entero entre 1 y 10, incluidos los dos extremos. ¿Qué línea lo logra?</p>
+                <ul class="options-list">
+                    <li data-opt="a">numero = random.randint(1, 9)</li>
+                    <li data-opt="b">numero = random.randint(1, 10)</li>
+                    <li data-opt="c">numero = random.range(10)</li>
+                    <li data-opt="d">numero = random(1, 10)</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="c">
+                <p class="q-text">9. ¿Qué línea vacía el campo <code class="inline">entrada</code> de un Entry?</p>
+                <ul class="options-list">
+                    <li data-opt="a">entrada.clear()</li>
+                    <li data-opt="b">entrada.config(text="")</li>
+                    <li data-opt="c">entrada.delete(0, END)</li>
+                    <li data-opt="d">entrada.delete(END)</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="a">
+                <p class="q-text">10. ¿Cuál conecta BIEN el botón con la función <code class="inline">verificar</code>?</p>
+                <ul class="options-list">
+                    <li data-opt="a">Button(ventana, text="OK", command=verificar)</li>
+                    <li data-opt="b">Button(ventana, text="OK", command=verificar())</li>
+                    <li data-opt="c">Button(ventana, text="OK", command="verificar")</li>
+                    <li data-opt="d">Button(ventana, text="OK", verificar)</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="b">
+                <p class="q-text">11. ¿Para qué se usa <code class="inline">try / except</code> al leer un Entry?</p>
+                <ul class="options-list">
+                    <li data-opt="a">Para que el botón responda más rápido</li>
+                    <li data-opt="b">Para que, si escriben letras, el programa avise en vez de cerrarse</li>
+                    <li data-opt="c">Porque command exige una función protegida</li>
+                    <li data-opt="d">Porque el Entry devuelve siempre texto vacío</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="c">
+                <p class="q-text">12. Querés que un contador suba uno por segundo en la ventana. ¿Cómo se repite con
+                    <code class="inline">after</code>?</p>
+                <ul class="options-list">
+                    <li data-opt="a">Llamando after(1000, subir) una única vez; eso ya repite solo</li>
+                    <li data-opt="b">Con while True: pass antes de mainloop()</li>
+                    <li data-opt="c">Agendándolo otra vez DENTRO de la función: al final de subir() va ventana.after(1000, subir)</li>
+                    <li data-opt="d">Con time.sleep(1) dentro de un while</li>
+                </ul>
+            </div>
+
+            <div class="quiz-actions">
+                <button class="btn btn-primary" onclick="calificarQuiz('quiz','score-banner')">✅ Calificar</button>
+                <button class="btn btn-ghost" onclick="reiniciarQuiz('quiz','score-banner')">🔄 Reiniciar</button>
+            </div>
+            <div id="score-banner"></div>
+        </div>
+    </section>
+
+    <!-- ================= SECCIÓN 3 ================= -->
+    <section id="simuladores">
+        <h2 class="section-title">SECCIÓN 3 · Simuladores</h2>
+        <p class="section-sub">
+            Dos programas de la guía funcionando en la página, para que veas cómo se comportan
+            sin instalar nada.
+        </p>
+        <div class="grid2">
+            <div class="card sim">
+                <h3>🎯 Adivina el número</h3>
+                <p style="font-size:.92rem;margin:0 0 .4rem;">
+                    Pensá un número del <strong>1 al 10</strong> y probá cómo reacciona el
+                    <code class="inline">if / elif / else</code>.
+                </p>
+                <div class="sim-row">
+                    <input type="text" id="adiv-input" placeholder="1-10" inputmode="numeric">
+                    <button class="btn btn-primary" id="adiv-btn">Verificar</button>
+                    <button class="btn btn-ghost" id="adiv-reset">Jugar otra vez</button>
+                </div>
+                <div class="sim-msg" id="adiv-out"></div>
+            </div>
+
+            <div class="card sim">
+                <h3>⏱️ Temporizador tipo after()</h3>
+                <p style="font-size:.92rem;margin:0;">
+                    Igual que <code class="inline">ventana.after(1000, subir)</code>:
+                    un evento se re-agenda solo, sin congelar la ventana.
+                </p>
+                <p id="reloj-num">0</p>
+                <div class="sim-row">
+                    <button class="btn btn-primary" id="reloj-ini">Iniciar</button>
+                    <button class="btn btn-ghost" id="reloj-deta">Detener</button>
+                    <button class="btn btn-ghost" id="reloj-cero">Reiniciar</button>
+                </div>
+                <div class="sim-msg" id="reloj-estado"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SECCIÓN 4 ================= -->
+    <section id="entrega">
+        <h2 class="section-title">SECCIÓN 4 · Actividad Final Autocorregible</h2>
+        <p class="section-sub">
+            Esta actividad se corrige <strong>en esta misma página</strong>: no hay que descargar,
+            subir ni enviar archivos. Primero respondé la parte teórica y después escribí los dos programas.
+        </p>
+
+        <div class="card delivery">
+            <h3>Parte A · Conceptos clave</h3>
+            <p style="font-size:.93rem;margin:0 0 1rem;">
+                Cinco preguntas de repaso. Marcá una opción por pregunta y presioná <strong>Calificar parte A</strong>.
+            </p>
+
+            <div id="entrega-quiz">
+                <div class="quiz-question" data-answer="b">
+                    <p class="q-text">A1. ¿Qué tipo de dato devuelve siempre <code class="inline">input()</code>?</p>
+                    <ul class="options-list">
+                        <li data-opt="a">int</li>
+                        <li data-opt="b">str</li>
+                        <li data-opt="c">float</li>
+                        <li data-opt="d">Depende de lo que escriba el usuario</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question" data-answer="c">
+                    <p class="q-text">A2. ¿Qué valores recorre <code class="inline">for i in range(1, 6):</code>?</p>
+                    <ul class="options-list">
+                        <li data-opt="a">1, 2, 3, 4, 5, 6</li>
+                        <li data-opt="b">0, 1, 2, 3, 4, 5</li>
+                        <li data-opt="c">1, 2, 3, 4, 5</li>
+                        <li data-opt="d">0, 1, 2, 3, 4</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question" data-answer="a">
+                    <p class="q-text">A3. ¿Dónde va <code class="inline">mainloop()</code> en un programa con Tkinter?</p>
+                    <ul class="options-list">
+                        <li data-opt="a">Al final, después de crear todos los widgets</li>
+                        <li data-opt="b">Al principio, antes de crear la ventana</li>
+                        <li data-opt="c">Dentro de cada función de botón</li>
+                        <li data-opt="d">No hace falta</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question" data-answer="d">
+                    <p class="q-text">A4. Necesitás que un botón llame a <code class="inline">tabla(7)</code>. ¿Qué escribís?</p>
+                    <ul class="options-list">
+                        <li data-opt="a">command=tabla(7)</li>
+                        <li data-opt="b">command="tabla(7)"</li>
+                        <li data-opt="c">command=tabla</li>
+                        <li data-opt="d">command=lambda: tabla(7)</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question" data-answer="b">
+                    <p class="q-text">A5. ¿Qué devuelve una función que no tiene <code class="inline">return</code>?</p>
+                    <ul class="options-list">
+                        <li data-opt="a">0</li>
+                        <li data-opt="b">None</li>
+                        <li data-opt="c">"" (texto vacío)</li>
+                        <li data-opt="d">El último print que hizo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="quiz-actions">
+                <button class="btn btn-primary" onclick="calificarQuiz('entrega-quiz','score-parteA')">✅ Calificar parte A</button>
+                <button class="btn btn-ghost" onclick="reiniciarQuiz('entrega-quiz','score-parteA')">🔄 Reiniciar</button>
+            </div>
+            <div id="score-parteA"></div>
+        </div>
+
+        <div class="card delivery">
+            <h3>Parte B · Programas completos</h3>
+            <p style="font-size:.93rem;margin:0 0 1rem;">
+                Escribí cada programa en su caja y presioná <strong>Corregir</strong>.
+                El corrector revisa la <strong>estructura</strong> del código (no ejecuta Python),
+                así que también te sirve como lista de control.
+            </p>
+
+            <div class="exercise">
+                <h4>🧩 Programa 1 · Menú que se repite</h4>
+                <p class="ex-goal">
+                    Escribí un programa con un <strong>menú</strong> que se repita hasta que el usuario elija
+                    <code class="inline">S</code>. Debe mostrar al menos <strong>dos opciones</strong>
+                    (por ejemplo <code class="inline">1</code> y <code class="inline">2</code>),
+                    hacer algo distinto en cada una y salir con <code class="inline">break</code>.
+                </p>
+                <textarea class="code-input" id="in-menu" spellcheck="false" placeholder="# Menú con while True y break&#10;while True:&#10;    ..."></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('menu')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('menu')">Limpiar</button>
+                </div>
+                <div class="result" id="res-menu"></div>
+            </div>
+
+            <div class="exercise">
+                <h4>🧩 Programa 2 · Promedio y aprobados</h4>
+                <p class="ex-goal">
+                    Pedí la <strong>cantidad de alumnos</strong>, leé cada nota, calculá el
+                    <strong>promedio</strong>, contá los <strong>aprobados</strong> (nota 6 o más)
+                    y mostrá ambos resultados con <strong>f-strings</strong>.
+                </p>
+                <textarea class="code-input" id="in-promedios" spellcheck="false" placeholder="# Promedio y contador de aprobados&#10;cantidad = int(input(&quot;Alumnos: &quot;))"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('promedios')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('promedios')">Limpiar</button>
+                </div>
+                <div class="result" id="res-promedios"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="pie">
+        Guía interactiva · Programación Estructurada con Python · 5to año · Escuela Técnica
+    </footer>
+
+</main>
+
+<script>
+/* ================= ACORDEÓN DE TEMAS + PESTAÑAS ================= */
+(function () {
+    var articulos = document.querySelectorAll('#teoria article.card');
+
+    articulos.forEach(function (article, index) {
+        var h3 = article.querySelector('h3');
+        var exercise = article.querySelector('.exercise');
+        if (!h3 || !exercise) return;
+
+        article.classList.add('topic');
+
+        var teoria = document.createElement('div');
+        teoria.className = 'topic-panel topic-panel-teoria';
+        teoria.setAttribute('role', 'tabpanel');
+
+        var practica = document.createElement('div');
+        practica.className = 'topic-panel topic-panel-ejercicio';
+        practica.setAttribute('role', 'tabpanel');
+        practica.hidden = true;
+
+        Array.prototype.slice.call(article.children).forEach(function (child) {
+            if (child === h3 || child === exercise) return;
+            teoria.appendChild(child);
+        });
+        practica.appendChild(exercise);
+
+        var tabs = document.createElement('div');
+        tabs.className = 'topic-tabs';
+        tabs.setAttribute('role', 'tablist');
+        tabs.innerHTML =
+            '<button type="button" class="topic-tab active" data-tab="teoria" role="tab" aria-selected="true">📘 Teoría</button>' +
+            '<button type="button" class="topic-tab" data-tab="ejercicio" role="tab" aria-selected="false">✍️ Ejercitación</button>';
+
+        article.appendChild(teoria);
+        article.appendChild(practica);
+        article.insertBefore(tabs, teoria);
+
+        h3.classList.add('topic-toggle');
+        h3.setAttribute('role', 'button');
+        h3.setAttribute('tabindex', '0');
+        h3.setAttribute('title', 'Abrir o cerrar este tema');
+        var chevron = document.createElement('span');
+        chevron.className = 'chevron';
+        chevron.setAttribute('aria-hidden', 'true');
+        chevron.textContent = '▾';
+        h3.appendChild(chevron);
+
+        function setTab(nombre) {
+            tabs.querySelectorAll('.topic-tab').forEach(function (b) {
+                var activo = b.dataset.tab === nombre;
+                b.classList.toggle('active', activo);
+                b.setAttribute('aria-selected', activo ? 'true' : 'false');
+            });
+            teoria.hidden = nombre !== 'teoria';
+            practica.hidden = nombre !== 'ejercicio';
+        }
+
+        function setOpen(abierto) {
+            article.classList.toggle('open', abierto);
+            article.classList.toggle('closed', !abierto);
+            h3.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+        }
+
+        h3.addEventListener('click', function () { setOpen(!article.classList.contains('open')); });
+        h3.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                setOpen(!article.classList.contains('open'));
+            }
+        });
+        tabs.addEventListener('click', function (e) {
+            var btn = e.target.closest('.topic-tab');
+            if (btn) setTab(btn.dataset.tab);
+        });
+
+        article._setTab = setTab;
+        article._setOpen = setOpen;
+
+        setOpen(index === 0);
+        setTab('teoria');
+    });
+
+    window.abrirEjercicio = function (id) {
+        var input = document.getElementById('in-' + id);
+        if (!input) return;
+        var article = input.closest('#teoria article.card');
+        if (!article) { input.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+        if (article._setOpen) article._setOpen(true);
+        if (article._setTab) article._setTab('ejercicio');
+        article.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    var lista = document.getElementById('progreso-lista');
+    if (lista) {
+        lista.addEventListener('click', function (e) {
+            var a = e.target.closest('a[href^="#in-"]');
+            if (!a) return;
+            e.preventDefault();
+            window.abrirEjercicio(a.getAttribute('href').slice(4));
+        });
+    }
+})();
+
+/* ================= AUTOEVALUACIÓN ================= */
+document.querySelectorAll('.options-list').forEach(function (lista) {
+    lista.addEventListener('click', function (e) {
+        var li = e.target.closest('li');
+        if (!li) return;
+        var q = li.closest('.quiz-question');
+        if (!q || q.dataset.locked) return;
+        q.querySelectorAll('li').forEach(function (x) { x.classList.remove('selected'); });
+        li.classList.add('selected');
+    });
+});
+
+window.calificarQuiz = function (contId, bannerId) {
+    var cont = document.getElementById(contId);
+    if (!cont) return;
+    var qs = cont.querySelectorAll('.quiz-question');
+    var ok = 0, sinResponder = 0;
+
+    qs.forEach(function (q) {
+        var ans = q.dataset.answer;
+        var sel = q.querySelector('li.selected');
+        q.querySelectorAll('li').forEach(function (li) {
+            li.classList.remove('correct', 'incorrect');
+            if (li.dataset.opt === ans) li.classList.add('correct');
+        });
+        if (!sel) sinResponder++;
+        else if (sel.dataset.opt === ans) ok++;
+        else sel.classList.add('incorrect');
+        q.dataset.locked = '1';
+    });
+
+    var banner = document.getElementById(bannerId);
+    if (!banner) return;
+    var total = qs.length;
+    var pct = Math.round(ok / total * 100);
+    banner.style.display = 'block';
+    banner.style.background = pct >= 60 ? '#dcfce7' : '#fee2e2';
+    banner.style.color = pct >= 60 ? '#14532d' : '#7f1d1d';
+    banner.style.border = '1px solid ' + (pct >= 60 ? '#86efac' : '#fca5a5');
+    banner.textContent = 'Resultado: ' + ok + ' / ' + total + ' (' + pct + '%)' +
+        (sinResponder ? ' · ' + sinResponder + ' sin responder' : '');
+};
+
+window.reiniciarQuiz = function (contId, bannerId) {
+    var cont = document.getElementById(contId);
+    if (!cont) return;
+    cont.querySelectorAll('.quiz-question').forEach(function (q) {
+        delete q.dataset.locked;
+        q.querySelectorAll('li').forEach(function (li) {
+            li.classList.remove('selected', 'correct', 'incorrect');
+        });
+    });
+    var banner = document.getElementById(bannerId);
+    if (banner) { banner.style.display = 'none'; banner.textContent = ''; }
+};
+
+/* ================= SIMULADORES ================= */
+(function () {
+    var secreto = Math.floor(Math.random() * 10) + 1;
+    var inp = document.getElementById('adiv-input');
+    var out = document.getElementById('adiv-out');
+
+    function verificar() {
+        var txt = inp.value.trim();
+        out.classList.remove('ok', 'bad');
+        if (txt === '' || isNaN(Number(txt))) {
+            out.textContent = 'Escribí un número válido';
+            out.classList.add('bad');
+            return;
+        }
+        var n = Number(txt);
+        if (n === secreto) {
+            out.textContent = '¡Correcto! Era ' + secreto + '.';
+            out.classList.add('ok');
+        } else if (n < secreto) {
+            out.textContent = 'El número es mayor';
+            out.classList.add('bad');
+        } else {
+            out.textContent = 'El número es menor';
+            out.classList.add('bad');
+        }
+    }
+
+    document.getElementById('adiv-btn').addEventListener('click', verificar);
+    inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') verificar(); });
+    document.getElementById('adiv-reset').addEventListener('click', function () {
+        secreto = Math.floor(Math.random() * 10) + 1;
+        inp.value = '';
+        out.textContent = '';
+        out.classList.remove('ok', 'bad');
+    });
+})();
+
+(function () {
+    var seg = 0, id = null;
+    var num = document.getElementById('reloj-num');
+    var estado = document.getElementById('reloj-estado');
+
+    document.getElementById('reloj-ini').addEventListener('click', function () {
+        if (id !== null) { estado.textContent = 'Ya está corriendo'; return; }
+        estado.classList.remove('bad');
+        estado.classList.add('ok');
+        estado.textContent = 'Corriendo... (evento re-agendado cada 1 s)';
+        function tick() {
+            seg = seg + 1;
+            num.textContent = seg;
+            id = setTimeout(tick, 1000);
+        }
+        id = setTimeout(tick, 1000);
+    });
+
+    document.getElementById('reloj-deta').addEventListener('click', function () {
+        clearTimeout(id);
+        id = null;
+        estado.classList.remove('ok');
+        estado.classList.add('bad');
+        estado.textContent = 'Detenido en ' + seg;
+    });
+
+    document.getElementById('reloj-cero').addEventListener('click', function () {
+        clearTimeout(id);
+        id = null;
+        seg = 0;
+        num.textContent = '0';
+        estado.textContent = '';
+        estado.classList.remove('ok', 'bad');
+    });
+})();
+</script>
+
+<script>
+/* ================= CORRECTOR DE EJERCICIOS ================= */
+(function () {
+    function norm(txt) {
+        return txt.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .replace(/#[^\n]*/g, '')
+            .replace(/[ \t]+/g, ' ')
+            .trim();
+    }
+    function count(c, re) {
+        var g = new RegExp(re.source, 'g');
+        return (c.match(g) || []).length;
+    }
+
+    var EJERCICIOS = {
+        variables: [
+            { d: 'Asigna un texto entre comillas', f: function (c) { return /\b[a-z_]\w*\s*=\s*["']/.test(c); } },
+            { d: 'Asigna un número entero', f: function (c) { return /\b[a-z_]\w*\s*=\s*-?\d+\b/.test(c); } },
+            { d: 'Asigna un número decimal (con punto)', f: function (c) { return /\b[a-z_]\w*\s*=\s*-?\d+\.\d+/.test(c); } },
+            { d: 'Usa al menos 3 variables distintas', f: function (c) { var m = c.match(/^ *([a-z_]\w*) *=/gm) || []; return new Set(m.map(function (s) { return s.split('=')[0].trim(); })).size >= 3; } },
+            { d: 'Muestra los valores con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
+        ],
+        decisiones: [
+            { d: 'Pide un dato con input()', f: function (c) { return /\binput\s*\(/.test(c); } },
+            { d: 'Convierte el dato a número con int()', f: function (c) { return /\bint\s*\(/.test(c); } },
+            { d: 'Usa if con dos puntos al final', f: function (c) { return /\bif\b[^\n]*:/.test(c); } },
+            { d: 'Incluye una rama elif', f: function (c) { return /\belif\b[^\n]*:/.test(c); } },
+            { d: 'Incluye una rama else', f: function (c) { return /\belse\s*:/.test(c); } },
+            { d: 'Compara con 18 (>= 18 o > 17)', f: function (c) { return /(>=\s*18)|(>\s*17)/.test(c); } },
+            { d: 'Muestra al menos dos resultados con print()', f: function (c) { return count(c, /\bprint\s*\(/) >= 2; } }
+        ],
+        ciclos: [
+            { d: 'Inicializa el contador en 1', f: function (c) { return /\b[a-z_]\w*\s*=\s*1\b/.test(c); } },
+            { d: 'Usa while con condición', f: function (c) { return /\bwhile\b[^\n]*:/.test(c); } },
+            { d: 'La condición corta en 5 (<= 5 o < 6)', f: function (c) { return /(<=\s*5\b)|(<\s*6\b)/.test(c); } },
+            { d: 'Incrementa el contador (i = i + 1 o i += 1)', f: function (c) { return /([a-z_]\w*)\s*=\s*\1\s*\+\s*1/.test(c) || /\b[a-z_]\w*\s*\+=\s*1/.test(c); } },
+            { d: 'Muestra el número con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
+        ],
+        entrada: [
+            { d: 'Pide un dato con input()', f: function (c) { return /\binput\s*\(/.test(c); } },
+            { d: 'Convierte con int() o float()', f: function (c) { return /\b(int|float)\s*\(/.test(c); } },
+            { d: 'Calcula el doble (× 2)', f: function (c) { return /\*\s*2\b/.test(c); } },
+            { d: 'Muestra con print() y f-string', f: function (c) { return /\bprint\s*\(\s*f["']/.test(c); } },
+            { d: 'Incluye las llaves { } del f-string', f: function (c) { return /\{[^}]+\}/.test(c); } }
+        ],
+        funciones: [
+            { d: 'Define la función con def', f: function (c) { return /\bdef\s+\w+\s*\(/.test(c); } },
+            { d: 'La función recibe un parámetro', f: function (c) { return /\bdef\s+\w+\s*\(\s*[a-z_]\w*\s*\)/.test(c); } },
+            { d: 'Devuelve un valor con return', f: function (c) { return /\breturn\b/.test(c); } },
+            { d: 'Evalúa la paridad (módulo 2)', f: function (c) { return /%|\bmod\b/.test(c); } },
+            { d: 'Llama a la función con un argumento', f: function (c) { var m = c.match(/\bdef\s+(\w+)/); if (!m) return false; return new RegExp('\\b' + m[1] + '\\s*\\(\\s*\\d+').test(c); } },
+            { d: 'Muestra el resultado con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
+        ],
+        tkinter: [
+            { d: 'Crea la ventana con Tk()', f: function (c) { return /\btk\s*\(\s*\)/.test(c); } },
+            { d: 'Agrega un campo Entry', f: function (c) { return /\bentry\s*\(/.test(c); } },
+            { d: 'Agrega un Label para mostrar', f: function (c) { return /\blabel\s*\(/.test(c); } },
+            { d: 'Agrega un Button con command=', f: function (c) { return /\bbutton\s*\([^)]*command\s*=/.test(c); } },
+            { d: 'Pasa la función SIN paréntesis en command', f: function (c) { return /command\s*=\s*[a-z_]\w*\s*[,)]/.test(c); } },
+            { d: 'Lee el campo con .get()', f: function (c) { return /\.get\s*\(\s*\)/.test(c); } },
+            { d: 'Actualiza el Label con .config()', f: function (c) { return /\.config\s*\(/.test(c); } },
+            { d: 'Cierra con mainloop()', f: function (c) { return /\bmainloop\s*\(\s*\)/.test(c); } }
+        ],
+        menu: [
+            { d: 'Usa while True', f: function (c) { return /\bwhile\s+true\s*:/.test(c); } },
+            { d: 'Lee la opción con input()', f: function (c) { return /\binput\s*\(/.test(c); } },
+            { d: 'Muestra las opciones del menú con print()', f: function (c) { return /\bprint\s*\(/.test(c); } },
+            { d: 'Corta el ciclo con break', f: function (c) { return /\bbreak\b/.test(c); } },
+            { d: 'Sale cuando la opción es "S"', f: function (c) { return /==\s*["']s["']/.test(c); } },
+            { d: 'Tiene al menos dos opciones (if y elif)', f: function (c) { return /\bif\b[^\n]*:/.test(c) && /\belif\b[^\n]*:/.test(c); } },
+            { d: 'Responde de forma distinta según la opción (2+ print)', f: function (c) { return count(c, /\bprint\s*\(/) >= 2; } }
+        ],
+        promedios: [
+            { d: 'Pide la cantidad de alumnos con input()', f: function (c) { return /\binput\s*\(/.test(c); } },
+            { d: 'Convierte la cantidad con int()', f: function (c) { return /\bint\s*\(/.test(c); } },
+            { d: 'Recorre con for … range()', f: function (c) { return /\bfor\b[^\n]*\brange\s*\(/.test(c); } },
+            { d: 'Inicializa un acumulador en 0', f: function (c) { return /\b[a-z_]\w*\s*=\s*0\b/.test(c); } },
+            { d: 'Acumula las notas (suma = suma + nota)', f: function (c) { return /([a-z_]\w*)\s*=\s*\1\s*\+\s*[a-z_]\w*/.test(c) || /\b[a-z_]\w*\s*\+=\s*[a-z_]\w*/.test(c); } },
+            { d: 'Evalúa la condición nota >= 6', f: function (c) { return /\bif\b[^\n]*(>=\s*6|>\s*5)/.test(c); } },
+            { d: 'Cuenta los aprobados (contador + 1)', f: function (c) { return /([a-z_]\w*)\s*=\s*\1\s*\+\s*1\b/.test(c) || /\b[a-z_]\w*\s*\+=\s*1\b/.test(c); } },
+            { d: 'Calcula el promedio dividiendo', f: function (c) { return /\bpromedio\b\s*=/.test(c) && /\//.test(c); } },
+            { d: 'Muestra el resultado con print() y f-string', f: function (c) { return /\bprint\s*\(\s*f["']/.test(c); } }
+        ]
+    };
+
+    window.corregir = function (id) {
+        var checks = EJERCICIOS[id];
+        var input = document.getElementById('in-' + id);
+        var res = document.getElementById('res-' + id);
+        if (!checks || !input || !res) return;
+
+        var code = norm(input.value);
+        res.classList.add('show');
+
+        if (!code) {
+            res.innerHTML = '<p class="result-msg" style="color:#b91c1c;">⚠️ Escribí tu solución antes de corregir.</p>';
+            return;
+        }
+
+        var ok = 0;
+        var items = checks.map(function (ch) {
+            var passed = false;
+            try { passed = ch.f(code); } catch (e) { passed = false; }
+            if (passed) ok++;
+            return '<li class="' + (passed ? 'ok' : 'fail') + '">' +
+                (passed ? '✔' : '✘') + ' ' + ch.d + '</li>';
+        }).join('');
+
+        var total = checks.length;
+        var pct = Math.round(ok / total * 100);
+        var allOk = ok === total;
+
+        res.innerHTML =
+            '<div class="result-head">' +
+                '<span class="result-score">' + ok + ' / ' + total + ' requisitos</span>' +
+                '<div class="score-bar"><div class="score-fill" style="width:' + pct + '%"></div></div>' +
+            '</div>' +
+            '<ul>' + items + '</ul>' +
+            '<p class="result-msg" style="color:' + (allOk ? '#15803d' : '#b45309') + ';">' +
+                (allOk
+                    ? '✅ ¡Excelente! Tu programa cumple todos los requisitos.'
+                    : '🔎 Revisá los puntos marcados con ✘ y volvé a corregir.') +
+            '</p>' +
+            '<p style="font-size:.78rem;color:#64748b;margin:.4rem 0 0;">El corrector revisa la estructura del código (no ejecuta Python).</p>';
+
+        input.dataset.pct = pct;
+        window.actualizarResumen();
+    };
+
+    window.limpiar = function (id) {
+        var el = document.getElementById('in-' + id);
+        var res = document.getElementById('res-' + id);
+        if (el) { el.value = ''; delete el.dataset.pct; }
+        if (res) { res.classList.remove('show'); res.innerHTML = ''; }
+        try { localStorage.removeItem('py_ej_' + id); } catch (e) {}
+        window.actualizarResumen();
+    };
+
+    /* ---------- Progreso ---------- */
+    var TEMAS = [
+        { id: 'variables', nombre: '1. Variables y tipos de datos' },
+        { id: 'decisiones', nombre: '2. Decisiones (if / elif / else)' },
+        { id: 'ciclos', nombre: '3. Ciclos (while y for)' },
+        { id: 'entrada', nombre: '4. Ingreso y salida de datos' },
+        { id: 'funciones', nombre: '5. Funciones con def' },
+        { id: 'tkinter', nombre: '6. Interfaz con Tkinter' },
+        { id: 'menu', nombre: 'Actividad final · Menú con break' },
+        { id: 'promedios', nombre: 'Actividad final · Promedio y aprobados' }
+    ];
+
+    window.actualizarResumen = function () {
+        var lista = document.getElementById('progreso-lista');
+        var barra = document.getElementById('progreso-barra');
+        var texto = document.getElementById('progreso-texto');
+        if (!lista) return;
+
+        var completos = 0;
+        var iniciados = 0;
+        lista.innerHTML = TEMAS.map(function (t) {
+            var el = document.getElementById('in-' + t.id);
+            var valor = el ? el.value.trim() : '';
+            var pct = el && el.dataset.pct !== undefined ? parseInt(el.dataset.pct, 10) : null;
+            var clase, estado;
+            if (pct === 100) {
+                completos++;
+                clase = 'done';
+                estado = 'Completo';
+            } else if (valor) {
+                iniciados++;
+                clase = 'progress';
+                estado = pct !== null ? pct + ' %' : 'En progreso';
+            } else {
+                clase = 'todo';
+                estado = 'Sin empezar';
+            }
+            return '<li><a href="#in-' + t.id + '">' + t.nombre + '</a>' +
+                '<span class="pill ' + clase + '">' + estado + '</span></li>';
+        }).join('');
+
+        var pctGlobal = Math.round(completos / TEMAS.length * 100);
+        if (barra) barra.style.width = pctGlobal + '%';
+        if (texto) {
+            texto.textContent = completos + ' de ' + TEMAS.length + ' completos' +
+                (iniciados ? ' · ' + iniciados + ' en progreso' : '');
+        }
+    };
+
+    window.reiniciarTodo = function () {
+        if (!confirm('¿Borrar tus respuestas de los ejercicios de la guía?')) return;
+        TEMAS.forEach(function (t) {
+            var el = document.getElementById('in-' + t.id);
+            var res = document.getElementById('res-' + t.id);
+            if (el) { el.value = ''; delete el.dataset.pct; }
+            if (res) { res.classList.remove('show'); res.innerHTML = ''; }
+            try { localStorage.removeItem('py_ej_' + t.id); } catch (e) {}
+        });
+        window.actualizarResumen();
+    };
+
+    /* ---------- Guardado automático ---------- */
+    Object.keys(EJERCICIOS).forEach(function (id) {
+        var el = document.getElementById('in-' + id);
+        if (!el) return;
+        try {
+            var saved = localStorage.getItem('py_ej_' + id);
+            if (saved) el.value = saved;
+        } catch (e) {}
+        el.addEventListener('input', function () {
+            try { localStorage.setItem('py_ej_' + id, el.value); } catch (e) {}
+            window.actualizarResumen();
+        });
+    });
+
+    window.actualizarResumen();
+})();
+</script>
+
+</body>
+</html>
+
