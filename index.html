@@ -345,7 +345,7 @@
         <h2 class="section-title">SECCIÓN 1 · Contenido Explicativo</h2>
         <p class="section-sub">
             Los temas están ordenados en <strong>secuencia de aprendizaje</strong>: primero guardar datos,
-            luego decidir, repetir, interactuar, modularizar y finalmente construir una interfaz.
+            luego interactuar, decidir, repetir, modularizar y finalmente construir una interfaz.
             <strong>Tocá un tema</strong> para abrirlo y usá las pestañas
             <strong>📘 Teoría</strong> y <strong>✍️ Ejercitación</strong>.
             Cada ejercicio se corrige al instante en esta página, sin descargar nada.
@@ -410,7 +410,76 @@ aprobado = <span class="kw">True</span>     <span class="cmt"># bool  (verdadero
 
         <!-- 2 -->
         <article class="card">
-            <h3><span class="num">2</span> Toma de decisiones: if / elif / else</h3>
+            <h3><span class="num">2</span> Ingreso y salida de datos</h3>
+            <p class="concept">
+                Todo programa interactivo hace lo mismo: <strong>ingresa</strong> un dato
+                (<code class="inline">input()</code>), <strong>procesa</strong> y
+                <strong>muestra</strong> el resultado (<code class="inline">print()</code>).
+                Ojo: <code class="inline">input()</code> siempre devuelve texto (str),
+                aunque escriban números.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Patrón</span>
+                dato = int(input("Mensaje: "))<br>
+                resultado = dato * 2<br>
+                print(f"El doble es {resultado}")
+            </div>
+
+            <div class="sub">Ingreso: input() y conversiones</div>
+            <table class="datos">
+                <tr><th>Función</th><th>Convierte a</th><th>Ejemplo</th></tr>
+                <tr><td><code class="inline">int()</code></td><td>entero</td><td><code class="inline">int("15") -&gt; 15</code></td></tr>
+                <tr><td><code class="inline">float()</code></td><td>decimal</td><td><code class="inline">float("1.75") -&gt; 1.75</code></td></tr>
+                <tr><td><code class="inline">str()</code></td><td>texto</td><td><code class="inline">str(21) -&gt; "21"</code></td></tr>
+            </table>
+
+            <div class="sub">Salida: print() y f-strings</div>
+            <pre><code><span class="fn">print</span>(<span class="str">"Hola"</span>, nombre)          <span class="cmt"># separa con espacio</span>
+<span class="fn">print</span>(<span class="fn">f"El doble es {doble}"</span>)  <span class="cmt"># f-string: mete variables adentro</span>
+<span class="fn">print</span>(<span class="fn">f"{n}x{i}={n*i}"</span>)         <span class="cmt"># así se arman las tablas</span></code></pre>
+            <ul class="explain">
+                <li>La <code class="inline">f</code> antes de las comillas permite poner variables entre llaves sin cortar el texto.</li>
+                <li>Sin la <code class="inline">f</code>, las llaves se muestran como texto común.</li>
+                <li><code class="inline">print(a, b)</code> separa los valores con un espacio.</li>
+            </ul>
+
+            <div class="sub">Patrón completo</div>
+            <pre><code><span class="cmt"># leer - convertir - calcular - mostrar</span>
+numero = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Ingrese un número: "</span>))
+doble = numero * <span class="nu">2</span>
+<span class="fn">print</span>(<span class="fn">f"El doble es {doble}"</span>)</code></pre>
+            <div class="alerta">
+                <strong>Error clásico:</strong> <code class="inline">"2" + "3"</code> da
+                <code class="inline">"23"</code> (concatena texto) porque input trajo str.
+                Sin <code class="inline">int()</code>, el programa corre pero calcula mal.
+            </div>
+            <div class="buenas">
+                <strong>Buenas prácticas con input:</strong>
+                <ol class="explain">
+                    <li>Mensaje claro que diga qué dato se espera.</li>
+                    <li>Convertí apenas leés: <code class="inline">int(input(...))</code>.</li>
+                    <li>Si puede fallar la conversión, protegé con <code class="inline">try / except</code>.</li>
+                </ol>
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Ejercicio: el doble de un número</h4>
+                <p class="ex-goal">
+                    Pedí un número por teclado, convertilo a entero, calculá su doble
+                    y mostralo con un <strong>f-string</strong>.
+                </p>
+                <textarea class="code-input" id="in-entrada" spellcheck="false" placeholder="# Pedí, convertí, calculá y mostrá&#10;numero = int(input(&quot;Número: &quot;))"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('entrada')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('entrada')">Limpiar</button>
+                </div>
+                <div class="result" id="res-entrada"></div>
+            </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="card">
+            <h3><span class="num">3</span> Toma de decisiones: if / elif / else</h3>
             <p class="concept">
                 Un programa casi nunca hace siempre lo mismo: tiene que <strong>decidir</strong>.
                 Pensalo como una bifurcación en el camino: según una condición
@@ -522,9 +591,9 @@ aprobado = <span class="kw">True</span>     <span class="cmt"># bool  (verdadero
             </div>
         </article>
 
-        <!-- 3 -->
+        <!-- 4 -->
         <article class="card">
-            <h3><span class="num">3</span> Ciclos: while, for, contador y acumulador</h3>
+            <h3><span class="num">4</span> Ciclos: while, for, contador y acumulador</h3>
             <p class="concept">
                 El <code class="inline">while</code> repite un bloque <strong>mientras</strong> una condición
                 siga siendo verdadera. Analogía: <em>mientras llueva, quedate bajo el techo; cuando pare, salí.</em>
@@ -634,75 +703,6 @@ aprobados = <span class="nu">0</span>                      <span class="cmt"># c
                     <button class="btn btn-ghost" onclick="limpiar('ciclos')">Limpiar</button>
                 </div>
                 <div class="result" id="res-ciclos"></div>
-            </div>
-        </article>
-
-        <!-- 4 -->
-        <article class="card">
-            <h3><span class="num">4</span> Ingreso y salida de datos</h3>
-            <p class="concept">
-                Todo programa interactivo hace lo mismo: <strong>ingresa</strong> un dato
-                (<code class="inline">input()</code>), <strong>procesa</strong> y
-                <strong>muestra</strong> el resultado (<code class="inline">print()</code>).
-                Ojo: <code class="inline">input()</code> siempre devuelve texto (str),
-                aunque escriban números.
-            </p>
-            <div class="syntax">
-                <span class="syntax-label">Patrón</span>
-                dato = int(input("Mensaje: "))<br>
-                resultado = dato * 2<br>
-                print(f"El doble es {resultado}")
-            </div>
-
-            <div class="sub">Ingreso: input() y conversiones</div>
-            <table class="datos">
-                <tr><th>Función</th><th>Convierte a</th><th>Ejemplo</th></tr>
-                <tr><td><code class="inline">int()</code></td><td>entero</td><td><code class="inline">int("15") -&gt; 15</code></td></tr>
-                <tr><td><code class="inline">float()</code></td><td>decimal</td><td><code class="inline">float("1.75") -&gt; 1.75</code></td></tr>
-                <tr><td><code class="inline">str()</code></td><td>texto</td><td><code class="inline">str(21) -&gt; "21"</code></td></tr>
-            </table>
-
-            <div class="sub">Salida: print() y f-strings</div>
-            <pre><code><span class="fn">print</span>(<span class="str">"Hola"</span>, nombre)          <span class="cmt"># separa con espacio</span>
-<span class="fn">print</span>(<span class="fn">f"El doble es {doble}"</span>)  <span class="cmt"># f-string: mete variables adentro</span>
-<span class="fn">print</span>(<span class="fn">f"{n}x{i}={n*i}"</span>)         <span class="cmt"># así se arman las tablas</span></code></pre>
-            <ul class="explain">
-                <li>La <code class="inline">f</code> antes de las comillas permite poner variables entre llaves sin cortar el texto.</li>
-                <li>Sin la <code class="inline">f</code>, las llaves se muestran como texto común.</li>
-                <li><code class="inline">print(a, b)</code> separa los valores con un espacio.</li>
-            </ul>
-
-            <div class="sub">Patrón completo</div>
-            <pre><code><span class="cmt"># leer - convertir - calcular - mostrar</span>
-numero = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Ingrese un número: "</span>))
-doble = numero * <span class="nu">2</span>
-<span class="fn">print</span>(<span class="fn">f"El doble es {doble}"</span>)</code></pre>
-            <div class="alerta">
-                <strong>Error clásico:</strong> <code class="inline">"2" + "3"</code> da
-                <code class="inline">"23"</code> (concatena texto) porque input trajo str.
-                Sin <code class="inline">int()</code>, el programa corre pero calcula mal.
-            </div>
-            <div class="buenas">
-                <strong>Buenas prácticas con input:</strong>
-                <ol class="explain">
-                    <li>Mensaje claro que diga qué dato se espera.</li>
-                    <li>Convertí apenas leés: <code class="inline">int(input(...))</code>.</li>
-                    <li>Si puede fallar la conversión, protegé con <code class="inline">try / except</code>.</li>
-                </ol>
-            </div>
-
-            <div class="exercise">
-                <h4>✍️ Ejercicio: el doble de un número</h4>
-                <p class="ex-goal">
-                    Pedí un número por teclado, convertilo a entero, calculá su doble
-                    y mostralo con un <strong>f-string</strong>.
-                </p>
-                <textarea class="code-input" id="in-entrada" spellcheck="false" placeholder="# Pedí, convertí, calculá y mostrá&#10;numero = int(input(&quot;Número: &quot;))"></textarea>
-                <div class="ex-actions">
-                    <button class="btn btn-primary" onclick="corregir('entrada')">✅ Corregir</button>
-                    <button class="btn btn-ghost" onclick="limpiar('entrada')">Limpiar</button>
-                </div>
-                <div class="result" id="res-entrada"></div>
             </div>
         </article>
 
@@ -1644,9 +1644,9 @@ window.reiniciarQuiz = function (contId, bannerId) {
     /* ---------- Progreso ---------- */
     var TEMAS = [
         { id: 'variables', nombre: '1. Variables y tipos de datos' },
-        { id: 'decisiones', nombre: '2. Decisiones (if / elif / else)' },
-        { id: 'ciclos', nombre: '3. Ciclos (while y for)' },
-        { id: 'entrada', nombre: '4. Ingreso y salida de datos' },
+        { id: 'entrada', nombre: '2. Ingreso y salida de datos' },
+        { id: 'decisiones', nombre: '3. Decisiones (if / elif / else)' },
+        { id: 'ciclos', nombre: '4. Ciclos (while y for)' },
         { id: 'funciones', nombre: '5. Funciones con def' },
         { id: 'tkinter', nombre: '6. Interfaz con Tkinter' },
         { id: 'menu', nombre: 'Actividad final · Menú con break' },
