@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estructuras, Multimedia y Base de Datos con Python — Guía Interactiva</title>
+    <style>
+        :root{
+            --primary:#2563eb;
+            --primary-dark:#1d4ed8;
+            --ink:#1e293b;
+            --muted:#64748b;
+            --bg:#f1f5f9;
+            --card:#ffffff;
+            --border:#e2e8f0;
+            --code:#0f172a;
+            --ok:#16a34a;
+            --ok-bg:#dcfce7;
+            --bad:#dc2626;
+            --bad-bg:#fee2e2;
+            --accent:#f59e0b;
+        }
+        *{box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        body{
+            margin:0;
+            font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+            background:var(--bg);
+            color:var(--ink);
+            line-height:1.65;
+        }
+        /* ---------- Encabezado ---------- */
+        header.hero{
+            background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#3b82f6 100%);
+            color:#fff;
+            padding:3rem 1rem 2.5rem;
+            text-align:center;
+        }
+        header.hero h1{margin:0 0 .6rem;font-size:clamp(1.6rem,4vw,2.4rem);}
+        header.hero p{margin:0;opacity:.92;font-size:1.05rem;}
+        .badge{
+            display:inline-block;margin-top:1.1rem;padding:.35rem .9rem;
+            background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);
+            border-radius:999px;font-size:.85rem;letter-spacing:.3px;
+        }
+        a.hero-link{
+            display:inline-block;margin-top:1rem;color:#fff;font-weight:600;
+            font-size:.9rem;text-decoration:none;border-bottom:1px dashed rgba(255,255,255,.6);
+        }
+        a.hero-link:hover{border-bottom-style:solid;}
+        /* ---------- Navegación ---------- */
+        nav.sumario{
+            position:sticky;top:0;z-index:20;
+            background:rgba(255,255,255,.95);
+            backdrop-filter:blur(8px);
+            border-bottom:1px solid var(--border);
+            padding:.6rem 1rem;
+            display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;
+        }
+        nav.sumario a{
+            color:var(--primary);text-decoration:none;font-weight:600;font-size:.9rem;
+            padding:.35rem .75rem;border-radius:6px;transition:background .2s;
+        }
+        nav.sumario a:hover{background:#dbeafe;}
+        /* ---------- Layout ---------- */
+        main{max-width:920px;margin:0 auto;padding:2rem 1rem 4rem;}
+        section{margin-bottom:3rem;}
+        h2.section-title{
+            font-size:1.5rem;color:#1e3a8a;margin:0 0 .4rem;
+            padding-bottom:.5rem;border-bottom:3px solid var(--primary);
+        }
+        .section-sub{color:var(--muted);margin:0 0 1.5rem;font-size:.95rem;}
+        /* ---------- Tarjetas ---------- */
+        .card{
+            background:var(--card);border:1px solid var(--border);border-radius:12px;
+            padding:1.4rem 1.5rem;margin-bottom:1.25rem;
+            box-shadow:0 1px 3px rgba(15,23,42,.06);
+            transition:box-shadow .2s, transform .2s;
+        }
+        .card:hover{box-shadow:0 8px 24px rgba(15,23,42,.09);}
+        .card h3{
+            display:flex;align-items:center;gap:.6rem;
+            margin:0 0 .8rem;font-size:1.15rem;color:var(--primary);
+        }
+        .num{
+            flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+            width:28px;height:28px;border-radius:50%;
+            background:var(--primary);color:#fff;font-size:.85rem;font-weight:700;
+        }
+        .concept{
+            background:#eff6ff;border-left:4px solid var(--primary);
+            padding:.8rem 1rem;border-radius:0 8px 8px 0;margin:0 0 1rem;
+        }
+        .concept strong{color:#1e3a8a;}
+        .syntax{
+            background:#f8fafc;border:1px dashed #94a3b8;border-radius:8px;
+            padding:.7rem .9rem;margin:0 0 1rem;font-family:Consolas,Monaco,monospace;
+            font-size:.9rem;color:#334155;overflow-x:auto;
+        }
+        .syntax-label{
+            display:block;font-family:system-ui,sans-serif;font-size:.75rem;
+            text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.35rem;
+        }
+        /* ---------- Código ---------- */
+        pre{
+            background:var(--code);color:#e2e8f0;border-radius:10px;
+            padding:1rem 1.1rem;overflow-x:auto;margin:0 0 1rem;
+            font-family:"Fira Code",Consolas,Monaco,monospace;
+            font-size:.86rem;line-height:1.55;tab-size:4;
+        }
+        pre code{font-family:inherit;background:none;padding:0;}
+        .cmt{color:#94a3b8;font-style:italic;}
+        .kw{color:#7dd3fc;font-weight:600;}
+        .str{color:#fde68a;}
+        .fn{color:#86efac;}
+        .nu{color:#fca5a5;}
+        code.inline{
+            background:#e2e8f0;color:#0f172a;padding:.1rem .35rem;
+            border-radius:4px;font-family:Consolas,Monaco,monospace;font-size:.88em;
+        }
+        ul.explain{margin:0;padding-left:1.1rem;}
+        ul.explain li{margin:.35rem 0;font-size:.93rem;}
+        ul.explain li strong{color:#0f172a;}
+        ol.explain{margin:.3rem 0 0;padding-left:1.2rem;}
+        ol.explain li{margin:.3rem 0;font-size:.93rem;}
+        .example-label{
+            display:inline-block;font-size:.78rem;font-weight:700;text-transform:uppercase;
+            letter-spacing:.06em;color:#fff;background:var(--primary);border-radius:4px;
+            padding:.15rem .5rem;margin:0 0 .5rem;
+        }
+        .note{
+            background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;
+            padding:.75rem .95rem;font-size:.9rem;margin:0 0 1rem;
+        }
+        .note strong{color:#92400e;}
+        /* ---------- Sub-bloques dentro de un tema ---------- */
+        .sub{
+            font-size:.98rem;color:#0f172a;margin:1.4rem 0 .5rem;
+            padding-left:.6rem;border-left:4px solid #93c5fd;
+        }
+        .sub:first-child{margin-top:.2rem;}
+        /* ---------- Bloques de color ---------- */
+        .okbox{
+            border-left:4px solid var(--ok);background:#f0fdf4;border-radius:0 8px 8px 0;
+            padding:.7rem .95rem;font-size:.9rem;margin:.8rem 0;
+        }
+        .okbox strong{color:#15803d;}
+        .alerta{
+            border-left:4px solid var(--bad);background:#fef2f2;border-radius:0 8px 8px 0;
+            padding:.7rem .95rem;font-size:.9rem;margin:.8rem 0;
+        }
+        .alerta strong{color:#b91c1c;}
+        .buenas{
+            border-left:4px solid var(--accent);background:#fffbeb;border-radius:0 8px 8px 0;
+            padding:.7rem .95rem;font-size:.9rem;margin:.8rem 0;
+        }
+        .buenas strong{color:#b45309;}
+        /* ---------- Tablas ---------- */
+        table.datos{width:100%;border-collapse:collapse;font-size:.87rem;margin:.5rem 0 .8rem;}
+        table.datos th{
+            text-align:left;color:#1e3a8a;background:#eff6ff;
+            border-bottom:2px solid var(--border);padding:.4rem .55rem;
+        }
+        table.datos td{border-bottom:1px solid var(--border);padding:.4rem .55rem;vertical-align:top;}
+        table.datos tr:nth-child(even) td{background:#f8fafc;}
+        .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+        /* ---------- Temas en acordeón ---------- */
+        .card.topic{padding:0;overflow:hidden;scroll-margin-top:80px;}
+        .card.topic h3{
+            margin:0;padding:1.15rem 1.5rem;cursor:pointer;user-select:none;
+            border-bottom:1px solid transparent;transition:background .15s;
+        }
+        .card.topic h3:hover{background:#f8fafc;}
+        .card.topic h3:focus-visible{outline:2px solid var(--primary);outline-offset:-2px;}
+        .card.topic.open h3{border-bottom-color:var(--border);}
+        .chevron{
+            margin-left:auto;color:var(--muted);font-size:.85rem;
+            transition:transform .2s;
+        }
+        .card.topic.open .chevron{transform:rotate(180deg);}
+        .topic-tabs{display:flex;gap:.45rem;flex-wrap:wrap;padding:1rem 1.5rem .2rem;}
+        .topic-tab{
+            border:1.5px solid var(--border);background:#fff;color:var(--muted);
+            font-weight:600;font-size:.85rem;padding:.45rem .9rem;border-radius:999px;
+            cursor:pointer;transition:all .15s;
+        }
+        .topic-tab:hover{border-color:#93c5fd;color:var(--primary);}
+        .topic-tab.active{background:var(--primary);border-color:var(--primary);color:#fff;}
+        .topic-panel{padding:.8rem 1.5rem 1.5rem;}
+        .topic-panel[hidden]{display:none;}
+        .topic-panel-ejercicio .exercise{margin-top:0;}
+        .card.topic.closed .topic-tabs,
+        .card.topic.closed .topic-panel{display:none;}
+        /* ---------- Quiz ---------- */
+        .quiz-question{border-bottom:1px dashed var(--border);padding-bottom:1.1rem;margin-bottom:1.1rem;}
+        .quiz-question:last-of-type{border-bottom:none;}
+        .q-text{margin:0 0 .7rem;font-weight:600;}
+        .options-list{list-style:none;margin:0;padding:0;display:grid;gap:.5rem;}
+        .options-list li{
+            border:1.5px solid var(--border);border-radius:8px;
+            padding:.6rem .8rem;cursor:pointer;font-size:.93rem;
+            background:#fff;transition:all .15s;user-select:none;
+        }
+        .options-list li:hover{border-color:#93c5fd;background:#f8fbff;}
+        .options-list li.selected{border-color:var(--primary);background:#dbeafe;font-weight:600;}
+        .options-list li.correct{border-color:var(--ok);background:var(--ok-bg);color:#14532d;font-weight:600;}
+        .options-list li.incorrect{border-color:var(--bad);background:var(--bad-bg);color:#7f1d1d;}
+        .btn{
+            border:none;border-radius:8px;padding:.7rem 1.4rem;font-size:.95rem;
+            font-weight:600;cursor:pointer;transition:background .2s, transform .1s;
+        }
+        .btn:active{transform:scale(.98);}
+        .btn-primary{background:var(--primary);color:#fff;}
+        .btn-primary:hover{background:var(--primary-dark);}
+        .btn-ghost{background:#e2e8f0;color:#334155;}
+        .btn-ghost:hover{background:#cbd5e1;}
+        .quiz-actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.2rem;}
+        #score-banner, #score-parteA{
+            display:none;margin-top:1.2rem;padding:1rem;border-radius:10px;
+            text-align:center;font-weight:700;font-size:1.05rem;
+        }
+        /* ---------- Ejercicios autocorregibles ---------- */
+        .exercise{
+            margin-top:1.1rem;padding:1rem 1.1rem;border:2px solid #10b981;
+            border-radius:10px;background:#f0fdf4;
+        }
+        .exercise h4{margin:0 0 .35rem;color:#047857;font-size:1rem;}
+        .ex-goal{font-size:.92rem;margin:0 0 .6rem;}
+        .code-input{
+            width:100%;min-height:150px;resize:vertical;
+            font-family:"Fira Code",Consolas,Monaco,monospace;font-size:.85rem;
+            line-height:1.5;padding:.7rem .8rem;border:1.5px solid #a7f3d0;
+            border-radius:8px;background:#fff;color:#0f172a;tab-size:4;
+        }
+        .code-input:focus{outline:none;border-color:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.15);}
+        .ex-actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem;}
+        .ex-actions .btn{padding:.5rem 1rem;font-size:.88rem;}
+        .result{display:none;margin-top:.8rem;}
+        .result.show{display:block;}
+        .result-head{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.5rem;}
+        .result-score{font-weight:700;font-size:.95rem;white-space:nowrap;}
+        .score-bar{flex:1 1 160px;height:10px;border-radius:999px;background:#e5e7eb;overflow:hidden;min-width:120px;}
+        .score-fill{height:100%;width:0;background:linear-gradient(90deg,#34d399,#10b981);transition:width .35s;}
+        .result ul{list-style:none;margin:0;padding:0;font-size:.88rem;}
+        .result li{padding:.25rem 0;}
+        .result li.ok{color:#166534;}
+        .result li.fail{color:#991b1b;}
+        .result-msg{margin-top:.5rem;font-size:.9rem;font-weight:600;}
+        /* ---------- Resumen de progreso ---------- */
+        .progress-card{
+            border:2px solid #0ea5e9;border-radius:12px;
+            background:linear-gradient(135deg,#f0f9ff,#e0f2fe);
+            padding:1.4rem 1.5rem;margin-top:1.5rem;
+        }
+        .progress-card h3{color:#0369a1;margin:0 0 .3rem;}
+        .progress-top{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin:.7rem 0 1rem;}
+        .progress-top .score-bar{height:12px;}
+        .progress-pct{font-weight:700;color:#075985;white-space:nowrap;}
+        ul.progress-list{list-style:none;margin:0;padding:0;display:grid;gap:.4rem;}
+        ul.progress-list li{
+            display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;
+            font-size:.9rem;padding:.35rem .1rem;
+        }
+        ul.progress-list a{color:#0c4a6e;font-weight:600;text-decoration:none;flex:1 1 220px;}
+        ul.progress-list a:hover{text-decoration:underline;}
+        .pill{
+            font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+            padding:.15rem .55rem;border-radius:999px;white-space:nowrap;border:1px solid transparent;
+        }
+        .pill.todo{background:#f1f5f9;color:#64748b;border-color:#cbd5e1;}
+        .pill.progress{background:#fef3c7;color:#92400e;border-color:#fcd34d;}
+        .pill.done{background:#dcfce7;color:#166534;border-color:#86efac;}
+        /* ---------- Entrega final ---------- */
+        .delivery{border:2px dashed #7c3aed;background:#faf5ff;}
+        .delivery h3{color:#6d28d9;}
+        .delivery .exercise{border-color:#8b5cf6;background:#fdfbff;}
+        .delivery .exercise h4{color:#6d28d9;}
+        .delivery .code-input{border-color:#ddd6fe;}
+        .delivery .code-input:focus{border-color:#8b5cf6;box-shadow:0 0 0 3px rgba(139,92,246,.15);}
+        /* ---------- Simuladores ---------- */
+        .sim{padding:1.2rem 1.3rem;}
+        .sim h3{color:#0369a1;}
+        .sim-row{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin:.6rem 0;}
+        .sim input[type=text]{
+            width:110px;padding:.55rem .7rem;border:1.5px solid var(--border);
+            border-radius:8px;font-size:.95rem;font-family:inherit;
+        }
+        .sim input[type=text]:focus{outline:none;border-color:var(--primary);}
+        .sim-out{
+            min-height:170px;max-height:280px;overflow-y:auto;margin:.7rem 0 0;
+            white-space:pre;font-size:.85rem;
+        }
+        .num-btns{display:flex;gap:.4rem;flex-wrap:wrap;margin:.2rem 0 .4rem;}
+        .num-btns button{
+            border:1.5px solid var(--border);background:#fff;color:var(--ink);
+            font-weight:700;font-size:.9rem;width:40px;height:38px;border-radius:8px;
+            cursor:pointer;transition:all .15s;
+        }
+        .num-btns button:hover{border-color:var(--primary);color:var(--primary);background:#eff6ff;}
+        .num-btns button.active{background:var(--primary);border-color:var(--primary);color:#fff;}
+        #demo-canvas{
+            width:100%;display:block;background:#f8fafc;
+            border:1px solid var(--border);border-radius:10px;margin:.4rem 0 .6rem;
+        }
+        .sim-msg{display:none;margin-top:.6rem;padding:.6rem .85rem;border-radius:0 8px 8px 0;font-size:.9rem;font-weight:600;}
+        .sim-msg.ok{display:block;background:#f0fdf4;border-left:4px solid var(--ok);color:#15803d;}
+        .sim-msg.bad{display:block;background:#fef2f2;border-left:4px solid var(--bad);color:#b91c1c;}
+        /* ---------- Footer ---------- */
+        footer.pie{
+            text-align:center;color:var(--muted);font-size:.85rem;
+            margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);
+        }
+        /* ---------- Responsive ---------- */
+        @media (max-width:640px){
+            main{padding:1.2rem .7rem 3rem;}
+            .card{padding:1.1rem;}
+            pre{font-size:.78rem;}
+            .card.topic h3{padding:1rem 1.1rem;}
+            .topic-tabs{padding:.9rem 1.1rem 0;}
+            .topic-panel{padding:.7rem 1.1rem 1.2rem;}
+        }
+        @media print{
+            nav.sumario, .quiz-actions, .btn, #score-banner, #score-parteA{display:none !important;}
+            body{background:#fff;}
+            .card{box-shadow:none;break-inside:avoid;}
+            .topic-tabs, .chevron{display:none !important;}
+            .card.topic.closed .topic-panel,
+            .topic-panel[hidden]{display:block !important;}
+            .card.topic h3{border-bottom:1px solid var(--border);}
+            header.hero{background:#1e3a8a !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+            pre{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+            .code-input{min-height:90px;}
+        }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <h1>Estructuras, Multimedia y Base de Datos con Python</h1>
+    <p>Parte 2: listas, tuplas, diccionarios, Tkinter avanzado, Canvas, música y MySQL</p>
+    <span class="badge">Guía teórico-práctica · 5to año · Escuela Técnica</span>
+    <p><a class="hero-link" href="index.html">← Volver a la Parte 1 · Variables, decisiones, ciclos, funciones y Tkinter</a></p>
+</header>
+
+<nav class="sumario">
+    <a href="#teoria">📘 Teoría</a>
+    <a href="#quiz">📝 Autoevaluación</a>
+    <a href="#simuladores">🧪 Simuladores</a>
+    <a href="#entrega">📤 Actividad final</a>
+    <a href="index.html">⬅️ Parte 1</a>
+</nav>
+
+<main>
+
+    <!-- ================= SECCIÓN 1 ================= -->
+    <section id="teoria">
+        <h2 class="section-title">SECCIÓN 1 · Contenido Explicativo</h2>
+        <p class="section-sub">
+            Siete temas en <strong>secuencia de proyecto</strong>: primero organizar datos
+            (listas, tuplas, diccionarios), después dominar la ventana (Text, state y lambda),
+            luego animar y sonar (Canvas y pygame) y por último guardar en una base de datos.
+            <strong>Tocá un tema</strong> para abrirlo y usá las pestañas
+            <strong>📘 Teoría</strong> y <strong>✍️ Ejercitación</strong>.
+            Cada ejercicio se corrige al instante en esta página, sin descargar nada.
+        </p>
+
+        <!-- 1 -->
+        <article class="card">
+            <h3><span class="num">1</span> Listas: muchas cosas en una sola caja</h3>
+            <p class="concept">
+                Una <strong>lista</strong> guarda <strong>varios valores juntos y en orden</strong>,
+                como un estante con casilleros numerados. Cada valor vive en una
+                <strong>posición</strong> que arranca a contar desde <strong>0</strong>.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis</span>
+                cursos = ["1A", "2A", "3A", "4A"]<br>
+                print(cursos[0])&nbsp;&nbsp;&nbsp;# el primero<br>
+                print(len(cursos))&nbsp;# cuántos hay
+            </div>
+            <pre><code>cursos = [<span class="str">"1A"</span>, <span class="str">"2A"</span>, <span class="str">"3A"</span>, <span class="str">"4A"</span>]     <span class="cmt"># así empieza planilla.py</span>
+
+<span class="fn">print</span>(cursos[<span class="nu">0</span>])          <span class="cmt"># 1A    (el primero)</span>
+<span class="fn">print</span>(cursos[<span class="nu">2</span>])          <span class="cmt"># 3A    (tercera posición)</span>
+<span class="fn">print</span>(<span class="fn">len</span>(cursos))        <span class="cmt"># 4     (cantidad de elementos)</span></code></pre>
+
+            <div class="sub">Operaciones básicas</div>
+            <table class="datos">
+                <tr><th>Acción</th><th>Código</th><th>Qué hace</th></tr>
+                <tr><td>leer una posición</td><td><code class="inline">cursos[1]</code></td><td>devuelve "2A"</td></tr>
+                <tr><td>cambiar un valor</td><td><code class="inline">cursos[0] = "5A"</code></td><td>pisa el primero</td></tr>
+                <tr><td>agregar al final</td><td><code class="inline">cursos.append("5B")</code></td><td>crece la lista</td></tr>
+                <tr><td>insertar en medio</td><td><code class="inline">cursos.insert(1, "6A")</code></td><td>corre al resto</td></tr>
+                <tr><td>sacar un valor</td><td><code class="inline">cursos.remove("3A")</code></td><td>borra ese dato</td></tr>
+                <tr><td>ordenar</td><td><code class="inline">cursos.sort()</code></td><td>alfanumérico ascendente</td></tr>
+                <tr><td>recorrer con índice</td><td><code class="inline">for i in range(len(cursos)):</code></td><td>i pasa por 0, 1, 2…</td></tr>
+            </table>
+
+            <div class="sub">Recorrer con índice</div>
+            <pre><code><span class="cmt"># Así muestra el menú la planilla.py:</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="fn">len</span>(cursos)):
+    <span class="fn">print</span>(i, <span class="str">"-"</span>, cursos[i])
+
+indice = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Seleccione índice del curso: "</span>))
+<span class="fn">print</span>(<span class="str">"Elegiste:"</span>, cursos[indice])</code></pre>
+            <ul class="explain">
+                <li><strong>range(len(lista))</strong> genera 0, 1, 2… hasta el último índice.</li>
+                <li>El número que mostraba el menú es el mismo que se usa para leer: cero traducciones.</li>
+            </ul>
+
+            <div class="alerta">
+                <strong>Error clásico:</strong> <code class="inline">cursos[4]</code> con 4 elementos da
+                <strong>IndexError</strong>: las posiciones van de 0 a 3. El último siempre es
+                <code class="inline">len(lista) - 1</code>.
+            </div>
+            <div class="buenas">
+                <strong>Buena práctica:</strong> cuando muestres un menú numerado, usá ese mismo índice
+                para leer la lista: cero traducciones y cero errores.
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Ejercicio: tu estante de cursos</h4>
+                <p class="ex-goal">
+                    Creá una lista <code class="inline">cursos</code> con al menos <strong>3 cursos</strong>,
+                    mostrá el primero con <code class="inline">cursos[0]</code>, mostrá la cantidad con
+                    <code class="inline">len()</code>, agregá uno nuevo con
+                    <code class="inline">append()</code> y recorré la lista con un <code class="inline">for</code>
+                    mostrando cada curso.
+                </p>
+                <textarea class="code-input" id="in-listas" spellcheck="false" placeholder="# Lista + len + append + for&#10;cursos = [&quot;1A&quot;, &quot;2A&quot;, &quot;3A&quot;]&#10;print(cursos[0])"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('listas')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('listas')">Limpiar</button>
+                </div>
+                <div class="result" id="res-listas"></div>
+            </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="card">
+            <h3><span class="num">2</span> Tuplas: listas que no se cambian</h3>
+            <p class="concept">
+                Una <strong>tupla</strong> es igual a una lista pero <strong>congelada</strong>:
+                se define con paréntesis y después <strong>no se puede modificar</strong>.
+                Analogía: la lista es una carpeta donde podés agregar hojas; la tupla es un
+                libro impreso.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis</span>
+                punto = (120, 140)&nbsp;&nbsp;&nbsp;&nbsp;# coordenada fija (x, y)<br>
+                print(punto[0])&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# leer sí se puede<br>
+                x, y = punto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# desempaquetar
+            </div>
+            <pre><code>punto = (<span class="nu">120</span>, <span class="nu">140</span>)          <span class="cmt"># coordenada fija (x, y)</span>
+dias = (<span class="str">"lunes"</span>, <span class="str">"martes"</span>, <span class="str">"miércoles"</span>)
+
+<span class="fn">print</span>(punto[<span class="nu">0</span>])             <span class="cmt"># leer sí se puede: 120</span>
+x, y = punto                 <span class="cmt"># desempaquetar: x=120, y=140</span></code></pre>
+
+            <div class="sub">Lista o tupla: cuándo usar cada una</div>
+            <table class="datos">
+                <tr><th></th><th>Lista [ ]</th><th>Tupla ( )</th></tr>
+                <tr><td>Modificar / agregar / borrar</td><td>sí (append, remove…)</td><td><strong>NO: error TypeError</strong></td></tr>
+                <tr><td>Leer posiciones</td><td>sí</td><td>sí</td></tr>
+                <tr><td>Para qué sirve</td><td>datos que cambian</td><td>datos fijos (constantes)</td></tr>
+                <tr><td>Ejemplo real</td><td>notas del alumno</td><td>tamaño de la ventana, coordenada inicial</td></tr>
+            </table>
+
+            <div class="okbox">
+                <strong>Dónde ya la usaste sin darte cuenta:</strong> en
+                <code class="inline">font=("arial", 20)</code> y en el SQL del formulario:
+                <code class="inline">cursor.execute(sql, (nombre, curso))</code>. Los paréntesis que
+                pasan varios datos juntos suelen ser tuplas.
+            </div>
+            <div class="alerta">
+                <strong>Ojo:</strong> <code class="inline">punto[0] = 200</code> da
+                <code class="inline">TypeError</code>. Si el dato tiene que cambiar, entonces no era
+                una tupla: usá lista.
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Ejercicio: coordenada fija</h4>
+                <p class="ex-goal">
+                    Creá la tupla <code class="inline">punto</code> con dos números, mostrá su primera
+                    posición con <code class="inline">punto[0]</code>, desempaquetala en
+                    <code class="inline">x</code> e <code class="inline">y</code> y mostrá ambas
+                    variables con <code class="inline">print()</code>.
+                </p>
+                <textarea class="code-input" id="in-tuplas" spellcheck="false" placeholder="# Tupla + desempaquetado&#10;punto = (120, 140)&#10;print(punto[0])"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('tuplas')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('tuplas')">Limpiar</button>
+                </div>
+                <div class="result" id="res-tuplas"></div>
+            </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="card">
+            <h3><span class="num">3</span> Diccionarios: cada dato con su etiqueta</h3>
+            <p class="concept">
+                Un <strong>diccionario</strong> guarda pares <strong>clave : valor</strong>, como una
+                ficha de alumno: en vez de recordar "la posición 1 es el apellido", preguntás directo
+                por <code class="inline">"apellido"</code>.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis</span>
+                alumno = {"nombre": "Ana", "curso": "3A"}<br>
+                print(alumno["nombre"])&nbsp;&nbsp;# Ana<br>
+                alumno["turno"] = "Tarde"&nbsp;# clave nueva
+            </div>
+            <pre><code>alumno = {
+    <span class="str">"nombre"</span>: <span class="str">"Ana"</span>,
+    <span class="str">"curso"</span>: <span class="str">"3A"</span>,
+    <span class="str">"notas"</span>: [<span class="nu">8</span>, <span class="nu">7</span>, <span class="nu">9</span>]
+}
+
+<span class="fn">print</span>(alumno[<span class="str">"nombre"</span>])      <span class="cmt"># Ana</span>
+alumno[<span class="str">"turno"</span>] = <span class="str">"Tarde"</span>      <span class="cmt"># agregar una clave nueva</span>
+alumno[<span class="str">"curso"</span>] = <span class="str">"4A"</span>         <span class="cmt"># sobreescribir</span></code></pre>
+
+            <div class="sub">Operaciones con claves</div>
+            <table class="datos">
+                <tr><th>Acción</th><th>Código</th><th>Devuelve</th></tr>
+                <tr><td>leer</td><td><code class="inline">alumno["nombre"]</code></td><td>el valor de esa clave</td></tr>
+                <tr><td>leer sin riesgo</td><td><code class="inline">alumno.get("edad", "no está")</code></td><td>el default si no existe</td></tr>
+                <tr><td>agregar / cambiar</td><td><code class="inline">alumno[clave] = valor</code></td><td>—</td></tr>
+                <tr><td>todas las claves</td><td><code class="inline">alumno.keys()</code></td><td>dict_keys([...])</td></tr>
+                <tr><td>pares clave-valor</td><td><code class="inline">alumno.items()</code></td><td>pares para recorrer</td></tr>
+            </table>
+
+            <div class="sub">Recorrer y calcular</div>
+            <pre><code><span class="kw">for</span> clave, valor <span class="kw">in</span> alumno.<span class="fn">items</span>():
+    <span class="fn">print</span>(clave, <span class="str">"-&gt;"</span>, valor)
+
+promedio = <span class="fn">sum</span>(alumno[<span class="str">"notas"</span>]) / <span class="fn">len</span>(alumno[<span class="str">"notas"</span>])
+<span class="fn">print</span>(<span class="fn">f"Promedio de {alumno['nombre']}: {promedio}"</span>)</code></pre>
+            <ul class="explain">
+                <li><strong>items()</strong> entrega dos valores por vuelta: la clave y su valor.</li>
+                <li>Dentro del diccionario puede haber una lista (las notas) y se opera igual.</li>
+            </ul>
+
+            <div class="alerta">
+                <strong>Diferencia clave:</strong> la lista accede por <b>número</b>
+                (<code class="inline">cursos[2]</code>), el diccionario por <b>etiqueta</b>
+                (<code class="inline">alumno["curso"]</code>). <strong>KeyError</strong> = esa etiqueta
+                no existe.
+            </div>
+            <div class="buenas">
+                <strong>Buena práctica:</strong> si no estás seguro de que la clave exista, usá
+                <code class="inline">.get()</code> con un valor por defecto en vez de romper el programa.
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Ejercicio: ficha del alumno</h4>
+                <p class="ex-goal">
+                    Creá el diccionario <code class="inline">alumno</code> con las claves
+                    <code class="inline">"nombre"</code>, <code class="inline">"curso"</code> y
+                    <code class="inline">"notas"</code> (una lista de 3 notas). Mostrá el nombre
+                    accediendo por clave, agregá la clave <code class="inline">"turno"</code>, calculá
+                    el promedio con <code class="inline">sum()</code> y <code class="inline">len()</code>
+                    y recorré el diccionario con <code class="inline">.items()</code>.
+                </p>
+                <textarea class="code-input" id="in-diccionarios" spellcheck="false" placeholder="# Diccionario + items()&#10;alumno = {&quot;nombre&quot;: &quot;Ana&quot;, &quot;curso&quot;: &quot;3A&quot;}"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('diccionarios')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('diccionarios')">Limpiar</button>
+                </div>
+                <div class="result" id="res-diccionarios"></div>
+            </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="card">
+            <h3><span class="num">4</span> Tkinter avanzado: Text, state y lambda</h3>
+            <p class="concept">
+                Acá entra el corazón de <em>LasTablas.py</em>: un widget <strong>Text</strong> grande
+                donde escribir muchas líneas, botones que envían datos con <strong>lambda</strong> y el
+                atributo <strong>state</strong> para bloquear o habilitar.
+            </p>
+
+            <div class="sub">Widget Text: muchas líneas</div>
+            <pre><code>texto_tabla = <span class="fn">Text</span>(frame3)
+texto_tabla.config(bg=<span class="str">"turquoise"</span>, width=<span class="nu">80</span>, height=<span class="nu">17</span>)
+texto_tabla.pack(padx=<span class="nu">10</span>, pady=<span class="nu">10</span>)</code></pre>
+            <table class="datos">
+                <tr><th>Acción</th><th>Línea</th><th>Notas</th></tr>
+                <tr><td>escribir al final</td><td><code class="inline">texto.insert(END, "hola\n")</code></td><td>\n = salto de línea</td></tr>
+                <tr><td>borrar TODO</td><td><code class="inline">texto.delete("1.0", END)</code></td><td>"1.0" = línea 1, carácter 0</td></tr>
+                <tr><td>leer todo</td><td><code class="inline">texto.get("1.0", END)</code></td><td>devuelve str</td></tr>
+            </table>
+            <div class="alerta">
+                <strong>Ojo:</strong> Entry borra con <code class="inline">(0, END)</code>, pero Text
+                borra con <code class="inline">("1.0", END)</code>: el Text usa notación
+                línea.carácter porque tiene varias líneas.
+            </div>
+
+            <div class="sub">La función exacta del proyecto: mostrar_tabla(n)</div>
+            <pre><code><span class="kw">def</span> <span class="fn">mostrar_tabla</span>(n):
+    texto_tabla.delete(<span class="str">"1.0"</span>, END)              <span class="cmt"># limpia lo anterior</span>
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">1</span>, <span class="nu">11</span>):                       <span class="cmt"># vueltas: 1 a 10</span>
+        texto_tabla.insert(END, <span class="fn">f"{n}*{i}={n*i}"</span> + <span class="str">"\n"</span>)</code></pre>
+            <ol class="explain">
+                <li>Borra el contenido viejo (si no, las tablas se mezclarían).</li>
+                <li>Recorre 1..10 con <code class="inline">for</code>.</li>
+                <li>En cada vuelta inserta UNA línea al final (<code class="inline">END</code>).</li>
+            </ol>
+
+            <div class="sub">state: habilitar y bloquear</div>
+            <table class="datos">
+                <tr><th>Valor</th><th>Efecto</th><th>Uso típico</th></tr>
+                <tr><td><code class="inline">state=NORMAL</code></td><td>activo, responde</td><td>estado normal</td></tr>
+                <tr><td><code class="inline">state=DISABLED</code></td><td>bloqueado, gris</td><td>botón "Guardar" sin conexión</td></tr>
+                <tr><td><code class="inline">state=READONLY</code></td><td>muestra pero no edita</td><td>resultado calculado</td></tr>
+            </table>
+            <pre><code>boton_guardar = <span class="fn">Button</span>(ventana, text=<span class="str">"Guardar"</span>, state=DISABLED)
+<span class="cmt"># más tarde, cuando todo esté listo:</span>
+boton_guardar.config(state=NORMAL)</code></pre>
+            <div class="buenas">
+                <strong>Buena práctica:</strong> deshabilitá botones cuya acción todavía no tiene
+                sentido (evitás errores del usuario en vez de corregirlos después).
+            </div>
+
+            <div class="sub">lambda: una función escrita en una línea</div>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                <strong>Paso 0 · cómo trabaja command.</strong> En un botón,
+                <code class="inline">command=saludar</code> va SIN paréntesis: no llamamos a la función
+                ahora, le entregamos a Tkinter <em>su dirección</em> para que la llame recién con el click.
+            </p>
+            <pre><code><span class="kw">def</span> <span class="fn">doble</span>(x):                <span class="cmt"># función normal</span>
+    <span class="kw">return</span> x * <span class="nu">2</span>
+
+<span class="kw">lambda</span> x: x * <span class="nu">2</span>              <span class="cmt"># EXACTAMENTE lo mismo, en una línea</span></code></pre>
+            <table class="datos">
+                <tr><th>Pedazo</th><th>Significado</th><th>Equivalente en def</th></tr>
+                <tr><td><code class="inline">lambda</code></td><td>"acá empieza una mini-función sin nombre"</td><td><code class="inline">def nombre():</code></td></tr>
+                <tr><td><code class="inline">x</code></td><td>lo que recibe</td><td>el <code class="inline">x</code> de los paréntesis</td></tr>
+                <tr><td><code class="inline">: x * 2</code></td><td>lo único que hace y devuelve</td><td><code class="inline">return x * 2</code></td></tr>
+            </table>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                El problema: nuestros botones necesitan mandar el número de tabla. Pero esto…
+            </p>
+            <pre><code>Button(frame2, text=<span class="str">"7"</span>, command=<span class="fn">mostrar_tabla</span>(<span class="nu">7</span>))  <span class="cmt"># MAL: los paréntesis ejecutan YA</span></code></pre>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                …ejecuta la función <strong>al crear el botón</strong>, no al hacer click. Y sin
+                paréntesis (<code class="inline">command=mostrar_tabla</code>) falta el número y da error
+                en el click. Hace falta algo intermedio: <strong>lambda</strong>.
+            </p>
+            <pre><code>boton7 = Button(frame2, text=<span class="str">"7"</span>, command=<span class="kw">lambda</span>: <span class="fn">mostrar_tabla</span>(<span class="nu">7</span>))</code></pre>
+            <ol class="explain">
+                <li>Python crea la mini-función <code class="inline">lambda: mostrar_tabla(7)</code> y la guarda en <code class="inline">command</code>. Todavía NO se ejecuta nada.</li>
+                <li>Hacés click en el "7".</li>
+                <li>Tkinter llama a esa mini-función (por eso funciona sin paréntesis: la invoca vacía).</li>
+                <li>La mini-función corre su única línea: <code class="inline">mostrar_tabla(7)</code>. Recién AHORA se dibuja la tabla del 7.</li>
+            </ol>
+            <table class="datos">
+                <tr><th>Forma</th><th>Qué pasa</th></tr>
+                <tr><td><code class="inline">command=mostrar_tabla</code></td><td>falta el número n: error al hacer click</td></tr>
+                <tr><td><code class="inline">command=mostrar_tabla(7)</code></td><td>se ejecuta YA al crear el botón (mal)</td></tr>
+                <tr><td><code class="inline">command=lambda: mostrar_tabla(7)</code></td><td>espera el click Y manda el 7 (correcto)</td></tr>
+            </table>
+            <div class="okbox">
+                <strong>Idea clave:</strong> lambda no ejecuta nada por sí sola: fabrica la función y la
+                deja lista, como un papelito que dice "cuando te llamen, mostrá la tabla del 7".
+                Tkinter guarda el papelito y lo lee en cada click.
+            </div>
+            <div class="alerta">
+                <strong>Límite:</strong> lambda admite UNA sola expresión (una línea). Si necesitás
+                varias instrucciones o un <code class="inline">if</code> complejo, usá
+                <code class="inline">def</code> normal.
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Ejercicio: la tabla del 7 con lambda</h4>
+                <p class="ex-goal">
+                    Definí <code class="inline">mostrar_tabla(n)</code>: debe crear un
+                    <code class="inline">Text</code>, borrarlo con <code class="inline">delete("1.0", END)</code>,
+                    recorrer <code class="inline">range(1, 11)</code> e insertar cada línea con
+                    <code class="inline">insert(END, ...)</code>. Después creá un
+                    <code class="inline">Button</code> con <code class="inline">command=lambda: mostrar_tabla(7)</code>
+                    y cerrá con <code class="inline">mainloop()</code>.
+                </p>
+                <textarea class="code-input" id="in-tkinter2" spellcheck="false" placeholder="# Text + for + lambda&#10;from tkinter import *&#10;ventana = Tk()"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('tkinter2')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('tkinter2')">Limpiar</button>
+                </div>
+                <div class="result" id="res-tkinter2"></div>
+            </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="card">
+            <h3><span class="num">5</span> Canvas: dibujar, poner imagen y animar</h3>
+            <p class="concept">
+                El <strong>Canvas</strong> es un lienzo donde se colocan formas e imágenes, y cada
+                objeto queda identificado por un <strong>id</strong> para poder moverlo después.
+                Es el escenario del sapo de <em>LasTablas.py</em>.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis</span>
+                canvas = Canvas(ventana, width=1500, height=90)<br>
+                sapo = canvas.create_image(100, 55, image=img_Tk)<br>
+                canvas.coords(sapo, x, y)&nbsp;&nbsp;# mover
+            </div>
+
+            <div class="sub">Crear lienzo e imagen</div>
+            <pre><code><span class="kw">from</span> PIL <span class="kw">import</span> Image, ImageTk
+
+canvas = <span class="fn">Canvas</span>(frame5, width=<span class="nu">1500</span>, height=<span class="nu">90</span>)
+canvas.pack()
+
+img = Image.open(<span class="str">"Sapo.jfif"</span>).resize((<span class="nu">100</span>,<span class="nu">100</span>))
+img_Tk = ImageTk.PhotoImage(img)
+
+sapo = canvas.create_image(<span class="nu">100</span>, <span class="nu">55</span>, image=img_Tk)</code></pre>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                <code class="inline">create_image(x, y, image=...)</code> devuelve el
+                <strong>id</strong> del objeto (acá, <code class="inline">sapo</code>). Ese id es el que
+                se usa después para moverlo.
+            </p>
+
+            <div class="sub">Moverlo en cada vuelta</div>
+            <pre><code><span class="cmt"># Mueve la imagen a la nueva posición</span>
+canvas.coords(sapo, x, ALTO // <span class="nu">2</span>)</code></pre>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                <code class="inline">coords(id, x, y)</code> teletransporta el objeto a esa posición.
+                Cambiar las coordenadas muchas veces seguidas = animación.
+            </p>
+
+            <div class="sub">La animación completa: rebote izquierda-derecha</div>
+            <pre><code>x, direccion = <span class="nu">100</span>, <span class="nu">1</span>            <span class="cmt"># direccion 1=derecha, -1=izquierda</span>
+
+<span class="kw">def</span> <span class="fn">mover</span>():
+    <span class="kw">global</span> x, direccion
+    x += <span class="nu">10</span> * direccion           <span class="cmt"># avanza 10 px por vuelta</span>
+    <span class="kw">if</span> x &lt;= <span class="nu">100</span> <span class="kw">or</span> x &gt; <span class="nu">1300</span> - <span class="nu">100</span>:
+        direccion *= -<span class="nu">1</span>           <span class="cmt"># tocó un borde: invierte el sentido</span>
+    canvas.coords(sapo, x, ALTO // <span class="nu">2</span>)
+    base.after(<span class="nu">30</span>, mover)          <span class="cmt"># re-agenda: ~33 cuadros por segundo</span>
+
+<span class="fn">mover</span>()                            <span class="cmt"># primera llamada: arranca el loop</span></code></pre>
+            <ul class="explain">
+                <li><code class="inline">x += 10 * direccion</code>: suma si dirección vale 1, resta si vale -1.</li>
+                <li>El <code class="inline">if</code> de bordes multiplica la dirección por -1: rebota.</li>
+                <li><code class="inline">after(30, mover)</code> re-agenda: el mismo patrón del cronómetro de la Parte 1.</li>
+                <li><code class="inline">global</code> es obligatorio para modificar <code class="inline">x</code> y <code class="inline">direccion</code> dentro de la función.</li>
+            </ul>
+
+            <div class="alerta">
+                <strong>Error clásico con imágenes:</strong> guardar <code class="inline">img_Tk</code>
+                solo dentro de una función hace que la imagen desaparezca (el recolector la borra).
+                Guardala en una variable global.
+            </div>
+            <div class="buenas">
+                <strong>Buena práctica:</strong> nombrá el id con algo que se entienda
+                (<code class="inline">sapo</code>, <code class="inline">pelota</code>), así
+                <code class="inline">coords(sapo, ...)</code> se lee solo.
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Ejercicio: el sapo que rebota</h4>
+                <p class="ex-goal">
+                    Creá un <code class="inline">Canvas</code>, agregá una imagen u óvalo con
+                    <code class="inline">create_image()</code> o <code class="inline">create_oval()</code>
+                    guardando su id, definí <code class="inline">mover()</code> con
+                    <code class="inline">global x</code> que actualice la posición con
+                    <code class="inline">canvas.coords(...)</code> y se re-agende con
+                    <code class="inline">after(30, mover)</code>. Cerrá con <code class="inline">mainloop()</code>.
+                </p>
+                <textarea class="code-input" id="in-canvas" spellcheck="false" placeholder="# Canvas + coords + after&#10;from tkinter import *&#10;ventana = Tk()&#10;canvas = Canvas(ventana, width=600, height=90)"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('canvas')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('canvas')">Limpiar</button>
+                </div>
+                <div class="result" id="res-canvas"></div>
+            </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="card">
+            <h3><span class="num">6</span> Música de fondo con pygame</h3>
+            <p class="concept">
+                Pygame trae un reproductor de sonido (<code class="inline">mixer</code>) que puede sonar
+                mientras la ventana sigue andando: perfecto para ponerle música a
+                <em>LasTablas</em>.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis</span>
+                import pygame<br>
+                pygame.mixer.init()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 1) enciende audio<br>
+                pygame.mixer.music.load("musica.mp3")&nbsp;# 2) carga<br>
+                pygame.mixer.music.play(-1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 3) loop infinito
+            </div>
+            <pre><code><span class="kw">import</span> pygame
+
+<span class="fn">pygame.mixer.init</span>()                        <span class="cmt"># 1) enciende el sistema de audio</span>
+musica_tablas = <span class="str">"musica_tablas.mp3"</span>          <span class="cmt"># archivo en la MISMA carpeta</span>
+<span class="fn">pygame.mixer.music.load</span>(musica_tablas)      <span class="cmt"># 2) carga el archivo</span>
+pygame.mixer.music.play(-<span class="nu">1</span>)                 <span class="cmt"># 3) reproduce en LOOP infinito</span></code></pre>
+            <table class="datos">
+                <tr><th>Línea</th><th>Qué hace</th></tr>
+                <tr><td><code class="inline">pygame.mixer.init()</code></td><td>prepara el hardware de audio (una sola vez)</td></tr>
+                <tr><td><code class="inline">music.load(archivo)</code></td><td>carga mp3/wav/ogg a memoria</td></tr>
+                <tr><td><code class="inline">music.play(-1)</code></td><td>reproduce y repite para SIEMPRE (-1 = loop infinito)</td></tr>
+                <tr><td><code class="inline">music.play(3)</code></td><td>suena 3 veces y para</td></tr>
+                <tr><td><code class="inline">music.stop()</code></td><td>corta la reproducción</td></tr>
+            </table>
+            <div class="okbox">
+                <strong>¿Por qué -1?</strong> El argumento es "cuántas veces repetir". Con 0 suena una
+                vez, con 3 suena tres veces, con -1 el ciclo nunca termina: música de fondo eterna.
+            </div>
+            <div class="alerta">
+                <strong>Errores típicos:</strong>
+                <ul class="explain" style="margin-top:.3rem;">
+                    <li>No llamar <code class="inline">init()</code> antes de load/play.</li>
+                    <li>Ruta mal escrita: el archivo debe estar junto al .py (o pasar la ruta completa).</li>
+                    <li>Formato no soportado: probá mp3 u ogg.</li>
+                </ul>
+            </div>
+            <div class="buenas">
+                <strong>Idea integradora:</strong> podés combinar todo: botón "Música ON/OFF" con
+                <code class="inline">command=lambda: pygame.mixer.music.stop()</code> o con una función
+                propia que alterne.
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Ejercicio: música sin fin</h4>
+                <p class="ex-goal">
+                    Importá <code class="inline">pygame</code>, inicializá el mixer con
+                    <code class="inline">pygame.mixer.init()</code>, cargá un archivo
+                    <code class="inline">.mp3</code> con <code class="inline">music.load()</code> y
+                    reproducilo en loop con <code class="inline">play(-1)</code>.
+                </p>
+                <textarea class="code-input" id="in-musica" spellcheck="false" placeholder="# pygame + mixer + loop&#10;import pygame"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('musica')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('musica')">Limpiar</button>
+                </div>
+                <div class="result" id="res-musica"></div>
+            </div>
+        </article>
+
+        <!-- 7 -->
+        <article class="card">
+            <h3><span class="num">7</span> Formulario con base de datos (MySQL)</h3>
+            <p class="concept">
+                Meta final: una ventana donde cargar un alumno (nombre + curso),
+                <strong>ENVIARLO</strong> a MySQL y después <strong>MOSTRAR</strong> lo guardado.
+                Orden del proyecto: <strong>primero armamos el formulario</strong> con Tkinter puro y
+                lo probamos; recién después le conectamos la base. Con la BD llegan tres verbos:
+                <strong>CONECTAR</strong> (abrir la puerta), <strong>ENVIAR</strong> (INSERT + commit)
+                y <strong>MOSTRAR</strong> (SELECT + fetchall).
+            </p>
+
+            <div class="sub">Ventanitas de aviso: messagebox</div>
+            <table class="datos">
+                <tr><th>messagebox</th><th>Cuándo usarla</th><th>Icono</th></tr>
+                <tr><td><code class="inline">showinfo(titulo, texto)</code></td><td>operación exitosa</td><td>i azul</td></tr>
+                <tr><td><code class="inline">showwarning(titulo, texto)</code></td><td>falta un dato / algo raro</td><td>!</td></tr>
+                <tr><td><code class="inline">showerror(titulo, texto)</code></td><td>fallo grave (conexión)</td><td>X roja</td></tr>
+            </table>
+
+            <div class="sub">PASO 1 · El formulario (solo Tkinter, sin base)</div>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                Primero construimos y probamos la VENTANA completa: caja de nombre, desplegable de
+                curso, pizarra para listar y dos botones. Si esto funciona solo, agregarle la base
+                después no rompe nada.
+            </p>
+            <pre><code><span class="kw">from</span> tkinter <span class="kw">import</span> *             <span class="cmt"># Tk, Label, Entry, Button, Text, END...</span>
+<span class="kw">from</span> tkinter <span class="kw">import</span> ttk           <span class="cmt"># widget mejorado: el Combobox</span>
+<span class="kw">from</span> tkinter <span class="kw">import</span> messagebox    <span class="cmt"># ventanitas: showinfo/showwarning/showerror</span>
+
+ventana = <span class="fn">Tk</span>()
+ventana.title(<span class="str">"Registro de alumnos"</span>)
+ventana.geometry(<span class="str">"380x420"</span>)
+
+<span class="fn">Label</span>(ventana, text=<span class="str">"Nombre del alumno:"</span>).pack()
+entrada_nombre = <span class="fn">Entry</span>(ventana)                <span class="cmt"># caja para escribir el nombre</span>
+entrada_nombre.pack()
+
+<span class="fn">Label</span>(ventana, text=<span class="str">"Curso:"</span>).pack()
+combo_curso = ttk.<span class="fn">Combobox</span>(ventana, values=[<span class="str">"1A"</span>, <span class="str">"2A"</span>, <span class="str">"3A"</span>, <span class="str">"4A"</span>])
+combo_curso.<span class="fn">current</span>(<span class="nu">0</span>)                         <span class="cmt"># preselecciona el primero</span>
+combo_curso.pack()
+
+texto_alumnos = <span class="fn">Text</span>(ventana, width=<span class="nu">42</span>, height=<span class="nu">10</span>)   <span class="cmt"># acá listará MOSTRAR</span>
+texto_alumnos.pack(pady=<span class="nu">10</span>)
+
+<span class="fn">Button</span>(ventana, text=<span class="str">"Guardar"</span>, command=guardar).pack()
+<span class="fn">Button</span>(ventana, text=<span class="str">"Mostrar"</span>, command=mostrar).pack()
+
+ventana.<span class="fn">mainloop</span>()                             <span class="cmt"># enciende la ventana</span></code></pre>
+            <table class="datos">
+                <tr><th>Widget</th><th>Trabajo que hace</th></tr>
+                <tr><td><code class="inline">Entry entrada_nombre</code></td><td>escribir el nombre (se lee con <code class="inline">.get()</code>)</td></tr>
+                <tr><td><code class="inline">ttk.Combobox combo_curso</code></td><td>elegir el curso de la lista, sin tipearlo</td></tr>
+                <tr><td><code class="inline">Text texto_alumnos</code></td><td>pizarra donde MOSTRAR escribirá los alumnos</td></tr>
+                <tr><td><code class="inline">Button command=guardar</code></td><td>clic → ejecuta guardar() (¡sin paréntesis!)</td></tr>
+                <tr><td><code class="inline">Button command=mostrar</code></td><td>clic → ejecuta mostrar()</td></tr>
+            </table>
+            <div class="alerta">
+                <strong>Ojo:</strong> los botones mencionan <code class="inline">guardar</code> y
+                <code class="inline">mostrar</code>, que TODAVÍA no existen. No pasa nada al crear la
+                ventana (Python las busca recién en el click)… pero si clickeás antes de definirlas:
+                <code class="inline">NameError</code>.
+            </div>
+
+            <div class="sub">PASO 2 · CONECTAR: def conectar()</div>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                Una función chiquita que devuelve la conexión abierta. Las demás funciones la llaman
+                cada vez que necesitan hablar con MySQL: abren la puerta, usan la base y la cierran.
+            </p>
+            <pre><code><span class="kw">import</span> mysql.connector        <span class="cmt"># driver: pip install mysql-connector-python</span>
+
+<span class="kw">def</span> <span class="fn">conectar</span>():
+    <span class="kw">return</span> mysql.connector.connect(
+        host=<span class="str">"localhost"</span>,
+        user=<span class="str">"root"</span>,
+        password=<span class="str">""</span>,
+        database=<span class="str">"escuela"</span>
+    )</code></pre>
+            <table class="datos">
+                <tr><th>Dato</th><th>Valor típico</th><th>Significado</th></tr>
+                <tr><td><code class="inline">host</code></td><td>"localhost"</td><td>dónde vive MySQL: esta misma PC</td></tr>
+                <tr><td><code class="inline">user</code></td><td>"root"</td><td>usuario de MySQL</td></tr>
+                <tr><td><code class="inline">password</code></td><td>""</td><td>clave del usuario (vacía en XAMPP recién instalado)</td></tr>
+                <tr><td><code class="inline">database</code></td><td>"escuela"</td><td>a qué base entrar (¡debe existir antes!)</td></tr>
+            </table>
+            <div class="buenas">
+                <strong>¿Por qué una función aparte?</strong> Los datos de acceso se escriben UNA sola
+                vez. Si cambia la clave o el nombre de la base, editás <code class="inline">conectar()</code>
+                y todo lo demás sigue igual.
+            </div>
+
+            <div class="sub">PASO 3 · ENVIAR: def guardar()</div>
+            <pre><code><span class="kw">def</span> <span class="fn">guardar</span>():
+    nombre = entrada_nombre.get()
+    curso = combo_curso.get()
+
+    <span class="kw">if</span> nombre == <span class="str">""</span> <span class="kw">or</span> curso == <span class="str">""</span>:
+        messagebox.<span class="fn">showwarning</span>(<span class="str">"Falta dato"</span>, <span class="str">"Completá todos los campos"</span>)
+        <span class="kw">return</span>
+
+    <span class="kw">try</span>:
+        cnx = <span class="fn">conectar</span>()
+        cursor = cnx.cursor()
+        sql = <span class="str">"INSERT INTO alumnos (nombre, curso) VALUES (%s, %s)"</span>
+        cursor.execute(sql, (nombre, curso))     <span class="cmt"># los valores viajan en una TUPLA</span>
+        cnx.commit()                             <span class="cmt"># confirma el cambio</span>
+        cnx.close()
+        messagebox.<span class="fn">showinfo</span>(<span class="str">"Guardado"</span>, <span class="str">"Alumno agregado con éxito"</span>)
+    <span class="kw">except</span>:
+        messagebox.<span class="fn">showerror</span>(<span class="str">"Error"</span>, <span class="str">"No se pudo conectar a la base"</span>)</code></pre>
+            <ol class="explain">
+                <li><code class="inline">.get()</code>: saca de la ventana lo que escribió/eligió el usuario.</li>
+                <li>Validación ANTES de tocar la base; <code class="inline">return</code> corta la función si falta un dato.</li>
+                <li><code class="inline">try</code>: si MySQL está apagado no rompe el programa, salta al <code class="inline">except</code> y avisa con showerror.</li>
+                <li>Pide la conexión a <code class="inline">conectar()</code> y crea el cursor: el "lápiz" que escribe sobre la base.</li>
+                <li>Los <code class="inline">%s</code> son huecos; los valores viajan en una tupla aparte (nunca concatenar strings del usuario al SQL).</li>
+                <li><code class="inline">commit()</code> confirma el cambio; sin esa línea, el INSERT se pierde.</li>
+                <li><code class="inline">close()</code> cierra la puerta y showinfo celebra.</li>
+            </ol>
+
+            <div class="sub">PASO 4 · MOSTRAR lo guardado (SELECT)</div>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                Mismo camino que ENVIAR, con distinto final: INSERT cambia datos y necesita
+                <code class="inline">commit()</code>; SELECT solo consulta y responde con
+                <code class="inline">fetchall()</code>.
+            </p>
+            <pre><code><span class="kw">def</span> <span class="fn">mostrar</span>():
+    <span class="kw">try</span>:
+        cnx = <span class="fn">conectar</span>()
+        cursor = cnx.cursor()
+        cursor.<span class="fn">execute</span>(<span class="str">"SELECT nombre, curso FROM alumnos"</span>)
+        filas = cursor.<span class="fn">fetchall</span>()            <span class="cmt"># devuelve LISTA DE TUPLAS</span>
+        <span class="cmt"># ej: filas = [("Ana", "1A"), ("Bruno", "2A")]</span>
+
+        texto_alumnos.delete(<span class="str">"1.0"</span>, END)      <span class="cmt"># limpia antes de escribir</span>
+        <span class="kw">for</span> fila <span class="kw">in</span> filas:                    <span class="cmt"># cada fila es una tupla</span>
+            texto_alumnos.insert(END, <span class="fn">f"{fila[0]} - {fila[1]}\n"</span>)
+
+        <span class="kw">if</span> <span class="fn">len</span>(filas) == <span class="nu">0</span>:
+            messagebox.<span class="fn">showinfo</span>(<span class="str">"Sin datos"</span>, <span class="str">"Todavía no hay alumnos"</span>)
+        cnx.close()
+    <span class="kw">except</span>:
+        messagebox.<span class="fn">showerror</span>(<span class="str">"Error"</span>, <span class="str">"No se pudo leer la base"</span>)</code></pre>
+            <table class="datos">
+                <tr><th>Herramienta</th><th>Qué hace</th></tr>
+                <tr><td><code class="inline">cursor.execute(sql)</code></td><td>envía el SELECT (sin tupla de valores: no hay datos que proteger)</td></tr>
+                <tr><td><code class="inline">cursor.fetchall()</code></td><td>trae TODAS las filas juntas, como lista de tuplas</td></tr>
+                <tr><td><code class="inline">fila[0]</code> / <code class="inline">fila[1]</code></td><td>campo por posición: el orden es el MISMO que se pidió en el SELECT</td></tr>
+            </table>
+
+            <div class="sub">Los cinco pasos, de un vistazo</div>
+            <table class="datos">
+                <tr><th>Paso</th><th>Línea</th><th>Si falta…</th></tr>
+                <tr><td>1. abrir conexión</td><td><code class="inline">connect(host, user, password, database)</code></td><td>todo lo demás falla</td></tr>
+                <tr><td>2. crear cursor</td><td><code class="inline">cnx.cursor()</code></td><td>no hay quién ejecute SQL</td></tr>
+                <tr><td>3. ejecutar</td><td><code class="inline">cursor.execute(sql, tupla_valores)</code></td><td>nada llega a la base</td></tr>
+                <tr><td>4. confirmar</td><td><code class="inline">cnx.commit()</code></td><td>el INSERT se pierde al cerrar</td></tr>
+                <tr><td>5. cerrar</td><td><code class="inline">cnx.close()</code></td><td>conexiones colgadas</td></tr>
+            </table>
+            <div class="alerta">
+                <strong>Error clásico Nº1:</strong> olvidar <code class="inline">commit()</code>. El
+                programa dice que guardó, pero al abrir phpMyAdmin no hay nada: la operación quedó
+                pendiente.
+            </div>
+            <div class="buenas">
+                <strong>Buena práctica:</strong> validar ANTES de tocar la base (campos vacíos con
+                showwarning) y proteger la conexión con try/except para responder con showerror si
+                MySQL está apagado.
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Ejercicio: guardar un alumno en MySQL</h4>
+                <p class="ex-goal">
+                    Escribí <code class="inline">def conectar()</code> que devuelva
+                    <code class="inline">mysql.connector.connect(...)</code> y
+                    <code class="inline">def guardar()</code> que lea el nombre con
+                    <code class="inline">.get()</code>, use <code class="inline">INSERT INTO</code> con
+                    <code class="inline">%s</code>, llame a <code class="inline">commit()</code> y
+                    <code class="inline">close()</code>, todo dentro de <code class="inline">try / except</code>
+                    con <code class="inline">messagebox</code>.
+                </p>
+                <textarea class="code-input" id="in-mysql" spellcheck="false" placeholder="# conectar() + INSERT + commit&#10;import mysql.connector"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('mysql')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('mysql')">Limpiar</button>
+                </div>
+                <div class="result" id="res-mysql"></div>
+            </div>
+        </article>
+
+        <!-- Progreso -->
+        <div class="progress-card" id="progreso">
+            <h3>📊 Tu progreso en la guía</h3>
+            <p style="margin:0;font-size:.9rem;color:#0c4a6e;">
+                Se guarda automáticamente en este navegador. Tocá un tema para ir directo a su ejercicio.
+            </p>
+            <div class="progress-top">
+                <div class="score-bar"><div class="score-fill" id="progreso-barra" style="width:0%"></div></div>
+                <span class="progress-pct" id="progreso-texto">0 de 9 completos</span>
+            </div>
+            <ul class="progress-list" id="progreso-lista"></ul>
+            <div class="quiz-actions">
+                <button class="btn btn-ghost" onclick="reiniciarTodo()">🔄 Reiniciar progreso</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SECCIÓN 2 ================= -->
+    <section id="quiz">
+        <h2 class="section-title">SECCIÓN 2 · Autoevaluación</h2>
+        <p class="section-sub">
+            Doce preguntas sobre todos los temas de la Parte 2. Elegí una opción por pregunta y presioná
+            <strong>Calificar</strong>: la página te muestra cuáles están bien y cuáles revisar.
+        </p>
+        <div class="card">
+            <div class="quiz-question" data-answer="b">
+                <p class="q-text">1. ¿Qué imprime este programa?</p>
+                <pre><code>cursos = [<span class="str">"1A"</span>, <span class="str">"2A"</span>, <span class="str">"3A"</span>, <span class="str">"4A"</span>]
+<span class="fn">print</span>(cursos[<span class="nu">1</span>])
+<span class="fn">print</span>(<span class="fn">len</span>(cursos))</code></pre>
+                <ul class="options-list">
+                    <li data-opt="a">1A y 4</li>
+                    <li data-opt="b">2A y 4</li>
+                    <li data-opt="c">3A y 3</li>
+                    <li data-opt="d">IndexError</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="c">
+                <p class="q-text">2. ¿Qué aparece en pantalla?</p>
+                <pre><code>turnos = [<span class="str">"Mañana"</span>, <span class="str">"Tarde"</span>]
+turnos.append(<span class="str">"Noche"</span>)
+<span class="fn">print</span>(<span class="fn">len</span>(turnos))
+<span class="fn">print</span>(turnos[<span class="nu">2</span>])</code></pre>
+                <ul class="options-list">
+                    <li data-opt="a">2 y Mañana</li>
+                    <li data-opt="b">3 y Tarde</li>
+                    <li data-opt="c">3 y Noche</li>
+                    <li data-opt="d">IndexError: la lista tiene 2</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="b">
+                <p class="q-text">3. Necesitás guardar la coordenada inicial (x, y) de un sprite, que
+                    <strong>NUNCA</strong> cambia. ¿Qué estructura conviene?</p>
+                <ul class="options-list">
+                    <li data-opt="a">lista: [120, 140]</li>
+                    <li data-opt="b">tupla: (120, 140)</li>
+                    <li data-opt="c">diccionario: {"x": 120}</li>
+                    <li data-opt="d">texto: "120, 140"</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="c">
+                <p class="q-text">4. ¿Qué imprime <code class="inline">print(alumno["curso"])</code>?</p>
+                <pre><code>alumno = {<span class="str">"nombre"</span>: <span class="str">"Ana"</span>, <span class="str">"curso"</span>: <span class="str">"3A"</span>}</code></pre>
+                <ul class="options-list">
+                    <li data-opt="a">0</li>
+                    <li data-opt="b">Ana</li>
+                    <li data-opt="c">3A</li>
+                    <li data-opt="d">KeyError</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="b">
+                <p class="q-text">5. Querés guardar el turno del alumno en el diccionario. ¿Qué línea lo logra?</p>
+                <ul class="options-list">
+                    <li data-opt="a">alumno.add("turno", "Tarde")</li>
+                    <li data-opt="b">alumno["turno"] = "Tarde"</li>
+                    <li data-opt="c">alumno.append("Tarde")</li>
+                    <li data-opt="d">turno = alumno</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="b">
+                <p class="q-text">6. Completá el rango para recorrer del 1 al 10 <strong>incluyendo el 10</strong>:</p>
+                <pre><code><span class="kw">for</span> i <span class="kw">in</span> ______:
+    texto_tabla.insert(END, <span class="fn">f"{n}*{i}={n*i}"</span> + <span class="str">"\n"</span>)</code></pre>
+                <ul class="options-list">
+                    <li data-opt="a">range(1, 10)</li>
+                    <li data-opt="b">range(1, 11)</li>
+                    <li data-opt="c">range(10)</li>
+                    <li data-opt="d">range(0, 10)</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="b">
+                <p class="q-text">7. El botón "Guardar" debe aparecer <strong>bloqueado</strong> al abrir la
+                    ventana. ¿Cómo se crea?</p>
+                <ul class="options-list">
+                    <li data-opt="a">Button(ventana, text="Guardar", state=OFF)</li>
+                    <li data-opt="b">Button(ventana, text="Guardar", state=DISABLED)</li>
+                    <li data-opt="c">Button(ventana, text="Guardar", disabled=True)</li>
+                    <li data-opt="d">Button(ventana, text="Guardar").block()</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="b">
+                <p class="q-text">8. En LasTablas los botones 1..10 llaman a la misma función con distinto
+                    número. ¿Por qué se usa <code class="inline">lambda</code>?</p>
+                <ul class="options-list">
+                    <li data-opt="a">Porque lambda hace el botón más rápido</li>
+                    <li data-opt="b">Porque command no admite argumentos: lambda guarda la llamada mostrar_tabla(n) para el click</li>
+                    <li data-opt="c">Porque lambda reemplaza al mainloop</li>
+                    <li data-opt="d">Porque sin lambda el botón no se puede empaquetar</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="b">
+                <p class="q-text">9. ¿Qué hace exactamente
+                    <code class="inline">canvas.coords(sapo, x, ALTO // 2)</code>?</p>
+                <ul class="options-list">
+                    <li data-opt="a">Redimensiona la imagen del sapo</li>
+                    <li data-opt="b">Coloca al sapo en la posición (x, mitad de altura): lo mueve</li>
+                    <li data-opt="c">Crea un nuevo sapo en el centro</li>
+                    <li data-opt="d">Devuelve las coordenadas actuales</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="c">
+                <p class="q-text">10. ¿Qué significa el <code class="inline">-1</code> en
+                    <code class="inline">pygame.mixer.music.play(-1)</code>?</p>
+                <ul class="options-list">
+                    <li data-opt="a">Reproduce hacia atrás</li>
+                    <li data-opt="b">Reproduce una vez y silencia</li>
+                    <li data-opt="c">Repite PARA SIEMPRE hasta que se llame stop()</li>
+                    <li data-opt="d">Baja el volumen al mínimo</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="b">
+                <p class="q-text">11. El formulario dice "Guardado", pero phpMyAdmin no muestra la fila.
+                    ¿Qué línea falta?</p>
+                <ul class="options-list">
+                    <li data-opt="a">cursor.execute(sql, valores) otra vez</li>
+                    <li data-opt="b">cnx.commit()</li>
+                    <li data-opt="c">cnx.close()</li>
+                    <li data-opt="d">messagebox.showinfo otra vez</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="b">
+                <p class="q-text">12. El usuario aprieta Guardar con el nombre vacío. ¿Qué ventanita corresponde?</p>
+                <ul class="options-list">
+                    <li data-opt="a">showerror("Error", "...")</li>
+                    <li data-opt="b">showwarning("Falta dato", "Completá todos los campos")</li>
+                    <li data-opt="c">showinfo("Guardado", "...")</li>
+                    <li data-opt="d">No hace falta avisar nada</li>
+                </ul>
+            </div>
+
+            <div class="quiz-actions">
+                <button class="btn btn-primary" onclick="calificarQuiz('quiz','score-banner')">✅ Calificar</button>
+                <button class="btn btn-ghost" onclick="reiniciarQuiz('quiz','score-banner')">🔄 Reiniciar</button>
+            </div>
+            <div id="score-banner"></div>
+        </div>
+    </section>
+
+    <!-- ================= SECCIÓN 3 ================= -->
+    <section id="simuladores">
+        <h2 class="section-title">SECCIÓN 3 · Simuladores</h2>
+        <p class="section-sub">
+            Dos comportamientos de la guía funcionando acá mismo, para verlos sin instalar nada.
+        </p>
+        <div class="grid2">
+            <div class="card sim">
+                <h3>🧮 mostrar_tabla(n)</h3>
+                <p style="font-size:.92rem;margin:0 0 .4rem;">
+                    Igual que <em>LasTablas</em>: apretá un número y mirá cómo el
+                    <code class="inline">for</code> llena el Text línea por línea.
+                </p>
+                <div class="num-btns" id="tablas-btns"></div>
+                <div class="sim-row">
+                    <button class="btn btn-ghost" id="tablas-clear">🧹 Borrar (delete "1.0", END)</button>
+                </div>
+                <pre class="sim-out" id="tablas-out"></pre>
+            </div>
+
+            <div class="card sim">
+                <h3>🐸 Canvas: el sapo que rebota</h3>
+                <p style="font-size:.92rem;margin:0;">
+                    Cada cuadro avanza 10 px y rebota en los bordes, igual que
+                    <code class="inline">canvas.coords(sapo, x, y)</code> con <code class="inline">after()</code>.
+                </p>
+                <canvas id="demo-canvas" width="600" height="90"></canvas>
+                <div class="sim-row">
+                    <button class="btn btn-primary" id="demo-ini">▶ Iniciar</button>
+                    <button class="btn btn-ghost" id="demo-sto">⏸ Detener</button>
+                </div>
+                <div class="sim-msg" id="demo-estado"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SECCIÓN 4 ================= -->
+    <section id="entrega">
+        <h2 class="section-title">SECCIÓN 4 · Actividad Final Autocorregible</h2>
+        <p class="section-sub">
+            Esta actividad se corrige <strong>en esta misma página</strong>: no hay que descargar,
+            subir ni enviar archivos. Primero respondé la parte teórica y después escribí los dos programas.
+        </p>
+
+        <div class="card delivery">
+            <h3>Parte A · Conceptos clave</h3>
+            <p style="font-size:.93rem;margin:0 0 1rem;">
+                Cinco preguntas de repaso. Marcá una opción por pregunta y presioná
+                <strong>Calificar parte A</strong>.
+            </p>
+
+            <div id="entrega-quiz">
+                <div class="quiz-question" data-answer="c">
+                    <p class="q-text">A1. Una lista tiene 4 elementos. ¿Cuál es el índice del último?</p>
+                    <ul class="options-list">
+                        <li data-opt="a">4</li>
+                        <li data-opt="b">5</li>
+                        <li data-opt="c">3</li>
+                        <li data-opt="d">Depende del contenido</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question" data-answer="b">
+                    <p class="q-text">A2. ¿Qué estructura usás para datos que no deben cambiar?</p>
+                    <ul class="options-list">
+                        <li data-opt="a">lista</li>
+                        <li data-opt="b">tupla</li>
+                        <li data-opt="c">diccionario</li>
+                        <li data-opt="d">Text</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question" data-answer="b">
+                    <p class="q-text">A3. ¿Qué devuelve <code class="inline">cursor.fetchall()</code>?</p>
+                    <ul class="options-list">
+                        <li data-opt="a">Una sola fila</li>
+                        <li data-opt="b">Todas las filas, como lista de tuplas</li>
+                        <li data-opt="c">La cantidad de filas</li>
+                        <li data-opt="d">La conexión abierta</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question" data-answer="d">
+                    <p class="q-text">A4. Necesitás que un botón llame a <code class="inline">mostrar_tabla(7)</code>
+                        al hacer click. ¿Qué escribís?</p>
+                    <ul class="options-list">
+                        <li data-opt="a">command=mostrar_tabla(7)</li>
+                        <li data-opt="b">command="mostrar_tabla(7)"</li>
+                        <li data-opt="c">command=mostrar_tabla</li>
+                        <li data-opt="d">command=lambda: mostrar_tabla(7)</li>
+                    </ul>
+                </div>
+
+                <div class="quiz-question" data-answer="b">
+                    <p class="q-text">A5. ¿Qué pasa si guardás con <code class="inline">INSERT</code> pero
+                        olvidás <code class="inline">cnx.commit()</code>?</p>
+                    <ul class="options-list">
+                        <li data-opt="a">Se guarda dos veces</li>
+                        <li data-opt="b">El cambio queda pendiente y se pierde al cerrar</li>
+                        <li data-opt="c">MySQL rechaza el INSERT con error de sintaxis</li>
+                        <li data-opt="d">Se guarda igual, commit es opcional</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="quiz-actions">
+                <button class="btn btn-primary" onclick="calificarQuiz('entrega-quiz','score-parteA')">✅ Calificar parte A</button>
+                <button class="btn btn-ghost" onclick="reiniciarQuiz('entrega-quiz','score-parteA')">🔄 Reiniciar</button>
+            </div>
+            <div id="score-parteA"></div>
+        </div>
+
+        <div class="card delivery">
+            <h3>Parte B · Programas completos</h3>
+            <p style="font-size:.93rem;margin:0 0 1rem;">
+                Escribí cada programa en su caja y presioná <strong>Corregir</strong>.
+                El corrector revisa la <strong>estructura</strong> del código (no ejecuta Python),
+                así que también te sirve como lista de control.
+            </p>
+
+            <div class="exercise">
+                <h4>🧩 Programa 1 · La lista de cursos que crece</h4>
+                <p class="ex-goal">
+                    Creá una <strong>lista vacía</strong>, pedí cursos con
+                    <code class="inline">input()</code> dentro de un <code class="inline">while True</code>
+                    hasta que escriban <code class="inline">"fin"</code> (ahí cortás con
+                    <code class="inline">break</code>), agregá cada uno con
+                    <code class="inline">append()</code> y al final recorré la lista con un
+                    <code class="inline">for</code> mostrando cada curso.
+                </p>
+                <textarea class="code-input" id="in-cursos" spellcheck="false" placeholder="# Lista + while True + break + append&#10;cursos = []&#10;while True:&#10;    ..."></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('cursos')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('cursos')">Limpiar</button>
+                </div>
+                <div class="result" id="res-cursos"></div>
+            </div>
+
+            <div class="exercise">
+                <h4>🧩 Programa 2 · Formulario que guarda en MySQL</h4>
+                <p class="ex-goal">
+                    Armá un formulario mínimo (<code class="inline">Entry</code> + botón) y la función
+                    <code class="inline">guardar()</code> que lea el nombre con
+                    <code class="inline">.get()</code>, lo inserte con
+                    <code class="inline">INSERT INTO ... VALUES (%s)</code>, confirme con
+                    <code class="inline">commit()</code> y cierre con <code class="inline">close()</code>.
+                    Protegé todo con <code class="inline">try / except</code> y avisá con
+                    <code class="inline">messagebox</code>.
+                </p>
+                <textarea class="code-input" id="in-mysql2" spellcheck="false" placeholder="# Formulario + INSERT + commit&#10;import mysql.connector&#10;from tkinter import *&#10;from tkinter import messagebox"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('mysql2')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('mysql2')">Limpiar</button>
+                </div>
+                <div class="result" id="res-mysql2"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="pie">
+        Guía interactiva · Estructuras, multimedia y base de datos con Python · 5to año · Escuela Técnica
+    </footer>
+
+</main>
+
+<script>
+/* ================= ACORDEÓN DE TEMAS + PESTAÑAS ================= */
+(function () {
+    var articulos = document.querySelectorAll('#teoria article.card');
+
+    articulos.forEach(function (article, index) {
+        var h3 = article.querySelector('h3');
+        var exercise = article.querySelector('.exercise');
+        if (!h3 || !exercise) return;
+
+        article.classList.add('topic');
+
+        var teoria = document.createElement('div');
+        teoria.className = 'topic-panel topic-panel-teoria';
+        teoria.setAttribute('role', 'tabpanel');
+
+        var practica = document.createElement('div');
+        practica.className = 'topic-panel topic-panel-ejercicio';
+        practica.setAttribute('role', 'tabpanel');
+        practica.hidden = true;
+
+        Array.prototype.slice.call(article.children).forEach(function (child) {
+            if (child === h3 || child === exercise) return;
+            teoria.appendChild(child);
+        });
+        practica.appendChild(exercise);
+
+        var tabs = document.createElement('div');
+        tabs.className = 'topic-tabs';
+        tabs.setAttribute('role', 'tablist');
+        tabs.innerHTML =
+            '<button type="button" class="topic-tab active" data-tab="teoria" role="tab" aria-selected="true">📘 Teoría</button>' +
+            '<button type="button" class="topic-tab" data-tab="ejercicio" role="tab" aria-selected="false">✍️ Ejercitación</button>';
+
+        article.appendChild(teoria);
+        article.appendChild(practica);
+        article.insertBefore(tabs, teoria);
+
+        h3.classList.add('topic-toggle');
+        h3.setAttribute('role', 'button');
+        h3.setAttribute('tabindex', '0');
+        h3.setAttribute('title', 'Abrir o cerrar este tema');
+        var chevron = document.createElement('span');
+        chevron.className = 'chevron';
+        chevron.setAttribute('aria-hidden', 'true');
+        chevron.textContent = '▾';
+        h3.appendChild(chevron);
+
+        function setTab(nombre) {
+            tabs.querySelectorAll('.topic-tab').forEach(function (b) {
+                var activo = b.dataset.tab === nombre;
+                b.classList.toggle('active', activo);
+                b.setAttribute('aria-selected', activo ? 'true' : 'false');
+            });
+            teoria.hidden = nombre !== 'teoria';
+            practica.hidden = nombre !== 'ejercicio';
+        }
+
+        function setOpen(abierto) {
+            article.classList.toggle('open', abierto);
+            article.classList.toggle('closed', !abierto);
+            h3.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+        }
+
+        function alternar() {
+            var abrir = !article.classList.contains('open');
+            if (abrir) {
+                articulos.forEach(function (otro) {
+                    if (otro !== article && otro._setOpen) otro._setOpen(false);
+                });
+            }
+            setOpen(abrir);
+        }
+
+        h3.addEventListener('click', alternar);
+        h3.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                alternar();
+            }
+        });
+        tabs.addEventListener('click', function (e) {
+            var btn = e.target.closest('.topic-tab');
+            if (btn) setTab(btn.dataset.tab);
+        });
+
+        article._setTab = setTab;
+        article._setOpen = setOpen;
+
+        setOpen(index === 0);
+        setTab('teoria');
+    });
+
+    window.abrirEjercicio = function (id) {
+        var input = document.getElementById('in-' + id);
+        if (!input) return;
+        var article = input.closest('#teoria article.card');
+        if (!article) { input.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+        document.querySelectorAll('#teoria article.card').forEach(function (otro) {
+            if (otro !== article && otro._setOpen) otro._setOpen(false);
+        });
+        if (article._setOpen) article._setOpen(true);
+        if (article._setTab) article._setTab('ejercicio');
+        article.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    var lista = document.getElementById('progreso-lista');
+    if (lista) {
+        lista.addEventListener('click', function (e) {
+            var a = e.target.closest('a[href^="#in-"]');
+            if (!a) return;
+            e.preventDefault();
+            window.abrirEjercicio(a.getAttribute('href').slice(4));
+        });
+    }
+})();
+
+/* ================= AUTOEVALUACIÓN ================= */
+document.querySelectorAll('.options-list').forEach(function (lista) {
+    lista.addEventListener('click', function (e) {
+        var li = e.target.closest('li');
+        if (!li) return;
+        var q = li.closest('.quiz-question');
+        if (!q || q.dataset.locked) return;
+        q.querySelectorAll('li').forEach(function (x) { x.classList.remove('selected'); });
+        li.classList.add('selected');
+    });
+});
+
+window.calificarQuiz = function (contId, bannerId) {
+    var cont = document.getElementById(contId);
+    if (!cont) return;
+    var qs = cont.querySelectorAll('.quiz-question');
+    var ok = 0, sinResponder = 0;
+
+    qs.forEach(function (q) {
+        var ans = q.dataset.answer;
+        var sel = q.querySelector('li.selected');
+        q.querySelectorAll('li').forEach(function (li) {
+            li.classList.remove('correct', 'incorrect');
+            if (li.dataset.opt === ans) li.classList.add('correct');
+        });
+        if (!sel) sinResponder++;
+        else if (sel.dataset.opt === ans) ok++;
+        else sel.classList.add('incorrect');
+        q.dataset.locked = '1';
+    });
+
+    var banner = document.getElementById(bannerId);
+    if (!banner) return;
+    var total = qs.length;
+    var pct = Math.round(ok / total * 100);
+    banner.style.display = 'block';
+    banner.style.background = pct >= 60 ? '#dcfce7' : '#fee2e2';
+    banner.style.color = pct >= 60 ? '#14532d' : '#7f1d1d';
+    banner.style.border = '1px solid ' + (pct >= 60 ? '#86efac' : '#fca5a5');
+    banner.textContent = 'Resultado: ' + ok + ' / ' + total + ' (' + pct + '%)' +
+        (sinResponder ? ' · ' + sinResponder + ' sin responder' : '');
+};
+
+window.reiniciarQuiz = function (contId, bannerId) {
+    var cont = document.getElementById(contId);
+    if (!cont) return;
+    cont.querySelectorAll('.quiz-question').forEach(function (q) {
+        delete q.dataset.locked;
+        q.querySelectorAll('li').forEach(function (li) {
+            li.classList.remove('selected', 'correct', 'incorrect');
+        });
+    });
+    var banner = document.getElementById(bannerId);
+    if (banner) { banner.style.display = 'none'; banner.textContent = ''; }
+};
+
+/* ================= SIMULADOR: mostrar_tabla(n) ================= */
+(function () {
+    var out = document.getElementById('tablas-out');
+    var btns = document.getElementById('tablas-btns');
+    if (!out || !btns) return;
+
+    for (var n = 1; n <= 10; n++) {
+        (function (n) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.textContent = String(n);
+            b.addEventListener('click', function () {
+                btns.querySelectorAll('button').forEach(function (x) { x.classList.remove('active'); });
+                b.classList.add('active');
+                /* replica: delete("1.0", END) y luego insert(END, linea) por vuelta */
+                var contenido = '';
+                for (var i = 1; i <= 10; i++) {
+                    contenido += n + '*' + i + '=' + (n * i) + '\n';
+                }
+                out.textContent = contenido;
+            });
+            btns.appendChild(b);
+        })(n);
+    }
+
+    document.getElementById('tablas-clear').addEventListener('click', function () {
+        out.textContent = '';
+        btns.querySelectorAll('button').forEach(function (x) { x.classList.remove('active'); });
+    });
+})();
+
+/* ================= SIMULADOR: Canvas rebote ================= */
+(function () {
+    var cv = document.getElementById('demo-canvas');
+    if (!cv) return;
+    var ctx = cv.getContext('2d');
+    var x = 40, dir = 1, id = null;
+    var TAM = 34, ALTO = cv.height;
+    var estado = document.getElementById('demo-estado');
+
+    function pintar() {
+        ctx.clearRect(0, 0, cv.width, ALTO);
+        ctx.fillStyle = '#f59e0b';
+        ctx.beginPath();
+        ctx.arc(x + TAM / 2, ALTO / 2, TAM / 2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#1e293b';
+        ctx.beginPath();
+        ctx.arc(x + TAM / 2 - 5, ALTO / 2 - 4, 2.4, 0, Math.PI * 2);
+        ctx.arc(x + TAM / 2 + 5, ALTO / 2 - 4, 2.4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#1e293b';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(x + TAM / 2, ALTO / 2 + 2, 7, 0, Math.PI);
+        ctx.stroke();
+        /* equivalente a: canvas.coords(sapo, x, ALTO // 2) */
+    }
+
+    function mover() {
+        x += 10 * dir;
+        if (x <= 0 || x >= cv.width - TAM) dir *= -1;
+        pintar();
+        id = setTimeout(mover, 60);   /* re-agenda: patrón after() */
+    }
+
+    pintar();
+
+    document.getElementById('demo-ini').addEventListener('click', function () {
+        if (id !== null) {
+            estado.className = 'sim-msg ok';
+            estado.textContent = 'Ya está rebotando…';
+            return;
+        }
+        estado.className = 'sim-msg ok';
+        estado.textContent = 'Animación activa: cada 60 ms se re-agenda (after).';
+        id = setTimeout(mover, 60);
+    });
+
+    document.getElementById('demo-sto').addEventListener('click', function () {
+        clearTimeout(id);
+        id = null;
+        estado.className = 'sim-msg bad';
+        estado.textContent = 'Detenida: clearTimeout equivale a no volver a llamar after().';
+    });
+})();
+</script>
+
+<script>
+/* ================= CORRECTOR DE EJERCICIOS ================= */
+(function () {
+    function norm(txt) {
+        return txt.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .replace(/#[^\n]*/g, '')
+            .replace(/[ \t]+/g, ' ')
+            .trim();
+    }
+    function count(c, re) {
+        var g = new RegExp(re.source, 'g');
+        return (c.match(g) || []).length;
+    }
+
+    var EJERCICIOS = {
+        listas: [
+            { d: 'Crea una lista con corchetes', f: function (c) { return /\b[a-z_]\w*\s*=\s*\[/.test(c); } },
+            { d: 'La lista tiene al menos 3 elementos', f: function (c) { return /\b[a-z_]\w*\s*=\s*\[[^\]]*,[^\]]*,[^\]]*\]/.test(c); } },
+            { d: 'Lee una posición con lista[0]', f: function (c) { return /\b[a-z_]\w*\s*\[\s*\d+\s*\]/.test(c); } },
+            { d: 'Usa len() para saber cuántos hay', f: function (c) { return /\blen\s*\(/.test(c); } },
+            { d: 'Agrega un elemento con append()', f: function (c) { return /\.append\s*\(/.test(c); } },
+            { d: 'Recorre la lista con un for', f: function (c) { return /\bfor\b[^\n]*\bin\b/.test(c); } },
+            { d: 'Muestra los cursos con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
+        ],
+        tuplas: [
+            { d: 'Define una tupla con paréntesis y coma', f: function (c) { return /\b[a-z_]\w*\s*=\s*\([^)]*,/.test(c); } },
+            { d: 'La tupla tiene dos números', f: function (c) { return /\b[a-z_]\w*\s*=\s*\(\s*-?\d+\s*,\s*-?\d+\s*\)/.test(c); } },
+            { d: 'Lee una posición con punto[0]', f: function (c) { return /\b[a-z_]\w*\s*\[\s*\d+\s*\]/.test(c); } },
+            { d: 'Desempaqueta en dos variables (x, y = ...)', f: function (c) { return /\b[a-z_]\w*\s*,\s*[a-z_]\w*\s*=/.test(c); } },
+            { d: 'Muestra los valores con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
+        ],
+        diccionarios: [
+            { d: 'Crea un diccionario con llaves { }', f: function (c) { return /\b[a-z_]\w*\s*=\s*\{/.test(c); } },
+            { d: 'Usa claves de texto entre comillas', f: function (c) { return /\{\s*["'][a-z_]/.test(c); } },
+            { d: 'Accede a un valor por su clave', f: function (c) { return /\b[a-z_]\w*\s*\[\s*["'][^"']+["']\s*\]/.test(c); } },
+            { d: 'Agrega una clave nueva', f: function (c) { return /\b[a-z_]\w*\s*\[\s*["'][^"']+["']\s*\]\s*=/.test(c); } },
+            { d: 'Recorre el diccionario con .items()', f: function (c) { return /\.items\s*\(/.test(c); } },
+            { d: 'Calcula el promedio con sum() y división', f: function (c) { return /\bsum\s*\(/.test(c) && /\//.test(c); } },
+            { d: 'Muestra resultados con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
+        ],
+        tkinter2: [
+            { d: 'Define una función con parámetro (def ...(n))', f: function (c) { return /\bdef\s+\w+\s*\(\s*\w+\s*\)/.test(c); } },
+            { d: 'Crea un widget Text', f: function (c) { return /\btext\s*\(/.test(c); } },
+            { d: 'Borra con delete("1.0", END)', f: function (c) { return /delete\s*\(\s*["']1\.0["']/.test(c); } },
+            { d: 'Inserta al final con insert(END, ...)', f: function (c) { return /insert\s*\(\s*end/.test(c); } },
+            { d: 'Recorre range(1, 11)', f: function (c) { return /\brange\s*\(\s*1\s*,\s*11\s*\)/.test(c); } },
+            { d: 'Conecta el botón con command=lambda', f: function (c) { return /\bbutton\s*\([^)]*command\s*=\s*lambda/.test(c); } },
+            { d: 'Cierra con mainloop()', f: function (c) { return /\bmainloop\s*\(\s*\)/.test(c); } }
+        ],
+        canvas: [
+            { d: 'Crea el lienzo con Canvas(...)', f: function (c) { return /\bcanvas\s*\(/.test(c); } },
+            { d: 'Dibuja con create_image() o create_oval()', f: function (c) { return /create_(image|oval|rectangle)\s*\(/.test(c); } },
+            { d: 'Guarda el id que devuelve create_...', f: function (c) { return /\b[a-z_]\w*\s*=\s*\w+\.create_/.test(c); } },
+            { d: 'Mueve el objeto con .coords()', f: function (c) { return /\.coords\s*\(/.test(c); } },
+            { d: 'Declara global para cambiar x', f: function (c) { return /\bglobal\b/.test(c); } },
+            { d: 'Se re-agenda con .after()', f: function (c) { return /\.after\s*\(/.test(c); } },
+            { d: 'Cierra con mainloop()', f: function (c) { return /\bmainloop\s*\(\s*\)/.test(c); } }
+        ],
+        musica: [
+            { d: 'Importa pygame', f: function (c) { return /\bimport\s+pygame\b/.test(c); } },
+            { d: 'Inicializa el audio con mixer.init()', f: function (c) { return /mixer\.init\s*\(/.test(c); } },
+            { d: 'Carga el archivo con music.load()', f: function (c) { return /music\.load\s*\(/.test(c); } },
+            { d: 'Usa un archivo .mp3, .ogg o .wav', f: function (c) { return /["'][^"']+\.(mp3|ogg|wav)["']/.test(c); } },
+            { d: 'Reproduce en loop con play(-1)', f: function (c) { return /play\s*\(\s*-\s*1\s*\)/.test(c); } }
+        ],
+        mysql: [
+            { d: 'Importa mysql.connector', f: function (c) { return /import\s+mysql\.connector/.test(c); } },
+            { d: 'Define la función conectar()', f: function (c) { return /\bdef\s+conectar\s*\(\s*\)/.test(c); } },
+            { d: 'Usa connect(...) con los datos de acceso', f: function (c) { return /\.connect\s*\(/.test(c); } },
+            { d: 'Crea el cursor con .cursor()', f: function (c) { return /\.cursor\s*\(/.test(c); } },
+            { d: 'Usa INSERT INTO', f: function (c) { return /\binsert\s+into\b/.test(c); } },
+            { d: 'Deja huecos %s para los valores', f: function (c) { return /%s/.test(c); } },
+            { d: 'Confirma el cambio con commit()', f: function (c) { return /\.commit\s*\(/.test(c); } },
+            { d: 'Cierra la conexión con close()', f: function (c) { return /\.close\s*\(/.test(c); } },
+            { d: 'Protege la conexión con try / except', f: function (c) { return /\btry\s*:/.test(c) && /\bexcept\b/.test(c); } }
+        ],
+        cursos: [
+            { d: 'Crea una lista vacía', f: function (c) { return /\b[a-z_]\w*\s*=\s*\[\s*\]/.test(c); } },
+            { d: 'Usa while True', f: function (c) { return /\bwhile\s+true\s*:/.test(c); } },
+            { d: 'Lee cada curso con input()', f: function (c) { return /\binput\s*\(/.test(c); } },
+            { d: 'Sale cuando escriben "fin"', f: function (c) { return /==\s*["']fin["']/.test(c); } },
+            { d: 'Agrega cada curso con append()', f: function (c) { return /\.append\s*\(/.test(c); } },
+            { d: 'Corta el ciclo con break', f: function (c) { return /\bbreak\b/.test(c); } },
+            { d: 'Recorre la lista con un for', f: function (c) { return /\bfor\b[^\n]*\bin\b/.test(c); } },
+            { d: 'Muestra los cursos con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
+        ],
+        mysql2: [
+            { d: 'Importa mysql.connector', f: function (c) { return /import\s+mysql\.connector/.test(c); } },
+            { d: 'Define la función conectar()', f: function (c) { return /\bdef\s+conectar\s*\(\s*\)/.test(c); } },
+            { d: 'Usa connect(...) con los datos de acceso', f: function (c) { return /\.connect\s*\(/.test(c); } },
+            { d: 'Lee el Entry con .get()', f: function (c) { return /\.get\s*\(\s*\)/.test(c); } },
+            { d: 'Usa INSERT INTO', f: function (c) { return /\binsert\s+into\b/.test(c); } },
+            { d: 'Deja huecos %s para los valores', f: function (c) { return /%s/.test(c); } },
+            { d: 'Confirma el cambio con commit()', f: function (c) { return /\.commit\s*\(/.test(c); } },
+            { d: 'Cierra la conexión con close()', f: function (c) { return /\.close\s*\(/.test(c); } },
+            { d: 'Protege la operación con try / except', f: function (c) { return /\btry\s*:/.test(c) && /\bexcept\b/.test(c); } },
+            { d: 'Avisa con messagebox', f: function (c) { return /messagebox\./.test(c); } }
+        ]
+    };
+
+    window.corregir = function (id) {
+        var checks = EJERCICIOS[id];
+        var input = document.getElementById('in-' + id);
+        var res = document.getElementById('res-' + id);
+        if (!checks || !input || !res) return;
+
+        var code = norm(input.value);
+        res.classList.add('show');
+
+        if (!code) {
+            res.innerHTML = '<p class="result-msg" style="color:#b91c1c;">⚠️ Escribí tu solución antes de corregir.</p>';
+            return;
+        }
+
+        var ok = 0;
+        var items = checks.map(function (ch) {
+            var passed = false;
+            try { passed = ch.f(code); } catch (e) { passed = false; }
+            if (passed) ok++;
+            return '<li class="' + (passed ? 'ok' : 'fail') + '">' +
+                (passed ? '✔' : '✘') + ' ' + ch.d + '</li>';
+        }).join('');
+
+        var total = checks.length;
+        var pct = Math.round(ok / total * 100);
+        var allOk = ok === total;
+
+        res.innerHTML =
+            '<div class="result-head">' +
+                '<span class="result-score">' + ok + ' / ' + total + ' requisitos</span>' +
+                '<div class="score-bar"><div class="score-fill" style="width:' + pct + '%"></div></div>' +
+            '</div>' +
+            '<ul>' + items + '</ul>' +
+            '<p class="result-msg" style="color:' + (allOk ? '#15803d' : '#b45309') + ';">' +
+                (allOk
+                    ? '✅ ¡Excelente! Tu programa cumple todos los requisitos.'
+                    : '🔎 Revisá los puntos marcados con ✘ y volvé a corregir.') +
+            '</p>' +
+            '<p style="font-size:.78rem;color:#64748b;margin:.4rem 0 0;">El corrector revisa la estructura del código (no ejecuta Python).</p>';
+
+        input.dataset.pct = pct;
+        window.actualizarResumen();
+    };
+
+    window.limpiar = function (id) {
+        var el = document.getElementById('in-' + id);
+        var res = document.getElementById('res-' + id);
+        if (el) { el.value = ''; delete el.dataset.pct; }
+        if (res) { res.classList.remove('show'); res.innerHTML = ''; }
+        try { localStorage.removeItem('p2_ej_' + id); } catch (e) {}
+        window.actualizarResumen();
+    };
+
+    /* ---------- Progreso ---------- */
+    var TEMAS = [
+        { id: 'listas', nombre: '1. Listas' },
+        { id: 'tuplas', nombre: '2. Tuplas' },
+        { id: 'diccionarios', nombre: '3. Diccionarios' },
+        { id: 'tkinter2', nombre: '4. Text, state y lambda' },
+        { id: 'canvas', nombre: '5. Canvas y animación' },
+        { id: 'musica', nombre: '6. Música con pygame' },
+        { id: 'mysql', nombre: '7. Formulario + MySQL' },
+        { id: 'cursos', nombre: 'Actividad final · Lista de cursos' },
+        { id: 'mysql2', nombre: 'Actividad final · Guardar en MySQL' }
+    ];
+
+    window.actualizarResumen = function () {
+        var lista = document.getElementById('progreso-lista');
+        var barra = document.getElementById('progreso-barra');
+        var texto = document.getElementById('progreso-texto');
+        if (!lista) return;
+
+        var completos = 0;
+        var iniciados = 0;
+        lista.innerHTML = TEMAS.map(function (t) {
+            var el = document.getElementById('in-' + t.id);
+            var valor = el ? el.value.trim() : '';
+            var pct = el && el.dataset.pct !== undefined ? parseInt(el.dataset.pct, 10) : null;
+            var clase, estado;
+            if (pct === 100) {
+                completos++;
+                clase = 'done';
+                estado = 'Completo';
+            } else if (valor) {
+                iniciados++;
+                clase = 'progress';
+                estado = pct !== null ? pct + ' %' : 'En progreso';
+            } else {
+                clase = 'todo';
+                estado = 'Sin empezar';
+            }
+            return '<li><a href="#in-' + t.id + '">' + t.nombre + '</a>' +
+                '<span class="pill ' + clase + '">' + estado + '</span></li>';
+        }).join('');
+
+        var pctGlobal = Math.round(completos / TEMAS.length * 100);
+        if (barra) barra.style.width = pctGlobal + '%';
+        if (texto) {
+            texto.textContent = completos + ' de ' + TEMAS.length + ' completos' +
+                (iniciados ? ' · ' + iniciados + ' en progreso' : '');
+        }
+    };
+
+    window.reiniciarTodo = function () {
+        if (!confirm('¿Borrar tus respuestas de los ejercicios de la guía?')) return;
+        TEMAS.forEach(function (t) {
+            var el = document.getElementById('in-' + t.id);
+            var res = document.getElementById('res-' + t.id);
+            if (el) { el.value = ''; delete el.dataset.pct; }
+            if (res) { res.classList.remove('show'); res.innerHTML = ''; }
+            try { localStorage.removeItem('p2_ej_' + t.id); } catch (e) {}
+        });
+        window.actualizarResumen();
+    };
+
+    /* ---------- Guardado automático ---------- */
+    Object.keys(EJERCICIOS).forEach(function (id) {
+        var el = document.getElementById('in-' + id);
+        if (!el) return;
+        try {
+            var saved = localStorage.getItem('p2_ej_' + id);
+            if (saved) el.value = saved;
+        } catch (e) {}
+        el.addEventListener('input', function () {
+            try { localStorage.setItem('p2_ej_' + id, el.value); } catch (e) {}
+            window.actualizarResumen();
+        });
+    });
+
+    window.actualizarResumen();
+})();
+</script>
+
+</body>
+</html>
+
