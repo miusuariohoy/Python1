@@ -933,6 +933,46 @@ ventana.<span class="fn">mainloop</span>()                             <span cla
                 y todo lo demás sigue igual.
             </div>
 
+            <div class="sub">try / except: la red de seguridad</div>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                Hay operaciones que <strong>pueden fallar aunque el código esté bien escrito</strong>:
+                MySQL apagado, un archivo que no existe o el usuario escribió letras donde iba un
+                número. Sin protección, ese error <strong>cierra el programa</strong>.
+                <code class="inline">try / except</code> es el plan B: intenta lo riesgoso y, si
+                falla, ejecuta otra cosa en vez de explotar.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis</span>
+                try:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;lo_que_puede_fallar()<br>
+                except:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;qué_hacer_si_falla()
+            </div>
+
+            <div class="sub">Ejemplo mínimo: convertir lo que escribe el usuario</div>
+            <pre><code><span class="kw">try</span>:
+    edad = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Tu edad: "</span>))   <span class="cmt"># zona protegida</span>
+    <span class="fn">print</span>(<span class="str">"Tenés"</span>, edad, <span class="str">"años"</span>)
+<span class="kw">except</span>:
+    <span class="fn">print</span>(<span class="str">"Eso no es un número"</span>)      <span class="cmt"># plan B: el programa sigue</span></code></pre>
+            <table class="datos">
+                <tr><th>Parte</th><th>Qué hace</th><th>En este proyecto</th></tr>
+                <tr><td><code class="inline">try:</code></td><td>intenta las líneas protegidas (con sangría)</td><td>conectar() + INSERT</td></tr>
+                <tr><td><code class="inline">except:</code></td><td>se ejecuta SOLO si algo falló</td><td>showerror("No se pudo conectar")</td></tr>
+                <tr><td>sin try</td><td>el error corta el programa</td><td>la ventana se cierra de golpe</td></tr>
+            </table>
+            <div class="okbox">
+                <strong>Cómo leerlo:</strong> “intentá esto; si no se puede, hacé aquello”.
+                El <code class="inline">except</code> no es el error: es la respuesta que dejamos
+                preparada. En <code class="inline">guardar()</code> y
+                <code class="inline">mostrar()</code> vas a ver este mismo patrón.
+            </div>
+            <div class="alerta">
+                <strong>Ojo con la sangría:</strong> todo lo que puede fallar va <b>dentro</b> del
+                <code class="inline">try</code>. Si queda afuera, el error no se atrapa y el
+                programa se cierra igual.
+            </div>
+
             <div class="sub">PASO 3 · ENVIAR: def guardar()</div>
             <pre><code><span class="kw">def</span> <span class="fn">guardar</span>():
     nombre = entrada_nombre.get()
@@ -1020,8 +1060,9 @@ ventana.<span class="fn">mainloop</span>()                             <span cla
                     <code class="inline">def guardar()</code> que lea el nombre con
                     <code class="inline">.get()</code>, use <code class="inline">INSERT INTO</code> con
                     <code class="inline">%s</code>, llame a <code class="inline">commit()</code> y
-                    <code class="inline">close()</code>, todo dentro de <code class="inline">try / except</code>
-                    con <code class="inline">messagebox</code>.
+                    <code class="inline">close()</code>, todo dentro de <code class="inline">try / except</code>:
+                    intentá la conexión en el <code class="inline">try</code> y, si algo falla, avisá
+                    en el <code class="inline">except</code> con <code class="inline">messagebox.showerror(...)</code>.
                 </p>
                 <textarea class="code-input" id="in-mysql" spellcheck="false" placeholder="# conectar() + INSERT + commit&#10;import mysql.connector"></textarea>
                 <div class="ex-actions">
@@ -1702,7 +1743,8 @@ window.reiniciarQuiz = function (contId, bannerId) {
             { d: 'Deja huecos %s para los valores', f: function (c) { return /%s/.test(c); } },
             { d: 'Confirma el cambio con commit()', f: function (c) { return /\.commit\s*\(/.test(c); } },
             { d: 'Cierra la conexión con close()', f: function (c) { return /\.close\s*\(/.test(c); } },
-            { d: 'Protege la conexión con try / except', f: function (c) { return /\btry\s*:/.test(c) && /\bexcept\b/.test(c); } }
+            { d: 'Protege la conexión con try / except', f: function (c) { return /\btry\s*:/.test(c) && /\bexcept\b/.test(c); } },
+            { d: 'Avisa en el except con messagebox', f: function (c) { return /messagebox\s*\./.test(c); } }
         ],
         cursos: [
             { d: 'Crea una lista vacía', f: function (c) { return /\b[a-z_]\w*\s*=\s*\[\s*\]/.test(c); } },
