@@ -64,7 +64,7 @@
         return m ? m[1] : null;
     }
 
-    var EJERCICIOS = {
+    var EJERCICIOS = cfg.EJERCICIOS || {
         c1: [
             { d: 'Pide al menos dos datos con input()', f: function (c) { return (c.match(/\binput\s*\(/g) || []).length >= 2; } },
             { d: 'Convierte la edad con int()', f: function (c) { return /\bint\s*\(/.test(c); } },
@@ -364,34 +364,53 @@
         return bytes;
     }
 
+    function comprimir(datos) {
+        if (!window.CompressionStream || !window.Response || !window.Blob) {
+            return Promise.resolve({ datos: datos, z: 0 });
+        }
+        try {
+            var flujo = new Blob([datos]).stream().pipeThrough(new window.CompressionStream('gzip'));
+            return new Response(flujo).arrayBuffer().then(function (buffer) {
+                return { datos: new Uint8Array(buffer), z: 1 };
+            }).catch(function () {
+                return { datos: datos, z: 0 };
+            });
+        } catch (e) {
+            return Promise.resolve({ datos: datos, z: 0 });
+        }
+    }
+
     function cifrarPayload(payload) {
         if (!window.crypto || !window.crypto.subtle) {
             return Promise.reject(new Error('Este navegador no soporta cifrado (probá con HTTPS o Chrome/Firefox actualizado)'));
         }
         var datos = new TextEncoder().encode(JSON.stringify(payload));
-        return window.crypto.subtle.importKey(
-            'spki',
-            bufferDeB64(cfg.CLAVE_PUBLICA),
-            { name: 'RSA-OAEP', hash: 'SHA-256' },
-            false,
-            ['encrypt']
-        ).then(function (clavePublica) {
-            return window.crypto.subtle.generateKey(
-                { name: 'AES-GCM', length: 256 }, true, ['encrypt']
-            ).then(function (claveAes) {
-                var iv = window.crypto.getRandomValues(new Uint8Array(12));
-                return window.crypto.subtle.encrypt(
-                    { name: 'AES-GCM', iv: iv }, claveAes, datos
-                ).then(function (cifrado) {
-                    return window.crypto.subtle.exportKey('raw', claveAes).then(function (cruda) {
-                        return window.crypto.subtle.encrypt(
-                            { name: 'RSA-OAEP' }, clavePublica, cruda
-                        ).then(function (claveCifrada) {
-                            return {
-                                k: b64DeBuffer(claveCifrada),
-                                i: b64DeBuffer(iv),
-                                d: b64DeBuffer(cifrado)
-                            };
+        return comprimir(datos).then(function (paquete) {
+            return window.crypto.subtle.importKey(
+                'spki',
+                bufferDeB64(cfg.CLAVE_PUBLICA),
+                { name: 'RSA-OAEP', hash: 'SHA-256' },
+                false,
+                ['encrypt']
+            ).then(function (clavePublica) {
+                return window.crypto.subtle.generateKey(
+                    { name: 'AES-GCM', length: 256 }, true, ['encrypt']
+                ).then(function (claveAes) {
+                    var iv = window.crypto.getRandomValues(new Uint8Array(12));
+                    return window.crypto.subtle.encrypt(
+                        { name: 'AES-GCM', iv: iv }, claveAes, paquete.datos
+                    ).then(function (cifrado) {
+                        return window.crypto.subtle.exportKey('raw', claveAes).then(function (cruda) {
+                            return window.crypto.subtle.encrypt(
+                                { name: 'RSA-OAEP' }, clavePublica, cruda
+                            ).then(function (claveCifrada) {
+                                return {
+                                    k: b64DeBuffer(claveCifrada),
+                                    i: b64DeBuffer(iv),
+                                    d: b64DeBuffer(cifrado),
+                                    z: paquete.z
+                                };
+                            });
                         });
                     });
                 });

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación Parte 2 · Estructuras, Multimedia y Base de Datos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ================= PUERTA DE ACCESO ================= -->
+<div class="acceso" id="acceso">
+    <form class="acceso-caja" id="form-acceso" autocomplete="off">
+        <span class="badge-acceso">Acceso restringido</span>
+        <h1>Estructuras, Multimedia y Base de Datos</h1>
+        <p>Ingresá la clave que te dio el docente para comenzar.</p>
+        <input type="password" id="clave" inputmode="numeric" placeholder="Clave de acceso" required>
+        <button type="submit" class="btn btn-primario" style="width:100%">Entrar</button>
+        <p class="acceso-error" id="acceso-error"></p>
+        <p class="acceso-volver"><a href="parte2.html">← Volver a la guía de la Parte 2</a></p>
+    </form>
+</div>
+
+<!-- ================= APP ================= -->
+<div id="app" hidden>
+
+<header class="hero">
+    <div class="contenedor">
+        <span class="badge">Evaluación · Parte 2</span>
+        <h1>Estructuras, Multimedia y Base de Datos</h1>
+        <p class="subtitulo">
+            Listas, tuplas, diccionarios, Tkinter avanzado, Canvas, pygame y MySQL.
+            11 consignas, 10 puntos y corrección automática.
+        </p>
+        <div class="nav-rapida">
+            <a href="#parte-a" class="btn-enlace">Parte A · Opción múltiple</a>
+            <a href="#parte-b" class="btn-enlace">Parte B · Salidas</a>
+            <a href="#parte-c" class="btn-enlace">Parte C · Código</a>
+            <a href="#resultado" class="btn-enlace">Resultado</a>
+        </div>
+    </div>
+</header>
+
+<main class="contenedor">
+
+    <!-- ================= INSTRUCCIONES ================= -->
+    <section class="bloque">
+        <div class="tarjeta">
+            <h3>Antes de empezar</h3>
+            <ul>
+                <li>Leé cada consigna con atención y respondé <strong>todas</strong> las preguntas.</li>
+                <li>En la <strong>Parte A</strong> marcá una sola opción por pregunta.</li>
+                <li>En la <strong>Parte B</strong> escribí la salida exacta del programa. Si son varias líneas, separalas con un espacio.</li>
+                <li>En la <strong>Parte C</strong> escribí el código completo en Python. El corrector revisa la estructura, no ejecuta el programa.</li>
+                <li>Podés realizar la evaluación <strong>más de una vez</strong>. Cada envío queda registrado con tu apellido, nombre, día y hora.</li>
+                <li>Si otra persona va a usar esta computadora, al terminar presioná <strong>Hacer otra evaluación</strong> para dejarla lista.</li>
+                <li>Al corregir, la <strong>nota y la corrección</strong> se guardan automáticamente en el informe del docente.</li>
+                <li>Al terminar, presioná <strong>Corregir y enviar</strong>. Vas a ver el puntaje y la explicación de cada respuesta.</li>
+            </ul>
+
+            <table class="tabla-puntos">
+                <thead>
+                    <tr><th>Parte</th><th>Consigna</th><th>Puntos</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>A</td><td>5 preguntas de opción múltiple</td><td>5</td></tr>
+                    <tr><td>B</td><td>4 predicciones de salida</td><td>2</td></tr>
+                    <tr><td>C</td><td>2 ejercicios de código</td><td>3</td></tr>
+                    <tr><td colspan="2"><strong>Total</strong></td><td><strong>10</strong></td></tr>
+                </tbody>
+            </table>
+
+            <div class="datos-alumno">
+                <label>Apellido
+                    <input type="text" id="alumno-apellido" placeholder="Tu apellido" autocomplete="off">
+                </label>
+                <label>Nombre
+                    <input type="text" id="alumno-nombre" placeholder="Tu nombre" autocomplete="off">
+                </label>
+                <label>Curso
+                    <input type="text" id="alumno-curso" placeholder="Ej.: 5.º 2.ª" autocomplete="off">
+                </label>
+                <label>Materia
+                    <input type="text" id="alumno-materia" placeholder="Ej.: Programación" autocomplete="off">
+                </label>
+            </div>
+
+            <p class="nota">
+                Tiempo sugerido: <strong>45 minutos</strong>. Intentá resolver sin ejecutar el código:
+                el objetivo es interpretar la lógica del programa.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================= PARTE A ================= -->
+    <section class="bloque" id="parte-a">
+        <div class="encabezado-seccion">
+            <span class="numero-paso">A</span>
+            <div>
+                <h2>Opción múltiple</h2>
+                <p>5 preguntas · 1 punto cada una · marcá una sola respuesta.</p>
+            </div>
+        </div>
+
+        <article class="pregunta mc" data-correcta="b">
+            <p class="enunciado"><span class="num-preg">1</span>
+                Si <code>cursos = ["1A", "2A", "3A"]</code>, ¿qué muestra <code>print(cursos[1])</code>?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a1" value="a"> <code>1A</code></label>
+                <label data-op="b"><input type="radio" name="a1" value="b"> <code>2A</code></label>
+                <label data-op="c"><input type="radio" name="a1" value="c"> <code>3A</code></label>
+                <label data-op="d"><input type="radio" name="a1" value="d"> <code>IndexError</code></label>
+            </div>
+            <p class="explicacion">Las posiciones de una lista empiezan en <strong>0</strong>: <code>cursos[0]</code> es "1A" y <code>cursos[1]</code> es <strong>"2A"</strong>.</p>
+        </article>
+
+        <article class="pregunta mc" data-correcta="c">
+            <p class="enunciado"><span class="num-preg">2</span>
+                Si <code>punto = (120, 140)</code>, ¿qué ocurre al ejecutar <code>punto[0] = 200</code>?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a2" value="a"> El primer valor pasa a 200.</label>
+                <label data-op="b"><input type="radio" name="a2" value="b"> Se convierte automáticamente en lista.</label>
+                <label data-op="c"><input type="radio" name="a2" value="c"> Da <code>TypeError</code>: las tuplas no se pueden modificar.</label>
+                <label data-op="d"><input type="radio" name="a2" value="d"> Se borra el primer valor y queda <code>(140,)</code>.</label>
+            </div>
+            <p class="explicacion">Una <strong>tupla</strong> es inmutable: se puede leer (<code>punto[0]</code>) pero no cambiar. Si el dato debe cambiar, corresponde una lista.</p>
+        </article>
+
+        <article class="pregunta mc" data-correcta="c">
+            <p class="enunciado"><span class="num-preg">3</span>
+                ¿Qué método devuelve los pares <strong>clave-valor</strong> para recorrerlos con
+                <code>for clave, valor in ...</code>?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a3" value="a"> <code>.keys()</code></label>
+                <label data-op="b"><input type="radio" name="a3" value="b"> <code>.values()</code></label>
+                <label data-op="c"><input type="radio" name="a3" value="c"> <code>.items()</code></label>
+                <label data-op="d"><input type="radio" name="a3" value="d"> <code>.append()</code></label>
+            </div>
+            <p class="explicacion"><code>.items()</code> entrega dos valores por vuelta: la <strong>clave</strong> y su <strong>valor</strong>. <code>.keys()</code> y <code>.values()</code> entregan solo una parte.</p>
+        </article>
+
+        <article class="pregunta mc" data-correcta="b">
+            <p class="enunciado"><span class="num-preg">4</span>
+                En un botón de Tkinter, ¿por qué se usa
+                <code>command=lambda: mostrar_tabla(7)</code> en lugar de
+                <code>command=mostrar_tabla(7)</code>?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a4" value="a"> Porque <code>lambda</code> hace que el botón responda más rápido.</label>
+                <label data-op="b"><input type="radio" name="a4" value="b"> Porque <code>mostrar_tabla(7)</code> se ejecutaría al crear el botón; <code>lambda</code> espera el clic y recién ahí la llama.</label>
+                <label data-op="c"><input type="radio" name="a4" value="c"> Porque <code>command</code> no acepta funciones definidas con <code>def</code>.</label>
+                <label data-op="d"><input type="radio" name="a4" value="d"> Porque <code>lambda</code> reemplaza a <code>mainloop()</code>.</label>
+            </div>
+            <p class="explicacion">Sin <code>lambda</code>, los paréntesis ejecutan la función en el momento de crear el botón. <code>lambda</code> fabrica una mini-función que Tkinter llama recién con el clic.</p>
+        </article>
+
+        <article class="pregunta mc" data-correcta="b">
+            <p class="enunciado"><span class="num-preg">5</span>
+                ¿Cuál de estas afirmaciones sobre la Parte 2 es correcta?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a5" value="a"> <code>canvas.coords(sapo, x, y)</code> cambia el tamaño de la imagen.</label>
+                <label data-op="b"><input type="radio" name="a5" value="b"> <code>pygame.mixer.music.play(-1)</code> reproduce la música en loop infinito.</label>
+                <label data-op="c"><input type="radio" name="a5" value="c"> <code>cnx.commit()</code> se usa para leer filas con <code>SELECT</code>.</label>
+                <label data-op="d"><input type="radio" name="a5" value="d"> <code>texto.delete(0, END)</code> es la forma correcta de borrar un widget <code>Text</code>.</label>
+            </div>
+            <p class="explicacion"><code>play(-1)</code> repite para siempre. <code>coords()</code> mueve el objeto, <code>commit()</code> confirma cambios (INSERT) y un <code>Text</code> se borra con <code>delete("1.0", END)</code>.</p>
+        </article>
+    </section>
+
+    <!-- ================= PARTE B ================= -->
+    <section class="bloque" id="parte-b">
+        <div class="encabezado-seccion">
+            <span class="numero-paso">B</span>
+            <div>
+                <h2>Predicción de salidas</h2>
+                <p>4 programas · 0,5 puntos cada uno · escribí lo que muestra cada uno.</p>
+            </div>
+        </div>
+
+        <article class="pregunta salida" data-aceptadas="4 2A">
+            <p class="enunciado"><span class="num-preg">6</span>
+                ¿Qué muestra este programa?</p>
+            <pre><code>cursos = ["1A", "2A", "3A"]
+cursos.append("4A")
+print(len(cursos))
+print(cursos[1])</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b1" autocomplete="off" placeholder="Separá los valores con espacios">
+            </label>
+            <p class="explicacion"><code>append("4A")</code> deja 4 elementos y <code>cursos[1]</code> sigue siendo <strong>"2A"</strong>. La salida es <strong>4 2A</strong>.</p>
+        </article>
+
+        <article class="pregunta salida" data-aceptadas="3A sin turno">
+            <p class="enunciado"><span class="num-preg">7</span>
+                ¿Qué muestra este programa?</p>
+            <pre><code>alumno = {"nombre": "Ana", "curso": "3A"}
+print(alumno["curso"])
+print(alumno.get("turno", "sin turno"))</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b2" autocomplete="off" placeholder="Separá los valores con espacios">
+            </label>
+            <p class="explicacion"><code>alumno["curso"]</code> devuelve <strong>"3A"</strong>; como la clave <code>"turno"</code> no existe, <code>.get()</code> devuelve el valor por defecto <strong>"sin turno"</strong>.</p>
+        </article>
+
+        <article class="pregunta salida" data-aceptadas="120 140">
+            <p class="enunciado"><span class="num-preg">8</span>
+                ¿Qué muestra este programa?</p>
+            <pre><code>punto = (120, 140)
+x, y = punto
+print(x)
+print(y)</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b3" autocomplete="off" placeholder="Separá los valores con espacios">
+            </label>
+            <p class="explicacion">El <strong>desempaquetado</strong> asigna 120 a <code>x</code> y 140 a <code>y</code>. La salida es <strong>120 140</strong>.</p>
+        </article>
+
+        <article class="pregunta salida" data-aceptadas="24">
+            <p class="enunciado"><span class="num-preg">9</span>
+                ¿Qué muestra este programa?</p>
+            <pre><code>notas = [8, 7, 9]
+suma = 0
+for n in notas:
+    suma += n
+print(suma)</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b4" autocomplete="off" placeholder="Escribí la salida">
+            </label>
+            <p class="explicacion">El acumulador suma 8 + 7 + 9. La salida es <strong>24</strong>.</p>
+        </article>
+    </section>
+
+    <!-- ================= PARTE C ================= -->
+    <section class="bloque" id="parte-c">
+        <div class="encabezado-seccion">
+            <span class="numero-paso">C</span>
+            <div>
+                <h2>Ejercicios de código</h2>
+                <p>2 programas · 1,5 puntos cada uno · se corrige la estructura del código.</p>
+            </div>
+        </div>
+
+        <article class="pregunta codigo" data-ejercicio="c1">
+            <p class="enunciado"><span class="num-preg">10</span>
+                Escribí <code>mostrar_tabla(n)</code>: debe borrar un widget <code>Text</code> con
+                <code>delete("1.0", END)</code>, recorrer <code>range(1, 11)</code> e insertar cada línea
+                <code>f"{n}*{i}={n*i}"</code> con <code>insert(END, ... + "\n")</code>.
+                Después creá un <code>Button</code> con <code>command=lambda: mostrar_tabla(7)</code>
+                y cerrá con <code>mainloop()</code>.</p>
+            <textarea class="editor" id="c1" spellcheck="false" placeholder="# Text + for + lambda&#10;from tkinter import *&#10;ventana = Tk()"></textarea>
+            <div class="resultado-codigo" id="res-c1"></div>
+            <details class="solucion">
+                <summary>Ver una solución de referencia</summary>
+                <pre><code>from tkinter import *
+
+ventana = Tk()
+texto_tabla = Text(ventana)
+texto_tabla.pack()
+
+def mostrar_tabla(n):
+    texto_tabla.delete("1.0", END)
+    for i in range(1, 11):
+        texto_tabla.insert(END, f"{n}*{i}={n*i}" + "\n")
+
+Button(ventana, text="7", command=lambda: mostrar_tabla(7)).pack()
+ventana.mainloop()</code></pre>
+            </details>
+        </article>
+
+        <article class="pregunta codigo" data-ejercicio="c2">
+            <p class="enunciado"><span class="num-preg">11</span>
+                Escribí <code>conectar()</code> que devuelva
+                <code>mysql.connector.connect(...)</code> con <code>host</code>, <code>user</code>,
+                <code>password</code> y <code>database</code>. Después escribí <code>guardar()</code>
+                que lea el nombre con <code>.get()</code>, ejecute
+                <code>INSERT INTO alumnos (nombre, curso) VALUES (%s, %s)</code> con
+                <code>cursor.execute(sql, (nombre, curso))</code>, confirme con <code>commit()</code>,
+                cierre con <code>close()</code> y avise con <code>messagebox.showerror(...)</code>
+                si algo falla dentro de <code>try / except</code>.</p>
+            <textarea class="editor" id="c2" spellcheck="false" placeholder="# conectar() + INSERT + commit&#10;import mysql.connector"></textarea>
+            <div class="resultado-codigo" id="res-c2"></div>
+            <details class="solucion">
+                <summary>Ver una solución de referencia</summary>
+                <pre><code>import mysql.connector
+from tkinter import messagebox
+
+def conectar():
+    return mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="",
+        database="escuela"
+    )
+
+def guardar():
+    nombre = entrada_nombre.get()
+    curso = combo_curso.get()
+    try:
+        cnx = conectar()
+        cursor = cnx.cursor()
+        sql = "INSERT INTO alumnos (nombre, curso) VALUES (%s, %s)"
+        cursor.execute(sql, (nombre, curso))
+        cnx.commit()
+        cnx.close()
+    except:
+        messagebox.showerror("Error", "No se pudo conectar a la base")</code></pre>
+            </details>
+        </article>
+    </section>
+
+    <!-- ================= RESULTADO ================= -->
+    <div class="acciones no-print">
+        <button type="button" class="btn btn-primario" id="btn-corregir">✅ Corregir y enviar</button>
+        <button type="button" class="btn btn-secundario" id="btn-reiniciar">🔄 Reiniciar</button>
+        <button type="button" class="btn btn-secundario" id="btn-imprimir">🖨️ Imprimir</button>
+    </div>
+
+    <div class="aviso-envio" id="aviso-envio" role="status"></div>
+
+    <section class="resultado" id="resultado" aria-live="polite">
+        <div class="puntaje-grande"><span id="puntaje-total">0</span><small> / 10 puntos</small></div>
+        <div class="barra"><div class="barra-fill" id="barra-fill"></div></div>
+        <p id="mensaje">Corregí la evaluación para ver tu puntaje.</p>
+        <div class="desglose">
+            <span>Parte A: <b id="puntos-a">0</b> / 5</span>
+            <span>Parte B: <b id="puntos-b">0</b> / 2</span>
+            <span>Parte C: <b id="puntos-c">0</b> / 3</span>
+        </div>
+        <div class="resumen-errores" id="resumen-errores"></div>
+        <p class="nota no-print" id="nota-resultado" style="display:none;">
+            Las respuestas correctas y las soluciones de referencia ya están visibles en cada consigna.
+        </p>
+        <p class="estado-envio" id="estado-envio"></p>
+        <div class="enviar-fallback no-print" id="enviar-fallback">
+            <button type="button" class="btn btn-secundario btn-chico" id="btn-copiar">📋 Copiar resultado</button>
+            <button type="button" class="btn btn-secundario btn-chico" id="btn-descargar">⬇️ Descargar comprobante</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>Evaluación interactiva · Python · Parte 2 · 10 puntos</p>
+    </footer>
+
+</main>
+</div>
+
+<script src="config.js"></script>
+<script src="config-parte2.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

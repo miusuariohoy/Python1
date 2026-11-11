@@ -1,8 +1,9 @@
 # Python1 · Guía + Evaluación interactiva
 
-Sitio de GitHub Pages con la guía de **Programación Estructurada** y una evaluación
-protegida por clave. Al corregir, el resultado se guarda automáticamente en el
-repositorio privado [`inform`](https://github.com/miusuariohoy/inform).
+Sitio de GitHub Pages con la guía de **Programación Estructurada** y dos
+evaluaciones protegidas por clave (Parte 1 y Parte 2). Al corregir, el resultado
+se guarda automáticamente en el repositorio privado
+[`inform`](https://github.com/miusuariohoy/inform).
 
 ## Archivos
 
@@ -10,13 +11,17 @@ repositorio privado [`inform`](https://github.com/miusuariohoy/inform).
 | --- | --- |
 | `index.html` | Parte 1 de la guía (teoría, autoevaluación, simuladores). |
 | `parte2.html` | Parte 2 de la guía (listas, Canvas, MySQL). |
-| `evaluacion.html` | Pantalla de acceso + evaluación completa (11 consignas). |
+| `evaluacion.html` | Evaluación de la **Parte 1** (11 consignas). |
+| `evaluacion-parte2.html` | Evaluación de la **Parte 2** (11 consignas). |
 | `styles.css` | Estilos de la evaluación. |
 | `app.js` | Acceso, corrección, envío y reinicio para el siguiente alumno. |
-| `config.js` | **Lo único que tenés que editar**: clave, repo y token. |
+| `config.js` | Configuración general: clave, canal cifrado y examen de la Parte 1. |
+| `config-parte2.js` | Examen y requisitos de código de la Parte 2. |
 
-La evaluación se abre desde el ítem **🎓 Evaluación** del menú, al lado de
-**Parte 2**, o directo en `https://miusuariohoy.github.io/Python1/evaluacion.html`.
+Cada guía abre su evaluación desde el ítem **🎓 Evaluación** del menú:
+
+- Parte 1 → `https://miusuariohoy.github.io/Python1/evaluacion.html`
+- Parte 2 → `https://miusuariohoy.github.io/Python1/evaluacion-parte2.html`
 
 ## Publicar (una sola vez)
 
@@ -62,8 +67,10 @@ y actualizar `NTFY_TOPIC` y `CLAVE_PUBLICA` en `config.js`.
 
 ## Cómo probar
 
-1. Abrí `https://miusuariohoy.github.io/Python1/evaluacion.html` (o el ítem
-   **🎓 Evaluación** del menú), ingresá la clave `123456`.
+1. Abrí la evaluación que corresponda desde el menú de cada guía, ingresá la
+   clave `123456`:
+   - Parte 1: `https://miusuariohoy.github.io/Python1/evaluacion.html`
+   - Parte 2: `https://miusuariohoy.github.io/Python1/evaluacion-parte2.html`
 2. Completá apellido, nombre y curso.
 3. Respondé y presioná **Corregir y enviar**.
 4. En el repo `inform`: pestaña **Actions** → **Recoger resultados** →
@@ -96,11 +103,14 @@ y actualizar `NTFY_TOPIC` y `CLAVE_PUBLICA` en `config.js`.
 
 ## Cambiar de examen
 
-En `config.js`:
+La evaluación de la Parte 1 se configura en `config.js`:
 
 ```js
-EXAMEN: { id: 'python-2', titulo: 'Otro examen', materia: 'Programación' }
+EXAMEN: { id: 'python-1', titulo: 'Programación Estructurada', materia: 'Programación' }
 ```
 
+La de la Parte 2 se configura en `config-parte2.js`, que también define los
+requisitos que se revisan en la Parte C (`EJERCICIOS`).
+
 El `id` separa los intentos y los resultados en el informe. Para un examen nuevo
-conviene duplicar `evaluacion.html` y editar las preguntas.
+conviene duplicar la página de evaluación que corresponda y editar las preguntas.
