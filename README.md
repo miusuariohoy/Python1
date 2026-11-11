@@ -111,8 +111,9 @@ EXAMEN: { id: 'python-1', titulo: 'Programación Estructurada', materia: 'Progra
 
 La de la Parte 2 se configura en `config-parte2.js`, que también define los
 requisitos que se revisan en la Parte C (`EJERCICIOS`) y cuánto vale cada
-actividad (`PUNTOS_EJERCICIO`). Las actividades de código se corrigen con
-expresiones regulares sobre el texto; la teórica busca palabras clave.
+actividad (`PUNTOS_EJERCICIO`). Las actividades se corrigen con expresiones
+regulares sobre el texto: la teórica pide completar cada acción con el método
+de MySQL que corresponde.
 
 El `id` separa los intentos y los resultados en el informe. Para un examen nuevo
 conviene duplicar la página de evaluación que corresponda y editar las preguntas.

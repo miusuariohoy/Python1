@@ -37,12 +37,12 @@ window.CONFIG.EJERCICIOS = {
         { d: 'Cierra con mainloop()', f: function (c) { return /mainloop\s*\(\s*\)/.test(c); } }
     ],
 
-    /* Actividad 3 · Teórico de base de datos: explicar cada paso. */
+    /* Actividad 3 · Teórico de base de datos: unir cada acción con su método. */
     c3: [
-        { d: 'Explica connect: abre la conexión con la base', f: function (c) { return /connect/.test(c) && /(conect|abre|enlaz|uni)/.test(c); } },
-        { d: 'Explica cursor: permite ejecutar o recorrer consultas', f: function (c) { return /cursor/.test(c) && /(ejecut|recorr|consult|envi|permite)/.test(c); } },
-        { d: 'Explica execute: envía la consulta SQL (INSERT)', f: function (c) { return /execute/.test(c) && /(sql|consult|insert|envi|ejecut)/.test(c); } },
-        { d: 'Explica commit: confirma y guarda los cambios', f: function (c) { return /commit/.test(c) && /(guard|confirm|persist|aplic)/.test(c); } },
-        { d: 'Explica close: cierra la conexión', f: function (c) { return /close/.test(c) && /(cerrar|cierra|conexi)/.test(c); } }
+        { d: 'Abrir la conexión: connect', f: function (c) { return /abrir la conexi[oó]n\s*:\s*(?:mysql\.connector\.)?connect/.test(c); } },
+        { d: 'Crear el cursor: cursor', f: function (c) { return /crear el cursor\s*:\s*(?:cnx\.)?cursor/.test(c); } },
+        { d: 'Ejecutar la consulta SQL: execute', f: function (c) { return /ejecutar la consulta[^\n]*:\s*(?:cursor\.)?execute/.test(c); } },
+        { d: 'Confirmar y guardar los cambios: commit', f: function (c) { return /(confirmar|guardar)[^\n]*:\s*(?:cnx\.)?commit/.test(c); } },
+        { d: 'Cerrar la conexión: close', f: function (c) { return /cerrar la conexi[oó]n\s*:\s*(?:cnx\.)?close/.test(c); } }
     ]
 };

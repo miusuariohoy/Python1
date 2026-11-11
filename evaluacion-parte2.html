@@ -54,7 +54,7 @@
                 <li>Leé cada consigna con atención y respondé <strong>todas</strong> las preguntas.</li>
                 <li>En la <strong>Parte A</strong> marcá una sola opción por pregunta.</li>
                 <li>En la <strong>Parte B</strong> escribí la salida exacta del programa. Si son varias líneas, separalas con un espacio.</li>
-                <li>En la <strong>Parte C</strong> resolvé tres actividades cortas: dos de Tkinter y una teórica sobre base de datos. En las dos primeras se revisa la estructura del código; en la teórica se buscan las palabras clave de tu explicación.</li>
+                <li>En la <strong>Parte C</strong> resolvé tres actividades cortas: dos de Tkinter y una teórica sobre base de datos. En las dos primeras se revisa la estructura del código; en la teórica completás cada acción con el método que corresponde.</li>
                 <li>Podés realizar la evaluación <strong>más de una vez</strong>. Cada envío queda registrado con tu apellido, nombre, día y hora.</li>
                 <li>Si otra persona va a usar esta computadora, al terminar presioná <strong>Hacer otra evaluación</strong> para dejarla lista.</li>
                 <li>Al corregir, la <strong>nota y la corrección</strong> se guardan automáticamente en el informe del docente.</li>
@@ -144,7 +144,7 @@
 
         <article class="pregunta mc" data-correcta="a">
             <p class="enunciado"><span class="num-preg">4</span>
-                Mirá este código. ¿Qué pasa cuando se abre la ventana?</p>
+                En este código, ¿cuándo se ejecuta la función <code>mostrar_tabla(7)</code>?</p>
             <pre><code>ventana = Tk()
 
 def mostrar_tabla(n):
@@ -152,12 +152,12 @@ def mostrar_tabla(n):
 
 Button(ventana, text="7", command=mostrar_tabla(7))</code></pre>
             <div class="opciones">
-                <label data-op="a"><input type="radio" name="a4" value="a"> Se imprime <code>Tabla del 7</code> al abrir la ventana, y el botón no hace nada al hacer clic.</label>
-                <label data-op="b"><input type="radio" name="a4" value="b"> No se imprime nada hasta hacer clic en el botón.</label>
-                <label data-op="c"><input type="radio" name="a4" value="c"> El botón no se crea: Python muestra un error por falta de <code>lambda</code>.</label>
-                <label data-op="d"><input type="radio" name="a4" value="d"> Cada clic imprime <code>Tabla del 7</code> una vez más.</label>
+                <label data-op="a"><input type="radio" name="a4" value="a"> Una sola vez, al crear el botón, antes de que el usuario haga clic.</label>
+                <label data-op="b"><input type="radio" name="a4" value="b"> Cada vez que el usuario hace clic en el botón.</label>
+                <label data-op="c"><input type="radio" name="a4" value="c"> Nunca, porque al botón le falta <code>lambda</code>.</label>
+                <label data-op="d"><input type="radio" name="a4" value="d"> Recién cuando se cierra la ventana.</label>
             </div>
-            <p class="explicacion">Los paréntesis de <code>mostrar_tabla(7)</code> hacen que la función se ejecute <strong>en el momento de crear el botón</strong>. Para que espere el clic hay que escribir <code>command=lambda: mostrar_tabla(7)</code>.</p>
+            <p class="explicacion">Los paréntesis de <code>mostrar_tabla(7)</code> ejecutan la función en el momento de crear el botón. Para que se ejecute en cada clic hay que escribir <code>command=lambda: mostrar_tabla(7)</code>.</p>
         </article>
 
         <article class="pregunta mc" data-correcta="a">
@@ -292,24 +292,27 @@ ventana.mainloop()</code></pre>
 
         <article class="pregunta codigo" data-ejercicio="c3">
             <p class="enunciado"><span class="num-preg">12</span>
-                <strong>Base de datos · teórico.</strong> Explicá con tus palabras qué hace cada parte
-                del código que conecta con MySQL. En tu respuesta tienen que aparecer las palabras
-                <code>connect</code>, <code>cursor</code>, <code>execute</code>, <code>commit</code>
-                y <code>close</code>, y qué hace cada una.</p>
-            <pre><code>cnx = mysql.connector.connect(host="localhost", user="root", database="escuela")
-cursor = cnx.cursor()
-cursor.execute("INSERT INTO alumnos (nombre, curso) VALUES (%s, %s)", (nombre, curso))
-cnx.commit()
-cnx.close()</code></pre>
-            <textarea class="editor" id="c3" spellcheck="false" placeholder="connect sirve para...&#10;cursor...&#10;execute...&#10;commit...&#10;close..."></textarea>
+                <strong>Base de datos · teórico.</strong> Completá cada acción con el método de MySQL
+                que corresponde. Usá solo estas palabras: <code>connect</code>, <code>cursor</code>,
+                <code>execute</code>, <code>commit</code> y <code>close</code>.</p>
+            <pre><code>Abrir la conexión: ______
+Crear el cursor: ______
+Ejecutar la consulta SQL: ______
+Confirmar y guardar los cambios: ______
+Cerrar la conexión: ______</code></pre>
+            <textarea class="editor" id="c3" spellcheck="false" data-plantilla="Abrir la conexión: &#10;Crear el cursor: &#10;Ejecutar la consulta SQL: &#10;Confirmar y guardar los cambios: &#10;Cerrar la conexión: ">Abrir la conexión: 
+Crear el cursor: 
+Ejecutar la consulta SQL: 
+Confirmar y guardar los cambios: 
+Cerrar la conexión: </textarea>
             <div class="resultado-codigo" id="res-c3"></div>
             <details class="solucion">
                 <summary>Ver una respuesta de referencia</summary>
-                <pre><code>connect abre la conexión con la base de datos MySQL.
-cursor crea el objeto que permite ejecutar consultas.
-execute envía la consulta SQL (en este caso el INSERT) con los datos.
-commit confirma y guarda los cambios en la base.
-close cierra la conexión cuando terminamos.</code></pre>
+                <pre><code>Abrir la conexión: connect
+Crear el cursor: cursor
+Ejecutar la consulta SQL: execute
+Confirmar y guardar los cambios: commit
+Cerrar la conexión: close</code></pre>
             </details>
         </article>
     </section>

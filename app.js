@@ -586,7 +586,7 @@
 
         $$('input[type="radio"]').forEach(function (r) { r.checked = false; });
         $$('.salida input').forEach(function (i) { i.value = ''; });
-        $$('.editor').forEach(function (t) { t.value = ''; });
+        $$('.editor').forEach(function (t) { t.value = t.getAttribute('data-plantilla') || ''; });
         $$('.mc, .salida').forEach(function (q) { q.classList.remove('correcta', 'incorrecta'); });
         $$('.opciones label').forEach(function (l) { l.classList.remove('opcion-correcta', 'opcion-elegida-mal'); });
         $$('.resultado-codigo').forEach(function (r) { r.innerHTML = ''; });
