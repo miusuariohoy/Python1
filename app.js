@@ -15,7 +15,9 @@
     var CLAVE_ACCESO = 'eval_acceso_' + EXAMEN.id;
     var CLAVE_ENVIO = 'eval_' + EXAMEN.id + '_enviada_v1';
 
+    var UN_SOLO_INTENTO = cfg.UN_SOLO_INTENTO !== false;
     var bloqueada = false;
+    var enviando = false;
     var ultimoResultado = null;
     var ultimoPayload = null;
 
@@ -435,7 +437,7 @@
         el.innerHTML = texto;
     }
 
-    /* ---------- Guardado local (un intento por navegador) ---------- */
+    /* ---------- Guardado local ---------- */
     function guardar(datos) {
         try { localStorage.setItem(CLAVE_ENVIO, JSON.stringify(datos)); } catch (e) { /* sin storage */ }
     }
@@ -470,23 +472,44 @@
         });
     }
 
+    function mostrarBotonOtra() {
+        if ($('#btn-otra')) return;
+        var boton = document.createElement('button');
+        boton.type = 'button';
+        boton.className = 'btn btn-secundario';
+        boton.id = 'btn-otra';
+        boton.style.display = 'block';
+        boton.style.marginTop = '12px';
+        boton.textContent = '🔄 Hacer otra evaluación';
+        boton.addEventListener('click', reiniciar);
+        $('#aviso-envio').appendChild(boton);
+    }
+
     function bloquear(mensaje) {
         bloqueada = true;
+
+        var aviso = $('#aviso-envio');
+        aviso.className = 'aviso-envio visible';
+        aviso.innerHTML = mensaje;
+
+        // Con varios intentos permitidos no se deshabilita nada:
+        // el siguiente alumno solo tiene que pedir "Hacer otra evaluación".
+        if (!UN_SOLO_INTENTO) {
+            mostrarBotonOtra();
+            return;
+        }
+
         document.body.classList.add('enviada');
         $$('input, textarea').forEach(function (el) { el.disabled = true; });
         var corrige = $('#btn-corregir');
         var reinicia = $('#btn-reiniciar');
         if (corrige) corrige.style.display = 'none';
         if (reinicia) reinicia.style.display = 'none';
-
-        var aviso = $('#aviso-envio');
-        aviso.className = 'aviso-envio visible';
-        aviso.innerHTML = mensaje;
     }
 
     /* ---------- Corrección principal ---------- */
     function corregir() {
-        if (bloqueada) return;
+        if (bloqueada || enviando) return;
         if (!validarAlumno()) return;
 
         var res = evaluar();
@@ -506,16 +529,16 @@
         };
         guardar(registro);
 
-        var aviso = $('#aviso-envio');
-        aviso.className = 'aviso-envio visible';
-        aviso.innerHTML = '🔒 <b>Evaluación enviada.</b> Tu nota es <b>' + formatear(res.total) +
-            ' / 10</b>. No se puede volver a realizar ni modificar.';
-
-        bloquear('🔒 <b>Evaluación enviada.</b> Tu nota es <b>' + formatear(res.total) +
-            ' / 10</b>. No se puede volver a realizar ni modificar.');
+        var mensaje = UN_SOLO_INTENTO
+            ? '🔒 <b>Evaluación enviada.</b> Tu nota es <b>' + formatear(res.total) +
+              ' / 10</b>. No se puede volver a realizar ni modificar.'
+            : '✅ <b>Evaluación enviada.</b> Tu nota es <b>' + formatear(res.total) +
+              ' / 10</b>. Quedó registrada en el informe del docente.';
+        bloquear(mensaje);
 
         mostrarEstadoEnvio('Enviando el resultado al informe del docente…');
 
+        enviando = true;
         enviar(payload)
             .then(function () {
                 mostrarEstadoEnvio('✅ Resultado guardado en el informe del docente.');
@@ -528,6 +551,9 @@
                     'fail'
                 );
                 $('#enviar-fallback').classList.add('visible');
+            })
+            .finally(function () {
+                enviando = false;
             });
 
         $('#resultado').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -535,7 +561,8 @@
 
     /* ---------- Reinicio ---------- */
     function reiniciar() {
-        if (bloqueada) return;
+        if (enviando) return;
+        if (bloqueada && UN_SOLO_INTENTO) return;
         if (!confirm('¿Borrar todas tus respuestas y empezar de nuevo?')) return;
 
         $$('input[type="radio"]').forEach(function (r) { r.checked = false; });
@@ -545,6 +572,25 @@
         $$('.opciones label').forEach(function (l) { l.classList.remove('opcion-correcta', 'opcion-elegida-mal'); });
         $$('.resultado-codigo').forEach(function (r) { r.innerHTML = ''; });
         $$('.invalido').forEach(function (i) { i.classList.remove('invalido'); });
+
+        $('#alumno-apellido').value = '';
+        $('#alumno-nombre').value = '';
+        $('#alumno-curso').value = '';
+        $('#alumno-materia').value = EXAMEN.materia;
+
+        bloqueada = false;
+        document.body.classList.remove('enviada');
+        $$('input, textarea').forEach(function (el) { el.disabled = false; });
+        var corrige = $('#btn-corregir');
+        var reinicia = $('#btn-reiniciar');
+        if (corrige) corrige.style.display = '';
+        if (reinicia) reinicia.style.display = '';
+        var otra = $('#btn-otra');
+        if (otra && otra.parentNode) otra.parentNode.removeChild(otra);
+
+        ultimoResultado = null;
+        ultimoPayload = null;
+        try { localStorage.removeItem(CLAVE_ENVIO); } catch (e) { /* sin storage */ }
 
         document.body.classList.remove('calificado');
         $('.resultado').classList.remove('visible');
@@ -556,6 +602,7 @@
         $('#mensaje').textContent = 'Corregí la evaluación para ver tu puntaje.';
         $('#nota-resultado').style.display = 'none';
         $('#estado-envio').textContent = '';
+        $('#estado-envio').className = 'estado-envio';
         $('#resumen-errores').innerHTML = '';
         $('#resumen-errores').className = 'resumen-errores';
         $('#enviar-fallback').classList.remove('visible');
@@ -564,6 +611,8 @@
         aviso.innerHTML = '';
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        var primero = $('#alumno-apellido');
+        if (primero) primero.focus();
     }
 
     /* ---------- Comprobante ---------- */
@@ -671,7 +720,7 @@
         $('#btn-descargar').addEventListener('click', descargar);
 
         var guardado = leerGuardado();
-        if (guardado) {
+        if (guardado && UN_SOLO_INTENTO) {
             restaurar(guardado);
             var res = evaluar();
             ultimoResultado = res;
@@ -684,6 +733,9 @@
             setTimeout(function () {
                 $('#resultado').scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 300);
+        } else if (guardado) {
+            // Sin bloqueo: arrancamos limpio para el próximo alumno.
+            try { localStorage.removeItem(CLAVE_ENVIO); } catch (e) { /* sin storage */ }
         }
     }
 

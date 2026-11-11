@@ -20,6 +20,12 @@ window.CONFIG = {
     // Clave para entrar a la evaluación (soft gate, ver README)
     CLAVE_ACCESO: '123456',
 
+    // ¿Se puede rendir una sola vez por navegador?
+    //   false -> cualquiera puede volver a rendirla; cada envío queda
+    //            registrado con apellido, nombre, día y hora.
+    //   true  -> se bloquea el navegador después de enviar.
+    UN_SOLO_INTENTO: false,
+
     // Datos del examen (van al informe)
     EXAMEN: {
         id: 'python-1',

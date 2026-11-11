@@ -12,7 +12,7 @@ repositorio privado [`inform`](https://github.com/miusuariohoy/inform).
 | `parte2.html` | Parte 2 de la guía (listas, Canvas, MySQL). |
 | `evaluacion.html` | Pantalla de acceso + evaluación completa (11 consignas). |
 | `styles.css` | Estilos de la evaluación. |
-| `app.js` | Acceso, corrección, bloqueo de segundo intento y envío. |
+| `app.js` | Acceso, corrección, envío y reinicio para el siguiente alumno. |
 | `config.js` | **Lo único que tenés que editar**: clave, repo y token. |
 
 La evaluación se abre desde el ítem **🎓 Evaluación** del menú, al lado de
@@ -74,10 +74,11 @@ y actualizar `NTFY_TOPIC` y `CLAVE_PUBLICA` en `config.js`.
 - **La clave es un filtro blando.** GitHub Pages no tiene login de servidor: la
   clave está en `config.js` y alguien con conocimientos puede verla. Sirve para
   ordenar el acceso, no como seguridad real.
-- **Un intento por navegador.** Se guarda en `localStorage`. Si el alumno cambia
-  de navegador, de dispositivo o usa incógnito, puede repetir. Sin legajo no hay
-  forma de impedirlo desde el navegador; el informe mostrará las entregas
-  duplicadas para que las detectes.
+- **Varios intentos permitidos.** Por defecto `UN_SOLO_INTENTO: false` en
+  `config.js`: cualquiera puede rendir la evaluación las veces que quiera y cada
+  envío queda registrado con apellido, nombre, día y hora. Al terminar aparece
+  **Hacer otra evaluación**, que limpia el formulario para el siguiente alumno.
+  Si querés bloquear el navegador después de enviar, poné `UN_SOLO_INTENTO: true`.
 - **Las respuestas correctas están en el HTML.** Un alumno con conocimientos
   puede verlas con F12. Si necesitás corrección realmente segura, hay que mover
   la corrección a un servidor (Apps Script o Supabase).
