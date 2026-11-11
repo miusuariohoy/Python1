@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación · Programación Estructurada</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ================= PUERTA DE ACCESO ================= -->
+<div class="acceso" id="acceso">
+    <form class="acceso-caja" id="form-acceso" autocomplete="off">
+        <span class="badge-acceso">Acceso restringido</span>
+        <h1>Programación Estructurada</h1>
+        <p>Ingresá la clave que te dio el docente para comenzar.</p>
+        <input type="password" id="clave" inputmode="numeric" placeholder="Clave de acceso" required>
+        <button type="submit" class="btn btn-primario" style="width:100%">Entrar</button>
+        <p class="acceso-error" id="acceso-error"></p>
+        <p class="acceso-volver"><a href="index.html">← Volver a la guía</a></p>
+    </form>
+</div>
+
+<!-- ================= APP ================= -->
+<div id="app" hidden>
+
+<header class="hero">
+    <div class="contenedor">
+        <span class="badge">Evaluación · Python</span>
+        <h1>Programación Estructurada</h1>
+        <p class="subtitulo">
+            Variables, operadores, condicionales, bucles, listas y funciones.
+            11 consignas, 10 puntos y corrección automática.
+        </p>
+        <div class="nav-rapida">
+            <a href="#parte-a" class="btn-enlace">Parte A · Opción múltiple</a>
+            <a href="#parte-b" class="btn-enlace">Parte B · Salidas</a>
+            <a href="#parte-c" class="btn-enlace">Parte C · Código</a>
+            <a href="#resultado" class="btn-enlace">Resultado</a>
+        </div>
+    </div>
+</header>
+
+<main class="contenedor">
+
+    <!-- ================= INSTRUCCIONES ================= -->
+    <section class="bloque">
+        <div class="tarjeta">
+            <h3>Antes de empezar</h3>
+            <ul>
+                <li>Leé cada consigna con atención y respondé <strong>todas</strong> las preguntas.</li>
+                <li>En la <strong>Parte A</strong> marcá una sola opción por pregunta.</li>
+                <li>En la <strong>Parte B</strong> escribí la salida exacta del programa. Si son varias líneas, separalas con un espacio.</li>
+                <li>En la <strong>Parte C</strong> escribí el código completo en Python. El corrector revisa la estructura, no ejecuta el programa.</li>
+                <li>La evaluación se puede realizar <strong>una sola vez</strong> por navegador. Al presionar <strong>Corregir y enviar</strong> ya no se puede modificar.</li>
+                <li>Al corregir, la <strong>nota y la corrección</strong> se guardan automáticamente en el informe del docente.</li>
+                <li>Al terminar, presioná <strong>Corregir y enviar</strong>. Vas a ver el puntaje y la explicación de cada respuesta.</li>
+            </ul>
+
+            <table class="tabla-puntos">
+                <thead>
+                    <tr><th>Parte</th><th>Consigna</th><th>Puntos</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>A</td><td>5 preguntas de opción múltiple</td><td>5</td></tr>
+                    <tr><td>B</td><td>4 predicciones de salida</td><td>2</td></tr>
+                    <tr><td>C</td><td>2 ejercicios de código</td><td>3</td></tr>
+                    <tr><td colspan="2"><strong>Total</strong></td><td><strong>10</strong></td></tr>
+                </tbody>
+            </table>
+
+            <div class="datos-alumno">
+                <label>Apellido
+                    <input type="text" id="alumno-apellido" placeholder="Tu apellido" autocomplete="off">
+                </label>
+                <label>Nombre
+                    <input type="text" id="alumno-nombre" placeholder="Tu nombre" autocomplete="off">
+                </label>
+                <label>Curso
+                    <input type="text" id="alumno-curso" placeholder="Ej.: 5.º 2.ª" autocomplete="off">
+                </label>
+                <label>Materia
+                    <input type="text" id="alumno-materia" placeholder="Ej.: Programación" autocomplete="off">
+                </label>
+            </div>
+
+            <p class="nota">
+                Tiempo sugerido: <strong>45 minutos</strong>. Intentá resolver sin ejecutar el código:
+                el objetivo es interpretar la lógica del programa.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================= PARTE A ================= -->
+    <section class="bloque" id="parte-a">
+        <div class="encabezado-seccion">
+            <span class="numero-paso">A</span>
+            <div>
+                <h2>Opción múltiple</h2>
+                <p>5 preguntas · 1 punto cada una · marcá una sola respuesta.</p>
+            </div>
+        </div>
+
+        <article class="pregunta mc" data-correcta="b">
+            <p class="enunciado"><span class="num-preg">1</span>
+                ¿Qué estructura representa un <code>if / elif / else</code>?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a1" value="a"> Secuencia.</label>
+                <label data-op="b"><input type="radio" name="a1" value="b"> Selección.</label>
+                <label data-op="c"><input type="radio" name="a1" value="c"> Iteración.</label>
+                <label data-op="d"><input type="radio" name="a1" value="d"> Una función.</label>
+            </div>
+            <p class="explicacion">El <code>if</code> elige qué bloque ejecutar según una condición: es una estructura de <strong>selección</strong>.</p>
+        </article>
+
+        <article class="pregunta mc" data-correcta="c">
+            <p class="enunciado"><span class="num-preg">2</span>
+                ¿Qué tipo de dato devuelve <code>input()</code>?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a2" value="a"> <code>int</code></label>
+                <label data-op="b"><input type="radio" name="a2" value="b"> <code>float</code></label>
+                <label data-op="c"><input type="radio" name="a2" value="c"> <code>str</code></label>
+                <label data-op="d"><input type="radio" name="a2" value="d"> <code>bool</code></label>
+            </div>
+            <p class="explicacion"><code>input()</code> siempre devuelve texto (<code>str</code>). Si necesitás un número, convertilo con <code>int()</code> o <code>float()</code>.</p>
+        </article>
+
+        <article class="pregunta mc" data-correcta="b">
+            <p class="enunciado"><span class="num-preg">3</span>
+                ¿Qué valores recorre <code>for i in range(1, 6):</code>?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a3" value="a"> 1, 2, 3, 4, 5 y 6.</label>
+                <label data-op="b"><input type="radio" name="a3" value="b"> 1, 2, 3, 4 y 5.</label>
+                <label data-op="c"><input type="radio" name="a3" value="c"> 0, 1, 2, 3, 4 y 5.</label>
+                <label data-op="d"><input type="radio" name="a3" value="d"> 0, 1, 2, 3, 4, 5 y 6.</label>
+            </div>
+            <p class="explicacion"><code>range(inicio, fin)</code> incluye el inicio y <strong>excluye el fin</strong>: llega hasta 5.</p>
+        </article>
+
+        <article class="pregunta mc" data-correcta="a">
+            <p class="enunciado"><span class="num-preg">4</span>
+                Si <code>notas = [8, 6, 10]</code>, ¿cuánto vale <code>notas[0]</code>?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a4" value="a"> 8</label>
+                <label data-op="b"><input type="radio" name="a4" value="b"> 6</label>
+                <label data-op="c"><input type="radio" name="a4" value="c"> 10</label>
+                <label data-op="d"><input type="radio" name="a4" value="d"> Se produce un error.</label>
+            </div>
+            <p class="explicacion">Los índices de una lista empiezan en <strong>0</strong>: <code>notas[0]</code> es el primer elemento, 8.</p>
+        </article>
+
+        <article class="pregunta mc" data-correcta="a">
+            <p class="enunciado"><span class="num-preg">5</span>
+                ¿Para qué sirve definir una función?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a5" value="a"> Para reutilizar código y organizarlo mejor.</label>
+                <label data-op="b"><input type="radio" name="a5" value="b"> Para que el programa ocupe más líneas.</label>
+                <label data-op="c"><input type="radio" name="a5" value="c"> Para reemplazar todas las variables.</label>
+                <label data-op="d"><input type="radio" name="a5" value="d"> Para ejecutar el código una sola vez y olvidarlo.</label>
+            </div>
+            <p class="explicacion">Una función agrupa instrucciones bajo un nombre y permite <strong>reutilizarlas</strong> sin repetir el código.</p>
+        </article>
+    </section>
+
+    <!-- ================= PARTE B ================= -->
+    <section class="bloque" id="parte-b">
+        <div class="encabezado-seccion">
+            <span class="numero-paso">B</span>
+            <div>
+                <h2>Predicción de salidas</h2>
+                <p>4 programas · 0,5 puntos cada uno · escribí lo que muestra cada uno.</p>
+            </div>
+        </div>
+
+        <article class="pregunta salida" data-aceptadas="mayor">
+            <p class="enunciado"><span class="num-preg">6</span>
+                ¿Qué muestra este programa?</p>
+            <pre><code>x = 5
+if x &gt; 3:
+    print("mayor")
+else:
+    print("menor")</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b1" autocomplete="off" placeholder="Escribí la salida">
+            </label>
+            <p class="explicacion">Como 5 es mayor que 3, se ejecuta el <code>if</code>: la salida es <strong>mayor</strong>.</p>
+        </article>
+
+        <article class="pregunta salida" data-aceptadas="10">
+            <p class="enunciado"><span class="num-preg">7</span>
+                ¿Qué muestra este programa?</p>
+            <pre><code>total = 0
+for i in range(1, 5):
+    total += i
+print(total)</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b2" autocomplete="off" placeholder="Escribí la salida">
+            </label>
+            <p class="explicacion">Suma 1 + 2 + 3 + 4. El <code>range(1, 5)</code> no incluye el 5: la salida es <strong>10</strong>.</p>
+        </article>
+
+        <article class="pregunta salida" data-aceptadas="3 2 1">
+            <p class="enunciado"><span class="num-preg">8</span>
+                ¿Qué muestra este programa?</p>
+            <pre><code>contador = 3
+while contador &gt; 0:
+    print(contador)
+    contador -= 1</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b3" autocomplete="off" placeholder="Separá los valores con espacios">
+            </label>
+            <p class="explicacion">El bucle imprime 3, luego 2 y luego 1. La salida es <strong>3 2 1</strong> (uno por línea).</p>
+        </article>
+
+        <article class="pregunta salida" data-aceptadas="4 3">
+            <p class="enunciado"><span class="num-preg">9</span>
+                ¿Qué muestra este programa?</p>
+            <pre><code>notas = [7, 4, 9]
+print(notas[1])
+print(len(notas))</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b4" autocomplete="off" placeholder="Separá los valores con espacios">
+            </label>
+            <p class="explicacion"><code>notas[1]</code> es 4 y <code>len(notas)</code> es 3. La salida es <strong>4 3</strong> (una línea cada uno).</p>
+        </article>
+    </section>
+
+    <!-- ================= PARTE C ================= -->
+    <section class="bloque" id="parte-c">
+        <div class="encabezado-seccion">
+            <span class="numero-paso">C</span>
+            <div>
+                <h2>Ejercicios de código</h2>
+                <p>2 programas · 1,5 puntos cada uno · se corrige la estructura del código.</p>
+            </div>
+        </div>
+
+        <article class="pregunta codigo" data-ejercicio="c1">
+            <p class="enunciado"><span class="num-preg">10</span>
+                Escribí un programa que pida el <strong>nombre</strong> y la <strong>edad</strong> de una persona,
+                convierta la edad a entero y muestre un mensaje como:
+                <code>Hola Ana, tenés 17 años</code>. Usá un <strong>f-string</strong>.</p>
+            <textarea class="editor" id="c1" spellcheck="false" placeholder="nombre = input(...)&#10;edad = int(input(...))&#10;print(f'...')"></textarea>
+            <div class="resultado-codigo" id="res-c1"></div>
+            <details class="solucion">
+                <summary>Ver una solución de referencia</summary>
+                <pre><code>nombre = input("Nombre: ")
+edad = int(input("Edad: "))
+print(f"Hola {nombre}, tenés {edad} años")</code></pre>
+            </details>
+        </article>
+
+        <article class="pregunta codigo" data-ejercicio="c2">
+            <p class="enunciado"><span class="num-preg">11</span>
+                Escribí un programa que muestre los números del <strong>1 al 10</strong> (uno por línea)
+                y al final imprima la <strong>suma total</strong>, que debe dar 55. Usá un acumulador.</p>
+            <textarea class="editor" id="c2" spellcheck="false" placeholder="suma = 0&#10;for i in range(...):&#10;    ..."></textarea>
+            <div class="resultado-codigo" id="res-c2"></div>
+            <details class="solucion">
+                <summary>Ver una solución de referencia</summary>
+                <pre><code>suma = 0
+for i in range(1, 11):
+    print(i)
+    suma += i
+print("Suma total:", suma)</code></pre>
+            </details>
+        </article>
+    </section>
+
+    <!-- ================= RESULTADO ================= -->
+    <div class="acciones no-print">
+        <button type="button" class="btn btn-primario" id="btn-corregir">✅ Corregir y enviar</button>
+        <button type="button" class="btn btn-secundario" id="btn-reiniciar">🔄 Reiniciar</button>
+        <button type="button" class="btn btn-secundario" id="btn-imprimir">🖨️ Imprimir</button>
+    </div>
+
+    <div class="aviso-envio" id="aviso-envio" role="status"></div>
+
+    <section class="resultado" id="resultado" aria-live="polite">
+        <div class="puntaje-grande"><span id="puntaje-total">0</span><small> / 10 puntos</small></div>
+        <div class="barra"><div class="barra-fill" id="barra-fill"></div></div>
+        <p id="mensaje">Corregí la evaluación para ver tu puntaje.</p>
+        <div class="desglose">
+            <span>Parte A: <b id="puntos-a">0</b> / 5</span>
+            <span>Parte B: <b id="puntos-b">0</b> / 2</span>
+            <span>Parte C: <b id="puntos-c">0</b> / 3</span>
+        </div>
+        <div class="resumen-errores" id="resumen-errores"></div>
+        <p class="nota no-print" id="nota-resultado" style="display:none;">
+            Las respuestas correctas y las soluciones de referencia ya están visibles en cada consigna.
+        </p>
+        <p class="estado-envio" id="estado-envio"></p>
+        <div class="enviar-fallback no-print" id="enviar-fallback">
+            <button type="button" class="btn btn-secundario btn-chico" id="btn-copiar">📋 Copiar resultado</button>
+            <button type="button" class="btn btn-secundario btn-chico" id="btn-descargar">⬇️ Descargar comprobante</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>Evaluación interactiva · Python · 10 puntos</p>
+    </footer>
+
+</main>
+</div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
