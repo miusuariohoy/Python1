@@ -42,7 +42,7 @@ La página **no guarda ningún token**. Al corregir:
 
 1. Cifra el resultado en el navegador (RSA + AES).
 2. Lo publica en un canal de `ntfy.sh` (`NTFY_TOPIC` en `config.js`).
-3. El repo privado `inform` lo recoge cada 10 minutos con el workflow
+3. El repo privado `inform` lo recoge cada 30 minutos con el workflow
    `recoger.yml`, lo descifra con la clave privada y reconstruye `INFORME.md`.
 
 El canal es público, pero los mensajes van cifrados: nadie sin la clave privada
@@ -67,7 +67,7 @@ y actualizar `NTFY_TOPIC` y `CLAVE_PUBLICA` en `config.js`.
 2. Completá apellido, nombre y curso.
 3. Respondé y presioná **Corregir y enviar**.
 4. En el repo `inform`: pestaña **Actions** → **Recoger resultados** →
-   *Run workflow* (o esperá 10 minutos), después abrí `INFORME.md`.
+   *Run workflow* (o esperá 30 minutos), después abrí `INFORME.md`.
 
 ## Detalles a tener en cuenta
 
@@ -84,10 +84,10 @@ y actualizar `NTFY_TOPIC` y `CLAVE_PUBLICA` en `config.js`.
 - **El canal es público, pero va cifrado.** `NTFY_TOPIC` se puede leer en el
   código, pero sin la clave privada (que está solo en `inform`) los mensajes no
   se pueden descifrar.
-- **Puede tardar hasta 10 minutos** en aparecer en `INFORME.md`. Si necesitás
+- **Puede tardar hasta 30 minutos** en aparecer en `INFORME.md`. Si necesitás
   que sea inmediato, entrá a `inform` → **Actions** → **Recoger resultados** →
   *Run workflow*.
-- **Los mensajes del canal duran 12 horas.** El workflow corre cada 10 minutos,
+- **Los mensajes del canal duran 12 horas.** El workflow corre cada 30 minutos,
   así que en condiciones normales no se pierde ninguno. Si Actions está caído
   más de 12 horas, el alumno igual recibe su comprobante descargable.
 - **GitHub pausa los workflows programados** después de 60 días sin actividad en
