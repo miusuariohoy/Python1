@@ -36,41 +36,29 @@ Después, en GitHub:
 2. *Source*: **Deploy from a branch** → Branch: **main** → carpeta **/ (root)** → Save
 3. En 1–2 minutos queda en `https://miusuariohoy.github.io/Python1/`
 
-## Configurar el envío (modo directo)
+## Cómo llegan los resultados (modo `ntfy`, por defecto)
 
-1. Crear el repo privado **`inform`** y subir el contenido de la carpeta `inform/`.
-2. GitHub → *Settings* → *Developer settings* → **Personal access tokens** →
-   **Fine-grained tokens** → *Generate new token*.
-   - **Repository access**: *Only select repositories* → `inform`
-   - **Permissions** → *Repository permissions* → **Contents: Read and write**
-   - Expiración: la que prefieras (ej. 90 días)
-3. Copiar el token y pegarlo en `config.js`:
+La página **no guarda ningún token**. Al corregir:
 
-```js
-GITHUB: {
-    owner: 'miusuariohoy',
-    repo: 'inform',
-    evento: 'resultado',
-    token: 'github_pat_...'
-}
-```
+1. Cifra el resultado en el navegador (RSA + AES).
+2. Lo publica en un canal de `ntfy.sh` (`NTFY_TOPIC` en `config.js`).
+3. El repo privado `inform` lo recoge cada 10 minutos con el workflow
+   `recoger.yml`, lo descifra con la clave privada y reconstruye `INFORME.md`.
 
-4. Commit y push. Listo.
+El canal es público, pero los mensajes van cifrados: nadie sin la clave privada
+puede leer nombres ni notas.
 
-### Modo más seguro (proxy)
+Para cambiar el canal o las claves, hay que regenerar el par en `inform/claves/`
+y actualizar `NTFY_TOPIC` y `CLAVE_PUBLICA` en `config.js`.
 
-Si no querés que el token quede en el navegador:
+### Alternativas
 
-1. Desplegá `inform/apps-script/Code.gs` como aplicación web (instrucciones en el
-   encabezado del archivo).
-2. En `config.js`:
-
-```js
-MODO_ENVIO: 'proxy',
-PROXY_URL: 'https://script.google.com/macros/s/XXXX/exec'
-```
-
-Así el navegador nunca ve el token.
+- **`proxy`**: Google Apps Script guarda el token en el servidor. Requiere
+  desplegar `inform/apps-script/Code.gs` y poner `MODO_ENVIO: 'proxy'` +
+  `PROXY_URL`.
+- **`directo`**: el navegador llama a la API de GitHub con un token. GitHub
+  **bloquea** el push de tokens a repos públicos, así que no es usable.
+- **`ninguno`**: no envía nada; el alumno descarga el comprobante.
 
 ## Cómo probar
 
@@ -78,8 +66,8 @@ Así el navegador nunca ve el token.
    **🎓 Evaluación** del menú), ingresá la clave `123456`.
 2. Completá apellido, nombre y curso.
 3. Respondé y presioná **Corregir y enviar**.
-4. En el repo `inform`: pestaña **Actions** (el workflow corre), después abrí
-   `INFORME.md`. Tiene que aparecer tu entrega.
+4. En el repo `inform`: pestaña **Actions** → **Recoger resultados** →
+   *Run workflow* (o esperá 10 minutos), después abrí `INFORME.md`.
 
 ## Detalles a tener en cuenta
 
@@ -93,8 +81,17 @@ Así el navegador nunca ve el token.
 - **Las respuestas correctas están en el HTML.** Un alumno con conocimientos
   puede verlas con F12. Si necesitás corrección realmente segura, hay que mover
   la corrección a un servidor (Apps Script o Supabase).
-- **El token del modo directo es visible.** Usalo solo con permiso *Contents:
-  Read and write* sobre `inform`, nunca con acceso a toda la cuenta.
+- **El canal es público, pero va cifrado.** `NTFY_TOPIC` se puede leer en el
+  código, pero sin la clave privada (que está solo en `inform`) los mensajes no
+  se pueden descifrar.
+- **Puede tardar hasta 10 minutos** en aparecer en `INFORME.md`. Si necesitás
+  que sea inmediato, entrá a `inform` → **Actions** → **Recoger resultados** →
+  *Run workflow*.
+- **Los mensajes del canal duran 12 horas.** El workflow corre cada 10 minutos,
+  así que en condiciones normales no se pierde ninguno. Si Actions está caído
+  más de 12 horas, el alumno igual recibe su comprobante descargable.
+- **GitHub pausa los workflows programados** después de 60 días sin actividad en
+  el repo. Se reactivan con un clic en **Actions**.
 
 ## Cambiar de examen
 

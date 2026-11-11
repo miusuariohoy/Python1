@@ -347,8 +347,83 @@
           });
     }
 
+    /* ---------- Modo ntfy: cifrado híbrido RSA + AES ---------- */
+    function b64DeBuffer(buffer) {
+        var bytes = new Uint8Array(buffer);
+        var bin = '';
+        for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+        return btoa(bin);
+    }
+
+    function bufferDeB64(texto) {
+        var bin = atob(texto);
+        var bytes = new Uint8Array(bin.length);
+        for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        return bytes;
+    }
+
+    function cifrarPayload(payload) {
+        if (!window.crypto || !window.crypto.subtle) {
+            return Promise.reject(new Error('Este navegador no soporta cifrado (probá con HTTPS o Chrome/Firefox actualizado)'));
+        }
+        var datos = new TextEncoder().encode(JSON.stringify(payload));
+        return window.crypto.subtle.importKey(
+            'spki',
+            bufferDeB64(cfg.CLAVE_PUBLICA),
+            { name: 'RSA-OAEP', hash: 'SHA-256' },
+            false,
+            ['encrypt']
+        ).then(function (clavePublica) {
+            return window.crypto.subtle.generateKey(
+                { name: 'AES-GCM', length: 256 }, true, ['encrypt']
+            ).then(function (claveAes) {
+                var iv = window.crypto.getRandomValues(new Uint8Array(12));
+                return window.crypto.subtle.encrypt(
+                    { name: 'AES-GCM', iv: iv }, claveAes, datos
+                ).then(function (cifrado) {
+                    return window.crypto.subtle.exportKey('raw', claveAes).then(function (cruda) {
+                        return window.crypto.subtle.encrypt(
+                            { name: 'RSA-OAEP' }, clavePublica, cruda
+                        ).then(function (claveCifrada) {
+                            return {
+                                k: b64DeBuffer(claveCifrada),
+                                i: b64DeBuffer(iv),
+                                d: b64DeBuffer(cifrado)
+                            };
+                        });
+                    });
+                });
+            });
+        });
+    }
+
+    function enviarNtfy(payload) {
+        if (!cfg.NTFY_TOPIC || !cfg.CLAVE_PUBLICA) {
+            return Promise.reject(new Error('Falta configurar el canal de envío en config.js'));
+        }
+        // Recortamos textos muy largos para no exceder el tamaño del mensaje.
+        var copia = JSON.parse(JSON.stringify(payload));
+        if (copia.detalle) copia.detalle = String(copia.detalle).slice(0, 6000);
+        if (copia.respuestas && copia.respuestas.codigo) {
+            Object.keys(copia.respuestas.codigo).forEach(function (k) {
+                copia.respuestas.codigo[k] = String(copia.respuestas.codigo[k]).slice(0, 4000);
+            });
+        }
+        return cifrarPayload(copia).then(function (sobre) {
+            return fetch('https://ntfy.sh/' + encodeURIComponent(cfg.NTFY_TOPIC), {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(sobre)
+            }).then(function (r) {
+                if (!r.ok) throw new Error('El canal respondió ' + r.status);
+                return true;
+            });
+        });
+    }
+
     function enviar(payload) {
         var modo = cfg.MODO_ENVIO || 'ninguno';
+        if (modo === 'ntfy') return enviarNtfy(payload);
         if (modo === 'directo') return enviarDirecto(payload);
         if (modo === 'proxy') return enviarProxy(payload);
         return Promise.reject(new Error('Envío desactivado (MODO_ENVIO = ninguno)'));
