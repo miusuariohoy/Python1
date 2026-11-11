@@ -10,7 +10,7 @@
 
     var MAX_PUNTOS = 10;
     var PUNTOS_POR_SALIDA = 0.5;
-    var PUNTOS_POR_EJERCICIO = 1.5;
+    var PUNTOS_POR_EJERCICIO = cfg.PUNTOS_EJERCICIO || 1.5;
 
     var CLAVE_ACCESO = 'eval_acceso_' + EXAMEN.id;
     var CLAVE_ENVIO = 'eval_' + EXAMEN.id + '_enviada_v1';

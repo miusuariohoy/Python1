@@ -32,13 +32,13 @@
         <span class="badge">Evaluación · Parte 2</span>
         <h1>Estructuras, Multimedia y Base de Datos</h1>
         <p class="subtitulo">
-            Listas, tuplas, diccionarios, Tkinter avanzado, Canvas, pygame y MySQL.
-            11 consignas, 10 puntos y corrección automática.
+            Listas, tuplas, diccionarios, Tkinter, Canvas, pygame y MySQL.
+            12 consignas, 10 puntos y corrección automática.
         </p>
         <div class="nav-rapida">
             <a href="#parte-a" class="btn-enlace">Parte A · Opción múltiple</a>
             <a href="#parte-b" class="btn-enlace">Parte B · Salidas</a>
-            <a href="#parte-c" class="btn-enlace">Parte C · Código</a>
+            <a href="#parte-c" class="btn-enlace">Parte C · Actividades</a>
             <a href="#resultado" class="btn-enlace">Resultado</a>
         </div>
     </div>
@@ -54,7 +54,7 @@
                 <li>Leé cada consigna con atención y respondé <strong>todas</strong> las preguntas.</li>
                 <li>En la <strong>Parte A</strong> marcá una sola opción por pregunta.</li>
                 <li>En la <strong>Parte B</strong> escribí la salida exacta del programa. Si son varias líneas, separalas con un espacio.</li>
-                <li>En la <strong>Parte C</strong> escribí el código completo en Python. El corrector revisa la estructura, no ejecuta el programa.</li>
+                <li>En la <strong>Parte C</strong> resolvé tres actividades cortas: dos de Tkinter y una teórica sobre base de datos. En las dos primeras se revisa la estructura del código; en la teórica se buscan las palabras clave de tu explicación.</li>
                 <li>Podés realizar la evaluación <strong>más de una vez</strong>. Cada envío queda registrado con tu apellido, nombre, día y hora.</li>
                 <li>Si otra persona va a usar esta computadora, al terminar presioná <strong>Hacer otra evaluación</strong> para dejarla lista.</li>
                 <li>Al corregir, la <strong>nota y la corrección</strong> se guardan automáticamente en el informe del docente.</li>
@@ -68,7 +68,7 @@
                 <tbody>
                     <tr><td>A</td><td>5 preguntas de opción múltiple</td><td>5</td></tr>
                     <tr><td>B</td><td>4 predicciones de salida</td><td>2</td></tr>
-                    <tr><td>C</td><td>2 ejercicios de código</td><td>3</td></tr>
+                    <tr><td>C</td><td>3 actividades cortas (2 de Tkinter y 1 teórica de BD)</td><td>3</td></tr>
                     <tr><td colspan="2"><strong>Total</strong></td><td><strong>10</strong></td></tr>
                 </tbody>
             </table>
@@ -142,30 +142,34 @@
             <p class="explicacion"><code>.items()</code> entrega dos valores por vuelta: la <strong>clave</strong> y su <strong>valor</strong>. <code>.keys()</code> y <code>.values()</code> entregan solo una parte.</p>
         </article>
 
-        <article class="pregunta mc" data-correcta="b">
+        <article class="pregunta mc" data-correcta="a">
             <p class="enunciado"><span class="num-preg">4</span>
-                En un botón de Tkinter, ¿por qué se usa
-                <code>command=lambda: mostrar_tabla(7)</code> en lugar de
-                <code>command=mostrar_tabla(7)</code>?</p>
+                Mirá este código. ¿Qué pasa cuando se abre la ventana?</p>
+            <pre><code>ventana = Tk()
+
+def mostrar_tabla(n):
+    print("Tabla del", n)
+
+Button(ventana, text="7", command=mostrar_tabla(7))</code></pre>
             <div class="opciones">
-                <label data-op="a"><input type="radio" name="a4" value="a"> Porque <code>lambda</code> hace que el botón responda más rápido.</label>
-                <label data-op="b"><input type="radio" name="a4" value="b"> Porque <code>mostrar_tabla(7)</code> se ejecutaría al crear el botón; <code>lambda</code> espera el clic y recién ahí la llama.</label>
-                <label data-op="c"><input type="radio" name="a4" value="c"> Porque <code>command</code> no acepta funciones definidas con <code>def</code>.</label>
-                <label data-op="d"><input type="radio" name="a4" value="d"> Porque <code>lambda</code> reemplaza a <code>mainloop()</code>.</label>
+                <label data-op="a"><input type="radio" name="a4" value="a"> Se imprime <code>Tabla del 7</code> al abrir la ventana, y el botón no hace nada al hacer clic.</label>
+                <label data-op="b"><input type="radio" name="a4" value="b"> No se imprime nada hasta hacer clic en el botón.</label>
+                <label data-op="c"><input type="radio" name="a4" value="c"> El botón no se crea: Python muestra un error por falta de <code>lambda</code>.</label>
+                <label data-op="d"><input type="radio" name="a4" value="d"> Cada clic imprime <code>Tabla del 7</code> una vez más.</label>
             </div>
-            <p class="explicacion">Sin <code>lambda</code>, los paréntesis ejecutan la función en el momento de crear el botón. <code>lambda</code> fabrica una mini-función que Tkinter llama recién con el clic.</p>
+            <p class="explicacion">Los paréntesis de <code>mostrar_tabla(7)</code> hacen que la función se ejecute <strong>en el momento de crear el botón</strong>. Para que espere el clic hay que escribir <code>command=lambda: mostrar_tabla(7)</code>.</p>
         </article>
 
-        <article class="pregunta mc" data-correcta="b">
+        <article class="pregunta mc" data-correcta="a">
             <p class="enunciado"><span class="num-preg">5</span>
-                ¿Cuál de estas afirmaciones sobre la Parte 2 es correcta?</p>
+                En la conexión con MySQL, ¿cuál es la diferencia entre <code>commit()</code> y <code>close()</code>?</p>
             <div class="opciones">
-                <label data-op="a"><input type="radio" name="a5" value="a"> <code>canvas.coords(sapo, x, y)</code> cambia el tamaño de la imagen.</label>
-                <label data-op="b"><input type="radio" name="a5" value="b"> <code>pygame.mixer.music.play(-1)</code> reproduce la música en loop infinito.</label>
-                <label data-op="c"><input type="radio" name="a5" value="c"> <code>cnx.commit()</code> se usa para leer filas con <code>SELECT</code>.</label>
-                <label data-op="d"><input type="radio" name="a5" value="d"> <code>texto.delete(0, END)</code> es la forma correcta de borrar un widget <code>Text</code>.</label>
+                <label data-op="a"><input type="radio" name="a5" value="a"> <code>commit()</code> confirma y guarda los cambios; <code>close()</code> cierra la conexión.</label>
+                <label data-op="b"><input type="radio" name="a5" value="b"> <code>commit()</code> cierra la conexión; <code>close()</code> confirma y guarda los cambios.</label>
+                <label data-op="c"><input type="radio" name="a5" value="c"> Los dos cierran la conexión; la diferencia es solo el nombre.</label>
+                <label data-op="d"><input type="radio" name="a5" value="d"> <code>commit()</code> borra la tabla y <code>close()</code> la vuelve a crear.</label>
             </div>
-            <p class="explicacion"><code>play(-1)</code> repite para siempre. <code>coords()</code> mueve el objeto, <code>commit()</code> confirma cambios (INSERT) y un <code>Text</code> se borra con <code>delete("1.0", END)</code>.</p>
+            <p class="explicacion"><code>commit()</code> confirma la operación (por ejemplo un <code>INSERT</code>) y la deja guardada. <code>close()</code> cierra la conexión con la base cuando terminamos.</p>
         </article>
     </section>
 
@@ -192,16 +196,16 @@ print(cursos[1])</code></pre>
             <p class="explicacion"><code>append("4A")</code> deja 4 elementos y <code>cursos[1]</code> sigue siendo <strong>"2A"</strong>. La salida es <strong>4 2A</strong>.</p>
         </article>
 
-        <article class="pregunta salida" data-aceptadas="3A sin turno">
+        <article class="pregunta salida" data-aceptadas="pan 100 leche 200">
             <p class="enunciado"><span class="num-preg">7</span>
                 ¿Qué muestra este programa?</p>
-            <pre><code>alumno = {"nombre": "Ana", "curso": "3A"}
-print(alumno["curso"])
-print(alumno.get("turno", "sin turno"))</code></pre>
+            <pre><code>precios = {"pan": 100, "leche": 200}
+for producto, precio in precios.items():
+    print(producto, precio)</code></pre>
             <label class="campo-salida">Salida:
                 <input type="text" id="b2" autocomplete="off" placeholder="Separá los valores con espacios">
             </label>
-            <p class="explicacion"><code>alumno["curso"]</code> devuelve <strong>"3A"</strong>; como la clave <code>"turno"</code> no existe, <code>.get()</code> devuelve el valor por defecto <strong>"sin turno"</strong>.</p>
+            <p class="explicacion"><code>.items()</code> entrega la clave y el valor en cada vuelta, en el orden en que se cargaron. La salida es <strong>pan 100 leche 200</strong>.</p>
         </article>
 
         <article class="pregunta salida" data-aceptadas="120 140">
@@ -237,75 +241,75 @@ print(suma)</code></pre>
         <div class="encabezado-seccion">
             <span class="numero-paso">C</span>
             <div>
-                <h2>Ejercicios de código</h2>
-                <p>2 programas · 1,5 puntos cada uno · se corrige la estructura del código.</p>
+                <h2>Actividades cortas</h2>
+                <p>3 actividades · 1 punto cada una · dos de Tkinter y una teórica de base de datos.</p>
             </div>
         </div>
 
         <article class="pregunta codigo" data-ejercicio="c1">
             <p class="enunciado"><span class="num-preg">10</span>
-                Escribí <code>mostrar_tabla(n)</code>: debe borrar un widget <code>Text</code> con
-                <code>delete("1.0", END)</code>, recorrer <code>range(1, 11)</code> e insertar cada línea
-                <code>f"{n}*{i}={n*i}"</code> con <code>insert(END, ... + "\n")</code>.
-                Después creá un <code>Button</code> con <code>command=lambda: mostrar_tabla(7)</code>
-                y cerrá con <code>mainloop()</code>.</p>
-            <textarea class="editor" id="c1" spellcheck="false" placeholder="# Text + for + lambda&#10;from tkinter import *&#10;ventana = Tk()"></textarea>
+                <strong>Tkinter · un Label.</strong> Creá una ventana con un <code>Label</code> que diga
+                <code>"Hola"</code>. Cambiale el color de fondo a amarillo y la fuente a
+                <code>("Arial", 20)</code> usando <code>config(...)</code>. Mostralo con
+                <code>pack()</code> y cerrá con <code>mainloop()</code>.</p>
+            <textarea class="editor" id="c1" spellcheck="false" placeholder="# Label + config + pack&#10;from tkinter import *&#10;ventana = Tk()"></textarea>
             <div class="resultado-codigo" id="res-c1"></div>
             <details class="solucion">
                 <summary>Ver una solución de referencia</summary>
                 <pre><code>from tkinter import *
 
 ventana = Tk()
-texto_tabla = Text(ventana)
-texto_tabla.pack()
-
-def mostrar_tabla(n):
-    texto_tabla.delete("1.0", END)
-    for i in range(1, 11):
-        texto_tabla.insert(END, f"{n}*{i}={n*i}" + "\n")
-
-Button(ventana, text="7", command=lambda: mostrar_tabla(7)).pack()
+etiqueta = Label(ventana, text="Hola")
+etiqueta.config(bg="yellow", font=("Arial", 20))
+etiqueta.pack()
 ventana.mainloop()</code></pre>
             </details>
         </article>
 
         <article class="pregunta codigo" data-ejercicio="c2">
             <p class="enunciado"><span class="num-preg">11</span>
-                Escribí <code>conectar()</code> que devuelva
-                <code>mysql.connector.connect(...)</code> con <code>host</code>, <code>user</code>,
-                <code>password</code> y <code>database</code>. Después escribí <code>guardar()</code>
-                que lea el nombre con <code>.get()</code>, ejecute
-                <code>INSERT INTO alumnos (nombre, curso) VALUES (%s, %s)</code> con
-                <code>cursor.execute(sql, (nombre, curso))</code>, confirme con <code>commit()</code>,
-                cierre con <code>close()</code> y avise con <code>messagebox.showerror(...)</code>
-                si algo falla dentro de <code>try / except</code>.</p>
-            <textarea class="editor" id="c2" spellcheck="false" placeholder="# conectar() + INSERT + commit&#10;import mysql.connector"></textarea>
+                <strong>Tkinter · una función.</strong> Escribí <code>def cambiar():</code> que cambie
+                el texto del label a <code>"¡Apretaste!"</code> con <code>etiqueta.config(text=...)</code>.
+                Después creá un <code>Button</code> con <code>command=cambiar</code> (sin paréntesis)
+                y cerrá con <code>mainloop()</code>.</p>
+            <textarea class="editor" id="c2" spellcheck="false" placeholder="# def + config + Button&#10;def cambiar():"></textarea>
             <div class="resultado-codigo" id="res-c2"></div>
             <details class="solucion">
                 <summary>Ver una solución de referencia</summary>
-                <pre><code>import mysql.connector
-from tkinter import messagebox
+                <pre><code>from tkinter import *
 
-def conectar():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="escuela"
-    )
+ventana = Tk()
+etiqueta = Label(ventana, text="Hola")
+etiqueta.pack()
 
-def guardar():
-    nombre = entrada_nombre.get()
-    curso = combo_curso.get()
-    try:
-        cnx = conectar()
-        cursor = cnx.cursor()
-        sql = "INSERT INTO alumnos (nombre, curso) VALUES (%s, %s)"
-        cursor.execute(sql, (nombre, curso))
-        cnx.commit()
-        cnx.close()
-    except:
-        messagebox.showerror("Error", "No se pudo conectar a la base")</code></pre>
+def cambiar():
+    etiqueta.config(text="¡Apretaste!")
+
+Button(ventana, text="Cambiar", command=cambiar).pack()
+ventana.mainloop()</code></pre>
+            </details>
+        </article>
+
+        <article class="pregunta codigo" data-ejercicio="c3">
+            <p class="enunciado"><span class="num-preg">12</span>
+                <strong>Base de datos · teórico.</strong> Explicá con tus palabras qué hace cada parte
+                del código que conecta con MySQL. En tu respuesta tienen que aparecer las palabras
+                <code>connect</code>, <code>cursor</code>, <code>execute</code>, <code>commit</code>
+                y <code>close</code>, y qué hace cada una.</p>
+            <pre><code>cnx = mysql.connector.connect(host="localhost", user="root", database="escuela")
+cursor = cnx.cursor()
+cursor.execute("INSERT INTO alumnos (nombre, curso) VALUES (%s, %s)", (nombre, curso))
+cnx.commit()
+cnx.close()</code></pre>
+            <textarea class="editor" id="c3" spellcheck="false" placeholder="connect sirve para...&#10;cursor...&#10;execute...&#10;commit...&#10;close..."></textarea>
+            <div class="resultado-codigo" id="res-c3"></div>
+            <details class="solucion">
+                <summary>Ver una respuesta de referencia</summary>
+                <pre><code>connect abre la conexión con la base de datos MySQL.
+cursor crea el objeto que permite ejecutar consultas.
+execute envía la consulta SQL (en este caso el INSERT) con los datos.
+commit confirma y guarda los cambios en la base.
+close cierra la conexión cuando terminamos.</code></pre>
             </details>
         </article>
     </section>

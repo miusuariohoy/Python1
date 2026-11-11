@@ -12,7 +12,7 @@ se guarda automáticamente en el repositorio privado
 | `index.html` | Parte 1 de la guía (teoría, autoevaluación, simuladores). |
 | `parte2.html` | Parte 2 de la guía (listas, Canvas, MySQL). |
 | `evaluacion.html` | Evaluación de la **Parte 1** (11 consignas). |
-| `evaluacion-parte2.html` | Evaluación de la **Parte 2** (11 consignas). |
+| `evaluacion-parte2.html` | Evaluación de la **Parte 2** (12 consignas). |
 | `styles.css` | Estilos de la evaluación. |
 | `app.js` | Acceso, corrección, envío y reinicio para el siguiente alumno. |
 | `config.js` | Configuración general: clave, canal cifrado y examen de la Parte 1. |
@@ -110,7 +110,9 @@ EXAMEN: { id: 'python-1', titulo: 'Programación Estructurada', materia: 'Progra
 ```
 
 La de la Parte 2 se configura en `config-parte2.js`, que también define los
-requisitos que se revisan en la Parte C (`EJERCICIOS`).
+requisitos que se revisan en la Parte C (`EJERCICIOS`) y cuánto vale cada
+actividad (`PUNTOS_EJERCICIO`). Las actividades de código se corrigen con
+expresiones regulares sobre el texto; la teórica busca palabras clave.
 
 El `id` separa los intentos y los resultados en el informe. Para un examen nuevo
 conviene duplicar la página de evaluación que corresponda y editar las preguntas.

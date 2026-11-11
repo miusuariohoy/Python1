@@ -2,8 +2,8 @@
    CONFIGURACIÓN DE LA EVALUACIÓN · PARTE 2
    ------------------------------------------------------------
    Se carga después de config.js y antes de app.js.
-   Define el examen y los requisitos que se revisan en la
-   Parte C (ejercicios de código).
+   Define el examen, el valor de cada actividad de la Parte C
+   y los requisitos que se revisan en cada una.
    ============================================================ */
 
 window.CONFIG.EXAMEN = {
@@ -12,32 +12,37 @@ window.CONFIG.EXAMEN = {
     materia: 'Programación'
 };
 
+/* Parte C: 3 actividades cortas de 1 punto cada una (total 3). */
+window.CONFIG.PUNTOS_EJERCICIO = 1;
+
 window.CONFIG.EJERCICIOS = {
+    /* Actividad 1 · Tkinter: crear un Label y configurarlo. */
     c1: [
-        { d: 'Define la función mostrar_tabla(n)', f: function (c) { return /def\s+mostrar_tabla\s*\(\s*n\s*\)/.test(c); } },
-        { d: 'Crea un widget Text', f: function (c) { return /\btext\s*\(/.test(c); } },
-        { d: 'Borra el contenido con delete("1.0", END)', f: function (c) { return /delete\s*\(\s*["']?1\.0["']?\s*,\s*end\s*\)/.test(c); } },
-        { d: 'Recorre del 1 al 10 con range(1, 11)', f: function (c) { return /range\s*\(\s*1\s*,\s*11\s*\)/.test(c); } },
-        { d: 'Inserta cada línea con insert(END, ...)', f: function (c) { return /insert\s*\(\s*end\b/.test(c); } },
-        { d: 'Arma la línea con un f-string que usa n*i', f: function (c) { return /f["'][^"']*\{n\s*\*\s*i\}/.test(c); } },
-        { d: 'Crea un Button', f: function (c) { return /\bbutton\s*\(/.test(c); } },
-        { d: 'Usa command=lambda: mostrar_tabla(7)', f: function (c) { return /command\s*=\s*lambda\s*:\s*mostrar_tabla\s*\(\s*7\s*\)/.test(c); } },
+        { d: 'Crea la ventana con Tk()', f: function (c) { return /tk\s*\(\s*\)/.test(c); } },
+        { d: 'Crea un Label', f: function (c) { return /label\s*\(/.test(c); } },
+        { d: 'El label dice "Hola"', f: function (c) { return /["']hola["']/.test(c); } },
+        { d: 'Usa config(bg=...) para el color de fondo', f: function (c) { return /\.config\s*\([^)]*bg\s*=/.test(c); } },
+        { d: 'Usa config(font=...) para la fuente', f: function (c) { return /\.config\s*\([^)]*font\s*=/.test(c); } },
+        { d: 'Muestra el label con pack()', f: function (c) { return /\.pack\s*\(/.test(c); } },
         { d: 'Cierra con mainloop()', f: function (c) { return /mainloop\s*\(\s*\)/.test(c); } }
     ],
+
+    /* Actividad 2 · Tkinter: función def que cambia el label. */
     c2: [
-        { d: 'Importa mysql.connector', f: function (c) { return /import\s+mysql\.connector/.test(c); } },
-        { d: 'Define la función conectar()', f: function (c) { return /def\s+conectar\s*\(\s*\)/.test(c); } },
-        { d: 'Devuelve mysql.connector.connect(...)', f: function (c) { return /mysql\.connector\.connect\s*\(/.test(c); } },
-        { d: 'Incluye host, user, password y database', f: function (c) { return /host\s*=/.test(c) && /user\s*=/.test(c) && /password\s*=/.test(c) && /database\s*=/.test(c); } },
-        { d: 'Define la función guardar()', f: function (c) { return /def\s+guardar\s*\(\s*\)/.test(c); } },
-        { d: 'Lee el nombre con .get()', f: function (c) { return /\.get\s*\(\s*\)/.test(c); } },
-        { d: 'Usa INSERT INTO alumnos', f: function (c) { return /insert\s+into\s+alumnos/.test(c); } },
-        { d: 'Usa los huecos %s en VALUES', f: function (c) { return /values\s*\(\s*%s\s*,\s*%s\s*\)/.test(c); } },
-        { d: 'Crea el cursor con .cursor()', f: function (c) { return /\.cursor\s*\(\s*\)/.test(c); } },
-        { d: 'Ejecuta con cursor.execute(sql, (nombre, curso))', f: function (c) { return /cursor\.execute\s*\(/.test(c) && /\(\s*nombre\s*,\s*curso\s*\)/.test(c); } },
-        { d: 'Confirma con commit()', f: function (c) { return /\.commit\s*\(\s*\)/.test(c); } },
-        { d: 'Cierra con close()', f: function (c) { return /\.close\s*\(\s*\)/.test(c); } },
-        { d: 'Protege con try/except', f: function (c) { return /try\s*:/.test(c) && /except\b/.test(c); } },
-        { d: 'Avisa el error con messagebox.showerror(...)', f: function (c) { return /messagebox\.showerror\s*\(/.test(c); } }
+        { d: 'Define la función def cambiar():', f: function (c) { return /def\s+cambiar\s*\(\s*\)\s*:/.test(c); } },
+        { d: 'Cambia el texto con .config(text=...)', f: function (c) { return /\.config\s*\([^)]*text\s*=/.test(c); } },
+        { d: 'El texto nuevo dice "Apretaste"', f: function (c) { return /apretaste/.test(c); } },
+        { d: 'Crea un Button', f: function (c) { return /button\s*\(/.test(c); } },
+        { d: 'Conecta el botón con command=cambiar (sin paréntesis)', f: function (c) { return /command\s*=\s*(?:cambiar\s*(?!\s*\()|lambda\s*:\s*cambiar\s*\(\s*\))/.test(c); } },
+        { d: 'Cierra con mainloop()', f: function (c) { return /mainloop\s*\(\s*\)/.test(c); } }
+    ],
+
+    /* Actividad 3 · Teórico de base de datos: explicar cada paso. */
+    c3: [
+        { d: 'Explica connect: abre la conexión con la base', f: function (c) { return /connect/.test(c) && /(conect|abre|enlaz|uni)/.test(c); } },
+        { d: 'Explica cursor: permite ejecutar o recorrer consultas', f: function (c) { return /cursor/.test(c) && /(ejecut|recorr|consult|envi|permite)/.test(c); } },
+        { d: 'Explica execute: envía la consulta SQL (INSERT)', f: function (c) { return /execute/.test(c) && /(sql|consult|insert|envi|ejecut)/.test(c); } },
+        { d: 'Explica commit: confirma y guarda los cambios', f: function (c) { return /commit/.test(c) && /(guard|confirm|persist|aplic)/.test(c); } },
+        { d: 'Explica close: cierra la conexión', f: function (c) { return /close/.test(c) && /(cerrar|cierra|conexi)/.test(c); } }
     ]
 };
