@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación · PSeInt</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ================= PUERTA DE ACCESO ================= -->
+<div class="acceso" id="acceso">
+    <form class="acceso-caja" id="form-acceso" autocomplete="off">
+        <span class="badge-acceso">Acceso restringido</span>
+        <h1>PSeInt · Programación Estructurada</h1>
+        <p>Ingresá la clave que te dio el docente para comenzar.</p>
+        <input type="password" id="clave" placeholder="Clave de acceso" required>
+        <button type="submit" class="btn btn-primario" style="width:100%">Entrar</button>
+        <p class="acceso-error" id="acceso-error"></p>
+    </form>
+</div>
+
+<!-- ================= APP ================= -->
+<div id="app" hidden>
+
+<header class="hero">
+    <div class="contenedor">
+        <span class="badge">Evaluación · PSeInt</span>
+        <h1>Programación Estructurada con PSeInt</h1>
+        <p class="subtitulo">
+            Algoritmos, variables, entrada y salida, condicionales, bucles, contadores,
+            acumuladores y subprocesos. 12 consignas, 10 puntos y corrección automática.
+        </p>
+        <div class="nav-rapida">
+            <a href="#parte-a" class="btn-enlace">Parte A · Opción múltiple</a>
+            <a href="#parte-b" class="btn-enlace">Parte B · Salidas</a>
+            <a href="#parte-c" class="btn-enlace">Parte C · Pseudocódigo</a>
+            <a href="#resultado" class="btn-enlace">Resultado</a>
+        </div>
+    </div>
+</header>
+
+<main class="contenedor">
+
+    <!-- ================= INSTRUCCIONES ================= -->
+    <section class="bloque">
+        <div class="tarjeta">
+            <h3>Antes de empezar</h3>
+            <ul>
+                <li>Leé cada consigna con atención y respondé <strong>todas</strong> las preguntas.</li>
+                <li>En la <strong>Parte A</strong> marcá una sola opción por pregunta.</li>
+                <li>En la <strong>Parte B</strong> escribí la salida exacta del algoritmo. Si son varios valores, separalos con un espacio.</li>
+                <li>En la <strong>Parte C</strong> escribí el pseudocódigo completo en PSeInt. El corrector revisa la estructura, no ejecuta el algoritmo.</li>
+                <li>Podés realizar la evaluación <strong>más de una vez</strong>. Cada envío queda registrado con tu apellido, nombre, día y hora.</li>
+                <li>Si otra persona va a usar esta computadora, al terminar presioná <strong>Hacer otra evaluación</strong> para dejarla lista.</li>
+                <li>Al corregir, la <strong>nota y la corrección</strong> se guardan automáticamente en el informe del docente.</li>
+                <li>Al terminar, presioná <strong>Corregir y enviar</strong>. Vas a ver el puntaje y la explicación de cada respuesta.</li>
+            </ul>
+
+            <table class="tabla-puntos">
+                <thead>
+                    <tr><th>Parte</th><th>Consigna</th><th>Puntos</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>A</td><td>5 preguntas de opción múltiple</td><td>5</td></tr>
+                    <tr><td>B</td><td>4 predicciones de salida</td><td>2</td></tr>
+                    <tr><td>C</td><td>3 actividades de pseudocódigo</td><td>3</td></tr>
+                    <tr><td colspan="2"><strong>Total</strong></td><td><strong>10</strong></td></tr>
+                </tbody>
+            </table>
+
+            <div class="datos-alumno">
+                <label>Apellido
+                    <input type="text" id="alumno-apellido" placeholder="Tu apellido" autocomplete="off">
+                </label>
+                <label>Nombre
+                    <input type="text" id="alumno-nombre" placeholder="Tu nombre" autocomplete="off">
+                </label>
+                <label>Curso
+                    <input type="text" id="alumno-curso" placeholder="Ej.: 5.º 2.ª" autocomplete="off">
+                </label>
+                <label>Materia
+                    <input type="text" id="alumno-materia" placeholder="Ej.: Programación" autocomplete="off">
+                </label>
+            </div>
+
+            <p class="nota">
+                Tiempo sugerido: <strong>45 minutos</strong>. Resolvé sin ejecutar los algoritmos:
+                el objetivo es interpretar la lógica del pseudocódigo.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================= PARTE A ================= -->
+    <section class="bloque" id="parte-a">
+        <div class="encabezado-seccion">
+            <span class="numero-paso">A</span>
+            <div>
+                <h2>Opción múltiple</h2>
+                <p>5 preguntas · 1 punto cada una · marcá una sola respuesta.</p>
+            </div>
+        </div>
+
+        <article class="pregunta mc" data-correcta="a">
+            <p class="enunciado"><span class="num-preg">1</span>
+                ¿Cuáles son las <strong>tres estructuras de control</strong> de la programación estructurada?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a1" value="a"> Secuencia, selección e iteración.</label>
+                <label data-op="b"><input type="radio" name="a1" value="b"> Variables, constantes y operadores.</label>
+                <label data-op="c"><input type="radio" name="a1" value="c"> Leer, Escribir y Definir.</label>
+                <label data-op="d"><input type="radio" name="a1" value="d"> Subprocesos, funciones y parámetros.</label>
+            </div>
+            <p class="explicacion">La programación estructurada se organiza con <strong>secuencia</strong> (una instrucción tras otra), <strong>selección</strong> (Si–Entonces) e <strong>iteración</strong> (Mientras / Para).</p>
+        </article>
+
+        <article class="pregunta mc" data-correcta="b">
+            <p class="enunciado"><span class="num-preg">2</span>
+                ¿Qué hace la línea <code>Definir edad Como Entero;</code>?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a2" value="a"> Muestra el valor de <code>edad</code> en pantalla.</label>
+                <label data-op="b"><input type="radio" name="a2" value="b"> Declara la variable <code>edad</code> y su tipo de dato.</label>
+                <label data-op="c"><input type="radio" name="a2" value="c"> Asigna el valor 0 a <code>edad</code>.</label>
+                <label data-op="d"><input type="radio" name="a2" value="d"> Convierte <code>edad</code> en texto.</label>
+            </div>
+            <p class="explicacion"><strong>Declarar</strong> es reservar la variable e indicar su tipo. El valor se asigna después con la flecha <code>&lt;-</code>.</p>
+        </article>
+
+        <article class="pregunta mc" data-correcta="b">
+            <p class="enunciado"><span class="num-preg">3</span>
+                ¿Cuál es la diferencia entre <code>Leer</code> y <code>Escribir</code>?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a3" value="a"> <code>Leer</code> muestra en pantalla y <code>Escribir</code> captura del teclado.</label>
+                <label data-op="b"><input type="radio" name="a3" value="b"> <code>Leer</code> captura un dato del teclado y <code>Escribir</code> muestra información en pantalla.</label>
+                <label data-op="c"><input type="radio" name="a3" value="c"> Los dos hacen lo mismo: mostrar texto.</label>
+                <label data-op="d"><input type="radio" name="a3" value="d"> <code>Leer</code> solo funciona con números y <code>Escribir</code> solo con texto.</label>
+            </div>
+            <p class="explicacion"><code>Leer</code> es la <strong>entrada</strong> (pausa el programa y guarda lo que escribe el usuario) y <code>Escribir</code> es la <strong>salida</strong> (muestra información).</p>
+        </article>
+
+        <article class="pregunta mc" data-correcta="b">
+            <p class="enunciado"><span class="num-preg">4</span>
+                ¿Cuándo conviene usar un bucle <code>Para</code> en lugar de un <code>Mientras</code>?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a4" value="a"> Cuando no sabemos cuántas veces se va a repetir.</label>
+                <label data-op="b"><input type="radio" name="a4" value="b"> Cuando conocemos de antemano cuántas veces se repite.</label>
+                <label data-op="c"><input type="radio" name="a4" value="c"> Cuando el bloque no tiene que repetirse nunca.</label>
+                <label data-op="d"><input type="radio" name="a4" value="d"> Cuando hay que leer un solo dato del teclado.</label>
+            </div>
+            <p class="explicacion">El <code>Para</code> es un bucle <strong>determinado</strong>: sabemos el inicio y el fin. El <code>Mientras</code> depende de una condición que puede cambiar, como un menú que termina cuando el usuario elige salir.</p>
+        </article>
+
+        <article class="pregunta mc" data-correcta="a">
+            <p class="enunciado"><span class="num-preg">5</span>
+                ¿En qué se diferencian un <strong>contador</strong> y un <strong>acumulador</strong>?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a5" value="a"> El contador cambia por una cantidad fija (normalmente 1); el acumulador suma valores que pueden variar.</label>
+                <label data-op="b"><input type="radio" name="a5" value="b"> El contador suma valores variables; el acumulador siempre suma 1.</label>
+                <label data-op="c"><input type="radio" name="a5" value="c"> El acumulador solo se puede usar dentro de un condicional.</label>
+                <label data-op="d"><input type="radio" name="a5" value="d"> No hay diferencia: son dos nombres para lo mismo.</label>
+            </div>
+            <p class="explicacion">Contador: <code>c &lt;- c + 1</code>. Acumulador: <code>suma &lt;- suma + valor</code>, donde <code>valor</code> cambia en cada vuelta.</p>
+        </article>
+    </section>
+
+    <!-- ================= PARTE B ================= -->
+    <section class="bloque" id="parte-b">
+        <div class="encabezado-seccion">
+            <span class="numero-paso">B</span>
+            <div>
+                <h2>Predicción de salidas</h2>
+                <p>4 algoritmos · 0,5 puntos cada uno · escribí lo que muestra cada uno.</p>
+            </div>
+        </div>
+
+        <article class="pregunta salida" data-aceptadas="Aprobado">
+            <p class="enunciado"><span class="num-preg">6</span>
+                ¿Qué muestra este algoritmo?</p>
+            <pre><code>Definir nota Como Real;
+nota &lt;- 8;
+Si nota &gt;= 6 Entonces
+    Escribir "Aprobado";
+Sino
+    Escribir "Desaprobado";
+FinSi</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b1" autocomplete="off" placeholder="Escribí la salida">
+            </label>
+            <p class="explicacion">Como 8 es mayor o igual que 6, la condición es verdadera y se ejecuta la rama del <code>Entonces</code>: la salida es <strong>Aprobado</strong>.</p>
+        </article>
+
+        <article class="pregunta salida" data-aceptadas="1 2 3">
+            <p class="enunciado"><span class="num-preg">7</span>
+                ¿Qué muestra este algoritmo?</p>
+            <pre><code>Definir i Como Entero;
+Para i &lt;- 1 Hasta 3 Con Paso 1 Hacer
+    Escribir i;
+FinPara</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b2" autocomplete="off" placeholder="Separá los valores con espacios">
+            </label>
+            <p class="explicacion">El bucle <code>Para</code> recorre 1, 2 y 3 (el 3 está incluido). La salida es <strong>1 2 3</strong> (uno por línea).</p>
+        </article>
+
+        <article class="pregunta salida" data-aceptadas="3 2 1">
+            <p class="enunciado"><span class="num-preg">8</span>
+                ¿Qué muestra este algoritmo?</p>
+            <pre><code>Definir c Como Entero;
+c &lt;- 3;
+Mientras c &gt; 0 Hacer
+    Escribir c;
+    c &lt;- c - 1;
+FinMientras</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b3" autocomplete="off" placeholder="Separá los valores con espacios">
+            </label>
+            <p class="explicacion">El bucle muestra 3, luego 2 y luego 1. Cuando <code>c</code> llega a 0 la condición deja de cumplirse. La salida es <strong>3 2 1</strong>.</p>
+        </article>
+
+        <article class="pregunta salida" data-aceptadas="10">
+            <p class="enunciado"><span class="num-preg">9</span>
+                ¿Qué muestra este algoritmo?</p>
+            <pre><code>Definir suma, i Como Entero;
+suma &lt;- 0;
+Para i &lt;- 1 Hasta 4 Con Paso 1 Hacer
+    suma &lt;- suma + i;
+FinPara
+Escribir suma;</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b4" autocomplete="off" placeholder="Escribí la salida">
+            </label>
+            <p class="explicacion"><code>suma</code> es un acumulador: 1 + 2 + 3 + 4 = 10. La salida es <strong>10</strong>.</p>
+        </article>
+    </section>
+
+    <!-- ================= PARTE C ================= -->
+    <section class="bloque" id="parte-c">
+        <div class="encabezado-seccion">
+            <span class="numero-paso">C</span>
+            <div>
+                <h2>Actividades de pseudocódigo</h2>
+                <p>3 actividades · 1 punto cada una · se revisa la estructura del código.</p>
+            </div>
+        </div>
+
+        <article class="pregunta codigo" data-ejercicio="c1">
+            <p class="enunciado"><span class="num-preg">10</span>
+                Escribí un algoritmo que <strong>declare</strong> <code>nombre</code> como
+                <code>Caracter</code>, pida el nombre con <code>Leer</code> y muestre un saludo
+                como <code>Hola, Ana</code> con <code>Escribir</code>.</p>
+            <textarea class="editor" id="c1" spellcheck="false" placeholder="Algoritmo Saludo&#10;    Definir ...&#10;    Leer ...&#10;    Escribir ...&#10;FinAlgoritmo"></textarea>
+            <div class="resultado-codigo" id="res-c1"></div>
+            <details class="solucion">
+                <summary>Ver una solución de referencia</summary>
+                <pre><code>Algoritmo Saludo
+    Definir nombre Como Caracter;
+    Escribir "Ingresá tu nombre:";
+    Leer nombre;
+    Escribir "Hola, ", nombre;
+FinAlgoritmo</code></pre>
+            </details>
+        </article>
+
+        <article class="pregunta codigo" data-ejercicio="c2">
+            <p class="enunciado"><span class="num-preg">11</span>
+                Leé la <strong>edad</strong> de una persona y mostrá <code>Mayor de edad</code>
+                si tiene 18 años o más, y <code>Menor de edad</code> si no.
+                Usá <code>Si … Entonces … Sino … FinSi</code>.</p>
+            <textarea class="editor" id="c2" spellcheck="false" placeholder="Algoritmo EdadPersona&#10;    Definir ...&#10;    Leer ...&#10;    Si ... Entonces&#10;    Sino&#10;    FinSi&#10;FinAlgoritmo"></textarea>
+            <div class="resultado-codigo" id="res-c2"></div>
+            <details class="solucion">
+                <summary>Ver una solución de referencia</summary>
+                <pre><code>Algoritmo EdadPersona
+    Definir edad Como Entero;
+    Escribir "Ingresá la edad:";
+    Leer edad;
+    Si edad &gt;= 18 Entonces
+        Escribir "Mayor de edad";
+    Sino
+        Escribir "Menor de edad";
+    FinSi
+FinAlgoritmo</code></pre>
+            </details>
+        </article>
+
+        <article class="pregunta codigo" data-ejercicio="c3">
+            <p class="enunciado"><span class="num-preg">12</span>
+                Creá un <strong>SubProceso</strong> llamado <code>Saludar(nombre)</code> que muestre
+                <code>Hola, </code> junto con el nombre recibido. Después, desde el
+                <strong>Algoritmo</strong> principal, llamalo pasando el valor <code>"Ana"</code>.</p>
+            <textarea class="editor" id="c3" spellcheck="false" placeholder="SubProceso Saludar(nombre)&#10;    Escribir ...&#10;FinSubProceso&#10;&#10;Algoritmo SaludoDemo&#10;    Saludar(...);&#10;FinAlgoritmo"></textarea>
+            <div class="resultado-codigo" id="res-c3"></div>
+            <details class="solucion">
+                <summary>Ver una solución de referencia</summary>
+                <pre><code>SubProceso Saludar(nombre)
+    Escribir "Hola, ", nombre;
+FinSubProceso
+
+Algoritmo SaludoDemo
+    Saludar("Ana");
+FinAlgoritmo</code></pre>
+            </details>
+        </article>
+    </section>
+
+    <!-- ================= RESULTADO ================= -->
+    <div class="acciones no-print">
+        <button type="button" class="btn btn-primario" id="btn-corregir">✅ Corregir y enviar</button>
+        <button type="button" class="btn btn-secundario" id="btn-reiniciar">🔄 Reiniciar</button>
+        <button type="button" class="btn btn-secundario" id="btn-imprimir">🖨️ Imprimir</button>
+    </div>
+
+    <div class="aviso-envio" id="aviso-envio" role="status"></div>
+
+    <section class="resultado" id="resultado" aria-live="polite">
+        <div class="puntaje-grande"><span id="puntaje-total">0</span><small> / 10 puntos</small></div>
+        <div class="barra"><div class="barra-fill" id="barra-fill"></div></div>
+        <p id="mensaje">Corregí la evaluación para ver tu puntaje.</p>
+        <div class="desglose">
+            <span>Parte A: <b id="puntos-a">0</b> / 5</span>
+            <span>Parte B: <b id="puntos-b">0</b> / 2</span>
+            <span>Parte C: <b id="puntos-c">0</b> / 3</span>
+        </div>
+        <div class="resumen-errores" id="resumen-errores"></div>
+        <p class="nota no-print" id="nota-resultado" style="display:none;">
+            Las respuestas correctas y las soluciones de referencia ya están visibles en cada consigna.
+        </p>
+        <p class="estado-envio" id="estado-envio"></p>
+        <div class="enviar-fallback no-print" id="enviar-fallback">
+            <button type="button" class="btn btn-secundario btn-chico" id="btn-copiar">📋 Copiar resultado</button>
+            <button type="button" class="btn btn-secundario btn-chico" id="btn-descargar">⬇️ Descargar comprobante</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>Evaluación interactiva · PSeInt · 10 puntos</p>
+    </footer>
+
+</main>
+</div>
+
+<script src="config.js?v=1"></script>
+<script src="config-pseint.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>
