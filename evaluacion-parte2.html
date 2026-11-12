@@ -293,26 +293,27 @@ ventana.mainloop()</code></pre>
         <article class="pregunta codigo" data-ejercicio="c3">
             <p class="enunciado"><span class="num-preg">12</span>
                 <strong>Base de datos · teórico.</strong> Completá cada acción con el método de MySQL
-                que corresponde. Usá solo estas palabras: <code>connect</code>, <code>cursor</code>,
-                <code>execute</code>, <code>commit</code> y <code>close</code>.</p>
-            <pre><code>Abrir la conexión: ______
-Crear el cursor: ______
-Ejecutar la consulta SQL: ______
+                que corresponde. Las acciones están desordenadas y las palabras también, así que
+                pensá cuál va en cada línea. Usá solo estas palabras: <code>execute</code>,
+                <code>connect</code>, <code>close</code>, <code>cursor</code> y <code>commit</code>.</p>
+            <pre><code>Ejecutar la consulta SQL: ______
+Cerrar la conexión: ______
+Abrir la conexión: ______
 Confirmar y guardar los cambios: ______
-Cerrar la conexión: ______</code></pre>
-            <textarea class="editor" id="c3" spellcheck="false" data-plantilla="Abrir la conexión: &#10;Crear el cursor: &#10;Ejecutar la consulta SQL: &#10;Confirmar y guardar los cambios: &#10;Cerrar la conexión: ">Abrir la conexión: 
-Crear el cursor: 
-Ejecutar la consulta SQL: 
+Crear el cursor: ______</code></pre>
+            <textarea class="editor" id="c3" spellcheck="false" data-plantilla="Ejecutar la consulta SQL: &#10;Cerrar la conexión: &#10;Abrir la conexión: &#10;Confirmar y guardar los cambios: &#10;Crear el cursor: ">Ejecutar la consulta SQL: 
+Cerrar la conexión: 
+Abrir la conexión: 
 Confirmar y guardar los cambios: 
-Cerrar la conexión: </textarea>
+Crear el cursor: </textarea>
             <div class="resultado-codigo" id="res-c3"></div>
             <details class="solucion">
                 <summary>Ver una respuesta de referencia</summary>
-                <pre><code>Abrir la conexión: connect
-Crear el cursor: cursor
-Ejecutar la consulta SQL: execute
+                <pre><code>Ejecutar la consulta SQL: execute
+Cerrar la conexión: close
+Abrir la conexión: connect
 Confirmar y guardar los cambios: commit
-Cerrar la conexión: close</code></pre>
+Crear el cursor: cursor</code></pre>
             </details>
         </article>
     </section>
@@ -353,8 +354,8 @@ Cerrar la conexión: close</code></pre>
 </main>
 </div>
 
-<script src="config.js?v=2"></script>
-<script src="config-parte2.js?v=2"></script>
-<script src="app.js?v=2"></script>
+<script src="config.js?v=3"></script>
+<script src="config-parte2.js?v=3"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>

@@ -40,12 +40,13 @@ window.CONFIG.EJERCICIOS = {
         { d: 'Cierra con mainloop()', f: function (c) { return /mainloop\s*\(\s*\)/.test(c); } }
     ],
 
-    /* Actividad 3 · Teórico de base de datos: unir cada acción con su método. */
+    /* Actividad 3 · Teórico de base de datos: unir cada acción con su método.
+       El orden de los requisitos acompaña el orden desordenado de la consigna. */
     c3: [
-        { d: 'Abrir la conexión: connect', f: function (c) { return /abrir la conexi[oó]n\s*:\s*(?:mysql\.connector\.)?connect/.test(c); } },
-        { d: 'Crear el cursor: cursor', f: function (c) { return /crear el cursor\s*:\s*(?:cnx\.)?cursor/.test(c); } },
         { d: 'Ejecutar la consulta SQL: execute', f: function (c) { return /ejecutar la consulta[^\n]*:\s*(?:cursor\.)?execute/.test(c); } },
+        { d: 'Cerrar la conexión: close', f: function (c) { return /cerrar la conexi[oó]n\s*:\s*(?:cnx\.)?close/.test(c); } },
+        { d: 'Abrir la conexión: connect', f: function (c) { return /abrir la conexi[oó]n\s*:\s*(?:mysql\.connector\.)?connect/.test(c); } },
         { d: 'Confirmar y guardar los cambios: commit', f: function (c) { return /(confirmar|guardar)[^\n]*:\s*(?:cnx\.)?commit/.test(c); } },
-        { d: 'Cerrar la conexión: close', f: function (c) { return /cerrar la conexi[oó]n\s*:\s*(?:cnx\.)?close/.test(c); } }
+        { d: 'Crear el cursor: cursor', f: function (c) { return /crear el cursor\s*:\s*(?:cnx\.)?cursor/.test(c); } }
     ]
 };
