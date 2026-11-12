@@ -18,7 +18,7 @@
 
 window.CONFIG = {
     // Clave para entrar a la evaluación (soft gate, ver README)
-    CLAVE_ACCESO: '123456',
+    CLAVE_ACCESO: 'pro1',
 
     // ¿Se puede rendir una sola vez por navegador?
     //   false -> cualquiera puede volver a rendirla; cada envío queda

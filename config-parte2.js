@@ -12,6 +12,9 @@ window.CONFIG.EXAMEN = {
     materia: 'Programación'
 };
 
+/* Clave de acceso propia de la Parte 2 (la Parte 1 usa "pro1"). */
+window.CONFIG.CLAVE_ACCESO = 'pro2';
+
 /* Parte C: 3 actividades cortas de 1 punto cada una (total 3). */
 window.CONFIG.PUNTOS_EJERCICIO = 1;
 

@@ -67,10 +67,10 @@ y actualizar `NTFY_TOPIC` y `CLAVE_PUBLICA` en `config.js`.
 
 ## Cómo probar
 
-1. Abrí la evaluación que corresponda desde el menú de cada guía, ingresá la
-   clave `123456`:
-   - Parte 1: `https://miusuariohoy.github.io/Python1/evaluacion.html`
-   - Parte 2: `https://miusuariohoy.github.io/Python1/evaluacion-parte2.html`
+1. Abrí la evaluación que corresponda desde el menú de cada guía e ingresá su
+   clave:
+   - Parte 1: `https://miusuariohoy.github.io/Python1/evaluacion.html` → clave **`pro1`**
+   - Parte 2: `https://miusuariohoy.github.io/Python1/evaluacion-parte2.html` → clave **`pro2`**
 2. Completá apellido, nombre y curso.
 3. Respondé y presioná **Corregir y enviar**.
 4. En el repo `inform`: pestaña **Actions** → **Recoger resultados** →
