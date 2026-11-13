@@ -64,22 +64,61 @@
         return m ? m[1] : null;
     }
 
+    function variableSuma(codigo) {
+        var nombres = [];
+        function agregar(n) {
+            if (nombres.indexOf(n) === -1) nombres.push(n);
+        }
+        var re = /\b([a-z_][a-z0-9_]*)\s*\+=\s*/g, m;
+        while ((m = re.exec(codigo))) agregar(m[1]);
+        re = /\b([a-z_][a-z0-9_]*)\s*=\s*\1\s*\+/g;
+        while ((m = re.exec(codigo))) agregar(m[1]);
+
+        // Preferimos la variable que se imprime y arranca en 0: es el acumulador.
+        var i, n, impreso, enCero;
+        for (i = 0; i < nombres.length; i++) {
+            n = nombres[i];
+            impreso = new RegExp('\\bprint\\s*\\([^)]*\\b' + n + '\\b').test(codigo);
+            enCero = new RegExp('\\b' + n + '\\s*=\\s*0\\b').test(codigo);
+            if (impreso && enCero) return n;
+        }
+        for (i = 0; i < nombres.length; i++) {
+            if (new RegExp('\\b' + nombres[i] + '\\s*=\\s*0\\b').test(codigo)) return nombres[i];
+        }
+        return nombres.length ? nombres[0] : null;
+    }
+
     var EJERCICIOS = cfg.EJERCICIOS || {
         c1: [
             { d: 'Pide al menos dos datos con input()', f: function (c) { return (c.match(/\binput\s*\(/g) || []).length >= 2; } },
             { d: 'Convierte la edad con int()', f: function (c) { return /\bint\s*\(/.test(c); } },
             { d: 'Usa un f-string', f: function (c) { return /\bf\s*["']/.test(c); } },
             { d: 'Muestra el mensaje con print()', f: function (c) { return /\bprint\s*\(/.test(c); } },
-            { d: 'Incluye el nombre y la edad en el mensaje', f: function (c) { return /nombre/.test(c) && /edad/.test(c); } }
+            { d: 'Incluye el nombre y la edad en el mensaje', f: function (c) {
+                var fs = c.match(/\bf\s*(?:"""[\s\S]*?"""|'''[\s\S]*?'''|"[^"]*"|'[^']*')/g) || [];
+                return fs.some(function (s) {
+                    return (s.match(/\{[^}]+\}/g) || []).length >= 2;
+                });
+            } }
         ],
         c2: [
             { d: 'Usa un bucle for o while', f: function (c) { return /\b(for|while)\b/.test(c); } },
-            { d: 'Recorre del 1 al 10', f: function (c) { return /range\s*\(\s*1\s*,\s*11\s*\)/.test(c) || /range\s*\(\s*(0\s*,\s*)?10\s*\)/.test(c) || /while[^\n]*<=\s*10/.test(c); } },
-            { d: 'Inicializa un acumulador en 0 (puede llamarse a, suma, total...)', f: function (c) { return variableAcumuladora(c) !== null; } },
-            { d: 'Acumula con += o con variable = variable + ...', f: function (c) { return /\+=/.test(c) || /\b([a-z_]\w*)\s*=\s*\1\s*\+/.test(c); } },
+            { d: 'Recorre del 1 al 10', f: function (c) {
+                if (/range\s*\(\s*1\s*,\s*(?:11|10\s*\+\s*1)\s*(?:,\s*1\s*)?\)/.test(c)) return true;
+                if (/range\s*\(\s*10\s*\)/.test(c) && /\b[a-z_]\w*\s*\+\s*1\b/.test(c)) return true;
+                var m = c.match(/while\s+([a-z_]\w*)\s*(?:<\s*11(?!\d)|<=\s*10(?!\d))/);
+                if (m) return new RegExp('\\b' + m[1] + '\\s*=\\s*1\\b').test(c);
+                return false;
+            } },
+            { d: 'Inicializa un acumulador en 0 (puede llamarse a, suma, total...)', f: function (c) {
+                var v = variableSuma(c) || variableAcumuladora(c);
+                if (!v) return false;
+                return new RegExp('\\b' + v + '\\s*=\\s*0\\b').test(c);
+            } },
+            { d: 'Acumula con += o con variable = variable + ...', f: function (c) { return variableSuma(c) !== null; } },
             { d: 'Imprime los números y el total', f: function (c) { return (c.match(/\bprint\s*\(/g) || []).length >= 2; } },
             { d: 'Imprime el acumulador al final', f: function (c) {
-                var v = variableAcumuladora(c);
+                var v = variableSuma(c) || variableAcumuladora(c);
                 if (!v) return false;
                 return new RegExp('\\bprint\\s*\\([^)]*\\b' + v + '\\b').test(c);
             } }
