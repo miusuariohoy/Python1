@@ -54,7 +54,7 @@
                 <li>Leé cada consigna con atención y respondé <strong>todas</strong> las preguntas.</li>
                 <li>En la <strong>Parte A</strong> marcá una sola opción por pregunta.</li>
                 <li>En la <strong>Parte B</strong> escribí la salida exacta del programa. Si son varias líneas, separalas con un espacio.</li>
-                <li>En la <strong>Parte C</strong> resolvé tres actividades cortas: dos de Tkinter y una teórica sobre base de datos. En las dos primeras se revisa la estructura del código; en la teórica completás cada acción con el método que corresponde.</li>
+                <li>En la <strong>Parte C</strong> resolvé tres actividades cortas: dos de Tkinter y una teórica sobre base de datos. En las dos primeras se revisa la estructura del código; en la teórica completás cada acción con el método que corresponde. En Tkinter, cada elemento debe <strong>crearse, configurarse y alinearse</strong>.</li>
                 <li>Podés realizar la evaluación <strong>más de una vez</strong>. Cada envío queda registrado con tu apellido, nombre, día y hora.</li>
                 <li>Si otra persona va a usar esta computadora, al terminar presioná <strong>Hacer otra evaluación</strong> para dejarla lista.</li>
                 <li>Al corregir, la <strong>nota y la corrección</strong> se guardan automáticamente en el informe del docente.</li>
@@ -107,26 +107,26 @@
 
         <article class="pregunta mc" data-correcta="b">
             <p class="enunciado"><span class="num-preg">1</span>
-                Si <code>cursos = ["1A", "2A", "3A"]</code>, ¿qué muestra <code>print(cursos[1])</code>?</p>
+                Si <code>bebidas = ["agua", "jugo", "té"]</code>, ¿qué muestra <code>print(bebidas[1])</code>?</p>
             <div class="opciones">
-                <label data-op="a"><input type="radio" name="a1" value="a"> <code>1A</code></label>
-                <label data-op="b"><input type="radio" name="a1" value="b"> <code>2A</code></label>
-                <label data-op="c"><input type="radio" name="a1" value="c"> <code>3A</code></label>
+                <label data-op="a"><input type="radio" name="a1" value="a"> <code>agua</code></label>
+                <label data-op="b"><input type="radio" name="a1" value="b"> <code>jugo</code></label>
+                <label data-op="c"><input type="radio" name="a1" value="c"> <code>té</code></label>
                 <label data-op="d"><input type="radio" name="a1" value="d"> <code>IndexError</code></label>
             </div>
-            <p class="explicacion">Las posiciones de una lista empiezan en <strong>0</strong>: <code>cursos[0]</code> es "1A" y <code>cursos[1]</code> es <strong>"2A"</strong>.</p>
+            <p class="explicacion">Las posiciones de una lista empiezan en <strong>0</strong>: <code>bebidas[0]</code> es "agua" y <code>bebidas[1]</code> es <strong>"jugo"</strong>.</p>
         </article>
 
         <article class="pregunta mc" data-correcta="c">
             <p class="enunciado"><span class="num-preg">2</span>
-                Si <code>punto = (120, 140)</code>, ¿qué ocurre al ejecutar <code>punto[0] = 200</code>?</p>
+                Si <code>colores = ("rojo", "verde")</code>, ¿qué ocurre al ejecutar <code>colores[0] = "azul"</code>?</p>
             <div class="opciones">
-                <label data-op="a"><input type="radio" name="a2" value="a"> El primer valor pasa a 200.</label>
+                <label data-op="a"><input type="radio" name="a2" value="a"> El primer valor pasa a "azul".</label>
                 <label data-op="b"><input type="radio" name="a2" value="b"> Se convierte automáticamente en lista.</label>
                 <label data-op="c"><input type="radio" name="a2" value="c"> Da <code>TypeError</code>: las tuplas no se pueden modificar.</label>
-                <label data-op="d"><input type="radio" name="a2" value="d"> Se borra el primer valor y queda <code>(140,)</code>.</label>
+                <label data-op="d"><input type="radio" name="a2" value="d"> Se borra el primer valor y queda <code>("verde",)</code>.</label>
             </div>
-            <p class="explicacion">Una <strong>tupla</strong> es inmutable: se puede leer (<code>punto[0]</code>) pero no cambiar. Si el dato debe cambiar, corresponde una lista.</p>
+            <p class="explicacion">Una <strong>tupla</strong> es inmutable: se puede leer (<code>colores[0]</code>) pero no cambiar. Si el dato debe cambiar, corresponde una lista.</p>
         </article>
 
         <article class="pregunta mc" data-correcta="c">
@@ -183,17 +183,17 @@ Button(ventana, text="7", command=mostrar_tabla(7))</code></pre>
             </div>
         </div>
 
-        <article class="pregunta salida" data-aceptadas="4 2A">
+        <article class="pregunta salida" data-aceptadas="4 lengua">
             <p class="enunciado"><span class="num-preg">6</span>
                 ¿Qué muestra este programa?</p>
-            <pre><code>cursos = ["1A", "2A", "3A"]
-cursos.append("4A")
-print(len(cursos))
-print(cursos[1])</code></pre>
+            <pre><code>materias = ["Matemática", "Lengua", "Historia"]
+materias.append("Arte")
+print(len(materias))
+print(materias[1])</code></pre>
             <label class="campo-salida">Salida:
                 <input type="text" id="b1" autocomplete="off" placeholder="Separá los valores con espacios">
             </label>
-            <p class="explicacion"><code>append("4A")</code> deja 4 elementos y <code>cursos[1]</code> sigue siendo <strong>"2A"</strong>. La salida es <strong>4 2A</strong>.</p>
+            <p class="explicacion"><code>append("Arte")</code> deja 4 elementos y <code>materias[1]</code> sigue siendo <strong>"Lengua"</strong>. La salida es <strong>4 Lengua</strong>.</p>
         </article>
 
         <article class="pregunta salida" data-aceptadas="pan 100 leche 200">
@@ -208,17 +208,17 @@ for producto, precio in precios.items():
             <p class="explicacion"><code>.items()</code> entrega la clave y el valor en cada vuelta, en el orden en que se cargaron. La salida es <strong>pan 100 leche 200</strong>.</p>
         </article>
 
-        <article class="pregunta salida" data-aceptadas="120 140">
+        <article class="pregunta salida" data-aceptadas="10 99">
             <p class="enunciado"><span class="num-preg">8</span>
                 ¿Qué muestra este programa?</p>
-            <pre><code>punto = (120, 140)
-x, y = punto
-print(x)
-print(y)</code></pre>
+            <pre><code>limites = (10, 99)
+minimo, maximo = limites
+print(minimo)
+print(maximo)</code></pre>
             <label class="campo-salida">Salida:
                 <input type="text" id="b3" autocomplete="off" placeholder="Separá los valores con espacios">
             </label>
-            <p class="explicacion">El <strong>desempaquetado</strong> asigna 120 a <code>x</code> y 140 a <code>y</code>. La salida es <strong>120 140</strong>.</p>
+            <p class="explicacion">El <strong>desempaquetado</strong> asigna 10 a <code>minimo</code> y 99 a <code>maximo</code>. La salida es <strong>10 99</strong>.</p>
         </article>
 
         <article class="pregunta salida" data-aceptadas="24">
@@ -248,14 +248,27 @@ print(suma)</code></pre>
 
         <article class="pregunta codigo" data-ejercicio="c1">
             <p class="enunciado"><span class="num-preg">10</span>
-                <strong>Tkinter · un Label.</strong> Creá una ventana con un <code>Label</code> que diga
-                <code>"Hola"</code>. Cambiale el color de fondo a amarillo y la fuente a
-                <code>("Arial", 20)</code> usando <code>config(...)</code>. Mostralo con
-                <code>pack()</code> y cerrá con <code>mainloop()</code>.</p>
-            <textarea class="editor" id="c1" spellcheck="false" placeholder="# Label + config + pack&#10;from tkinter import *&#10;ventana = Tk()"></textarea>
+                <strong>Tkinter · un Label en tres pasos.</strong> Cada elemento que crees debe cumplir
+                como mínimo <strong>tres cosas</strong>: <strong>crearlo</strong>,
+                <strong>configurarlo</strong> y <strong>alinearlo</strong>. Por ejemplo, un
+                <code>Label</code> se crea con <code>Label(...)</code>, se configura con
+                <code>bg=</code>, <code>font=</code> o <code>.config(...)</code>, y se alinea con
+                <code>.pack()</code>.</p>
+            <p class="enunciado">Mostrá un <code>Label</code> que diga <code>"Hola"</code>, con fondo
+                amarillo y fuente <code>("Arial", 20)</code>. Cerrá con <code>mainloop()</code>.
+                Podés resolverlo de <strong>dos formas</strong>: todo en una sola línea o repartido en
+                tres líneas.</p>
+            <textarea class="editor" id="c1" spellcheck="false" placeholder="# Crear + configurar + alinear&#10;from tkinter import *&#10;ventana = Tk()"></textarea>
             <div class="resultado-codigo" id="res-c1"></div>
             <details class="solucion">
-                <summary>Ver una solución de referencia</summary>
+                <summary>Ver las dos soluciones de referencia</summary>
+                <p><strong>Forma 1 · todo en una línea:</strong></p>
+                <pre><code>from tkinter import *
+
+ventana = Tk()
+Label(ventana, text="Hola", bg="yellow", font=("Arial", 20)).pack()
+ventana.mainloop()</code></pre>
+                <p><strong>Forma 2 · repartido en tres líneas:</strong></p>
                 <pre><code>from tkinter import *
 
 ventana = Tk()
@@ -279,7 +292,7 @@ ventana.mainloop()</code></pre>
                 <pre><code>from tkinter import *
 
 ventana = Tk()
-etiqueta = Label(ventana, text="Hola")
+etiqueta = Label(ventana, text="Bienvenido")
 etiqueta.pack()
 
 def cambiar():

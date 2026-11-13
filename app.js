@@ -531,6 +531,11 @@
         if (bloqueada || enviando) return;
         if (!validarAlumno()) return;
 
+        var aviso = UN_SOLO_INTENTO
+            ? '¿Corregir y enviar la evaluación?\n\nTenés un solo intento: después de enviar no podrás cambiar tus respuestas.'
+            : '¿Corregir y enviar la evaluación?\n\nEl resultado quedará registrado en el informe del docente.';
+        if (!window.confirm(aviso)) return;
+
         var res = evaluar();
         var payload = construirPayload(res);
         ultimoResultado = res;

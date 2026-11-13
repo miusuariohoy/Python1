@@ -396,13 +396,14 @@ aprobado = <span class="kw">True</span>     <span class="cmt"># bool  (verdadero
             </div>
 
             <div class="exercise">
-                <h4>✍️ Ejercicio: tus datos en cajas</h4>
+                <h4>✍️ Ejercicio: la ficha de un producto</h4>
                 <p class="ex-goal">
-                    Escribí un programa que guarde en <code class="inline">nombre</code> un texto,
-                    en <code class="inline">edad</code> un número entero y en <code class="inline">altura</code>
-                    un número decimal. Al final, mostralos con <code class="inline">print()</code>.
+                    Guardá en <code class="inline">producto</code> el texto <code class="inline">"Yerba"</code>,
+                    en <code class="inline">precio</code> el entero <code class="inline">1250</code> y en
+                    <code class="inline">peso</code> el decimal <code class="inline">0.5</code>.
+                    Al final mostrá los tres valores con <code class="inline">print()</code>.
                 </p>
-                <textarea class="code-input" id="in-variables" spellcheck="false" placeholder="# Escribí tu código acá&#10;nombre = ...&#10;print(nombre)"></textarea>
+                <textarea class="code-input" id="in-variables" spellcheck="false" placeholder="# Ficha de un producto&#10;producto = &quot;Yerba&quot;&#10;precio = 1250&#10;peso = 0.5&#10;print(producto, precio, peso)"></textarea>
                 <div class="ex-actions">
                     <button class="btn btn-primary" onclick="corregir('variables')">✅ Corregir</button>
                     <button class="btn btn-ghost" onclick="limpiar('variables')">Limpiar</button>
@@ -421,14 +422,14 @@ aprobado = <span class="kw">True</span>     <span class="cmt"># bool  (verdadero
                 Ojo: <code class="inline">input()</code> siempre devuelve texto (str),
                 aunque escriban números.
             </p>
-            <div class="syntax">
-                <span class="syntax-label">Patrón</span>
-                dato = int(input("Mensaje: "))<br>
-                resultado = dato * 2<br>
-                print(f"El doble es {resultado}")
-            </div>
-
-            <div class="sub">Ingreso: input() y conversiones</div>
+            <div class="sub">Entrada sola: input()</div>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                Cuando el programa solo necesita <strong>pedir</strong> un dato, alcanza con
+                <code class="inline">input()</code>. El valor queda guardado en una variable y no se
+                muestra nada más:
+            </p>
+            <pre><code>nombre = <span class="fn">input</span>(<span class="str">"¿Cómo te llamás? "</span>)
+<span class="cmt"># la entrada terminó: el dato quedó guardado en nombre</span></code></pre>
             <table class="datos">
                 <tr><th>Función</th><th>Convierte a</th><th>Ejemplo</th></tr>
                 <tr><td><code class="inline">int()</code></td><td>entero</td><td><code class="inline">int("15") -&gt; 15</code></td></tr>
@@ -436,19 +437,26 @@ aprobado = <span class="kw">True</span>     <span class="cmt"># bool  (verdadero
                 <tr><td><code class="inline">str()</code></td><td>texto</td><td><code class="inline">str(21) -&gt; "21"</code></td></tr>
             </table>
 
-            <div class="sub">Salida: print() y f-strings</div>
-            <pre><code><span class="fn">print</span>(<span class="str">"Hola"</span>, nombre)          <span class="cmt"># separa con espacio</span>
-<span class="fn">print</span>(<span class="fn">f"El doble es {doble}"</span>)  <span class="cmt"># f-string: mete variables adentro</span>
-<span class="fn">print</span>(<span class="fn">f"{n}x{i}={n*i}"</span>)         <span class="cmt"># así se arman las tablas</span></code></pre>
+            <div class="sub">Salida sola: print() y f-strings</div>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                Cuando el dato ya está resuelto, <code class="inline">print()</code> lo
+                <strong>muestra</strong> sin pedir nada por teclado:
+            </p>
+            <pre><code><span class="fn">print</span>(<span class="str">"Hola"</span>)                  <span class="cmt"># texto fijo</span>
+<span class="fn">print</span>(<span class="str">"Hola"</span>, nombre)          <span class="cmt"># separa con espacio</span>
+<span class="fn">print</span>(<span class="fn">f"El doble es {doble}"</span>)  <span class="cmt"># f-string: mete variables adentro</span></code></pre>
             <ul class="explain">
                 <li>La <code class="inline">f</code> antes de las comillas permite poner variables entre llaves sin cortar el texto.</li>
                 <li>Sin la <code class="inline">f</code>, las llaves se muestran como texto común.</li>
                 <li><code class="inline">print(a, b)</code> separa los valores con un espacio.</li>
             </ul>
 
-            <div class="sub">Patrón completo</div>
-            <pre><code><span class="cmt"># leer - convertir - calcular - mostrar</span>
-numero = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Ingrese un número: "</span>))
+            <div class="sub">Entrada y salida juntas: leer → calcular → mostrar</div>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                Lo más habitual es combinar las dos: <code class="inline">input()</code> pide,
+                el programa calcula y <code class="inline">print()</code> muestra el resultado.
+            </p>
+            <pre><code>numero = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Ingrese un número: "</span>))
 doble = numero * <span class="nu">2</span>
 <span class="fn">print</span>(<span class="fn">f"El doble es {doble}"</span>)</code></pre>
             <div class="alerta">
@@ -466,12 +474,13 @@ doble = numero * <span class="nu">2</span>
             </div>
 
             <div class="exercise">
-                <h4>✍️ Ejercicio: el doble de un número</h4>
+                <h4>✍️ Ejercicio: precio con IVA</h4>
                 <p class="ex-goal">
-                    Pedí un número por teclado, convertilo a entero, calculá su doble
-                    y mostralo con un <strong>f-string</strong>.
+                    Pedí el precio de un producto por teclado, convertilo a decimal con
+                    <code class="inline">float()</code>, calculá su precio con IVA multiplicando por
+                    <strong>1.21</strong> y mostralo con un <strong>f-string</strong>.
                 </p>
-                <textarea class="code-input" id="in-entrada" spellcheck="false" placeholder="# Pedí, convertí, calculá y mostrá&#10;numero = int(input(&quot;Número: &quot;))"></textarea>
+                <textarea class="code-input" id="in-entrada" spellcheck="false" placeholder="# Pedí, convertí, calculá y mostrá&#10;precio = float(input(&quot;Precio: &quot;))&#10;print(f&quot;...&quot;)"></textarea>
                 <div class="ex-actions">
                     <button class="btn btn-primary" onclick="corregir('entrada')">✅ Corregir</button>
                     <button class="btn btn-ghost" onclick="limpiar('entrada')">Limpiar</button>
@@ -579,13 +588,13 @@ doble = numero * <span class="nu">2</span>
             </div>
 
             <div class="exercise">
-                <h4>✍️ Ejercicio: mayor, adolescente o niño</h4>
+                <h4>✍️ Ejercicio: frío, templado o calor</h4>
                 <p class="ex-goal">
-                    Pedí una edad con <code class="inline">int(input(...))</code> y mostrá
-                    <strong>"Mayor"</strong> si es 18 o más, <strong>"Adolescente"</strong> si es 13 o más,
-                    y <strong>"Niño"</strong> en cualquier otro caso. Usá <code class="inline">if / elif / else</code>.
+                    Pedí una temperatura con <code class="inline">int(input(...))</code> y mostrá
+                    <strong>"Frío"</strong> si es 10 o menos, <strong>"Templado"</strong> si es 25 o menos,
+                    y <strong>"Calor"</strong> en cualquier otro caso. Usá <code class="inline">if / elif / else</code>.
                 </p>
-                <textarea class="code-input" id="in-decisiones" spellcheck="false" placeholder="# Pedí la edad y decidí&#10;edad = int(input(&quot;Edad: &quot;))&#10;if ...:"></textarea>
+                <textarea class="code-input" id="in-decisiones" spellcheck="false" placeholder="# Pedí la temperatura y decidí&#10;temperatura = int(input(&quot;Temperatura: &quot;))&#10;if ...:"></textarea>
                 <div class="ex-actions">
                     <button class="btn btn-primary" onclick="corregir('decisiones')">✅ Corregir</button>
                     <button class="btn btn-ghost" onclick="limpiar('decisiones')">Limpiar</button>
@@ -694,13 +703,13 @@ aprobados = <span class="nu">0</span>                      <span class="cmt"># c
             </svg>
 
             <div class="exercise">
-                <h4>✍️ Ejercicio: contar hasta cinco</h4>
+                <h4>✍️ Ejercicio: cuenta regresiva</h4>
                 <p class="ex-goal">
-                    Escribí un programa que muestre los números del <strong>1 al 5</strong> usando un
-                    <code class="inline">while</code>. El contador arranca en 1 y aumenta de a uno
-                    dentro del ciclo.
+                    Escribí un programa que muestre los números del <strong>10 al 5</strong> usando un
+                    <code class="inline">while</code>. El contador arranca en 10 y <strong>disminuye</strong>
+                    de a uno dentro del ciclo.
                 </p>
-                <textarea class="code-input" id="in-ciclos" spellcheck="false" placeholder="# Contador con while&#10;i = 1&#10;while ...:"></textarea>
+                <textarea class="code-input" id="in-ciclos" spellcheck="false" placeholder="# Cuenta regresiva con while&#10;i = 10&#10;while ...:"></textarea>
                 <div class="ex-actions">
                     <button class="btn btn-primary" onclick="corregir('ciclos')">✅ Corregir</button>
                     <button class="btn btn-ghost" onclick="limpiar('ciclos')">Limpiar</button>
@@ -794,14 +803,14 @@ a = <span class="fn">area_rectangulo</span>(<span class="nu">5</span>, <span cla
             </div>
 
             <div class="exercise">
-                <h4>✍️ Ejercicio: función es_par</h4>
+                <h4>✍️ Ejercicio: función es_adulto</h4>
                 <p class="ex-goal">
-                    Creá una función <code class="inline">es_par(n)</code> que devuelva
-                    <code class="inline">True</code> si el número es par y <code class="inline">False</code>
+                    Creá una función <code class="inline">es_adulto(edad)</code> que devuelva
+                    <code class="inline">True</code> si la edad es 18 o más y <code class="inline">False</code>
                     si no. Después llamala con un número y mostrá el resultado con
                     <code class="inline">print()</code>.
                 </p>
-                <textarea class="code-input" id="in-funciones" spellcheck="false" placeholder="# Definí la función y llamala&#10;def es_par(n):&#10;    ..."></textarea>
+                <textarea class="code-input" id="in-funciones" spellcheck="false" placeholder="# Definí la función y llamala&#10;def es_adulto(edad):&#10;    ..."></textarea>
                 <div class="ex-actions">
                     <button class="btn btn-primary" onclick="corregir('funciones')">✅ Corregir</button>
                     <button class="btn btn-ghost" onclick="limpiar('funciones')">Limpiar</button>
@@ -918,15 +927,16 @@ numero_secreto = random.<span class="fn">randint</span>(<span class="nu">1</span
             </div>
 
             <div class="exercise">
-                <h4>✍️ Ejercicio: ventana con Entry, botón y Label</h4>
+                <h4>✍️ Ejercicio: el saludador</h4>
                 <p class="ex-goal">
-                    Armá una ventana con un <code class="inline">Entry</code>, un
-                    <code class="inline">Button</code> conectado con <code class="inline">command=</code>
-                    (sin paréntesis) y un <code class="inline">Label</code> que se actualice con
-                    <code class="inline">.config()</code> leyendo el campo con <code class="inline">.get()</code>.
+                    Armá una ventana con un <code class="inline">Entry</code> para el nombre, un
+                    <code class="inline">Button</code> que diga <strong>"Saludar"</strong> y esté conectado
+                    con <code class="inline">command=</code> (sin paréntesis), y un <code class="inline">Label</code>
+                    que muestre <code class="inline">"Hola, "</code> junto al nombre usando
+                    <code class="inline">.get()</code> y <code class="inline">.config()</code>.
                     Cerrá con <code class="inline">mainloop()</code>.
                 </p>
-                <textarea class="code-input" id="in-tkinter" spellcheck="false" placeholder="# Ventana mínima con Tkinter&#10;from tkinter import *&#10;ventana = Tk()"></textarea>
+                <textarea class="code-input" id="in-tkinter" spellcheck="false" placeholder="# Entry + Button + Label&#10;from tkinter import *&#10;ventana = Tk()"></textarea>
                 <div class="ex-actions">
                     <button class="btn btn-primary" onclick="corregir('tkinter')">✅ Corregir</button>
                     <button class="btn btn-ghost" onclick="limpiar('tkinter')">Limpiar</button>
@@ -1534,20 +1544,20 @@ window.reiniciarQuiz = function (contId, bannerId) {
             { d: 'Usa if con dos puntos al final', f: function (c) { return /\bif\b[^\n]*:/.test(c); } },
             { d: 'Incluye una rama elif', f: function (c) { return /\belif\b[^\n]*:/.test(c); } },
             { d: 'Incluye una rama else', f: function (c) { return /\belse\s*:/.test(c); } },
-            { d: 'Compara con 18 (>= 18 o > 17)', f: function (c) { return /(>=\s*18)|(>\s*17)/.test(c); } },
+            { d: 'Compara con 10 (<= 10 o < 11)', f: function (c) { return /(<=?\s*10)|(<\s*11)/.test(c); } },
             { d: 'Muestra al menos dos resultados con print()', f: function (c) { return count(c, /\bprint\s*\(/) >= 2; } }
         ],
         ciclos: [
-            { d: 'Inicializa el contador en 1', f: function (c) { return /\b[a-z_]\w*\s*=\s*1\b/.test(c); } },
+            { d: 'Inicializa el contador en 10', f: function (c) { return /\b[a-z_]\w*\s*=\s*10\b/.test(c); } },
             { d: 'Usa while con condición', f: function (c) { return /\bwhile\b[^\n]*:/.test(c); } },
-            { d: 'La condición corta en 5 (<= 5 o < 6)', f: function (c) { return /(<=\s*5\b)|(<\s*6\b)/.test(c); } },
-            { d: 'Incrementa el contador (i = i + 1 o i += 1)', f: function (c) { return /([a-z_]\w*)\s*=\s*\1\s*\+\s*1/.test(c) || /\b[a-z_]\w*\s*\+=\s*1/.test(c); } },
+            { d: 'La condición corta en 5 (>= 5 o > 4)', f: function (c) { return /(>=\s*5\b)|(>\s*4\b)/.test(c); } },
+            { d: 'Resta 1 al contador (i = i - 1 o i -= 1)', f: function (c) { return /([a-z_]\w*)\s*=\s*\1\s*-\s*1/.test(c) || /\b[a-z_]\w*\s*-=\s*1\b/.test(c); } },
             { d: 'Muestra el número con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
         ],
         entrada: [
             { d: 'Pide un dato con input()', f: function (c) { return /\binput\s*\(/.test(c); } },
             { d: 'Convierte con int() o float()', f: function (c) { return /\b(int|float)\s*\(/.test(c); } },
-            { d: 'Calcula el doble (× 2)', f: function (c) { return /\*\s*2\b/.test(c); } },
+            { d: 'Calcula el precio con IVA (× 1.21)', f: function (c) { return /\*\s*1\.21\b/.test(c); } },
             { d: 'Muestra con print() y f-string', f: function (c) { return /\bprint\s*\(\s*f["']/.test(c); } },
             { d: 'Incluye las llaves { } del f-string', f: function (c) { return /\{[^}]+\}/.test(c); } }
         ],
@@ -1555,7 +1565,7 @@ window.reiniciarQuiz = function (contId, bannerId) {
             { d: 'Define la función con def', f: function (c) { return /\bdef\s+\w+\s*\(/.test(c); } },
             { d: 'La función recibe un parámetro', f: function (c) { return /\bdef\s+\w+\s*\(\s*[a-z_]\w*\s*\)/.test(c); } },
             { d: 'Devuelve un valor con return', f: function (c) { return /\breturn\b/.test(c); } },
-            { d: 'Evalúa la paridad (módulo 2)', f: function (c) { return /%|\bmod\b/.test(c); } },
+            { d: 'Compara la edad con 18 (>= 18 o > 17)', f: function (c) { return /(>=\s*18)|(>\s*17)/.test(c); } },
             { d: 'Llama a la función con un argumento', f: function (c) { var m = c.match(/\bdef\s+(\w+)/); if (!m) return false; return new RegExp('\\b' + m[1] + '\\s*\\(\\s*\\d+').test(c); } },
             { d: 'Muestra el resultado con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
         ],

@@ -19,14 +19,15 @@ window.CONFIG.CLAVE_ACCESO = 'pro2';
 window.CONFIG.PUNTOS_EJERCICIO = 1;
 
 window.CONFIG.EJERCICIOS = {
-    /* Actividad 1 · Tkinter: crear un Label y configurarlo. */
+    /* Actividad 1 · Tkinter: crear, configurar y alinear un Label.
+       Se aceptan las dos formas: todo en una línea o repartido en tres. */
     c1: [
         { d: 'Crea la ventana con Tk()', f: function (c) { return /tk\s*\(\s*\)/.test(c); } },
         { d: 'Crea un Label', f: function (c) { return /label\s*\(/.test(c); } },
         { d: 'El label dice "Hola"', f: function (c) { return /["']hola["']/.test(c); } },
-        { d: 'Usa config(bg=...) para el color de fondo', f: function (c) { return /\.config\s*\([^)]*bg\s*=/.test(c); } },
-        { d: 'Usa config(font=...) para la fuente', f: function (c) { return /\.config\s*\([^)]*font\s*=/.test(c); } },
-        { d: 'Muestra el label con pack()', f: function (c) { return /\.pack\s*\(/.test(c); } },
+        { d: 'Configura el fondo amarillo (bg= o config)', f: function (c) { return /label\s*\([^)]*\bbg\s*=/.test(c) || /\.config\s*\([^)]*\bbg\s*=/.test(c); } },
+        { d: 'Configura la fuente Arial 20 (font= o config)', f: function (c) { return /label\s*\([^)]*\bfont\s*=/.test(c) || /\.config\s*\([^)]*\bfont\s*=/.test(c); } },
+        { d: 'Alinea el label con pack()', f: function (c) { return /\.pack\s*\(/.test(c); } },
         { d: 'Cierra con mainloop()', f: function (c) { return /mainloop\s*\(\s*\)/.test(c); } }
     ],
 

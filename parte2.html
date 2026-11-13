@@ -422,15 +422,15 @@ indice = <span class="fn">int</span>(<span class="fn">input</span>(<span class="
             </div>
 
             <div class="exercise">
-                <h4>✍️ Ejercicio: tu estante de cursos</h4>
+                <h4>✍️ Ejercicio: la lista de compras</h4>
                 <p class="ex-goal">
-                    Creá una lista <code class="inline">cursos</code> con al menos <strong>3 cursos</strong>,
-                    mostrá el primero con <code class="inline">cursos[0]</code>, mostrá la cantidad con
-                    <code class="inline">len()</code>, agregá uno nuevo con
+                    Creá una lista <code class="inline">compras</code> con al menos <strong>3 productos</strong>,
+                    mostrá el primero con <code class="inline">compras[0]</code>, mostrá la cantidad con
+                    <code class="inline">len()</code>, agregá <code class="inline">"café"</code> con
                     <code class="inline">append()</code> y recorré la lista con un <code class="inline">for</code>
-                    mostrando cada curso.
+                    mostrando cada producto.
                 </p>
-                <textarea class="code-input" id="in-listas" spellcheck="false" placeholder="# Lista + len + append + for&#10;cursos = [&quot;1A&quot;, &quot;2A&quot;, &quot;3A&quot;]&#10;print(cursos[0])"></textarea>
+                <textarea class="code-input" id="in-listas" spellcheck="false" placeholder="# Lista + len + append + for&#10;compras = [&quot;pan&quot;, &quot;leche&quot;, &quot;huevos&quot;]&#10;print(compras[0])"></textarea>
                 <div class="ex-actions">
                     <button class="btn btn-primary" onclick="corregir('listas')">✅ Corregir</button>
                     <button class="btn btn-ghost" onclick="limpiar('listas')">Limpiar</button>
@@ -482,14 +482,15 @@ x, y = punto                 <span class="cmt"># desempaquetar: x=120, y=140</sp
             </div>
 
             <div class="exercise">
-                <h4>✍️ Ejercicio: coordenada fija</h4>
+                <h4>✍️ Ejercicio: las medidas de una foto</h4>
                 <p class="ex-goal">
-                    Creá la tupla <code class="inline">punto</code> con dos números, mostrá su primera
-                    posición con <code class="inline">punto[0]</code>, desempaquetala en
-                    <code class="inline">x</code> e <code class="inline">y</code> y mostrá ambas
+                    Creá la tupla <code class="inline">medidas</code> con el ancho y el alto de una foto
+                    (<code class="inline">30</code> y <code class="inline">45</code>), mostrá su primera
+                    posición con <code class="inline">medidas[0]</code>, desempaquetala en
+                    <code class="inline">ancho</code> y <code class="inline">alto</code> y mostrá ambas
                     variables con <code class="inline">print()</code>.
                 </p>
-                <textarea class="code-input" id="in-tuplas" spellcheck="false" placeholder="# Tupla + desempaquetado&#10;punto = (120, 140)&#10;print(punto[0])"></textarea>
+                <textarea class="code-input" id="in-tuplas" spellcheck="false" placeholder="# Tupla + desempaquetado&#10;medidas = (30, 45)&#10;print(medidas[0])"></textarea>
                 <div class="ex-actions">
                     <button class="btn btn-primary" onclick="corregir('tuplas')">✅ Corregir</button>
                     <button class="btn btn-ghost" onclick="limpiar('tuplas')">Limpiar</button>
@@ -555,16 +556,16 @@ promedio = <span class="fn">sum</span>(alumno[<span class="str">"notas"</span>])
             </div>
 
             <div class="exercise">
-                <h4>✍️ Ejercicio: ficha del alumno</h4>
+                <h4>✍️ Ejercicio: la ficha de una película</h4>
                 <p class="ex-goal">
-                    Creá el diccionario <code class="inline">alumno</code> con las claves
-                    <code class="inline">"nombre"</code>, <code class="inline">"curso"</code> y
-                    <code class="inline">"notas"</code> (una lista de 3 notas). Mostrá el nombre
-                    accediendo por clave, agregá la clave <code class="inline">"turno"</code>, calculá
+                    Creá el diccionario <code class="inline">pelicula</code> con las claves
+                    <code class="inline">"titulo"</code>, <code class="inline">"anio"</code> y
+                    <code class="inline">"puntajes"</code> (una lista de 3 notas). Mostrá el título
+                    accediendo por clave, agregá la clave <code class="inline">"genero"</code>, calculá
                     el promedio con <code class="inline">sum()</code> y <code class="inline">len()</code>
                     y recorré el diccionario con <code class="inline">.items()</code>.
                 </p>
-                <textarea class="code-input" id="in-diccionarios" spellcheck="false" placeholder="# Diccionario + items()&#10;alumno = {&quot;nombre&quot;: &quot;Ana&quot;, &quot;curso&quot;: &quot;3A&quot;}"></textarea>
+                <textarea class="code-input" id="in-diccionarios" spellcheck="false" placeholder="# Diccionario + items()&#10;pelicula = {&quot;titulo&quot;: &quot;Matrix&quot;, &quot;anio&quot;: 1999}"></textarea>
                 <div class="ex-actions">
                     <button class="btn btn-primary" onclick="corregir('diccionarios')">✅ Corregir</button>
                     <button class="btn btn-ghost" onclick="limpiar('diccionarios')">Limpiar</button>
@@ -674,16 +675,16 @@ boton_guardar.config(state=NORMAL)</code></pre>
             </div>
 
             <div class="exercise">
-                <h4>✍️ Ejercicio: la tabla del 7 con lambda</h4>
+                <h4>✍️ Ejercicio: la lista de tareas</h4>
                 <p class="ex-goal">
-                    Definí <code class="inline">mostrar_tabla(n)</code>: debe crear un
-                    <code class="inline">Text</code>, borrarlo con <code class="inline">delete("1.0", END)</code>,
-                    recorrer <code class="inline">range(1, 11)</code> e insertar cada línea con
-                    <code class="inline">insert(END, ...)</code>. Después creá un
-                    <code class="inline">Button</code> con <code class="inline">command=lambda: mostrar_tabla(7)</code>
+                    Creá un <code class="inline">Text</code> y definí
+                    <code class="inline">agregar(tarea)</code>: debe insertar la tarea al final con
+                    <code class="inline">insert(END, ...)</code> seguida de un salto de línea.
+                    Después creá un <code class="inline">Button</code> con
+                    <code class="inline">command=lambda: agregar("pan")</code>
                     y cerrá con <code class="inline">mainloop()</code>.
                 </p>
-                <textarea class="code-input" id="in-tkinter2" spellcheck="false" placeholder="# Text + for + lambda&#10;from tkinter import *&#10;ventana = Tk()"></textarea>
+                <textarea class="code-input" id="in-tkinter2" spellcheck="false" placeholder="# Text + lambda&#10;from tkinter import *&#10;ventana = Tk()"></textarea>
                 <div class="ex-actions">
                     <button class="btn btn-primary" onclick="corregir('tkinter2')">✅ Corregir</button>
                     <button class="btn btn-ghost" onclick="limpiar('tkinter2')">Limpiar</button>
@@ -762,16 +763,17 @@ canvas.coords(sapo, x, ALTO // <span class="nu">2</span>)</code></pre>
             </div>
 
             <div class="exercise">
-                <h4>✍️ Ejercicio: el sapo que rebota</h4>
+                <h4>✍️ Ejercicio: la pelota que rebota</h4>
                 <p class="ex-goal">
-                    Creá un <code class="inline">Canvas</code>, agregá una imagen u óvalo con
-                    <code class="inline">create_image()</code> o <code class="inline">create_oval()</code>
-                    guardando su id, definí <code class="inline">mover()</code> con
-                    <code class="inline">global x</code> que actualice la posición con
+                    Creá un <code class="inline">Canvas</code> y dibujá una pelota con
+                    <code class="inline">create_oval()</code> guardando su id. Definí
+                    <code class="inline">mover()</code> con <code class="inline">global y</code> que
+                    cambie la posición vertical, actualice el dibujo con
                     <code class="inline">canvas.coords(...)</code> y se re-agende con
-                    <code class="inline">after(30, mover)</code>. Cerrá con <code class="inline">mainloop()</code>.
+                    <code class="inline">after(30, mover)</code>. Cerrá con
+                    <code class="inline">mainloop()</code>.
                 </p>
-                <textarea class="code-input" id="in-canvas" spellcheck="false" placeholder="# Canvas + coords + after&#10;from tkinter import *&#10;ventana = Tk()&#10;canvas = Canvas(ventana, width=600, height=90)"></textarea>
+                <textarea class="code-input" id="in-canvas" spellcheck="false" placeholder="# Canvas + coords + after&#10;from tkinter import *&#10;ventana = Tk()&#10;canvas = Canvas(ventana, width=300, height=300)"></textarea>
                 <div class="ex-actions">
                     <button class="btn btn-primary" onclick="corregir('canvas')">✅ Corregir</button>
                     <button class="btn btn-ghost" onclick="limpiar('canvas')">Limpiar</button>
@@ -828,14 +830,15 @@ pygame.mixer.music.play(-<span class="nu">1</span>)                 <span class=
             </div>
 
             <div class="exercise">
-                <h4>✍️ Ejercicio: música sin fin</h4>
+                <h4>✍️ Ejercicio: efecto de sonido</h4>
                 <p class="ex-goal">
                     Importá <code class="inline">pygame</code>, inicializá el mixer con
                     <code class="inline">pygame.mixer.init()</code>, cargá un archivo
-                    <code class="inline">.mp3</code> con <code class="inline">music.load()</code> y
-                    reproducilo en loop con <code class="inline">play(-1)</code>.
+                    <code class="inline">.wav</code> en una variable con
+                    <code class="inline">pygame.mixer.Sound()</code> y reproducilo una vez con
+                    <code class="inline">.play()</code>.
                 </p>
-                <textarea class="code-input" id="in-musica" spellcheck="false" placeholder="# pygame + mixer + loop&#10;import pygame"></textarea>
+                <textarea class="code-input" id="in-musica" spellcheck="false" placeholder="# pygame + efecto de sonido&#10;import pygame"></textarea>
                 <div class="ex-actions">
                     <button class="btn btn-primary" onclick="corregir('musica')">✅ Corregir</button>
                     <button class="btn btn-ghost" onclick="limpiar('musica')">Limpiar</button>
@@ -1056,18 +1059,18 @@ ventana.<span class="fn">mainloop</span>()                             <span cla
             </div>
 
             <div class="exercise">
-                <h4>✍️ Ejercicio: guardar un alumno en MySQL</h4>
+                <h4>✍️ Ejercicio: eliminar un alumno de MySQL</h4>
                 <p class="ex-goal">
                     Escribí <code class="inline">def conectar()</code> que devuelva
                     <code class="inline">mysql.connector.connect(...)</code> y
-                    <code class="inline">def guardar()</code> que lea el nombre con
-                    <code class="inline">.get()</code>, use <code class="inline">INSERT INTO</code> con
+                    <code class="inline">def eliminar(nombre)</code> que reciba el nombre, use
+                    <code class="inline">DELETE FROM</code> con <code class="inline">WHERE</code> y
                     <code class="inline">%s</code>, llame a <code class="inline">commit()</code> y
                     <code class="inline">close()</code>, todo dentro de <code class="inline">try / except</code>:
                     intentá la conexión en el <code class="inline">try</code> y, si algo falla, avisá
                     en el <code class="inline">except</code> con <code class="inline">messagebox.showerror(...)</code>.
                 </p>
-                <textarea class="code-input" id="in-mysql" spellcheck="false" placeholder="# conectar() + INSERT + commit&#10;import mysql.connector"></textarea>
+                <textarea class="code-input" id="in-mysql" spellcheck="false" placeholder="# conectar() + DELETE + commit&#10;import mysql.connector"></textarea>
                 <div class="ex-actions">
                     <button class="btn btn-primary" onclick="corregir('mysql')">✅ Corregir</button>
                     <button class="btn btn-ghost" onclick="limpiar('mysql')">Limpiar</button>
@@ -1694,13 +1697,13 @@ window.reiniciarQuiz = function (contId, bannerId) {
             { d: 'Usa len() para saber cuántos hay', f: function (c) { return /\blen\s*\(/.test(c); } },
             { d: 'Agrega un elemento con append()', f: function (c) { return /\.append\s*\(/.test(c); } },
             { d: 'Recorre la lista con un for', f: function (c) { return /\bfor\b[^\n]*\bin\b/.test(c); } },
-            { d: 'Muestra los cursos con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
+            { d: 'Muestra los productos con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
         ],
         tuplas: [
             { d: 'Define una tupla con paréntesis y coma', f: function (c) { return /\b[a-z_]\w*\s*=\s*\([^)]*,/.test(c); } },
             { d: 'La tupla tiene dos números', f: function (c) { return /\b[a-z_]\w*\s*=\s*\(\s*-?\d+\s*,\s*-?\d+\s*\)/.test(c); } },
-            { d: 'Lee una posición con punto[0]', f: function (c) { return /\b[a-z_]\w*\s*\[\s*\d+\s*\]/.test(c); } },
-            { d: 'Desempaqueta en dos variables (x, y = ...)', f: function (c) { return /\b[a-z_]\w*\s*,\s*[a-z_]\w*\s*=/.test(c); } },
+            { d: 'Lee una posición con medidas[0]', f: function (c) { return /\b[a-z_]\w*\s*\[\s*\d+\s*\]/.test(c); } },
+            { d: 'Desempaqueta en dos variables (ancho, alto = ...)', f: function (c) { return /\b[a-z_]\w*\s*,\s*[a-z_]\w*\s*=/.test(c); } },
             { d: 'Muestra los valores con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
         ],
         diccionarios: [
@@ -1713,36 +1716,38 @@ window.reiniciarQuiz = function (contId, bannerId) {
             { d: 'Muestra resultados con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
         ],
         tkinter2: [
-            { d: 'Define una función con parámetro (def ...(n))', f: function (c) { return /\bdef\s+\w+\s*\(\s*\w+\s*\)/.test(c); } },
+            { d: 'Define una función con parámetro (def ...(tarea))', f: function (c) { return /\bdef\s+\w+\s*\(\s*\w+\s*\)/.test(c); } },
             { d: 'Crea un widget Text', f: function (c) { return /\btext\s*\(/.test(c); } },
-            { d: 'Borra con delete("1.0", END)', f: function (c) { return /delete\s*\(\s*["']1\.0["']/.test(c); } },
             { d: 'Inserta al final con insert(END, ...)', f: function (c) { return /insert\s*\(\s*end/.test(c); } },
-            { d: 'Recorre range(1, 11)', f: function (c) { return /\brange\s*\(\s*1\s*,\s*11\s*\)/.test(c); } },
+            { d: 'Agrega un salto de línea con \\n', f: function (c) { return /\\n/.test(c); } },
             { d: 'Conecta el botón con command=lambda', f: function (c) { return /\bbutton\s*\([^)]*command\s*=\s*lambda/.test(c); } },
+            { d: 'La lambda llama a la función con un dato', f: function (c) { return /lambda\s*:\s*\w+\s*\(\s*["'][^"']+["']\s*\)/.test(c); } },
             { d: 'Cierra con mainloop()', f: function (c) { return /\bmainloop\s*\(\s*\)/.test(c); } }
         ],
         canvas: [
             { d: 'Crea el lienzo con Canvas(...)', f: function (c) { return /\bcanvas\s*\(/.test(c); } },
-            { d: 'Dibuja con create_image() o create_oval()', f: function (c) { return /create_(image|oval|rectangle)\s*\(/.test(c); } },
-            { d: 'Guarda el id que devuelve create_...', f: function (c) { return /\b[a-z_]\w*\s*=\s*\w+\.create_/.test(c); } },
+            { d: 'Dibuja la pelota con create_oval()', f: function (c) { return /create_oval\s*\(/.test(c); } },
+            { d: 'Guarda el id que devuelve create_oval', f: function (c) { return /\b[a-z_]\w*\s*=\s*\w+\.create_oval/.test(c); } },
             { d: 'Mueve el objeto con .coords()', f: function (c) { return /\.coords\s*\(/.test(c); } },
-            { d: 'Declara global para cambiar x', f: function (c) { return /\bglobal\b/.test(c); } },
+            { d: 'Declara global para cambiar y', f: function (c) { return /\bglobal\b[^\n]*\by\b/.test(c); } },
             { d: 'Se re-agenda con .after()', f: function (c) { return /\.after\s*\(/.test(c); } },
             { d: 'Cierra con mainloop()', f: function (c) { return /\bmainloop\s*\(\s*\)/.test(c); } }
         ],
         musica: [
             { d: 'Importa pygame', f: function (c) { return /\bimport\s+pygame\b/.test(c); } },
             { d: 'Inicializa el audio con mixer.init()', f: function (c) { return /mixer\.init\s*\(/.test(c); } },
-            { d: 'Carga el archivo con music.load()', f: function (c) { return /music\.load\s*\(/.test(c); } },
-            { d: 'Usa un archivo .mp3, .ogg o .wav', f: function (c) { return /["'][^"']+\.(mp3|ogg|wav)["']/.test(c); } },
-            { d: 'Reproduce en loop con play(-1)', f: function (c) { return /play\s*\(\s*-\s*1\s*\)/.test(c); } }
+            { d: 'Carga el efecto con mixer.Sound()', f: function (c) { return /mixer\.sound\s*\(/.test(c); } },
+            { d: 'Usa un archivo .wav', f: function (c) { return /["'][^"']+\.wav["']/.test(c); } },
+            { d: 'Reproduce con .play()', f: function (c) { return /\.play\s*\(\s*\)/.test(c); } }
         ],
         mysql: [
             { d: 'Importa mysql.connector', f: function (c) { return /import\s+mysql\.connector/.test(c); } },
             { d: 'Define la función conectar()', f: function (c) { return /\bdef\s+conectar\s*\(\s*\)/.test(c); } },
             { d: 'Usa connect(...) con los datos de acceso', f: function (c) { return /\.connect\s*\(/.test(c); } },
             { d: 'Crea el cursor con .cursor()', f: function (c) { return /\.cursor\s*\(/.test(c); } },
-            { d: 'Usa INSERT INTO', f: function (c) { return /\binsert\s+into\b/.test(c); } },
+            { d: 'Define la función eliminar(nombre)', f: function (c) { return /\bdef\s+eliminar\s*\(\s*\w+\s*\)/.test(c); } },
+            { d: 'Usa DELETE FROM', f: function (c) { return /\bdelete\s+from\b/.test(c); } },
+            { d: 'Filtra con WHERE', f: function (c) { return /\bwhere\b/.test(c); } },
             { d: 'Deja huecos %s para los valores', f: function (c) { return /%s/.test(c); } },
             { d: 'Confirma el cambio con commit()', f: function (c) { return /\.commit\s*\(/.test(c); } },
             { d: 'Cierra la conexión con close()', f: function (c) { return /\.close\s*\(/.test(c); } },
