@@ -105,7 +105,9 @@
             { d: 'Usa un bucle for o while', f: function (c) { return /\b(for|while)\b/.test(c); } },
             { d: 'Recorre del 1 al 10', f: function (c) {
                 if (/range\s*\(\s*1\s*,\s*(?:11|10\s*\+\s*1)\s*(?:,\s*1\s*)?\)/.test(c)) return true;
-                if (/range\s*\(\s*10\s*\)/.test(c) && /\b[a-z_]\w*\s*\+\s*1\b/.test(c)) return true;
+                if (/range\s*\(\s*(?:0\s*,\s*)?10\s*\)/.test(c) &&
+                    (/print\s*\(\s*[a-z_]\w*\s*\+\s*1\s*(?=[,)])/.test(c) ||
+                     /\bf\s*["'][^"']*\{[^}]*\+\s*1[^}]*\}/.test(c))) return true;
                 var m = c.match(/while\s+([a-z_]\w*)\s*(?:<\s*11(?!\d)|<=\s*10(?!\d))/);
                 if (m) return new RegExp('\\b' + m[1] + '\\s*=\\s*1\\b').test(c);
                 return false;
