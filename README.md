@@ -1,8 +1,10 @@
 # Python1 · Guía + Evaluación interactiva
 
-Sitio de GitHub Pages con la guía de **Programación Estructurada** y tres
-evaluaciones protegidas por clave (Parte 1, Parte 2 y PSeInt). Al corregir, el
-resultado se guarda automáticamente en el repositorio privado
+Sitio de GitHub Pages con la guía de **Programación Estructurada** y las
+evaluaciones protegidas por clave de la **Parte 1** (evaluación y recuperatorio)
+y de la **Parte 2**. Los exámenes de PSeInt viven en el repositorio
+[`pseint`](https://github.com/miusuariohoy/pseint). Al corregir, el resultado se
+guarda automáticamente en el repositorio privado
 [`inform`](https://github.com/miusuariohoy/inform).
 
 ## Archivos
@@ -12,19 +14,20 @@ resultado se guarda automáticamente en el repositorio privado
 | `index.html` | Parte 1 de la guía (teoría, autoevaluación, simuladores). |
 | `parte2.html` | Parte 2 de la guía (listas, Canvas, MySQL). |
 | `evaluacion.html` | Evaluación de la **Parte 1** (11 consignas). |
+| `recuperatorio.html` | Recuperatorio de la **Parte 1** (11 consignas, mismos temas). |
 | `evaluacion-parte2.html` | Evaluación de la **Parte 2** (12 consignas). |
-| `evaluacion-pseint.html` | Evaluación de **PSeInt** (12 consignas). |
 | `styles.css` | Estilos de la evaluación. |
 | `app.js` | Acceso, corrección, envío y reinicio para el siguiente alumno. |
 | `config.js` | Configuración general: clave, canal cifrado y examen de la Parte 1. |
+| `config-recuperatorio1.js` | Examen y requisitos de código del recuperatorio de la Parte 1. |
 | `config-parte2.js` | Examen y requisitos de código de la Parte 2. |
-| `config-pseint.js` | Examen y requisitos de código de PSeInt. |
 
 Cada guía abre su evaluación desde el ítem **🎓 Evaluación** del menú:
 
 - Parte 1 → `https://miusuariohoy.github.io/Python1/evaluacion.html`
+- Recuperatorio Parte 1 → `https://miusuariohoy.github.io/Python1/recuperatorio.html`
 - Parte 2 → `https://miusuariohoy.github.io/Python1/evaluacion-parte2.html`
-- PSeInt → `https://miusuariohoy.github.io/Python1/evaluacion-pseint.html`
+- PSeInt → `https://miusuariohoy.github.io/pseint/examenes/`
 
 ## Publicar (una sola vez)
 
@@ -73,8 +76,9 @@ y actualizar `NTFY_TOPIC` y `CLAVE_PUBLICA` en `config.js`.
 1. Abrí la evaluación que corresponda desde el menú de cada guía e ingresá su
    clave:
    - Parte 1: `https://miusuariohoy.github.io/Python1/evaluacion.html` → clave **`pro1`**
+   - Recuperatorio Parte 1: `https://miusuariohoy.github.io/Python1/recuperatorio.html` → clave **`pro1-recu`**
    - Parte 2: `https://miusuariohoy.github.io/Python1/evaluacion-parte2.html` → clave **`pro2`**
-   - PSeInt: `https://miusuariohoy.github.io/Python1/evaluacion-pseint.html` → clave **`pseint`**
+   - PSeInt: `https://miusuariohoy.github.io/pseint/examenes/` → clave **`pseint`**
 2. Completá apellido, nombre y curso.
 3. Respondé y presioná **Corregir y enviar**.
 4. En el repo `inform`: pestaña **Actions** → **Recoger resultados** →
@@ -113,15 +117,19 @@ La evaluación de la Parte 1 se configura en `config.js`:
 EXAMEN: { id: 'python-1', titulo: 'Programación Estructurada', materia: 'Programación' }
 ```
 
+El recuperatorio de la Parte 1 se configura en `config-recuperatorio1.js` (clave
+`pro1-recu`, examen `python-1-recu`), que también define los requisitos de la
+Parte C. Usa las mismas 5 preguntas de opción múltiple, 4 salidas y 2 programas
+que la evaluación, con consignas distintas.
+
 La de la Parte 2 se configura en `config-parte2.js`, que también define los
 requisitos que se revisan en la Parte C (`EJERCICIOS`) y cuánto vale cada
 actividad (`PUNTOS_EJERCICIO`). Las actividades se corrigen con expresiones
 regulares sobre el texto: la teórica pide completar cada acción con el método
 de MySQL que corresponde.
 
-La de PSeInt se configura en `config-pseint.js` (clave `pseint`, examen
-`pseint-1`), con la misma estructura: 5 de opción múltiple, 4 salidas y 3
-actividades de pseudocódigo que cubren los 9 temas de la guía.
+Los exámenes de PSeInt se configuran en el repo
+[`pseint`](https://github.com/miusuariohoy/pseint), dentro de `examenes/`.
 
 El `id` separa los intentos y los resultados en el informe. Para un examen nuevo
 conviene duplicar la página de evaluación que corresponda y editar las preguntas.
