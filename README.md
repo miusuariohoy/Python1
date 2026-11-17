@@ -1,8 +1,9 @@
-# Python1 · Guía + Evaluación interactiva
+# Python1 · Guía + Evaluaciones interactivas
 
-Sitio de GitHub Pages con la guía de **Programación Estructurada** y las
-evaluaciones protegidas por clave de la **Parte 1** (evaluación y recuperatorio)
-y de la **Parte 2**. Los exámenes de PSeInt viven en el repositorio
+Sitio de GitHub Pages con la guía de **Programación Estructurada** (12 temas) y
+las evaluaciones protegidas por clave de la **Parte 1** (primera, segunda,
+tercera, evaluación original y recuperatorio) y de la **Parte 2**. Los exámenes
+de PSeInt viven en el repositorio
 [`pseint`](https://github.com/miusuariohoy/pseint). Al corregir, el resultado se
 guarda automáticamente en el repositorio privado
 [`inform`](https://github.com/miusuariohoy/inform).
@@ -11,20 +12,32 @@ guarda automáticamente en el repositorio privado
 
 | Archivo | Qué hace |
 | --- | --- |
-| `index.html` | Parte 1 de la guía (teoría, autoevaluación, simuladores). |
+| `index.html` | Guía de la Parte 1: 12 temas, autoevaluación y simuladores. |
 | `parte2.html` | Parte 2 de la guía (listas, Canvas, MySQL). |
-| `evaluacion.html` | Evaluación de la **Parte 1** (11 consignas). |
+| `primera-evaluacion.html` | **Primera evaluación** de la Parte 1 (temas 1 a 4). |
+| `segunda-evaluacion.html` | **Segunda evaluación** de la Parte 1 (temas 2, 5, 6 y 7). |
+| `tercera-evaluacion.html` | **Tercera evaluación** de la Parte 1 (temas 8 a 12). |
+| `evaluacion.html` | Evaluación original de la **Parte 1** (11 consignas). |
 | `recuperatorio.html` | Recuperatorio de la **Parte 1** (11 consignas, mismos temas). |
 | `evaluacion-parte2.html` | Evaluación de la **Parte 2** (12 consignas). |
-| `styles.css` | Estilos de la evaluación. |
+| `evaluacion-pseint.html` | Evaluación de PSeInt (copia local; se publica en el repo `pseint`). |
+| `styles.css` | Estilos de las evaluaciones. |
 | `app.js` | Acceso, corrección, envío y reinicio para el siguiente alumno. |
 | `config.js` | Configuración general: clave, canal cifrado y examen de la Parte 1. |
+| `config-primera.js` | Examen y requisitos de código de la Primera evaluación. |
+| `config-segunda.js` | Examen y requisitos de código de la Segunda evaluación. |
+| `config-tercera.js` | Examen y requisitos de código de la Tercera evaluación. |
 | `config-recuperatorio1.js` | Examen y requisitos de código del recuperatorio de la Parte 1. |
 | `config-parte2.js` | Examen y requisitos de código de la Parte 2. |
+| `CLAVES.md` | Claves de acceso vigentes de cada evaluación. |
+| `respaldos/` | Copia de todas las evaluaciones y sus configuraciones. |
 
-Cada guía abre su evaluación desde el ítem **🎓 Evaluación** del menú:
+La guía abre las evaluaciones desde la barra de menú:
 
-- Parte 1 → `https://miusuariohoy.github.io/Python1/evaluacion.html`
+- Primera evaluación → `https://miusuariohoy.github.io/Python1/primera-evaluacion.html`
+- Segunda evaluación → `https://miusuariohoy.github.io/Python1/segunda-evaluacion.html`
+- Tercera evaluación → `https://miusuariohoy.github.io/Python1/tercera-evaluacion.html`
+- Evaluación original Parte 1 → `https://miusuariohoy.github.io/Python1/evaluacion.html`
 - Recuperatorio Parte 1 → `https://miusuariohoy.github.io/Python1/recuperatorio.html`
 - Parte 2 → `https://miusuariohoy.github.io/Python1/evaluacion-parte2.html`
 - PSeInt → `https://miusuariohoy.github.io/pseint/examenes/`
@@ -73,10 +86,13 @@ y actualizar `NTFY_TOPIC` y `CLAVE_PUBLICA` en `config.js`.
 
 ## Cómo probar
 
-1. Abrí la evaluación que corresponda desde el menú de cada guía e ingresá su
+1. Abrí la evaluación que corresponda desde el menú de la guía e ingresá su
    clave:
-   - Parte 1: `https://miusuariohoy.github.io/Python1/evaluacion.html` → clave **`pro1`**
-   - Recuperatorio Parte 1: `https://miusuariohoy.github.io/Python1/recuperatorio.html` → clave **`pro1-recu`**
+   - Primera evaluación: `https://miusuariohoy.github.io/Python1/primera-evaluacion.html` → clave **`Primera1`**
+   - Segunda evaluación: `https://miusuariohoy.github.io/Python1/segunda-evaluacion.html` → clave **`Segunda1`**
+   - Tercera evaluación: `https://miusuariohoy.github.io/Python1/tercera-evaluacion.html` → clave **`Tercera1`**
+   - Evaluación original Parte 1: `https://miusuariohoy.github.io/Python1/evaluacion.html` → clave **`Python1`**
+   - Recuperatorio Parte 1: `https://miusuariohoy.github.io/Python1/recuperatorio.html` → clave **`recu1`**
    - Parte 2: `https://miusuariohoy.github.io/Python1/evaluacion-parte2.html` → clave **`pro2`**
    - PSeInt: `https://miusuariohoy.github.io/pseint/examenes/` → clave **`pseint`**
 2. Completá apellido, nombre y curso.
@@ -111,16 +127,30 @@ y actualizar `NTFY_TOPIC` y `CLAVE_PUBLICA` en `config.js`.
 
 ## Cambiar de examen
 
-La evaluación de la Parte 1 se configura en `config.js`:
+La evaluación original de la Parte 1 se configura en `config.js` (clave
+`Python1`, examen `python-1`):
 
 ```js
 EXAMEN: { id: 'python-1', titulo: 'Programación Estructurada', materia: 'Programación' }
 ```
 
+Las tres evaluaciones nuevas tienen su propia configuración y su propia clave:
+
+| Página | Configuración | Clave | `id` | Temas |
+| --- | --- | --- | --- | --- |
+| `primera-evaluacion.html` | `config-primera.js` | `Primera1` | `python-1-primera` | 1 a 4 |
+| `segunda-evaluacion.html` | `config-segunda.js` | `Segunda1` | `python-1-segunda` | 2, 5, 6 y 7 |
+| `tercera-evaluacion.html` | `config-tercera.js` | `Tercera1` | `python-1-tercera` | 8 a 12 |
+
+Las tres usan 5 preguntas de opción múltiple (5 puntos), 4 salidas (2 puntos) y
+2 ejercicios de código (1,5 puntos cada uno), con un total de 10 puntos. Cada
+`config-*.js` define los requisitos que se revisan en la Parte C (`EJERCICIOS`)
+y cuánto vale cada actividad (`PUNTOS_EJERCICIO`).
+
 El recuperatorio de la Parte 1 se configura en `config-recuperatorio1.js` (clave
-`pro1-recu`, examen `python-1-recu`), que también define los requisitos de la
-Parte C. Usa las mismas 5 preguntas de opción múltiple, 4 salidas y 2 programas
-que la evaluación, con consignas distintas.
+`recu1`, examen `python-1-recu`), que también define los requisitos de la Parte C.
+Usa las mismas 5 preguntas de opción múltiple, 4 salidas y 2 programas que la
+evaluación original, con consignas distintas.
 
 La de la Parte 2 se configura en `config-parte2.js`, que también define los
 requisitos que se revisan en la Parte C (`EJERCICIOS`) y cuánto vale cada

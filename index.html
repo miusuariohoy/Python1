@@ -194,6 +194,7 @@
         .topic-panel{padding:.8rem 1.5rem 1.5rem;}
         .topic-panel[hidden]{display:none;}
         .topic-panel-ejercicio .exercise{margin-top:0;}
+        .topic-panel-ejercicio .exercise + .exercise{margin-top:1.2rem;}
         .card.topic.closed .topic-tabs,
         .card.topic.closed .topic-panel{display:none;}
         /* ---------- Quiz ---------- */
@@ -338,8 +339,11 @@
     <a href="#simuladores">🧪 Simuladores</a>
     <a href="#entrega">📤 Actividad final</a>
     <a href="parte2.html">➡️ Parte 2</a>
-    <a class="destacado" href="evaluacion.html">🎓 Evaluación Parte 1</a>
-    <a href="recuperatorio.html">🔁 Recuperatorio Parte 1</a>
+    <a class="destacado" href="primera-evaluacion.html">🎓 Primera evaluación</a>
+    <a href="segunda-evaluacion.html">🎓 Segunda evaluación</a>
+    <a href="tercera-evaluacion.html">🎓 Tercera evaluación</a>
+    <a href="recuperatorio.html">🔁 Recuperatorio</a>
+    <a href="evaluacion.html">📄 Evaluación 1</a>
 </nav>
 
 <main>
@@ -349,7 +353,8 @@
         <h2 class="section-title">SECCIÓN 1 · Contenido Explicativo</h2>
         <p class="section-sub">
             Los temas están ordenados en <strong>secuencia de aprendizaje</strong>: primero guardar datos,
-            luego interactuar, decidir, repetir, modularizar y finalmente construir una interfaz.
+            luego interactuar, decidir, contar, repetir, modularizar, manejar errores, usar el azar
+            y finalmente construir una interfaz.
             <strong>Tocá un tema</strong> para abrirlo y usá las pestañas
             <strong>📘 Teoría</strong> y <strong>✍️ Ejercitación</strong>.
             Cada ejercicio se corrige al instante en esta página, sin descargar nada.
@@ -472,6 +477,27 @@ doble = numero * <span class="nu">2</span>
                     <li>Convertí apenas leés: <code class="inline">int(input(...))</code>.</li>
                     <li>Si puede fallar la conversión, protegé con <code class="inline">try / except</code>.</li>
                 </ol>
+            </div>
+
+            <div class="sub">Módulos y pausas: import time</div>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                Además de los datos, un programa puede usar <strong>módulos</strong>: archivos con
+                funciones ya hechas que se cargan con <code class="inline">import</code>. Uno muy útil es
+                <code class="inline">time</code>, que permite hacer pausas y medir tiempo.
+            </p>
+            <pre><code><span class="kw">import</span> time
+
+<span class="fn">print</span>(<span class="str">"Inicio"</span>)
+time.<span class="fn">sleep</span>(<span class="nu">2</span>)          <span class="cmt"># espera 2 segundos</span>
+<span class="fn">print</span>(<span class="str">"Pasaron 2 segundos"</span>)</code></pre>
+            <ul class="explain">
+                <li><code class="inline">import time</code> carga el módulo. Va al principio del archivo.</li>
+                <li><code class="inline">time.sleep(segundos)</code> detiene el programa esa cantidad de segundos.</li>
+                <li>Se usa para simulaciones o pausas en programas de consola. En Tkinter <strong>no</strong> se usa: congela la ventana (allí se usa <code class="inline">after()</code>).</li>
+            </ul>
+            <div class="alerta">
+                <strong>Ojo:</strong> <code class="inline">sleep()</code> no “hace varias cosas a la vez”:
+                el programa queda esperando. No lo uses para repetir tareas ni dentro de ventanas gráficas.
             </div>
 
             <div class="exercise">
@@ -606,10 +632,189 @@ doble = numero * <span class="nu">2</span>
 
         <!-- 4 -->
         <article class="card">
-            <h3><span class="num">4</span> Ciclos: while, for, contador y acumulador</h3>
+            <h3><span class="num">4</span> Contador y acumulador: dos variables que crecen</h3>
             <p class="concept">
-                El <code class="inline">while</code> repite un bloque <strong>mientras</strong> una condición
-                siga siendo verdadera. Analogía: <em>mientras llueva, quedate bajo el techo; cuando pare, salí.</em>
+                Un <strong>contador</strong> y un <strong>acumulador</strong> son variables que empiezan
+                con un valor inicial (casi siempre <code class="inline">0</code>) y van cambiando a medida
+                que el programa hace su trabajo. La diferencia está en <strong>qué les sumamos</strong>.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis</span>
+                variable = valor_inicial<br>
+                variable = variable + algo<br>
+                variable += algo &nbsp;&nbsp;&nbsp;&nbsp;# forma abreviada
+            </div>
+
+            <div class="sub">Contador: cuenta cuántas veces pasa algo</div>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                Al contador siempre se le suma <strong>1</strong> (o un paso fijo). Sirve para responder
+                <em>¿cuántos?</em>: cuántos alumnos aprobaron, cuántos intentos hubo, cuántas ventas se hicieron.
+            </p>
+            <pre><code>clics = <span class="nu">0</span>              <span class="cmt"># arranca en cero</span>
+clics = clics + <span class="nu">1</span>       <span class="cmt"># primer clic</span>
+clics = clics + <span class="nu">1</span>       <span class="cmt"># segundo clic</span>
+<span class="fn">print</span>(clics)             <span class="cmt"># 2</span></code></pre>
+            <div class="okbox">
+                <strong>Atajo:</strong> <code class="inline">clics += 1</code> hace exactamente lo mismo que
+                <code class="inline">clics = clics + 1</code>. Se lee “a clics sumale 1”.
+            </div>
+
+            <div class="sub">Acumulador: suma valores que cambian</div>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                Al acumulador se le suma un <strong>valor distinto cada vez</strong>. Sirve para responder
+                <em>¿cuánto en total?</em>: la suma de las notas, el total de una compra, la recaudación del día.
+            </p>
+            <pre><code>total = <span class="nu">0</span>              <span class="cmt"># arranca vacío</span>
+total = total + <span class="nu">1500</span>    <span class="cmt"># suma una yerba</span>
+total = total + <span class="nu">750</span>     <span class="cmt"># suma un pan</span>
+total = total + <span class="nu">2000</span>    <span class="cmt"># suma un queso</span>
+<span class="fn">print</span>(total)            <span class="cmt"># 4250</span></code></pre>
+            <div class="okbox">
+                <strong>Atajo:</strong> <code class="inline">total += 750</code> equivale a
+                <code class="inline">total = total + 750</code>.
+            </div>
+
+            <div class="sub">Comparación rápida</div>
+            <table class="datos">
+                <tr><th></th><th>Contador</th><th>Acumulador</th></tr>
+                <tr><td>¿Qué guarda?</td><td>una cantidad de veces</td><td>una suma de valores</td></tr>
+                <tr><td>¿Qué suma?</td><td>siempre 1 (o un paso fijo)</td><td>un valor que cambia</td></tr>
+                <tr><td>Arranca en</td><td>0 (o 1 si empieza a contar desde 1)</td><td>0</td></tr>
+                <tr><td>Pregunta que responde</td><td>¿cuántos?</td><td>¿cuánto en total?</td></tr>
+                <tr><td>Ejemplo</td><td>“aprobaron 18 alumnos”</td><td>“se recaudaron $45.000”</td></tr>
+            </table>
+            <div class="alerta">
+                <strong>Error clásico:</strong> inicializar la variable <em>dentro</em> de un bucle.
+                Si <code class="inline">total = 0</code> se ejecuta en cada vuelta, se borra lo acumulado.
+                La inicialización va <strong>antes</strong> de empezar a contar o acumular.
+            </div>
+            <div class="buenas">
+                <strong>Buena práctica:</strong> usá nombres que expliquen qué cuentan:
+                <code class="inline">aprobados</code>, <code class="inline">intentos</code>,
+                <code class="inline">total_compra</code>. Evitá <code class="inline">x</code> o
+                <code class="inline">c</code>.
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Actividad 1 · Contador de aprobados</h4>
+                <p class="ex-goal">
+                    Tres alumnos sacaron <strong>8</strong>, <strong>4</strong> y <strong>7</strong>.
+                    Creá un contador <code class="inline">aprobados</code> que empiece en 0 y sume 1 por
+                    cada nota mayor o igual a 6. Al final mostrá el contador con
+                    <code class="inline">print()</code>. El resultado debe ser <strong>2</strong>.
+                </p>
+                <textarea class="code-input" id="in-contador-1" spellcheck="false" placeholder="# Contador: solo suma 1 por cada aprobado&#10;aprobados = 0&#10;nota1 = 8&#10;..."></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('contador-1')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('contador-1')">Limpiar</button>
+                </div>
+                <div class="result" id="res-contador-1"></div>
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Actividad 2 · Acumulador de una compra</h4>
+                <p class="ex-goal">
+                    Una compra tiene tres productos de <strong>1500</strong>, <strong>750</strong> y
+                    <strong>2000</strong>. Creá un acumulador <code class="inline">total</code> que empiece
+                    en 0, sumale los tres precios y mostrá el total con <code class="inline">print()</code>.
+                    El resultado debe ser <strong>4250</strong>.
+                </p>
+                <textarea class="code-input" id="in-contador-2" spellcheck="false" placeholder="# Acumulador: suma valores distintos&#10;total = 0&#10;total += 1500&#10;..."></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('contador-2')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('contador-2')">Limpiar</button>
+                </div>
+                <div class="result" id="res-contador-2"></div>
+            </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="card">
+            <h3><span class="num">5</span> Bucle for: repetir una cantidad conocida de veces</h3>
+            <p class="concept">
+                El <strong>for</strong> repite un bloque de instrucciones <strong>una vez por cada valor</strong>
+                de una secuencia. Se usa cuando sabemos de antemano cuántas vueltas hay que dar:
+                mostrar los números del 1 al 10, recorrer una lista o generar una tabla de multiplicar.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis</span>
+                for variable in range(inicio, fin, paso):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;instrucciones
+            </div>
+            <pre><code><span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">1</span>, <span class="nu">6</span>):
+    <span class="fn">print</span>(i)              <span class="cmt"># muestra 1, 2, 3, 4 y 5</span></code></pre>
+
+            <div class="sub">range(): el generador de números</div>
+            <table class="datos">
+                <tr><th>Escritura</th><th>Valores que toma la variable</th><th>Vueltas</th></tr>
+                <tr><td><code class="inline">range(5)</code></td><td>0, 1, 2, 3, 4</td><td>5</td></tr>
+                <tr><td><code class="inline">range(1, 6)</code></td><td>1, 2, 3, 4, 5</td><td>5</td></tr>
+                <tr><td><code class="inline">range(0, 10, 2)</code></td><td>0, 2, 4, 6, 8</td><td>5</td></tr>
+                <tr><td><code class="inline">range(5, 0, -1)</code></td><td>5, 4, 3, 2, 1</td><td>5</td></tr>
+            </table>
+            <div class="okbox">
+                <strong>Regla de oro:</strong> <code class="inline">range(inicio, fin)</code> incluye el
+                <strong>inicio</strong> pero <strong>nunca incluye el fin</strong>. Para llegar al 10 hay que
+                escribir <code class="inline">range(1, 11)</code>.
+            </div>
+
+            <div class="sub">Ejemplo: la tabla del 7</div>
+            <pre><code><span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">1</span>, <span class="nu">11</span>):
+    <span class="fn">print</span>(<span class="fn">f"7 x {i} = {7 * i}"</span>)</code></pre>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                La variable <code class="inline">i</code> cambia sola en cada vuelta: no hace falta
+                incrementarla a mano. El cuerpo del for debe ir <strong>con sangría</strong> y la línea
+                del for termina en <strong>dos puntos</strong>.
+            </p>
+
+            <div class="sub">For + acumulador: sumar del 1 al 10</div>
+            <pre><code>total = <span class="nu">0</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">1</span>, <span class="nu">11</span>):
+    total += i
+<span class="fn">print</span>(<span class="str">"La suma es"</span>, total)   <span class="cmt"># 55</span></code></pre>
+            <div class="alerta">
+                <strong>Errores típicos:</strong> olvidar los dos puntos, no poner sangría,
+                usar <code class="inline">range(1, 10)</code> cuando se necesita el 10, o intentar cambiar
+                <code class="inline">i</code> dentro del for (el for vuelve a asignarla en cada vuelta).
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Actividad 1 · Contar del 1 al 10</h4>
+                <p class="ex-goal">
+                    Usá un <code class="inline">for</code> con <code class="inline">range()</code> para
+                    mostrar los números del <strong>1 al 10</strong>, uno por línea.
+                </p>
+                <textarea class="code-input" id="in-for-1" spellcheck="false" placeholder="# For del 1 al 10&#10;for i in range(1, 11):&#10;    print(i)"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('for-1')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('for-1')">Limpiar</button>
+                </div>
+                <div class="result" id="res-for-1"></div>
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Actividad 2 · Sumar del 1 al 100</h4>
+                <p class="ex-goal">
+                    Usá un <code class="inline">for</code> y un <strong>acumulador</strong> para sumar
+                    todos los números del <strong>1 al 100</strong>. Al final mostrá el total, que debe ser
+                    <strong>5050</strong>.
+                </p>
+                <textarea class="code-input" id="in-for-2" spellcheck="false" placeholder="# Acumulador dentro de un for&#10;total = 0&#10;for i in range(1, 101):&#10;    ..."></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('for-2')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('for-2')">Limpiar</button>
+                </div>
+                <div class="result" id="res-for-2"></div>
+            </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="card">
+            <h3><span class="num">6</span> Bucle while: repetir mientras se cumpla una condición</h3>
+            <p class="concept">
+                El <strong>while</strong> repite un bloque <strong>mientras</strong> una condición sea
+                verdadera. Se usa cuando no sabemos cuántas vueltas habrá: depende de lo que escriba el
+                usuario o de cuándo se cumpla una condición.
             </p>
             <div class="syntax">
                 <span class="syntax-label">Sintaxis</span>
@@ -617,115 +822,239 @@ doble = numero * <span class="nu">2</span>
                 &nbsp;&nbsp;&nbsp;&nbsp;instrucciones
             </div>
             <div class="okbox">
-                <strong>Idea clave:</strong> algo <em>dentro</em> del ciclo tiene que cambiar para que la
-                condición en algún momento sea False. Si nada cambia: ciclo infinito.
+                <strong>Idea clave:</strong> algo dentro del while tiene que cambiar para que la condición
+                llegue a ser falsa. Si nada cambia, el ciclo nunca termina: <strong>bucle infinito</strong>.
             </div>
 
-            <div class="sub">Forma 1: con contador (sabés cuántas vueltas)</div>
-            <pre><code>i = <span class="nu">1</span>
-<span class="kw">while</span> i &lt;= <span class="nu">5</span>:
+            <div class="sub">Forma 1 · while fijo (controlado por un contador)</div>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                Sabemos cuántas vueltas queremos. Inicializamos un contador, lo comparamos en la condición
+                y lo actualizamos dentro del ciclo.
+            </p>
+            <pre><code>i = <span class="nu">1</span>                  <span class="cmt"># inicialización</span>
+<span class="kw">while</span> i &lt;= <span class="nu">5</span>:          <span class="cmt"># condición</span>
     <span class="fn">print</span>(<span class="str">"Vuelta"</span>, i)
-    i = i + <span class="nu">1</span>            <span class="cmt"># sin esta línea: bucle infinito</span></code></pre>
-            <div class="sub">Forma 2: con centinela (no sabés cuántas vueltas)</div>
-            <pre><code>clave = <span class="str">""</span>
-<span class="kw">while</span> clave != <span class="str">"1234"</span>:
-    clave = <span class="fn">input</span>(<span class="str">"Clave: "</span>)
-<span class="fn">print</span>(<span class="str">"Acceso permitido"</span>)</code></pre>
+    i += <span class="nu">1</span>             <span class="cmt"># actualización: sin esto, infinito</span></code></pre>
 
-            <div class="sub">for: cuando sabés cuántas vueltas</div>
-            <pre><code><span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">1</span>, <span class="nu">11</span>):
-    <span class="fn">print</span>(<span class="fn">f"7 x {i} = {7*i}"</span>)   <span class="cmt"># la tabla del 7, completa</span></code></pre>
-            <table class="datos">
-                <tr><th>Escritura</th><th>Valores que genera i</th></tr>
-                <tr><td><code class="inline">range(5)</code></td><td>0, 1, 2, 3, 4 &nbsp;(arranca en 0)</td></tr>
-                <tr><td><code class="inline">range(1, 6)</code></td><td>1, 2, 3, 4, 5 &nbsp;(el final NUNCA se incluye)</td></tr>
-                <tr><td><code class="inline">range(0, 10, 2)</code></td><td>0, 2, 4, 6, 8 &nbsp;(tercer dato = paso)</td></tr>
-            </table>
-            <table class="datos">
-                <tr><th></th><th>while</th><th>for + range</th></tr>
-                <tr><td>Cuándo usarlo</td><td>repetición condicionada (no sabés cuántas veces)</td><td>cantidad conocida de vueltas</td></tr>
-                <tr><td>Ejemplo</td><td>menú hasta elegir SALIR</td><td>las tablas del 1 al 10</td></tr>
-            </table>
-
-            <div class="sub">Contador y acumulador: dos cajas que crecen en el ciclo</div>
-            <table class="datos">
-                <tr><th></th><th>Contador</th><th>Acumulador</th></tr>
-                <tr><td>Arranca en</td><td>0 (o 1)</td><td>0</td></tr>
-                <tr><td>Qué suma</td><td>siempre 1</td><td>un valor que cambia</td></tr>
-                <tr><td>Sirve para</td><td>contar vueltas o casos</td><td>sumar totales</td></tr>
-                <tr><td>Ejemplo mental</td><td>"voy por el alumno 25"</td><td>"ya junté $4300"</td></tr>
-            </table>
-            <pre><code>total = <span class="nu">0</span>                          <span class="cmt"># acumulador, arranca vacío</span>
-aprobados = <span class="nu">0</span>                      <span class="cmt"># contador</span>
-
-<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">3</span>):
-    nota = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Nota: "</span>))
-    total = total + nota           <span class="cmt"># acumula: suma CADA nota</span>
-    <span class="kw">if</span> nota &gt;= <span class="nu">6</span>:
-        aprobados = aprobados + <span class="nu">1</span>  <span class="cmt"># cuenta UNO más</span>
-
-<span class="fn">print</span>(<span class="str">"Promedio:"</span>, total / <span class="nu">3</span>)
-<span class="fn">print</span>(<span class="str">"Aprobados:"</span>, aprobados)</code></pre>
+            <div class="sub">Forma 2 · while con condición (centinela)</div>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                No sabemos cuántas vueltas serán: el ciclo termina cuando el dato cumple algo
+                (por ejemplo, cuando el usuario escribe <code class="inline">0</code> o la clave correcta).
+                Ese valor que marca el final se llama <strong>centinela</strong>.
+            </p>
+            <pre><code>suma = <span class="nu">0</span>
+numero = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Número (0 para salir): "</span>))
+<span class="kw">while</span> numero != <span class="nu">0</span>:
+    suma += numero
+    numero = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Número (0 para salir): "</span>))
+<span class="fn">print</span>(<span class="str">"Suma total:"</span>, suma)</code></pre>
             <div class="alerta">
-                <strong>Error clásico:</strong> olvidar inicializar antes del ciclo. Si
-                <code class="inline">total = 0</code> está DENTRO del for, se borra en cada vuelta
-                y al final vale solo la última nota.
+                <strong>Ojo:</strong> en el while con centinela hay que <strong>volver a leer el dato</strong>
+                dentro del ciclo. Si solo se lee antes, la condición nunca cambia y el programa se queda
+                repitiendo para siempre.
             </div>
 
-            <div class="sub">break: corta el ciclo en el momento</div>
-            <pre><code><span class="kw">while</span> <span class="kw">True</span>:              <span class="cmt"># bucle "infinito" a propósito</span>
+            <div class="sub">break: cortar el ciclo desde adentro</div>
+            <pre><code><span class="kw">while</span> <span class="kw">True</span>:
     opcion = <span class="fn">input</span>(<span class="str">"Opción (S para salir): "</span>)
     <span class="kw">if</span> opcion == <span class="str">"S"</span>:
-        <span class="kw">break</span>             <span class="cmt"># abandona el while acá mismo</span>
-    <span class="fn">print</span>(<span class="str">"Elegiste:"</span>, opcion)
-<span class="fn">print</span>(<span class="str">"Fin del programa"</span>)</code></pre>
-            <div class="buenas">
-                <strong>Buena práctica:</strong> el patrón <code class="inline">while True</code> +
-                <code class="inline">break</code> es el estándar para menús. Deja la condición de salida
-                junta con la lectura del dato.
-            </div>
+        <span class="kw">break</span>              <span class="cmt"># abandona el while inmediatamente</span>
+    <span class="fn">print</span>(<span class="str">"Elegiste:"</span>, opcion)</code></pre>
 
-            <div class="sub">Diagrama de flujo del while</div>
-            <svg viewBox="0 0 420 230" role="img" aria-label="Diagrama while" style="max-width:430px;width:100%">
-                <polygon points="210,15 320,62 210,109 100,62" fill="none" stroke="#f59e0b" stroke-width="2"/>
-                <text x="210" y="66" text-anchor="middle" fill="#1e293b" font-size="12">condición?</text>
-                <text x="330" y="52" text-anchor="middle" fill="#15803d" font-size="11">True</text>
-                <line x1="320" y1="62" x2="380" y2="62" stroke="#16a34a" stroke-width="2"/>
-                <line x1="380" y1="62" x2="380" y2="140" stroke="#16a34a" stroke-width="2"/>
-                <rect x="320" y="140" width="120" height="40" rx="8" fill="none" stroke="#16a34a" stroke-width="2"/>
-                <text x="380" y="164" text-anchor="middle" fill="#1e293b" font-size="11">instrucciones</text>
-                <path d="M 380 180 L 380 210 L 210 210 L 210 109" fill="none" stroke="#16a34a" stroke-width="2"/>
-                <text x="295" y="204" text-anchor="middle" fill="#64748b" font-size="11">vuelve a preguntar</text>
-                <line x1="100" y1="62" x2="30" y2="62" stroke="#dc2626" stroke-width="2"/>
-                <text x="65" y="54" text-anchor="middle" fill="#b91c1c" font-size="11">False</text>
-                <line x1="30" y1="62" x2="30" y2="160" stroke="#dc2626" stroke-width="2"/>
-                <line x1="30" y1="160" x2="105" y2="160" stroke="#dc2626" stroke-width="2"/>
-                <text x="68" y="178" text-anchor="middle" fill="#1e293b" font-size="11">sale del ciclo</text>
-            </svg>
+            <div class="sub">¿For o while?</div>
+            <table class="datos">
+                <tr><th></th><th>for + range</th><th>while</th></tr>
+                <tr><td>¿Cuántas vueltas?</td><td>se sabe de antemano</td><td>no se sabe: depende de una condición</td></tr>
+                <tr><td>Ejemplo</td><td>mostrar del 1 al 10</td><td>pedir datos hasta que escriban 0</td></tr>
+                <tr><td>Riesgo principal</td><td>equivocarse con el fin de range</td><td>olvidar actualizar y crear un bucle infinito</td></tr>
+            </table>
 
             <div class="exercise">
-                <h4>✍️ Ejercicio: cuenta regresiva</h4>
+                <h4>✍️ Actividad 1 · Cuenta regresiva con while fijo</h4>
                 <p class="ex-goal">
-                    Escribí un programa que muestre los números del <strong>10 al 5</strong> usando un
-                    <code class="inline">while</code>. El contador arranca en 10 y <strong>disminuye</strong>
-                    de a uno dentro del ciclo.
+                    Mostrá los números del <strong>5 al 1</strong> usando un <code class="inline">while</code>.
+                    El contador arranca en 5 y <strong>disminuye</strong> de a uno dentro del ciclo.
                 </p>
-                <textarea class="code-input" id="in-ciclos" spellcheck="false" placeholder="# Cuenta regresiva con while&#10;i = 10&#10;while ...:"></textarea>
+                <textarea class="code-input" id="in-while-1" spellcheck="false" placeholder="# While fijo: cuenta regresiva&#10;i = 5&#10;while i >= 1:&#10;    ..."></textarea>
                 <div class="ex-actions">
-                    <button class="btn btn-primary" onclick="corregir('ciclos')">✅ Corregir</button>
-                    <button class="btn btn-ghost" onclick="limpiar('ciclos')">Limpiar</button>
+                    <button class="btn btn-primary" onclick="corregir('while-1')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('while-1')">Limpiar</button>
                 </div>
-                <div class="result" id="res-ciclos"></div>
+                <div class="result" id="res-while-1"></div>
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Actividad 2 · Sumar hasta que escriban 0</h4>
+                <p class="ex-goal">
+                    Pedí números por teclado y sumalos en un acumulador. El programa debe terminar cuando
+                    el usuario escriba <strong>0</strong>. Al final mostrá la suma total. Usá un
+                    <code class="inline">while</code> con condición (centinela).
+                </p>
+                <textarea class="code-input" id="in-while-2" spellcheck="false" placeholder="# While con condición: corta con 0&#10;suma = 0&#10;numero = int(input(&quot;Número (0 para salir): &quot;))&#10;..."></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('while-2')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('while-2')">Limpiar</button>
+                </div>
+                <div class="result" id="res-while-2"></div>
             </div>
         </article>
 
-        <!-- 5 -->
+        <!-- 7 -->
         <article class="card">
-            <h3><span class="num">5</span> Modularización: funciones con def</h3>
+            <h3><span class="num">7</span> Funciones sin parámetro: bloques reutilizables</h3>
             <p class="concept">
-                Una función es una <strong>caja con nombre</strong> que guarda instrucciones para
-                <strong>reutilizarlas</strong>. Analogía: la receta de unas tortas fritas se escribe
-                una vez y se usa cada vez que haga falta.
+                Una <strong>función</strong> es un bloque de código con nombre que se puede ejecutar
+                muchas veces sin volver a escribirlo. Una función <strong>sin parámetro</strong> no recibe
+                datos: siempre hace la misma tarea cuando la llamamos.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Definir y llamar</span>
+                def nombre_funcion():<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;instrucciones<br><br>
+                nombre_funcion()
+            </div>
+            <pre><code><span class="kw">def</span> <span class="fn">saludar</span>():              <span class="cmt"># definición: no se ejecuta todavía</span>
+    <span class="fn">print</span>(<span class="str">"Hola, mundo"</span>)
+
+<span class="fn">saludar</span>()                    <span class="cmt"># llamada: acá sí se ejecuta</span>
+<span class="fn">saludar</span>()                    <span class="cmt"># se puede reutilizar</span></code></pre>
+
+            <div class="sub">Partes de la definición</div>
+            <table class="datos">
+                <tr><th>Parte</th><th>Ejemplo</th><th>Qué hace</th></tr>
+                <tr><td><code class="inline">def</code></td><td><code class="inline">def saludar():</code></td><td>avisa que empieza una función</td></tr>
+                <tr><td>nombre</td><td><code class="inline">saludar</code></td><td>así la llamamos después</td></tr>
+                <tr><td>paréntesis</td><td><code class="inline">()</code></td><td>vacíos: no recibe datos</td></tr>
+                <tr><td>dos puntos</td><td><code class="inline">:</code></td><td>abren el cuerpo de la función</td></tr>
+                <tr><td>sangría</td><td>4 espacios</td><td>indican qué líneas pertenecen a la función</td></tr>
+            </table>
+            <div class="okbox">
+                <strong>Definir no es ejecutar:</strong> el cuerpo de la función corre recién cuando
+                escribimos su nombre con paréntesis: <code class="inline">saludar()</code>.
+            </div>
+            <div class="alerta">
+                <strong>Error clásico:</strong> escribir <code class="inline">saludar</code> sin paréntesis
+                no llama a la función: solo hace referencia a ella. Para ejecutarla hacen falta los
+                <code class="inline">()</code>.
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Actividad 1 · Función saludar</h4>
+                <p class="ex-goal">
+                    Definí una función <code class="inline">saludar()</code> que muestre
+                    <code class="inline">"Hola, mundo"</code>. Después llamala <strong>dos veces</strong>.
+                </p>
+                <textarea class="code-input" id="in-funcion-sin-1" spellcheck="false" placeholder="# Función sin parámetro + dos llamadas&#10;def saludar():&#10;    ..."></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('funcion-sin-1')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('funcion-sin-1')">Limpiar</button>
+                </div>
+                <div class="result" id="res-funcion-sin-1"></div>
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Actividad 2 · Función mostrar menú</h4>
+                <p class="ex-goal">
+                    Definí una función <code class="inline">mostrar_menu()</code> que muestre tres opciones
+                    (por ejemplo <strong>1. Cargar</strong>, <strong>2. Listar</strong>,
+                    <strong>3. Salir</strong>) y llamala una vez.
+                </p>
+                <textarea class="code-input" id="in-funcion-sin-2" spellcheck="false" placeholder="# Menú dentro de una función sin parámetro&#10;def mostrar_menu():&#10;    ..."></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('funcion-sin-2')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('funcion-sin-2')">Limpiar</button>
+                </div>
+                <div class="result" id="res-funcion-sin-2"></div>
+            </div>
+        </article>
+
+        <!-- 8 -->
+        <article class="card">
+            <h3><span class="num">8</span> Funciones con parámetro: recibir datos</h3>
+            <p class="concept">
+                Una función <strong>con parámetro</strong> recibe uno o más datos para trabajar con ellos.
+                Así la misma función puede hacer la tarea con valores distintos: saludar a Ana o a Luis,
+                calcular la tabla del 7 o la del 5.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis</span>
+                def nombre_funcion(parámetro):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;instrucciones<br><br>
+                nombre_funcion(argumento)
+            </div>
+            <pre><code><span class="kw">def</span> <span class="fn">saludar</span>(nombre):        <span class="cmt"># nombre es el parámetro</span>
+    <span class="fn">print</span>(<span class="fn">f"Hola, {nombre}"</span>)
+
+<span class="fn">saludar</span>(<span class="str">"Ana"</span>)              <span class="cmt"># "Ana" es el argumento</span>
+<span class="fn">saludar</span>(<span class="str">"Luis"</span>)             <span class="cmt"># la misma función, otro dato</span></code></pre>
+
+            <div class="sub">Parámetro y argumento no son lo mismo</div>
+            <table class="datos">
+                <tr><th>Concepto</th><th>Qué es</th><th>Dónde aparece</th><th>Ejemplo</th></tr>
+                <tr><td><strong>Parámetro</strong></td><td>la variable que recibe la función</td><td>en la definición</td><td><code class="inline">def saludar(nombre):</code></td></tr>
+                <tr><td><strong>Argumento</strong></td><td>el valor concreto que enviamos</td><td>en la llamada</td><td><code class="inline">saludar("Ana")</code></td></tr>
+            </table>
+
+            <div class="sub">Más de un parámetro</div>
+            <pre><code><span class="kw">def</span> <span class="fn">area_rectangulo</span>(base, altura):
+    <span class="fn">print</span>(<span class="str">"Área:"</span>, base * altura)
+
+<span class="fn">area_rectangulo</span>(<span class="nu">5</span>, <span class="nu">3</span>)      <span class="cmt"># Área: 15</span></code></pre>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                Los argumentos se asignan a los parámetros <strong>en orden</strong>: el primer valor va al
+                primer parámetro, el segundo al segundo.
+            </p>
+
+            <div class="sub">Valor por defecto</div>
+            <pre><code><span class="kw">def</span> <span class="fn">saludar</span>(nombre=<span class="str">"mundo"</span>):
+    <span class="fn">print</span>(<span class="str">"Hola,"</span>, nombre)
+
+<span class="fn">saludar</span>(<span class="str">"Ana"</span>)     <span class="cmt"># Hola, Ana</span>
+<span class="fn">saludar</span>()           <span class="cmt"># Hola, mundo (usa el valor por defecto)</span></code></pre>
+            <div class="alerta">
+                <strong>Error clásico:</strong> llamar a una función con parámetros sin enviar el dato.
+                <code class="inline">saludar()</code> falla si la función fue definida como
+                <code class="inline">def saludar(nombre):</code>.
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Actividad 1 · Saludar a distintas personas</h4>
+                <p class="ex-goal">
+                    Definí <code class="inline">saludar(nombre)</code> para que muestre
+                    <code class="inline">Hola, Ana</code> o <code class="inline">Hola, Luis</code> según
+                    el argumento. Llamala con <strong>"Ana"</strong> y con <strong>"Luis"</strong>.
+                </p>
+                <textarea class="code-input" id="in-funcion-con-1" spellcheck="false" placeholder="# Función con un parámetro&#10;def saludar(nombre):&#10;    ..."></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('funcion-con-1')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('funcion-con-1')">Limpiar</button>
+                </div>
+                <div class="result" id="res-funcion-con-1"></div>
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Actividad 2 · Tabla de multiplicar</h4>
+                <p class="ex-goal">
+                    Definí <code class="inline">tabla(n)</code> que muestre la tabla de multiplicar de
+                    <code class="inline">n</code> del 1 al 10. Después llamala con <strong>7</strong>.
+                    Usá un <code class="inline">for</code> dentro de la función.
+                </p>
+                <textarea class="code-input" id="in-funcion-con-2" spellcheck="false" placeholder="# Función con parámetro + for&#10;def tabla(n):&#10;    for i in range(1, 11):&#10;        ..."></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('funcion-con-2')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('funcion-con-2')">Limpiar</button>
+                </div>
+                <div class="result" id="res-funcion-con-2"></div>
+            </div>
+        </article>
+
+        <!-- 9 -->
+        <article class="card">
+            <h3><span class="num">9</span> return, print y alcance de las variables</h3>
+            <p class="concept">
+                <strong>print()</strong> muestra un valor en pantalla; <strong>return</strong> devuelve un
+                valor al programa para que lo guarde o lo siga usando. No son lo mismo: una función puede
+                mostrar algo sin devolver nada, o devolver un resultado sin mostrarlo.
             </p>
             <div class="syntax">
                 <span class="syntax-label">Sintaxis</span>
@@ -733,216 +1062,340 @@ aprobados = <span class="nu">0</span>                      <span class="cmt"># c
                 &nbsp;&nbsp;&nbsp;&nbsp;instrucciones<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;return resultado
             </div>
+            <pre><code><span class="kw">def</span> <span class="fn">sumar</span>(a, b):
+    <span class="kw">return</span> a + b          <span class="cmt"># devuelve el valor, no lo muestra</span>
 
-            <div class="sub">Partes de una función</div>
-            <pre><code><span class="kw">def</span> <span class="fn">es_par</span>(n):                <span class="cmt"># def + nombre + (parámetros):</span>
-    <span class="kw">if</span> n % <span class="nu">2</span> == <span class="nu">0</span>:        <span class="cmt"># cuerpo (con sangría)</span>
-        <span class="kw">return</span> <span class="kw">True</span>       <span class="cmt"># devuelve un valor a quien llamó</span>
-    <span class="kw">else</span>:
-        <span class="kw">return</span> <span class="kw">False</span>
+resultado = <span class="fn">sumar</span>(<span class="nu">4</span>, <span class="nu">6</span>)  <span class="cmt"># guarda 10</span>
+<span class="fn">print</span>(resultado)         <span class="cmt"># recién acá se muestra 10</span></code></pre>
 
-resultado = <span class="fn">es_par</span>(<span class="nu">8</span>)         <span class="cmt"># llamada: el valor queda en resultado</span>
-<span class="fn">print</span>(resultado)               <span class="cmt"># True</span></code></pre>
+            <div class="sub">Diferencias entre print y return</div>
+            <table class="datos">
+                <tr><th></th><th>print()</th><th>return</th></tr>
+                <tr><td>¿Qué hace?</td><td>muestra en pantalla</td><td>entrega un valor al programa</td></tr>
+                <tr><td>¿Se puede guardar?</td><td>no</td><td>sí: <code class="inline">x = funcion()</code></td></tr>
+                <tr><td>¿Sirve para seguir calculando?</td><td>no</td><td>sí</td></tr>
+                <tr><td>¿Termina la función?</td><td>no</td><td>sí, vuelve inmediatamente</td></tr>
+                <tr><td>Si no está</td><td>no muestra nada</td><td>la función devuelve <code class="inline">None</code></td></tr>
+            </table>
             <div class="okbox">
-                <strong>Definir no es ejecutar:</strong> el cuerpo corre recién cuando alguien
-                llama a la función por su nombre.
+                <strong>Truco para recordarlo:</strong> <em>print</em> es hablar por altavoz;
+                <em>return</em> es entregar un papel con el resultado en la mano.
             </div>
 
-            <div class="sub">Parámetros y argumentos</div>
-            <table class="datos">
-                <tr><th>Concepto</th><th>Qué es</th><th>Dónde vive</th><th>Ejemplo</th></tr>
-                <tr><td>Parámetro</td><td>la variable que la función recibe</td><td>en la definición</td><td><code class="inline">def tabla(n):</code></td></tr>
-                <tr><td>Argumento</td><td>el valor concreto enviado</td><td>en la llamada</td><td><code class="inline">tabla(7)</code></td></tr>
-            </table>
-            <pre><code><span class="kw">def</span> <span class="fn">tabla</span>(n):                  <span class="cmt"># n es el parámetro</span>
-    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">1</span>, <span class="nu">11</span>):
-        <span class="fn">print</span>(<span class="fn">f"{n}*{i}={n*i}"</span>)
-
-<span class="fn">tabla</span>(<span class="nu">7</span>)                       <span class="cmt"># 7 es el argumento</span></code></pre>
-
-            <div class="sub">Valor por defecto (default)</div>
-            <pre><code><span class="kw">def</span> <span class="fn">saludo</span>(nombre=<span class="str">"mundo"</span>):
-    <span class="fn">print</span>(<span class="str">"Hola"</span>, nombre)
-
-<span class="fn">saludo</span>(<span class="str">"Ana"</span>)     <span class="cmt"># Hola Ana</span>
-<span class="fn">saludo</span>()           <span class="cmt"># Hola mundo   (usa el default)</span></code></pre>
+            <div class="sub">Variables locales</div>
             <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
-                Un parámetro puede traer un valor precargado: si la llamada no lo envía, se usa ese.
+                Una variable <strong>local</strong> nace dentro de una función y solo existe ahí.
+                Cuando la función termina, la variable desaparece.
             </p>
+            <pre><code><span class="kw">def</span> <span class="fn">calcular</span>():
+    temporal = <span class="nu">10</span>       <span class="cmt"># local: solo vive dentro de calcular</span>
+    <span class="kw">return</span> temporal * <span class="nu">2</span>
 
-            <div class="sub">return: devolver un resultado</div>
-            <pre><code><span class="kw">def</span> <span class="fn">area_rectangulo</span>(base, altura):
-    <span class="kw">return</span> base * altura
+<span class="fn">print</span>(<span class="fn">calcular</span>())      <span class="cmt"># 20</span>
+<span class="cmt"># print(temporal)     # error: temporal no existe acá afuera</span></code></pre>
 
-a = <span class="fn">area_rectangulo</span>(<span class="nu">5</span>, <span class="nu">3</span>)   <span class="cmt"># a vale 15</span></code></pre>
-            <table class="datos">
-                <tr><th></th><th>print</th><th>return</th></tr>
-                <tr><td>Qué hace</td><td>muestra en pantalla</td><td>entrega el valor al programa</td></tr>
-                <tr><td>Se puede guardar</td><td>no</td><td>sí: <code class="inline">x = funcion()</code></td></tr>
-                <tr><td>Sirve para seguir calculando</td><td>no</td><td>sí</td></tr>
-            </table>
+            <div class="sub">Variables globales</div>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                Una variable <strong>global</strong> se define fuera de las funciones y se puede
+                <strong>leer</strong> desde cualquier función. Para <strong>modificarla</strong> hay que
+                avisarlo con la palabra <code class="inline">global</code>.
+            </p>
+            <pre><code>contador = <span class="nu">0</span>              <span class="cmt"># global</span>
+
+<span class="kw">def</span> <span class="fn">sumar_uno</span>():
+    <span class="kw">global</span> contador        <span class="cmt"># permiso para modificarla</span>
+    contador += <span class="nu">1</span>
+
+<span class="fn">sumar_uno</span>()
+<span class="fn">print</span>(contador)          <span class="cmt"># 1</span></code></pre>
             <div class="alerta">
-                <strong>Sin return:</strong> toda función devuelve <code class="inline">None</code>
-                aunque tenga print. Print muestra; return entrega.
-            </div>
-
-            <div class="sub">Variables locales y globales</div>
-            <ul class="explain">
-                <li><strong>Local:</strong> nace dentro de la función, muere al terminar.</li>
-                <li><strong>Global:</strong> nace fuera; todas las funciones pueden leerla.</li>
-                <li><strong>Para modificarla</strong> dentro de una función hay que declarar <code class="inline">global</code>.</li>
-            </ul>
-            <pre><code>intentos = <span class="nu">0</span>                 <span class="cmt"># global</span>
-
-<span class="kw">def</span> <span class="fn">sumar_intento</span>():
-    <span class="kw">global</span> intentos
-    intentos = intentos + <span class="nu">1</span></code></pre>
-            <div class="buenas">
-                <strong>Buena práctica:</strong> usá <code class="inline">global</code> solo cuando sea
-                necesario; lo ideal es pasar datos por parámetros y recibir resultados con
-                <code class="inline">return</code>.
+                <strong>Cuidado:</strong> abusar de <code class="inline">global</code> hace que el programa
+                sea difícil de seguir. Lo recomendado es pasar los datos por parámetros y devolver el
+                resultado con <code class="inline">return</code>.
             </div>
 
             <div class="exercise">
-                <h4>✍️ Ejercicio: función es_adulto</h4>
+                <h4>✍️ Actividad 1 · Función que devuelve el doble</h4>
                 <p class="ex-goal">
-                    Creá una función <code class="inline">es_adulto(edad)</code> que devuelva
-                    <code class="inline">True</code> si la edad es 18 o más y <code class="inline">False</code>
-                    si no. Después llamala con un número y mostrá el resultado con
-                    <code class="inline">print()</code>.
+                    Definí <code class="inline">doble(n)</code> que <strong>devuelva</strong>
+                    <code class="inline">n * 2</code> usando <code class="inline">return</code>.
+                    Guardá el resultado de <code class="inline">doble(8)</code> en una variable y mostralo
+                    con <code class="inline">print()</code>.
                 </p>
-                <textarea class="code-input" id="in-funciones" spellcheck="false" placeholder="# Definí la función y llamala&#10;def es_adulto(edad):&#10;    ..."></textarea>
+                <textarea class="code-input" id="in-return-1" spellcheck="false" placeholder="# return: devolver para guardar y usar&#10;def doble(n):&#10;    return ..."></textarea>
                 <div class="ex-actions">
-                    <button class="btn btn-primary" onclick="corregir('funciones')">✅ Corregir</button>
-                    <button class="btn btn-ghost" onclick="limpiar('funciones')">Limpiar</button>
+                    <button class="btn btn-primary" onclick="corregir('return-1')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('return-1')">Limpiar</button>
                 </div>
-                <div class="result" id="res-funciones"></div>
+                <div class="result" id="res-return-1"></div>
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Actividad 2 · Contador global</h4>
+                <p class="ex-goal">
+                    Creá una variable global <code class="inline">contador = 0</code> y una función
+                    <code class="inline">sumar_uno()</code> que la aumente en 1 usando
+                    <code class="inline">global</code>. Llamá a la función <strong>tres veces</strong> y
+                    mostrá el contador al final: debe valer <strong>3</strong>.
+                </p>
+                <textarea class="code-input" id="in-return-2" spellcheck="false" placeholder="# Variable global modificada con global&#10;contador = 0&#10;def sumar_uno():&#10;    ..."></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('return-2')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('return-2')">Limpiar</button>
+                </div>
+                <div class="result" id="res-return-2"></div>
             </div>
         </article>
 
-        <!-- 6 -->
+        <!-- 10 -->
         <article class="card">
-            <h3><span class="num">6</span> Integración: interfaz con Tkinter</h3>
+            <h3><span class="num">10</span> Interfaz gráfica con Tkinter</h3>
             <p class="concept">
-                Hasta acá el programa conversaba por consola. Con <strong>Tkinter</strong>
-                (viene incluido en Python) armamos ventanas con etiquetas, campos y botones:
-                el usuario interactúa y el programa <strong>reacciona a eventos</strong>.
+                Hasta ahora los programas conversaban por consola. Con <strong>Tkinter</strong>, que viene
+                incluido en Python, se arman ventanas con etiquetas, campos de texto y botones. El usuario
+                hace clic y el programa <strong>reacciona a eventos</strong>.
             </p>
-
-            <div class="sub">Ventana base</div>
+            <div class="syntax">
+                <span class="syntax-label">Estructura mínima</span>
+                from tkinter import *<br><br>
+                ventana = Tk()<br>
+                ventana.title("Mi app")<br><br>
+                ventana.mainloop()
+            </div>
             <pre><code><span class="kw">from</span> tkinter <span class="kw">import</span> *
 
 ventana = <span class="fn">Tk</span>()
-ventana.title(<span class="str">"Mi app"</span>)
+ventana.title(<span class="str">"Mi primera ventana"</span>)
 ventana.geometry(<span class="str">"400x300"</span>)
 
-ventana.mainloop()      <span class="cmt"># deja la ventana viva, escuchando eventos</span></code></pre>
-            <div class="okbox">
-                <strong>mainloop()</strong> es el motor: un ciclo oculto que espera clicks y teclas
-                para disparar las funciones que indicaste.
-            </div>
+<span class="fn">Label</span>(ventana, text=<span class="str">"Hola"</span>).pack()
 
-            <div class="sub">Widgets y eventos</div>
+ventana.mainloop()      <span class="cmt"># mantiene la ventana abierta y escucha eventos</span></code></pre>
+
+            <div class="sub">Widgets básicos</div>
             <table class="datos">
-                <tr><th>Widget</th><th>Para qué</th><th>Típico</th></tr>
-                <tr><td><code class="inline">Label</code></td><td>mostrar texto</td><td><code class="inline">Label(ventana, text="Hola")</code></td></tr>
-                <tr><td><code class="inline">Entry</code></td><td>campo de escritura</td><td><code class="inline">entrada.get()</code> lee su contenido</td></tr>
-                <tr><td><code class="inline">Button</code></td><td>disparar acción</td><td><code class="inline">command=verificar</code></td></tr>
-                <tr><td><code class="inline">Frame</code></td><td>agrupar / ordenar</td><td><code class="inline">frame1.pack(fill="both")</code></td></tr>
+                <tr><th>Widget</th><th>Para qué sirve</th><th>Ejemplo</th></tr>
+                <tr><td><code class="inline">Label</code></td><td>mostrar un texto</td><td><code class="inline">Label(ventana, text="Hola")</code></td></tr>
+                <tr><td><code class="inline">Entry</code></td><td>escribir una línea</td><td><code class="inline">entrada.get()</code> lee el contenido</td></tr>
+                <tr><td><code class="inline">Button</code></td><td>ejecutar una acción al hacer clic</td><td><code class="inline">Button(ventana, text="OK", command=saludar)</code></td></tr>
+                <tr><td><code class="inline">Frame</code></td><td>agrupar y ordenar widgets</td><td><code class="inline">Frame(ventana).pack()</code></td></tr>
             </table>
-            <pre><code><span class="cmt"># Patrón completo (versión Adivina el número)</span>
-<span class="kw">def</span> <span class="fn">verificar</span>():
-    <span class="kw">try</span>:
-        intento = <span class="fn">int</span>(entrada.get())          <span class="cmt"># lee el Entry</span>
-        <span class="kw">if</span> intento == numero_secreto:
-            resultado.config(text=<span class="str">"¡Correcto!"</span>, bg=<span class="str">"green"</span>, fg=<span class="str">"white"</span>)
-        <span class="kw">else</span>:
-            resultado.config(text=<span class="str">"No es ese..."</span>, bg=<span class="str">"orange"</span>)
-    <span class="kw">except</span>:
-        resultado.config(text=<span class="str">"Escribí un número válido"</span>, bg=<span class="str">"red"</span>, fg=<span class="str">"white"</span>)
 
-boton = <span class="fn">Button</span>(ventana, text=<span class="str">"Verificar"</span>, command=verificar)</code></pre>
+            <div class="sub">Un botón que saluda</div>
+            <pre><code><span class="kw">from</span> tkinter <span class="kw">import</span> *
+
+ventana = <span class="fn">Tk</span>()
+entrada = <span class="fn">Entry</span>(ventana)
+entrada.pack()
+resultado = <span class="fn">Label</span>(ventana, text=<span class="str">""</span>)
+resultado.pack()
+
+<span class="kw">def</span> <span class="fn">saludar</span>():
+    nombre = entrada.<span class="fn">get</span>()          <span class="cmt"># lee lo escrito</span>
+    resultado.<span class="fn">config</span>(text=<span class="fn">f"Hola, {nombre}"</span>)
+
+<span class="fn">Button</span>(ventana, text=<span class="str">"Saludar"</span>, command=saludar).pack()
+ventana.mainloop()</code></pre>
             <div class="alerta">
-                <strong>Error clásico Nº1:</strong> <code class="inline">command=verificar()</code>
-                con paréntesis ejecuta la función UNA vez al crear el botón y luego no hace nada.
-                Sin paréntesis (<code class="inline">command=verificar</code>) entregás la función
-                para que el click la llame. Si necesitás enviarle datos:
-                <code class="inline">command=lambda: tabla(7)</code>.
+                <strong>Error clásico:</strong> <code class="inline">command=saludar()</code> con paréntesis
+                ejecuta la función una sola vez al crear el botón. Para que se ejecute con cada clic va
+                <strong>sin paréntesis</strong>: <code class="inline">command=saludar</code>.
             </div>
-
-            <div class="sub">Después de un rato: after(milisegundos, función)</div>
-            <pre><code><span class="kw">def</span> <span class="fn">subir</span>():
-    <span class="kw">global</span> segundos
-    segundos = segundos + <span class="nu">1</span>
-    reloj.config(text=str(segundos))
-    ventana.after(<span class="nu">1000</span>, subir)   <span class="cmt"># se re-agenda: repite cada 1 s</span>
-
-segundos = <span class="nu">0</span>
-ventana.after(<span class="nu">1000</span>, subir)       <span class="cmt"># primera llamada: arranca el ciclo</span></code></pre>
-            <table class="datos">
-                <tr><th></th><th>while + time.sleep</th><th>after()</th></tr>
-                <tr><td>Consola</td><td>sí</td><td>—</td></tr>
-                <tr><td>Ventana Tkinter</td><td><strong>NO: congela todo</strong></td><td>sí, sin congelar</td></tr>
-            </table>
             <div class="okbox">
-                <strong>Truco pro:</strong> <code class="inline">after</code> agenda UNA sola ejecución.
-                Para repetir, la función se llama de nuevo al final (se re-agenda). Es como tirar la
-                pelota contra la pared: cada rebote vuelve a programar el próximo.
+                <strong>mainloop()</strong> es el motor de la ventana: queda esperando clics y teclas.
+                Todo lo que se cree después de <code class="inline">mainloop()</code> no se va a ver.
             </div>
-
-            <div class="sub">Herramientas: random, try / except y delete</div>
-            <pre><code><span class="kw">import</span> random
-
-numero_secreto = random.<span class="fn">randint</span>(<span class="nu">1</span>, <span class="nu">10</span>)   <span class="cmt"># incluye AMBOS extremos</span></code></pre>
-            <table class="datos">
-                <tr><th>Error</th><th>Cuándo pasa</th><th>Ejemplo</th></tr>
-                <tr><td><code class="inline">ValueError</code></td><td>conversión imposible</td><td><code class="inline">int("hola")</code></td></tr>
-                <tr><td><code class="inline">ZeroDivisionError</code></td><td>división por cero</td><td><code class="inline">total / 0</code></td></tr>
-                <tr><td><code class="inline">NameError</code></td><td>variable sin definir</td><td>usar <code class="inline">tota1</code> en vez de <code class="inline">total</code></td></tr>
-            </table>
-            <pre><code><span class="kw">try</span>:
-    intento = <span class="fn">int</span>(entrada.get())   <span class="cmt"># zona protegida: puede fallar</span>
-<span class="kw">except</span>:
-    resultado.config(text=<span class="str">"Escribí un número válido"</span>)  <span class="cmt"># plan B sin crash</span></code></pre>
-            <table class="datos">
-                <tr><th>Acción</th><th>Línea</th><th>Widget</th></tr>
-                <tr><td>leer lo escrito</td><td><code class="inline">entrada.get()</code></td><td>Entry</td></tr>
-                <tr><td>vaciar el campo</td><td><code class="inline">entrada.delete(0, END)</code></td><td>Entry</td></tr>
-                <tr><td>cambiar texto/color</td><td><code class="inline">resultado.config(text=..., bg=...)</code></td><td>Label</td></tr>
-            </table>
-
-            <div class="sub">Reglas de oro de Tkinter</div>
             <div class="buenas">
-                <ol class="explain">
-                    <li>Nada de <code class="inline">while</code> ni <code class="inline">input()</code>
-                        dentro de una app de ventanas: bloquean el mainloop. El reemplazo del while es
-                        <code class="inline">after()</code>; el del input es el <code class="inline">Entry</code>.</li>
-                    <li>Los datos viven en widgets: <code class="inline">.get()</code> para leer,
-                        <code class="inline">.config()</code> para cambiar,
-                        <code class="inline">.delete(0, END)</code> para vaciar.</li>
-                    <li>El botón lleva la función SIN paréntesis; con datos, usá
-                        <code class="inline">lambda</code>.</li>
-                    <li>Si una función cambia una variable global, declará <code class="inline">global</code>.</li>
-                    <li><code class="inline">mainloop()</code> siempre al final del archivo.</li>
-                </ol>
+                <strong>Regla de oro:</strong> dentro de una app con Tkinter no uses
+                <code class="inline">input()</code> ni <code class="inline">while</code>:
+                bloquean la ventana. Para leer se usa <code class="inline">Entry.get()</code> y para
+                repetir en el tiempo se usa <code class="inline">after()</code>.
             </div>
 
             <div class="exercise">
-                <h4>✍️ Ejercicio: el saludador</h4>
+                <h4>✍️ Actividad 1 · Ventana con etiqueta</h4>
+                <p class="ex-goal">
+                    Creá una ventana con <code class="inline">Tk()</code>, agregá un
+                    <code class="inline">Label</code> que diga <strong>"Hola"</strong>, mostralo con
+                    <code class="inline">pack()</code> y cerrá con <code class="inline">mainloop()</code>.
+                </p>
+                <textarea class="code-input" id="in-tkinter-1" spellcheck="false" placeholder="# Ventana + Label + mainloop&#10;from tkinter import *&#10;ventana = Tk()"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('tkinter-1')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('tkinter-1')">Limpiar</button>
+                </div>
+                <div class="result" id="res-tkinter-1"></div>
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Actividad 2 · El saludador con botón</h4>
                 <p class="ex-goal">
                     Armá una ventana con un <code class="inline">Entry</code> para el nombre, un
-                    <code class="inline">Button</code> que diga <strong>"Saludar"</strong> y esté conectado
-                    con <code class="inline">command=</code> (sin paréntesis), y un <code class="inline">Label</code>
-                    que muestre <code class="inline">"Hola, "</code> junto al nombre usando
-                    <code class="inline">.get()</code> y <code class="inline">.config()</code>.
-                    Cerrá con <code class="inline">mainloop()</code>.
+                    <code class="inline">Button</code> que diga <strong>"Saludar"</strong> y un
+                    <code class="inline">Label</code> para el resultado. Al hacer clic, la función debe
+                    leer el nombre con <code class="inline">.get()</code> y actualizar el label con
+                    <code class="inline">.config()</code>. Conectá el botón con
+                    <code class="inline">command=</code> sin paréntesis y cerrá con
+                    <code class="inline">mainloop()</code>.
                 </p>
-                <textarea class="code-input" id="in-tkinter" spellcheck="false" placeholder="# Entry + Button + Label&#10;from tkinter import *&#10;ventana = Tk()"></textarea>
+                <textarea class="code-input" id="in-tkinter-2" spellcheck="false" placeholder="# Entry + Button + Label + mainloop&#10;from tkinter import *&#10;ventana = Tk()"></textarea>
                 <div class="ex-actions">
-                    <button class="btn btn-primary" onclick="corregir('tkinter')">✅ Corregir</button>
-                    <button class="btn btn-ghost" onclick="limpiar('tkinter')">Limpiar</button>
+                    <button class="btn btn-primary" onclick="corregir('tkinter-2')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('tkinter-2')">Limpiar</button>
                 </div>
-                <div class="result" id="res-tkinter"></div>
+                <div class="result" id="res-tkinter-2"></div>
+            </div>
+        </article>
+
+        <!-- 11 -->
+        <article class="card">
+            <h3><span class="num">11</span> Manejo de errores con try / except</h3>
+            <p class="concept">
+                Un programa bien hecho no debería cerrarse de golpe cuando el usuario escribe algo
+                inesperado. <strong>try / except</strong> permite <em>intentar</em> una operación peligrosa y,
+                si falla, ejecutar un <em>plan B</em> en lugar de terminar con un error.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis</span>
+                try:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;instrucciones que pueden fallar<br>
+                except TipoDeError:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;plan B
+            </div>
+            <pre><code><span class="kw">try</span>:
+    numero = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Número: "</span>))
+    <span class="fn">print</span>(<span class="str">"El doble es"</span>, numero * <span class="nu">2</span>)
+<span class="kw">except</span> <span class="fn">ValueError</span>:
+    <span class="fn">print</span>(<span class="str">"Eso no es un número válido"</span>)</code></pre>
+
+            <div class="sub">Errores frecuentes</div>
+            <table class="datos">
+                <tr><th>Error</th><th>Cuándo aparece</th><th>Ejemplo</th></tr>
+                <tr><td><code class="inline">ValueError</code></td><td>no se puede convertir el texto a número</td><td><code class="inline">int("hola")</code></td></tr>
+                <tr><td><code class="inline">ZeroDivisionError</code></td><td>se intenta dividir por cero</td><td><code class="inline">10 / 0</code></td></tr>
+                <tr><td><code class="inline">NameError</code></td><td>se usa una variable que no existe</td><td><code class="inline">print(tottal)</code></td></tr>
+                <tr><td><code class="inline">IndexError</code></td><td>se pide una posición que no existe</td><td><code class="inline">lista[99]</code></td></tr>
+            </table>
+
+            <div class="sub">Atrapar un error específico</div>
+            <pre><code><span class="kw">try</span>:
+    a = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Dividendo: "</span>))
+    b = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Divisor: "</span>))
+    <span class="fn">print</span>(a / b)
+<span class="kw">except</span> <span class="fn">ZeroDivisionError</span>:
+    <span class="fn">print</span>(<span class="str">"No se puede dividir por cero"</span>)</code></pre>
+            <div class="okbox">
+                <strong>Buena práctica:</strong> atrapá el error más específico que esperás
+                (<code class="inline">ValueError</code>, <code class="inline">ZeroDivisionError</code>)
+                y mostrá un mensaje claro. Evitá un <code class="inline">except</code> vacío que oculte
+                cualquier problema.
+            </div>
+            <div class="alerta">
+                <strong>Ojo:</strong> <code class="inline">try / except</code> no corrige el error;
+                permite <strong>reaccionar</strong> sin que el programa se cierre. La validación sigue
+                siendo necesaria.
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Actividad 1 · Número válido o inválido</h4>
+                <p class="ex-goal">
+                    Pedí un número por teclado y convertilo con <code class="inline">int()</code> dentro de un
+                    <code class="inline">try</code>. Si la conversión funciona, mostrá
+                    <strong>"Número válido"</strong>. Si falla, mostrá
+                    <strong>"No es un número"</strong> en el <code class="inline">except</code>.
+                </p>
+                <textarea class="code-input" id="in-try-1" spellcheck="false" placeholder="# try / except con ValueError&#10;try:&#10;    numero = int(input(&quot;Número: &quot;))&#10;    ..."></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('try-1')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('try-1')">Limpiar</button>
+                </div>
+                <div class="result" id="res-try-1"></div>
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Actividad 2 · División protegida</h4>
+                <p class="ex-goal">
+                    Pedí dos números y mostrá su división dentro de un <code class="inline">try</code>.
+                    Si el divisor es cero, atrapá el <code class="inline">ZeroDivisionError</code> y mostrá
+                    <strong>"No se puede dividir por cero"</strong>.
+                </p>
+                <textarea class="code-input" id="in-try-2" spellcheck="false" placeholder="# try / except con ZeroDivisionError&#10;try:&#10;    a = int(input(&quot;Dividendo: &quot;))&#10;    ..."></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('try-2')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('try-2')">Limpiar</button>
+                </div>
+                <div class="result" id="res-try-2"></div>
+            </div>
+        </article>
+
+        <!-- 12 -->
+        <article class="card">
+            <h3><span class="num">12</span> Números y elecciones al azar con random</h3>
+            <p class="concept">
+                El módulo <strong>random</strong> permite que el programa elija valores al azar: tirar un
+                dado, sacar una carta, elegir un nombre de una lista o generar un número secreto para un
+                juego. Se carga con <code class="inline">import random</code> al principio del archivo.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Importar y usar</span>
+                import random<br><br>
+                random.randint(1, 6)<br>
+                random.choice(lista)
+            </div>
+            <pre><code><span class="kw">import</span> random
+
+dado = random.<span class="fn">randint</span>(<span class="nu">1</span>, <span class="nu">6</span>)      <span class="cmt"># entero entre 1 y 6, ambos incluidos</span>
+<span class="fn">print</span>(<span class="str">"Salió"</span>, dado)</code></pre>
+            <table class="datos">
+                <tr><th>Función</th><th>Qué devuelve</th><th>Ejemplo</th></tr>
+                <tr><td><code class="inline">randint(a, b)</code></td><td>entero entre a y b, <strong>incluye ambos</strong></td><td><code class="inline">randint(1, 10)</code></td></tr>
+                <tr><td><code class="inline">choice(lista)</code></td><td>un elemento al azar de la lista</td><td><code class="inline">choice(["Ana", "Luis", "Eva"])</code></td></tr>
+                <tr><td><code class="inline">uniform(a, b)</code></td><td>decimal entre a y b</td><td><code class="inline">uniform(0, 1)</code></td></tr>
+                <tr><td><code class="inline">shuffle(lista)</code></td><td>mezcla la lista en su lugar</td><td><code class="inline">shuffle(cartas)</code></td></tr>
+            </table>
+            <div class="okbox">
+                <strong>randint incluye los dos extremos:</strong> <code class="inline">randint(1, 6)</code>
+                puede dar 1, 2, 3, 4, 5 o 6. Es distinto de <code class="inline">range</code>, que excluye
+                el final.
+            </div>
+            <pre><code><span class="kw">import</span> random
+
+nombres = [<span class="str">"Ana"</span>, <span class="str">"Luis"</span>, <span class="str">"Eva"</span>]
+elegido = random.<span class="fn">choice</span>(nombres)
+<span class="fn">print</span>(<span class="str">"Participa:"</span>, elegido)</code></pre>
+            <div class="alerta">
+                <strong>Error clásico:</strong> escribir <code class="inline">randint(10)</code>.
+                <code class="inline">randint</code> necesita <strong>dos</strong> argumentos: el mínimo y el
+                máximo.
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Actividad 1 · Tirar un dado</h4>
+                <p class="ex-goal">
+                    Importá <code class="inline">random</code>, generá un número entero entre
+                    <strong>1 y 6</strong> con <code class="inline">randint()</code>, guardalo en una variable
+                    y mostralo con <code class="inline">print()</code>.
+                </p>
+                <textarea class="code-input" id="in-random-1" spellcheck="false" placeholder="# Dado de 6 caras&#10;import random&#10;dado = random.randint(1, 6)&#10;print(dado)"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('random-1')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('random-1')">Limpiar</button>
+                </div>
+                <div class="result" id="res-random-1"></div>
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Actividad 2 · Elegir un nombre al azar</h4>
+                <p class="ex-goal">
+                    Creá una lista con al menos <strong>tres nombres</strong>, elegí uno al azar con
+                    <code class="inline">random.choice()</code> y mostralo con <code class="inline">print()</code>.
+                </p>
+                <textarea class="code-input" id="in-random-2" spellcheck="false" placeholder="# Elegir un elemento de una lista&#10;import random&#10;nombres = [&quot;Ana&quot;, &quot;Luis&quot;, &quot;Eva&quot;]&#10;..."></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('random-2')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('random-2')">Limpiar</button>
+                </div>
+                <div class="result" id="res-random-2"></div>
             </div>
         </article>
 
@@ -954,7 +1407,7 @@ numero_secreto = random.<span class="fn">randint</span>(<span class="nu">1</span
             </p>
             <div class="progress-top">
                 <div class="score-bar"><div class="score-fill" id="progreso-barra" style="width:0%"></div></div>
-                <span class="progress-pct" id="progreso-texto">0 de 8 completos</span>
+                <span class="progress-pct" id="progreso-texto">0 de 23 completos</span>
             </div>
             <ul class="progress-list" id="progreso-lista"></ul>
             <div class="quiz-actions">
@@ -967,7 +1420,7 @@ numero_secreto = random.<span class="fn">randint</span>(<span class="nu">1</span
     <section id="quiz">
         <h2 class="section-title">SECCIÓN 2 · Autoevaluación</h2>
         <p class="section-sub">
-            Doce preguntas sobre todos los temas. Elegí una opción por pregunta y presioná
+            Catorce preguntas sobre todos los temas. Elegí una opción por pregunta y presioná
             <strong>Calificar</strong>: la página te muestra cuáles están bien y cuáles revisar.
         </p>
         <div class="card">
@@ -985,8 +1438,18 @@ a = <span class="nu">10</span>
                 </ul>
             </div>
 
+            <div class="quiz-question" data-answer="c">
+                <p class="q-text">2. ¿Qué tipo de dato devuelve siempre <code class="inline">input()</code>?</p>
+                <ul class="options-list">
+                    <li data-opt="a">int</li>
+                    <li data-opt="b">float</li>
+                    <li data-opt="c">str</li>
+                    <li data-opt="d">Depende de lo que escriba el usuario</li>
+                </ul>
+            </div>
+
             <div class="quiz-question" data-answer="b">
-                <p class="q-text">2. Con <code class="inline">edad = 15</code>, ¿qué texto aparece?</p>
+                <p class="q-text">3. Con <code class="inline">edad = 15</code>, ¿qué texto aparece?</p>
                 <pre><code><span class="kw">if</span> edad &gt;= <span class="nu">18</span>:
     <span class="fn">print</span>(<span class="str">"Mayor"</span>)
 <span class="kw">elif</span> edad &gt;= <span class="nu">13</span>:
@@ -1001,19 +1464,18 @@ a = <span class="nu">10</span>
                 </ul>
             </div>
 
-            <div class="quiz-question" data-answer="c">
-                <p class="q-text">3. El usuario escribe <code class="inline">7</code> en
-                    <code class="inline">n = input("Número: ")</code>. ¿Qué produce <code class="inline">n * 2</code>?</p>
+            <div class="quiz-question" data-answer="a">
+                <p class="q-text">4. ¿Cuál de estas variables es un <strong>contador</strong>?</p>
                 <ul class="options-list">
-                    <li data-opt="a">14, porque convierte solo</li>
-                    <li data-opt="b">Da error de sintaxis</li>
-                    <li data-opt="c">"77", porque input devuelve texto</li>
-                    <li data-opt="d">0</li>
+                    <li data-opt="a">Una que empieza en 0 y suma 1 por cada aprobado.</li>
+                    <li data-opt="b">Una que empieza en 0 y suma el precio de cada producto.</li>
+                    <li data-opt="c">Una que guarda el nombre del alumno.</li>
+                    <li data-opt="d">Una que guarda un texto entre comillas.</li>
                 </ul>
             </div>
 
             <div class="quiz-question" data-answer="b">
-                <p class="q-text">4. ¿Cuántas vueltas da y qué valores toma <code class="inline">i</code> en
+                <p class="q-text">5. ¿Cuántas vueltas da y qué valores toma <code class="inline">i</code> en
                     <code class="inline">for i in range(1, 6):</code>?</p>
                 <ul class="options-list">
                     <li data-opt="a">6 vueltas: 1, 2, 3, 4, 5, 6</li>
@@ -1024,7 +1486,7 @@ a = <span class="nu">10</span>
             </div>
 
             <div class="quiz-question" data-answer="b">
-                <p class="q-text">5. ¿Qué imprime este acumulador?</p>
+                <p class="q-text">6. ¿Qué imprime este acumulador?</p>
                 <pre><code>total = <span class="nu">0</span>
 <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">3</span>):
     total = total + i
@@ -1037,81 +1499,90 @@ a = <span class="nu">10</span>
                 </ul>
             </div>
 
-            <div class="quiz-question" data-answer="c">
-                <p class="q-text">6. Las notas ingresadas son 4, 8 y 9. ¿Cuánto vale
-                    <code class="inline">aprobados</code> al final?</p>
-                <pre><code>aprobados = <span class="nu">0</span>
-<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">3</span>):
-    nota = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Nota: "</span>))
-    <span class="kw">if</span> nota &gt;= <span class="nu">6</span>:
-        aprobados = aprobados + <span class="nu">1</span></code></pre>
+            <div class="quiz-question" data-answer="a">
+                <p class="q-text">7. ¿Qué muestra este <code class="inline">while</code>?</p>
+                <pre><code>i = <span class="nu">3</span>
+<span class="kw">while</span> i &gt; <span class="nu">0</span>:
+    <span class="fn">print</span>(i)
+    i -= <span class="nu">1</span></code></pre>
                 <ul class="options-list">
-                    <li data-opt="a">0</li>
-                    <li data-opt="b">3</li>
-                    <li data-opt="c">2</li>
-                    <li data-opt="d">9</li>
+                    <li data-opt="a">3, 2 y 1 (uno por línea)</li>
+                    <li data-opt="b">1, 2 y 3 (uno por línea)</li>
+                    <li data-opt="c">3, 2, 1 y 0 (uno por línea)</li>
+                    <li data-opt="d">No muestra nada</li>
                 </ul>
             </div>
 
             <div class="quiz-question" data-answer="a">
-                <p class="q-text">7. Con <code class="inline">promedio = 7.5</code>, ¿qué línea imprime
-                    exactamente <code class="inline">Promedio: 7.5</code>?</p>
+                <p class="q-text">8. ¿Cómo se define una función <strong>sin parámetro</strong>?</p>
                 <ul class="options-list">
-                    <li data-opt="a">print(f"Promedio: {promedio}")</li>
-                    <li data-opt="b">print("Promedio: {promedio}")</li>
-                    <li data-opt="c">print("Promedio: " + promedio)</li>
-                    <li data-opt="d">print(Promedio: promedio)</li>
-                </ul>
-            </div>
-
-            <div class="quiz-question" data-answer="b">
-                <p class="q-text">8. Necesitás un entero entre 1 y 10, incluidos los dos extremos. ¿Qué línea lo logra?</p>
-                <ul class="options-list">
-                    <li data-opt="a">numero = random.randint(1, 9)</li>
-                    <li data-opt="b">numero = random.randint(1, 10)</li>
-                    <li data-opt="c">numero = random.range(10)</li>
-                    <li data-opt="d">numero = random(1, 10)</li>
+                    <li data-opt="a"><code class="inline">def saludar():</code></li>
+                    <li data-opt="b"><code class="inline">def saludar(nombre):</code></li>
+                    <li data-opt="c"><code class="inline">saludar():</code></li>
+                    <li data-opt="d"><code class="inline">function saludar():</code></li>
                 </ul>
             </div>
 
             <div class="quiz-question" data-answer="c">
-                <p class="q-text">9. ¿Qué línea vacía el campo <code class="inline">entrada</code> de un Entry?</p>
+                <p class="q-text">9. Si una función está definida como
+                    <code class="inline">def saludar(nombre):</code>, ¿cuál llamada le envía el argumento
+                    <strong>"Ana"</strong>?</p>
                 <ul class="options-list">
-                    <li data-opt="a">entrada.clear()</li>
-                    <li data-opt="b">entrada.config(text="")</li>
-                    <li data-opt="c">entrada.delete(0, END)</li>
-                    <li data-opt="d">entrada.delete(END)</li>
+                    <li data-opt="a"><code class="inline">saludar</code></li>
+                    <li data-opt="b"><code class="inline">saludar()</code></li>
+                    <li data-opt="c"><code class="inline">saludar("Ana")</code></li>
+                    <li data-opt="d"><code class="inline">def saludar("Ana"):</code></li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="b">
+                <p class="q-text">10. ¿Cuál es la diferencia principal entre <code class="inline">print</code>
+                    y <code class="inline">return</code>?</p>
+                <ul class="options-list">
+                    <li data-opt="a">print devuelve un valor y return lo muestra.</li>
+                    <li data-opt="b">print muestra en pantalla; return devuelve un valor al programa.</li>
+                    <li data-opt="c">Son exactamente lo mismo.</li>
+                    <li data-opt="d">return solo se usa dentro de un for.</li>
                 </ul>
             </div>
 
             <div class="quiz-question" data-answer="a">
-                <p class="q-text">10. ¿Cuál conecta BIEN el botón con la función <code class="inline">verificar</code>?</p>
+                <p class="q-text">11. Una variable <strong>local</strong> definida dentro de una función…</p>
                 <ul class="options-list">
-                    <li data-opt="a">Button(ventana, text="OK", command=verificar)</li>
-                    <li data-opt="b">Button(ventana, text="OK", command=verificar())</li>
-                    <li data-opt="c">Button(ventana, text="OK", command="verificar")</li>
-                    <li data-opt="d">Button(ventana, text="OK", verificar)</li>
+                    <li data-opt="a">solo existe mientras la función se ejecuta.</li>
+                    <li data-opt="b">se puede usar en cualquier parte del programa.</li>
+                    <li data-opt="c">siempre vale 0.</li>
+                    <li data-opt="d">se borra al cerrar la ventana de Tkinter.</li>
                 </ul>
             </div>
 
-            <div class="quiz-question" data-answer="b">
-                <p class="q-text">11. ¿Para qué se usa <code class="inline">try / except</code> al leer un Entry?</p>
+            <div class="quiz-question" data-answer="a">
+                <p class="q-text">12. ¿Cuál conecta BIEN el botón con la función <code class="inline">verificar</code>?</p>
                 <ul class="options-list">
-                    <li data-opt="a">Para que el botón responda más rápido</li>
-                    <li data-opt="b">Para que, si escriben letras, el programa avise en vez de cerrarse</li>
-                    <li data-opt="c">Porque command exige una función protegida</li>
-                    <li data-opt="d">Porque el Entry devuelve siempre texto vacío</li>
+                    <li data-opt="a"><code class="inline">Button(ventana, text="OK", command=verificar)</code></li>
+                    <li data-opt="b"><code class="inline">Button(ventana, text="OK", command=verificar())</code></li>
+                    <li data-opt="c"><code class="inline">Button(ventana, text="OK", command="verificar")</code></li>
+                    <li data-opt="d"><code class="inline">Button(ventana, text="OK", verificar)</code></li>
                 </ul>
             </div>
 
             <div class="quiz-question" data-answer="c">
-                <p class="q-text">12. Querés que un contador suba uno por segundo en la ventana. ¿Cómo se repite con
-                    <code class="inline">after</code>?</p>
+                <p class="q-text">13. ¿Para qué se usa <code class="inline">try / except</code>?</p>
                 <ul class="options-list">
-                    <li data-opt="a">Llamando after(1000, subir) una única vez; eso ya repite solo</li>
-                    <li data-opt="b">Con while True: pass antes de mainloop()</li>
-                    <li data-opt="c">Agendándolo otra vez DENTRO de la función: al final de subir() va ventana.after(1000, subir)</li>
-                    <li data-opt="d">Con time.sleep(1) dentro de un while</li>
+                    <li data-opt="a">Para que el programa corra más rápido.</li>
+                    <li data-opt="b">Para repetir un bloque muchas veces.</li>
+                    <li data-opt="c">Para intentar una operación y, si falla, ejecutar un plan B sin cerrar el programa.</li>
+                    <li data-opt="d">Para elegir un número al azar.</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question" data-answer="b">
+                <p class="q-text">14. Necesitás un entero entre 1 y 10, incluidos los dos extremos. ¿Qué línea lo logra?</p>
+                <ul class="options-list">
+                    <li data-opt="a"><code class="inline">numero = random.randint(1, 9)</code></li>
+                    <li data-opt="b"><code class="inline">numero = random.randint(1, 10)</code></li>
+                    <li data-opt="c"><code class="inline">numero = random.range(10)</code></li>
+                    <li data-opt="d"><code class="inline">numero = random(1, 10)</code></li>
                 </ul>
             </div>
 
@@ -1289,8 +1760,8 @@ a = <span class="nu">10</span>
 
     articulos.forEach(function (article, index) {
         var h3 = article.querySelector('h3');
-        var exercise = article.querySelector('.exercise');
-        if (!h3 || !exercise) return;
+        var ejercicios = article.querySelectorAll('.exercise');
+        if (!h3 || !ejercicios.length) return;
 
         article.classList.add('topic');
 
@@ -1304,10 +1775,12 @@ a = <span class="nu">10</span>
         practica.hidden = true;
 
         Array.prototype.slice.call(article.children).forEach(function (child) {
-            if (child === h3 || child === exercise) return;
+            if (child === h3 || child.classList.contains('exercise')) return;
             teoria.appendChild(child);
         });
-        practica.appendChild(exercise);
+        ejercicios.forEach(function (ejercicio) {
+            practica.appendChild(ejercicio);
+        });
 
         var tabs = document.createElement('div');
         tabs.className = 'topic-tabs';
@@ -1539,6 +2012,13 @@ window.reiniciarQuiz = function (contId, bannerId) {
             { d: 'Usa al menos 3 variables distintas', f: function (c) { var m = c.match(/^ *([a-z_]\w*) *=/gm) || []; return new Set(m.map(function (s) { return s.split('=')[0].trim(); })).size >= 3; } },
             { d: 'Muestra los valores con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
         ],
+        entrada: [
+            { d: 'Pide un dato con input()', f: function (c) { return /\binput\s*\(/.test(c); } },
+            { d: 'Convierte con int() o float()', f: function (c) { return /\b(int|float)\s*\(/.test(c); } },
+            { d: 'Calcula el precio con IVA (× 1.21)', f: function (c) { return /\*\s*1\.21\b/.test(c); } },
+            { d: 'Muestra con print() y f-string', f: function (c) { return /\bprint\s*\(\s*f["']/.test(c); } },
+            { d: 'Incluye las llaves { } del f-string', f: function (c) { return /\{[^}]+\}/.test(c); } }
+        ],
         decisiones: [
             { d: 'Pide un dato con input()', f: function (c) { return /\binput\s*\(/.test(c); } },
             { d: 'Convierte el dato a número con int()', f: function (c) { return /\bint\s*\(/.test(c); } },
@@ -1548,37 +2028,189 @@ window.reiniciarQuiz = function (contId, bannerId) {
             { d: 'Compara con 10 (<= 10 o < 11)', f: function (c) { return /(<=?\s*10)|(<\s*11)/.test(c); } },
             { d: 'Muestra al menos dos resultados con print()', f: function (c) { return count(c, /\bprint\s*\(/) >= 2; } }
         ],
-        ciclos: [
-            { d: 'Inicializa el contador en 10', f: function (c) { return /\b[a-z_]\w*\s*=\s*10\b/.test(c); } },
+        'contador-1': [
+            { d: 'Inicializa el contador aprobados en 0', f: function (c) { return /\baprobados\s*=\s*0\b/.test(c); } },
+            { d: 'Incluye las tres notas: 8, 4 y 7', f: function (c) { return /\b8\b/.test(c) && /\b4\b/.test(c) && /\b7\b/.test(c); } },
+            { d: 'Compara las notas con 6 (>= 6 o > 5)', f: function (c) { return /(>=\s*6)|(>\s*5)/.test(c); } },
+            { d: 'Suma 1 al contador por los aprobados', f: function (c) {
+                return /\baprobados\s*\+=\s*1\b/.test(c) || /\baprobados\s*=\s*aprobados\s*\+\s*1\b/.test(c);
+            } },
+            { d: 'Usa una decisión para cada nota (if)', f: function (c) { return count(c, /\bif\b[^\n]*:/) >= 1; } },
+            { d: 'Muestra el contador con print()', f: function (c) {
+                return /\bprint\s*\([^)]*\baprobados\b/.test(c) || /\bprint\s*\(\s*f["'][^"']*\{\s*aprobados\s*\}/.test(c);
+            } }
+        ],
+        'contador-2': [
+            { d: 'Inicializa el acumulador total en 0', f: function (c) { return /\btotal\s*=\s*0\b/.test(c); } },
+            { d: 'Suma 1500 al total', f: function (c) {
+                return /\btotal\s*\+=\s*1500\b/.test(c) || /\btotal\s*=\s*total\s*\+\s*1500\b/.test(c);
+            } },
+            { d: 'Suma 750 al total', f: function (c) {
+                return /\btotal\s*\+=\s*750\b/.test(c) || /\btotal\s*=\s*total\s*\+\s*750\b/.test(c);
+            } },
+            { d: 'Suma 2000 al total', f: function (c) {
+                return /\btotal\s*\+=\s*2000\b/.test(c) || /\btotal\s*=\s*total\s*\+\s*2000\b/.test(c);
+            } },
+            { d: 'Muestra el total con print()', f: function (c) {
+                return /\bprint\s*\([^)]*\btotal\b/.test(c) || /\bprint\s*\(\s*f["'][^"']*\{\s*total\s*\}/.test(c);
+            } }
+        ],
+        'for-1': [
+            { d: 'Usa un bucle for', f: function (c) { return /\bfor\b/.test(c); } },
+            { d: 'Usa range() para generar los números', f: function (c) { return /\brange\s*\(/.test(c); } },
+            { d: 'Recorre del 1 al 10 (range(1, 11))', f: function (c) {
+                return /\brange\s*\(\s*1\s*,\s*(?:11|10\s*\+\s*1)\s*\)/.test(c);
+            } },
+            { d: 'La línea del for termina en dos puntos', f: function (c) { return /\bfor\b[^\n]*:/.test(c); } },
+            { d: 'El cuerpo del for tiene sangría', f: function (c) { return /\bfor\b[^\n]*:\s*\n(?:\s*#[^\n]*\n)*\s+\S/.test(c); } },
+            { d: 'Muestra los números con print()', f: function (c) { return /\bprint\s*\(\s*[a-z_]\w*\s*\)/.test(c); } }
+        ],
+        'for-2': [
+            { d: 'Inicializa un acumulador en 0', f: function (c) { return /\b[a-z_]\w*\s*=\s*0\b/.test(c); } },
+            { d: 'Usa un bucle for', f: function (c) { return /\bfor\b/.test(c); } },
+            { d: 'Recorre del 1 al 100 (range(1, 101))', f: function (c) {
+                return /\brange\s*\(\s*1\s*,\s*(?:101|100\s*\+\s*1)\s*\)/.test(c);
+            } },
+            { d: 'Acumula con += o variable = variable + ...', f: function (c) {
+                return /([a-z_]\w*)\s*\+=\s*[a-z_]\w*/.test(c) || /([a-z_]\w*)\s*=\s*\1\s*\+/.test(c);
+            } },
+            { d: 'Muestra el total con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
+        ],
+        'while-1': [
+            { d: 'Inicializa el contador en 5', f: function (c) { return /\b[a-z_]\w*\s*=\s*5\b/.test(c); } },
             { d: 'Usa while con condición', f: function (c) { return /\bwhile\b[^\n]*:/.test(c); } },
-            { d: 'La condición corta en 5 (>= 5 o > 4)', f: function (c) { return /(>=\s*5\b)|(>\s*4\b)/.test(c); } },
-            { d: 'Resta 1 al contador (i = i - 1 o i -= 1)', f: function (c) { return /([a-z_]\w*)\s*=\s*\1\s*-\s*1/.test(c) || /\b[a-z_]\w*\s*-=\s*1\b/.test(c); } },
+            { d: 'La condición corta en 1 (>= 1 o > 0)', f: function (c) { return /(>=\s*1\b)|(>\s*0\b)/.test(c); } },
+            { d: 'Resta 1 al contador (i = i - 1 o i -= 1)', f: function (c) {
+                return /([a-z_]\w*)\s*=\s*\1\s*-\s*1\b/.test(c) || /\b[a-z_]\w*\s*-=\s*1\b/.test(c);
+            } },
+            { d: 'El cuerpo del while tiene sangría', f: function (c) { return /\bwhile\b[^\n]*:\s*\n(?:\s*#[^\n]*\n)*\s+\S/.test(c); } },
             { d: 'Muestra el número con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
         ],
-        entrada: [
-            { d: 'Pide un dato con input()', f: function (c) { return /\binput\s*\(/.test(c); } },
-            { d: 'Convierte con int() o float()', f: function (c) { return /\b(int|float)\s*\(/.test(c); } },
-            { d: 'Calcula el precio con IVA (× 1.21)', f: function (c) { return /\*\s*1\.21\b/.test(c); } },
-            { d: 'Muestra con print() y f-string', f: function (c) { return /\bprint\s*\(\s*f["']/.test(c); } },
-            { d: 'Incluye las llaves { } del f-string', f: function (c) { return /\{[^}]+\}/.test(c); } }
+        'while-2': [
+            { d: 'Inicializa el acumulador suma en 0', f: function (c) { return /\bsuma\s*=\s*0\b/.test(c); } },
+            { d: 'Pide un número con input() y lo convierte con int()', f: function (c) {
+                return /\bint\s*\(\s*input\s*\(/.test(c) || (/\bint\s*\(/.test(c) && /\binput\s*\(/.test(c));
+            } },
+            { d: 'Usa while con la condición del centinela (numero != 0)', f: function (c) {
+                return /\bwhile\b[^\n]*(!=\s*0|>\s*0)/.test(c);
+            } },
+            { d: 'Acumula el número en suma', f: function (c) {
+                return /\bsuma\s*\+=\s*[a-z_]\w*/.test(c) || /\bsuma\s*=\s*suma\s*\+\s*[a-z_]\w*/.test(c);
+            } },
+            { d: 'Vuelve a pedir el número dentro del while', f: function (c) { return count(c, /\binput\s*\(/) >= 2; } },
+            { d: 'Muestra la suma con print()', f: function (c) {
+                return /\bprint\s*\([^)]*\bsuma\b/.test(c) || /\bprint\s*\(\s*f["'][^"']*\{\s*suma\s*\}/.test(c);
+            } }
         ],
-        funciones: [
+        'funcion-sin-1': [
             { d: 'Define la función con def', f: function (c) { return /\bdef\s+\w+\s*\(/.test(c); } },
-            { d: 'La función recibe un parámetro', f: function (c) { return /\bdef\s+\w+\s*\(\s*[a-z_]\w*\s*\)/.test(c); } },
-            { d: 'Devuelve un valor con return', f: function (c) { return /\breturn\b/.test(c); } },
-            { d: 'Compara la edad con 18 (>= 18 o > 17)', f: function (c) { return /(>=\s*18)|(>\s*17)/.test(c); } },
-            { d: 'Llama a la función con un argumento', f: function (c) { var m = c.match(/\bdef\s+(\w+)/); if (!m) return false; return new RegExp('\\b' + m[1] + '\\s*\\(\\s*\\d+').test(c); } },
+            { d: 'La función no tiene parámetros', f: function (c) { return /\bdef\s+\w+\s*\(\s*\)\s*:/.test(c); } },
+            { d: 'El cuerpo muestra "Hola, mundo"', f: function (c) { return /hola,?\s*mundo/.test(c); } },
+            { d: 'Usa print() dentro de la función', f: function (c) { return /\bprint\s*\(/.test(c); } },
+            { d: 'Llama a la función dos veces', f: function (c) { return count(c, /\bsaludar\s*\(\s*\)/) >= 2; } },
+            { d: 'El cuerpo de la función tiene sangría', f: function (c) { return /\bdef\b[^\n]*:\s*\n(?:\s*#[^\n]*\n)*\s+\S/.test(c); } }
+        ],
+        'funcion-sin-2': [
+            { d: 'Define mostrar_menu() sin parámetros', f: function (c) { return /\bdef\s+mostrar_menu\s*\(\s*\)\s*:/.test(c); } },
+            { d: 'Muestra al menos tres líneas con print()', f: function (c) { return count(c, /\bprint\s*\(/) >= 3; } },
+            { d: 'El menú incluye tres opciones (1, 2 y 3)', f: function (c) { return /\b1\b/.test(c) && /\b2\b/.test(c) && /\b3\b/.test(c); } },
+            { d: 'Llama a mostrar_menu()', f: function (c) { return /\bmostrar_menu\s*\(\s*\)/.test(c); } },
+            { d: 'El cuerpo de la función tiene sangría', f: function (c) { return /\bdef\b[^\n]*:\s*\n(?:\s*#[^\n]*\n)*\s+\S/.test(c); } }
+        ],
+        'funcion-con-1': [
+            { d: 'Define saludar(nombre) con un parámetro', f: function (c) { return /\bdef\s+saludar\s*\(\s*[a-z_]\w*\s*\)\s*:/.test(c); } },
+            { d: 'Muestra un saludo con print()', f: function (c) { return /\bprint\s*\(/.test(c); } },
+            { d: 'Incluye la palabra "Hola"', f: function (c) { return /hola/.test(c); } },
+            { d: 'Usa el parámetro en el mensaje (f-string o concatenación)', f: function (c) {
+                return /\bprint\s*\(\s*f["'][^"']*\{[^}]+\}/.test(c) || /\bprint\s*\([^)]*\+/.test(c) || /\bprint\s*\([^)]*,\s*[a-z_]\w*/.test(c);
+            } },
+            { d: 'Llama a saludar("Ana")', f: function (c) { return /\bsaludar\s*\(\s*["']ana["']\s*\)/.test(c); } },
+            { d: 'Llama a saludar("Luis")', f: function (c) { return /\bsaludar\s*\(\s*["']luis["']\s*\)/.test(c); } }
+        ],
+        'funcion-con-2': [
+            { d: 'Define tabla(n) con un parámetro', f: function (c) { return /\bdef\s+tabla\s*\(\s*[a-z_]\w*\s*\)\s*:/.test(c); } },
+            { d: 'Usa un for con range(1, 11)', f: function (c) {
+                return /\bfor\b[^\n]*\brange\s*\(\s*1\s*,\s*(?:11|10\s*\+\s*1)\s*\)/.test(c);
+            } },
+            { d: 'Muestra la multiplicación con print()', f: function (c) { return /\bprint\s*\(/.test(c) && /\*/.test(c); } },
+            { d: 'Usa el parámetro n y la variable i en el mensaje', f: function (c) {
+                return /\bn\b/.test(c) && /\bi\b/.test(c) && /\{/.test(c);
+            } },
+            { d: 'Llama a tabla(7)', f: function (c) { return /\btabla\s*\(\s*7\s*\)/.test(c); } }
+        ],
+        'return-1': [
+            { d: 'Define doble(n) con un parámetro', f: function (c) { return /\bdef\s+doble\s*\(\s*[a-z_]\w*\s*\)\s*:/.test(c); } },
+            { d: 'Usa return para devolver el resultado', f: function (c) { return /\breturn\b/.test(c); } },
+            { d: 'Devuelve n multiplicado por 2', f: function (c) {
+                return /return\s+[a-z_]\w*\s*\*\s*2\b/.test(c) || /return\s+2\s*\*\s*[a-z_]\w*/.test(c);
+            } },
+            { d: 'Llama a doble(8)', f: function (c) { return /\bdoble\s*\(\s*8\s*\)/.test(c); } },
+            { d: 'Guarda el resultado en una variable', f: function (c) { return /\b[a-z_]\w*\s*=\s*doble\s*\(/.test(c); } },
             { d: 'Muestra el resultado con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
         ],
-        tkinter: [
+        'return-2': [
+            { d: 'Define la variable global contador = 0', f: function (c) { return /^\s*contador\s*=\s*0\b/m.test(c); } },
+            { d: 'Define sumar_uno() sin parámetros', f: function (c) { return /\bdef\s+sumar_uno\s*\(\s*\)\s*:/.test(c); } },
+            { d: 'Declara global contador dentro de la función', f: function (c) { return /\bglobal\s+contador\b/.test(c); } },
+            { d: 'Aumenta el contador en 1', f: function (c) {
+                return /\bcontador\s*\+=\s*1\b/.test(c) || /\bcontador\s*=\s*contador\s*\+\s*1\b/.test(c);
+            } },
+            { d: 'Llama a sumar_uno() tres veces', f: function (c) { return count(c, /\bsumar_uno\s*\(\s*\)/) >= 3; } },
+            { d: 'Muestra el contador con print()', f: function (c) { return /\bprint\s*\([^)]*\bcontador\b/.test(c); } }
+        ],
+        'tkinter-1': [
+            { d: 'Importa tkinter', f: function (c) { return /from\s+tkinter\s+import|import\s+tkinter/.test(c); } },
+            { d: 'Crea la ventana con Tk()', f: function (c) { return /\btk\s*\(\s*\)/.test(c); } },
+            { d: 'Agrega un Label', f: function (c) { return /\blabel\s*\(/.test(c); } },
+            { d: 'El Label dice "Hola"', f: function (c) { return /["']hola["']/.test(c); } },
+            { d: 'Muestra el Label con pack()', f: function (c) { return /\.pack\s*\(/.test(c); } },
+            { d: 'Cierra con mainloop()', f: function (c) { return /\bmainloop\s*\(\s*\)/.test(c); } }
+        ],
+        'tkinter-2': [
             { d: 'Crea la ventana con Tk()', f: function (c) { return /\btk\s*\(\s*\)/.test(c); } },
             { d: 'Agrega un campo Entry', f: function (c) { return /\bentry\s*\(/.test(c); } },
             { d: 'Agrega un Label para mostrar', f: function (c) { return /\blabel\s*\(/.test(c); } },
             { d: 'Agrega un Button con command=', f: function (c) { return /\bbutton\s*\([^)]*command\s*=/.test(c); } },
             { d: 'Pasa la función SIN paréntesis en command', f: function (c) { return /command\s*=\s*[a-z_]\w*\s*[,)]/.test(c); } },
+            { d: 'Define una función para el botón', f: function (c) { return /\bdef\s+[a-z_]\w*\s*\(\s*\)\s*:/.test(c); } },
             { d: 'Lee el campo con .get()', f: function (c) { return /\.get\s*\(\s*\)/.test(c); } },
             { d: 'Actualiza el Label con .config()', f: function (c) { return /\.config\s*\(/.test(c); } },
             { d: 'Cierra con mainloop()', f: function (c) { return /\bmainloop\s*\(\s*\)/.test(c); } }
+        ],
+        'try-1': [
+            { d: 'Usa try:', f: function (c) { return /\btry\s*:/.test(c); } },
+            { d: 'Pide un número con input() y lo convierte con int()', f: function (c) {
+                return /\bint\s*\(\s*input\s*\(/.test(c) || (/\bint\s*\(/.test(c) && /\binput\s*\(/.test(c));
+            } },
+            { d: 'Usa except para el error de conversión', f: function (c) { return /\bexcept\b/.test(c); } },
+            { d: 'Muestra "Número válido" si funciona', f: function (c) { return /v[aá]lido/.test(c); } },
+            { d: 'Muestra "No es un número" si falla', f: function (c) { return /no es un n[uú]mero/.test(c); } },
+            { d: 'El bloque try tiene sangría', f: function (c) { return /\btry\s*:\s*\n(?:\s*#[^\n]*\n)*\s+\S/.test(c); } }
+        ],
+        'try-2': [
+            { d: 'Usa try:', f: function (c) { return /\btry\s*:/.test(c); } },
+            { d: 'Pide dos números con input()', f: function (c) { return count(c, /\binput\s*\(/) >= 2; } },
+            { d: 'Convierte los datos con int()', f: function (c) { return count(c, /\bint\s*\(/) >= 2; } },
+            { d: 'Realiza una división', f: function (c) { return /\//.test(c); } },
+            { d: 'Atrapa ZeroDivisionError', f: function (c) { return /\bexcept\s+zerodivisionerror\b/.test(c); } },
+            { d: 'Muestra "No se puede dividir por cero"', f: function (c) { return /no se puede dividir por cero/.test(c); } }
+        ],
+        'random-1': [
+            { d: 'Importa el módulo random', f: function (c) { return /import\s+random|from\s+random\s+import/.test(c); } },
+            { d: 'Usa randint() para generar el número', f: function (c) { return /\brandint\s*\(/.test(c); } },
+            { d: 'Genera un número entre 1 y 6', f: function (c) { return /\brandint\s*\(\s*1\s*,\s*6\s*\)/.test(c); } },
+            { d: 'Guarda el resultado en una variable', f: function (c) { return /\b[a-z_]\w*\s*=\s*(?:random\.)?randint\s*\(/.test(c); } },
+            { d: 'Muestra el resultado con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
+        ],
+        'random-2': [
+            { d: 'Importa el módulo random', f: function (c) { return /import\s+random|from\s+random\s+import/.test(c); } },
+            { d: 'Crea una lista con al menos tres nombres', f: function (c) {
+                var m = c.match(/["'][^"']+["']/g) || [];
+                return /\w+\s*=\s*\[/.test(c) && m.length >= 3;
+            } },
+            { d: 'Usa random.choice() para elegir', f: function (c) { return /choice\s*\(/.test(c); } },
+            { d: 'Guarda el elegido en una variable', f: function (c) { return /\b[a-z_]\w*\s*=\s*(?:random\.)?choice\s*\(/.test(c); } },
+            { d: 'Muestra el elegido con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
         ],
         menu: [
             { d: 'Usa while True', f: function (c) { return /\bwhile\s+true\s*:/.test(c); } },
@@ -1660,9 +2292,24 @@ window.reiniciarQuiz = function (contId, bannerId) {
         { id: 'variables', nombre: '1. Variables y tipos de datos' },
         { id: 'entrada', nombre: '2. Ingreso y salida de datos' },
         { id: 'decisiones', nombre: '3. Decisiones (if / elif / else)' },
-        { id: 'ciclos', nombre: '4. Ciclos (while y for)' },
-        { id: 'funciones', nombre: '5. Funciones con def' },
-        { id: 'tkinter', nombre: '6. Interfaz con Tkinter' },
+        { id: 'contador-1', nombre: '4. Contador · Actividad 1: aprobados' },
+        { id: 'contador-2', nombre: '4. Acumulador · Actividad 2: compra' },
+        { id: 'for-1', nombre: '5. for · Actividad 1: contar del 1 al 10' },
+        { id: 'for-2', nombre: '5. for · Actividad 2: sumar del 1 al 100' },
+        { id: 'while-1', nombre: '6. while · Actividad 1: cuenta regresiva' },
+        { id: 'while-2', nombre: '6. while · Actividad 2: sumar hasta 0' },
+        { id: 'funcion-sin-1', nombre: '7. Funciones · Actividad 1: saludar' },
+        { id: 'funcion-sin-2', nombre: '7. Funciones · Actividad 2: mostrar menú' },
+        { id: 'funcion-con-1', nombre: '8. Parámetros · Actividad 1: saludar a distintos nombres' },
+        { id: 'funcion-con-2', nombre: '8. Parámetros · Actividad 2: tabla de multiplicar' },
+        { id: 'return-1', nombre: '9. return · Actividad 1: función doble' },
+        { id: 'return-2', nombre: '9. return · Actividad 2: contador global' },
+        { id: 'tkinter-1', nombre: '10. Tkinter · Actividad 1: ventana con etiqueta' },
+        { id: 'tkinter-2', nombre: '10. Tkinter · Actividad 2: saludador con botón' },
+        { id: 'try-1', nombre: '11. try/except · Actividad 1: número válido' },
+        { id: 'try-2', nombre: '11. try/except · Actividad 2: división protegida' },
+        { id: 'random-1', nombre: '12. random · Actividad 1: tirar un dado' },
+        { id: 'random-2', nombre: '12. random · Actividad 2: elegir un nombre' },
         { id: 'menu', nombre: 'Actividad final · Menú con break' },
         { id: 'promedios', nombre: 'Actividad final · Promedio y aprobados' }
     ];
