@@ -8,13 +8,17 @@ para funcionar. Fecha de la copia: **17/11/2026**.
 - `primera-evaluacion.html` + `config-primera.js` (clave `Primera1`).
 - `segunda-evaluacion.html` + `config-segunda.js` (clave `Segunda1`).
 - `tercera-evaluacion.html` + `config-tercera.js` (clave `Tercera1`).
-- `evaluacion.html` (evaluación original, clave `Python1`).
-- `recuperatorio.html` + `config-recuperatorio1.js` (clave `recu1`).
-- `evaluacion-parte2.html` + `config-parte2.js` (clave `pro2`).
+- `cuarta-evaluacion.html` + `config-cuarta.js` (clave `Cuarta1`, temas 13 a 15).
+- `quinta-evaluacion.html` + `config-quinta.js` (clave `Quinta1`, temas 16 a 18).
+- `sexta-evaluacion.html` + `config-sexta.js` (clave `Sexta1`, tema 19).
+- `evaluacion.html` + `config.js` (Evaluación Final, clave `Python1`).
+- `recuperatorio.html` + `config-recuperatorio1.js` (Recuperatorio de
+  Evaluación Final, clave `recu1`).
+- `evaluacion-parte2.html` + `config-parte2.js` (clave `pro2`). Sin cambios.
 - `evaluacion-pseint.html` + `config-pseint.js`.
 
-También se guardaron `config.js`, `app.js`, `styles.css`, `CLAVES.md` y
-`README.md` porque son necesarios para restaurar el funcionamiento.
+También se guardaron `app.js`, `styles.css`, `CLAVES.md` y `README.md` porque
+son necesarios para restaurar el funcionamiento.
 
 ## Cómo restaurar
 
@@ -23,4 +27,5 @@ También se guardaron `config.js`, `app.js`, `styles.css`, `CLAVES.md` y
    `app.js` en ese orden.
 3. Publicar con Git y GitHub Pages.
 
-Las claves vigentes están documentadas en `CLAVES.md`.
+Las claves vigentes están documentadas en `CLAVES.md` y, junto con las copias
+de entrega, al principio de `inform/README.md`.

@@ -29,7 +29,7 @@ window.CONFIG = {
     // Datos del examen (van al informe)
     EXAMEN: {
         id: 'python-1',
-        titulo: 'Programación Estructurada',
+        titulo: 'Evaluación Final · Programación Estructurada',
         materia: 'Programación'
     },
 

@@ -351,6 +351,9 @@
     <a href="#entrega">📤 Actividad final</a>
     <a href="index.html">⬅️ Parte 1</a>
     <a class="destacado" href="evaluacion-parte2.html">🎓 Evaluación Parte 2</a>
+    <a href="cuarta-evaluacion.html">🎓 Cuarta evaluación</a>
+    <a href="quinta-evaluacion.html">🎓 Quinta evaluación</a>
+    <a href="sexta-evaluacion.html">🎓 Sexta evaluación</a>
 </nav>
 
 <main>
@@ -359,17 +362,17 @@
     <section id="teoria">
         <h2 class="section-title">SECCIÓN 1 · Contenido Explicativo</h2>
         <p class="section-sub">
-            Siete temas en <strong>secuencia de proyecto</strong>: primero organizar datos
-            (listas, tuplas, diccionarios), después dominar la ventana (Text, state y lambda),
-            luego animar y sonar (Canvas y pygame) y por último guardar en una base de datos.
-            <strong>Tocá un tema</strong> para abrirlo y usá las pestañas
+            Nueve temas numerados del <strong>13 al 21</strong> en secuencia de proyecto:
+            primero organizar datos (listas, tuplas, diccionarios), después dominar la ventana
+            (Text, lambda y state), luego guardar en una base de datos y por último animar y sonar
+            (Canvas y pygame). <strong>Tocá un tema</strong> para abrirlo y usá las pestañas
             <strong>📘 Teoría</strong> y <strong>✍️ Ejercitación</strong>.
             Cada ejercicio se corrige al instante en esta página, sin descargar nada.
         </p>
 
-        <!-- 1 -->
+        <!-- 13 -->
         <article class="card">
-            <h3><span class="num">1</span> Listas: muchas cosas en una sola caja</h3>
+            <h3><span class="num">13</span> Listas: muchas cosas en una sola caja</h3>
             <p class="concept">
                 Una <strong>lista</strong> guarda <strong>varios valores juntos y en orden</strong>,
                 como un estante con casilleros numerados. Cada valor vive en una
@@ -438,10 +441,9 @@ indice = <span class="fn">int</span>(<span class="fn">input</span>(<span class="
                 <div class="result" id="res-listas"></div>
             </div>
         </article>
-
-        <!-- 2 -->
+        <!-- 14 -->
         <article class="card">
-            <h3><span class="num">2</span> Tuplas: listas que no se cambian</h3>
+            <h3><span class="num">14</span> Tuplas: listas que no se cambian</h3>
             <p class="concept">
                 Una <strong>tupla</strong> es igual a una lista pero <strong>congelada</strong>:
                 se define con paréntesis y después <strong>no se puede modificar</strong>.
@@ -498,10 +500,9 @@ x, y = punto                 <span class="cmt"># desempaquetar: x=120, y=140</sp
                 <div class="result" id="res-tuplas"></div>
             </div>
         </article>
-
-        <!-- 3 -->
+        <!-- 15 -->
         <article class="card">
-            <h3><span class="num">3</span> Diccionarios: cada dato con su etiqueta</h3>
+            <h3><span class="num">15</span> Diccionarios: cada dato con su etiqueta</h3>
             <p class="concept">
                 Un <strong>diccionario</strong> guarda pares <strong>clave : valor</strong>, como una
                 ficha de alumno: en vez de recordar "la posición 1 es el apellido", preguntás directo
@@ -573,283 +574,153 @@ promedio = <span class="fn">sum</span>(alumno[<span class="str">"notas"</span>])
                 <div class="result" id="res-diccionarios"></div>
             </div>
         </article>
-
-        <!-- 4 -->
+        <!-- 16 -->
         <article class="card">
-            <h3><span class="num">4</span> Tkinter avanzado: Text, state y lambda</h3>
+            <h3><span class="num">16</span> Tkinter avanzado: el widget Text</h3>
             <p class="concept">
-                Acá entra el corazón de <em>LasTablas.py</em>: un widget <strong>Text</strong> grande
-                donde escribir muchas líneas, botones que envían datos con <strong>lambda</strong> y el
-                atributo <strong>state</strong> para bloquear o habilitar.
+                El widget <strong>Text</strong> muestra y guarda <strong>varias líneas</strong> a la vez,
+                a diferencia de <code class="inline">Entry</code>, que solo admite una. Es el lugar donde
+                <em>LasTablas.py</em> dibuja las tablas de multiplicar.
             </p>
-
-            <div class="sub">Widget Text: muchas líneas</div>
-            <pre><code>texto_tabla = <span class="fn">Text</span>(frame3)
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis</span>
+                texto = Text(ventana, width=40, height=10)<br>
+                texto.insert(END, "hola\n")&nbsp;&nbsp;# escribe al final<br>
+                texto.delete("1.0", END)&nbsp;# borra todo
+            </div>
+            <pre><code><span class="fn">texto_tabla</span> = <span class="fn">Text</span>(frame3)
 texto_tabla.config(bg=<span class="str">"turquoise"</span>, width=<span class="nu">80</span>, height=<span class="nu">17</span>)
-texto_tabla.pack(padx=<span class="nu">10</span>, pady=<span class="nu">10</span>)</code></pre>
+texto_tabla.pack(padx=<span class="nu">10</span>, pady=<span class="nu">10</span>)
+
+<span class="kw">def</span> <span class="fn">mostrar_tabla</span>(n):
+    texto_tabla.delete(<span class="str">"1.0"</span>, END)          <span class="cmt"># limpia lo anterior</span>
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">1</span>, <span class="nu">11</span>):
+        texto_tabla.insert(END, <span class="fn">f"{n}*{i}={n*i}"</span> + <span class="str">"\n"</span>)</code></pre>
             <table class="datos">
-                <tr><th>Acción</th><th>Línea</th><th>Notas</th></tr>
-                <tr><td>escribir al final</td><td><code class="inline">texto.insert(END, "hola\n")</code></td><td>\n = salto de línea</td></tr>
-                <tr><td>borrar TODO</td><td><code class="inline">texto.delete("1.0", END)</code></td><td>"1.0" = línea 1, carácter 0</td></tr>
-                <tr><td>leer todo</td><td><code class="inline">texto.get("1.0", END)</code></td><td>devuelve str</td></tr>
+                <tr><th>Acción</th><th>Línea</th><th>Qué hace</th></tr>
+                <tr><td>escribir al final</td><td><code class="inline">texto.insert(END, "hola\n")</code></td><td>agrega una línea</td></tr>
+                <tr><td>borrar todo</td><td><code class="inline">texto.delete("1.0", END)</code></td><td>"1.0" = línea 1, carácter 0</td></tr>
+                <tr><td>leer todo</td><td><code class="inline">texto.get("1.0", END)</code></td><td>devuelve un str</td></tr>
             </table>
             <div class="alerta">
                 <strong>Ojo:</strong> Entry borra con <code class="inline">(0, END)</code>, pero Text
-                borra con <code class="inline">("1.0", END)</code>: el Text usa notación
-                línea.carácter porque tiene varias líneas.
+                borra con <code class="inline">("1.0", END)</code>: usa notación línea.carácter porque
+                tiene varias líneas.
             </div>
+            <div class="exercise">
+                <h4>✍️ Ejercicio: la lista de tareas</h4>
+                <p class="ex-goal">
+                    Creá un <code class="inline">Text</code>, empaquetalo con <code class="inline">pack()</code>
+                    y definí <code class="inline">agregar(tarea)</code>: debe insertar la tarea al final con
+                    <code class="inline">insert(END, ...)</code> seguida de un salto de línea
+                    <code class="inline">\n</code>. Cerrá con <code class="inline">mainloop()</code>.
+                </p>
+                <textarea class="code-input" id="in-texto" spellcheck="false" placeholder="# Text + insert(END, ...)\nfrom tkinter import *\nventana = Tk()"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('texto')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('texto')">Limpiar</button>
+                </div>
+                <div class="result" id="res-texto"></div>
+            </div>
+        </article>
+        <!-- 17 -->
+        <article class="card">
+            <h3><span class="num">17</span> lambda: funciones de una sola línea</h3>
+            <p class="concept">
+                Una <strong>lambda</strong> es una <strong>mini-función sin nombre</strong> que admite
+                una sola expresión. En Tkinter se usa para pasar datos a una función desde un botón
+                sin ejecutarla antes de tiempo.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis</span>
+                doble = lambda x: x * 2<br>
+                command=lambda: mostrar_tabla(7)&nbsp;&nbsp;# se ejecuta al hacer click
+            </div>
+            <pre><code><span class="kw">def</span> <span class="fn">doble</span>(x):
+    <span class="kw">return</span> x * <span class="nu">2</span>
 
-            <div class="sub">La función exacta del proyecto: mostrar_tabla(n)</div>
-            <pre><code><span class="kw">def</span> <span class="fn">mostrar_tabla</span>(n):
-    texto_tabla.delete(<span class="str">"1.0"</span>, END)              <span class="cmt"># limpia lo anterior</span>
-    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">1</span>, <span class="nu">11</span>):                       <span class="cmt"># vueltas: 1 a 10</span>
-        texto_tabla.insert(END, <span class="fn">f"{n}*{i}={n*i}"</span> + <span class="str">"\n"</span>)</code></pre>
-            <ol class="explain">
-                <li>Borra el contenido viejo (si no, las tablas se mezclarían).</li>
-                <li>Recorre 1..10 con <code class="inline">for</code>.</li>
-                <li>En cada vuelta inserta UNA línea al final (<code class="inline">END</code>).</li>
-            </ol>
+<span class="kw">lambda</span> x: x * <span class="nu">2</span>              <span class="cmt"># lo mismo, en una línea</span>
 
-            <div class="sub">state: habilitar y bloquear</div>
+boton7 = <span class="fn">Button</span>(frame2, text=<span class="str">"7"</span>, command=<span class="kw">lambda</span>: <span class="fn">mostrar_tabla</span>(<span class="nu">7</span>))</code></pre>
+            <table class="datos">
+                <tr><th>Forma</th><th>Qué pasa</th></tr>
+                <tr><td><code class="inline">command=mostrar_tabla</code></td><td>falta el número n: da error en el click</td></tr>
+                <tr><td><code class="inline">command=mostrar_tabla(7)</code></td><td>se ejecuta YA, al crear el botón (mal)</td></tr>
+                <tr><td><code class="inline">command=lambda: mostrar_tabla(7)</code></td><td>espera el click y manda el 7 (correcto)</td></tr>
+            </table>
+            <div class="okbox">
+                <strong>Idea clave:</strong> <code class="inline">command=saludar</code> va sin paréntesis:
+                le entregamos la dirección de la función a Tkinter. La lambda fabrica una función que
+                todavía no se ejecuta y la deja lista para el click.
+            </div>
+            <div class="alerta">
+                <strong>Límite:</strong> una lambda solo admite una expresión. Si necesitás varias
+                instrucciones o un <code class="inline">if</code> complejo, usá <code class="inline">def</code>.
+            </div>
+            <div class="exercise">
+                <h4>✍️ Ejercicio: el botón con dato</h4>
+                <p class="ex-goal">
+                    Definí <code class="inline">saludar(nombre)</code> con un parámetro y creá un
+                    <code class="inline">Button</code> con
+                    <code class="inline">command=lambda: saludar("Ana")</code>. Cerrá con
+                    <code class="inline">mainloop()</code>.
+                </p>
+                <textarea class="code-input" id="in-lambda1" spellcheck="false" placeholder="# lambda en un botón\nfrom tkinter import *\ndef saludar(nombre):\n    print(nombre)"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('lambda1')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('lambda1')">Limpiar</button>
+                </div>
+                <div class="result" id="res-lambda1"></div>
+            </div>
+        </article>
+        <!-- 18 -->
+        <article class="card">
+            <h3><span class="num">18</span> state: habilitar y bloquear controles</h3>
+            <p class="concept">
+                La opción <strong>state</strong> decide si un control responde o no. Sirve para
+                evitar errores del usuario: un botón "Guardar" bloqueado mientras no hay datos
+                no puede apretarse por accidente.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis</span>
+                boton = Button(ventana, text="Guardar", state=DISABLED)<br>
+                boton.config(state=NORMAL)&nbsp;&nbsp;# se habilita después
+            </div>
             <table class="datos">
                 <tr><th>Valor</th><th>Efecto</th><th>Uso típico</th></tr>
-                <tr><td><code class="inline">state=NORMAL</code></td><td>activo, responde</td><td>estado normal</td></tr>
-                <tr><td><code class="inline">state=DISABLED</code></td><td>bloqueado, gris</td><td>botón "Guardar" sin conexión</td></tr>
+                <tr><td><code class="inline">state=NORMAL</code></td><td>activo, responde</td><td>estado por defecto</td></tr>
+                <tr><td><code class="inline">state=DISABLED</code></td><td>bloqueado, gris</td><td>botón sin conexión</td></tr>
                 <tr><td><code class="inline">state=READONLY</code></td><td>muestra pero no edita</td><td>resultado calculado</td></tr>
             </table>
             <pre><code>boton_guardar = <span class="fn">Button</span>(ventana, text=<span class="str">"Guardar"</span>, state=DISABLED)
 <span class="cmt"># más tarde, cuando todo esté listo:</span>
-boton_guardar.config(state=NORMAL)</code></pre>
+boton_guardar.config(state=NORMAL)
+
+resultado = <span class="fn">Entry</span>(ventana, state=READONLY)   <span class="cmt"># solo lectura</span></code></pre>
             <div class="buenas">
                 <strong>Buena práctica:</strong> deshabilitá botones cuya acción todavía no tiene
-                sentido (evitás errores del usuario en vez de corregirlos después).
+                sentido y volvé a habilitarlos con <code class="inline">.config(state=NORMAL)</code>
+                cuando los datos estén completos.
             </div>
-
-            <div class="sub">lambda: una función escrita en una línea</div>
-            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
-                <strong>Paso 0 · cómo trabaja command.</strong> En un botón,
-                <code class="inline">command=saludar</code> va SIN paréntesis: no llamamos a la función
-                ahora, le entregamos a Tkinter <em>su dirección</em> para que la llame recién con el click.
-            </p>
-            <pre><code><span class="kw">def</span> <span class="fn">doble</span>(x):                <span class="cmt"># función normal</span>
-    <span class="kw">return</span> x * <span class="nu">2</span>
-
-<span class="kw">lambda</span> x: x * <span class="nu">2</span>              <span class="cmt"># EXACTAMENTE lo mismo, en una línea</span></code></pre>
-            <table class="datos">
-                <tr><th>Pedazo</th><th>Significado</th><th>Equivalente en def</th></tr>
-                <tr><td><code class="inline">lambda</code></td><td>"acá empieza una mini-función sin nombre"</td><td><code class="inline">def nombre():</code></td></tr>
-                <tr><td><code class="inline">x</code></td><td>lo que recibe</td><td>el <code class="inline">x</code> de los paréntesis</td></tr>
-                <tr><td><code class="inline">: x * 2</code></td><td>lo único que hace y devuelve</td><td><code class="inline">return x * 2</code></td></tr>
-            </table>
-            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
-                El problema: nuestros botones necesitan mandar el número de tabla. Pero esto…
-            </p>
-            <pre><code>Button(frame2, text=<span class="str">"7"</span>, command=<span class="fn">mostrar_tabla</span>(<span class="nu">7</span>))  <span class="cmt"># MAL: los paréntesis ejecutan YA</span></code></pre>
-            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
-                …ejecuta la función <strong>al crear el botón</strong>, no al hacer click. Y sin
-                paréntesis (<code class="inline">command=mostrar_tabla</code>) falta el número y da error
-                en el click. Hace falta algo intermedio: <strong>lambda</strong>.
-            </p>
-            <pre><code>boton7 = Button(frame2, text=<span class="str">"7"</span>, command=<span class="kw">lambda</span>: <span class="fn">mostrar_tabla</span>(<span class="nu">7</span>))</code></pre>
-            <ol class="explain">
-                <li>Python crea la mini-función <code class="inline">lambda: mostrar_tabla(7)</code> y la guarda en <code class="inline">command</code>. Todavía NO se ejecuta nada.</li>
-                <li>Hacés click en el "7".</li>
-                <li>Tkinter llama a esa mini-función (por eso funciona sin paréntesis: la invoca vacía).</li>
-                <li>La mini-función corre su única línea: <code class="inline">mostrar_tabla(7)</code>. Recién AHORA se dibuja la tabla del 7.</li>
-            </ol>
-            <table class="datos">
-                <tr><th>Forma</th><th>Qué pasa</th></tr>
-                <tr><td><code class="inline">command=mostrar_tabla</code></td><td>falta el número n: error al hacer click</td></tr>
-                <tr><td><code class="inline">command=mostrar_tabla(7)</code></td><td>se ejecuta YA al crear el botón (mal)</td></tr>
-                <tr><td><code class="inline">command=lambda: mostrar_tabla(7)</code></td><td>espera el click Y manda el 7 (correcto)</td></tr>
-            </table>
-            <div class="okbox">
-                <strong>Idea clave:</strong> lambda no ejecuta nada por sí sola: fabrica la función y la
-                deja lista, como un papelito que dice "cuando te llamen, mostrá la tabla del 7".
-                Tkinter guarda el papelito y lo lee en cada click.
-            </div>
-            <div class="alerta">
-                <strong>Límite:</strong> lambda admite UNA sola expresión (una línea). Si necesitás
-                varias instrucciones o un <code class="inline">if</code> complejo, usá
-                <code class="inline">def</code> normal.
-            </div>
-
             <div class="exercise">
-                <h4>✍️ Ejercicio: la lista de tareas</h4>
+                <h4>✍️ Ejercicio: guardar habilitado</h4>
                 <p class="ex-goal">
-                    Creá un <code class="inline">Text</code> y definí
-                    <code class="inline">agregar(tarea)</code>: debe insertar la tarea al final con
-                    <code class="inline">insert(END, ...)</code> seguida de un salto de línea.
-                    Después creá un <code class="inline">Button</code> con
-                    <code class="inline">command=lambda: agregar("pan")</code>
-                    y cerrá con <code class="inline">mainloop()</code>.
-                </p>
-                <textarea class="code-input" id="in-tkinter2" spellcheck="false" placeholder="# Text + lambda&#10;from tkinter import *&#10;ventana = Tk()"></textarea>
-                <div class="ex-actions">
-                    <button class="btn btn-primary" onclick="corregir('tkinter2')">✅ Corregir</button>
-                    <button class="btn btn-ghost" onclick="limpiar('tkinter2')">Limpiar</button>
-                </div>
-                <div class="result" id="res-tkinter2"></div>
-            </div>
-        </article>
-
-        <!-- 5 -->
-        <article class="card">
-            <h3><span class="num">5</span> Canvas: dibujar, poner imagen y animar</h3>
-            <p class="concept">
-                El <strong>Canvas</strong> es un lienzo donde se colocan formas e imágenes, y cada
-                objeto queda identificado por un <strong>id</strong> para poder moverlo después.
-                Es el escenario del sapo de <em>LasTablas.py</em>.
-            </p>
-            <div class="syntax">
-                <span class="syntax-label">Sintaxis</span>
-                canvas = Canvas(ventana, width=1500, height=90)<br>
-                sapo = canvas.create_image(100, 55, image=img_Tk)<br>
-                canvas.coords(sapo, x, y)&nbsp;&nbsp;# mover
-            </div>
-
-            <div class="sub">Crear lienzo e imagen</div>
-            <pre><code><span class="kw">from</span> PIL <span class="kw">import</span> Image, ImageTk
-
-canvas = <span class="fn">Canvas</span>(frame5, width=<span class="nu">1500</span>, height=<span class="nu">90</span>)
-canvas.pack()
-
-img = Image.open(<span class="str">"Sapo.jfif"</span>).resize((<span class="nu">100</span>,<span class="nu">100</span>))
-img_Tk = ImageTk.PhotoImage(img)
-
-sapo = canvas.create_image(<span class="nu">100</span>, <span class="nu">55</span>, image=img_Tk)</code></pre>
-            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
-                <code class="inline">create_image(x, y, image=...)</code> devuelve el
-                <strong>id</strong> del objeto (acá, <code class="inline">sapo</code>). Ese id es el que
-                se usa después para moverlo.
-            </p>
-
-            <div class="sub">Moverlo en cada vuelta</div>
-            <pre><code><span class="cmt"># Mueve la imagen a la nueva posición</span>
-canvas.coords(sapo, x, ALTO // <span class="nu">2</span>)</code></pre>
-            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
-                <code class="inline">coords(id, x, y)</code> teletransporta el objeto a esa posición.
-                Cambiar las coordenadas muchas veces seguidas = animación.
-            </p>
-
-            <div class="sub">La animación completa: rebote izquierda-derecha</div>
-            <pre><code>x, direccion = <span class="nu">100</span>, <span class="nu">1</span>            <span class="cmt"># direccion 1=derecha, -1=izquierda</span>
-
-<span class="kw">def</span> <span class="fn">mover</span>():
-    <span class="kw">global</span> x, direccion
-    x += <span class="nu">10</span> * direccion           <span class="cmt"># avanza 10 px por vuelta</span>
-    <span class="kw">if</span> x &lt;= <span class="nu">100</span> <span class="kw">or</span> x &gt; <span class="nu">1300</span> - <span class="nu">100</span>:
-        direccion *= -<span class="nu">1</span>           <span class="cmt"># tocó un borde: invierte el sentido</span>
-    canvas.coords(sapo, x, ALTO // <span class="nu">2</span>)
-    base.after(<span class="nu">30</span>, mover)          <span class="cmt"># re-agenda: ~33 cuadros por segundo</span>
-
-<span class="fn">mover</span>()                            <span class="cmt"># primera llamada: arranca el loop</span></code></pre>
-            <ul class="explain">
-                <li><code class="inline">x += 10 * direccion</code>: suma si dirección vale 1, resta si vale -1.</li>
-                <li>El <code class="inline">if</code> de bordes multiplica la dirección por -1: rebota.</li>
-                <li><code class="inline">after(30, mover)</code> re-agenda: el mismo patrón del cronómetro de la Parte 1.</li>
-                <li><code class="inline">global</code> es obligatorio para modificar <code class="inline">x</code> y <code class="inline">direccion</code> dentro de la función.</li>
-            </ul>
-
-            <div class="alerta">
-                <strong>Error clásico con imágenes:</strong> guardar <code class="inline">img_Tk</code>
-                solo dentro de una función hace que la imagen desaparezca (el recolector la borra).
-                Guardala en una variable global.
-            </div>
-            <div class="buenas">
-                <strong>Buena práctica:</strong> nombrá el id con algo que se entienda
-                (<code class="inline">sapo</code>, <code class="inline">pelota</code>), así
-                <code class="inline">coords(sapo, ...)</code> se lee solo.
-            </div>
-
-            <div class="exercise">
-                <h4>✍️ Ejercicio: la pelota que rebota</h4>
-                <p class="ex-goal">
-                    Creá un <code class="inline">Canvas</code> y dibujá una pelota con
-                    <code class="inline">create_oval()</code> guardando su id. Definí
-                    <code class="inline">mover()</code> con <code class="inline">global y</code> que
-                    cambie la posición vertical, actualice el dibujo con
-                    <code class="inline">canvas.coords(...)</code> y se re-agende con
-                    <code class="inline">after(30, mover)</code>. Cerrá con
+                    Creá un <code class="inline">Button</code> con <code class="inline">state=DISABLED</code>
+                    y otro botón que al apretarse ejecute una función que lo habilite con
+                    <code class="inline">config(state=NORMAL)</code>. Cerrá con
                     <code class="inline">mainloop()</code>.
                 </p>
-                <textarea class="code-input" id="in-canvas" spellcheck="false" placeholder="# Canvas + coords + after&#10;from tkinter import *&#10;ventana = Tk()&#10;canvas = Canvas(ventana, width=300, height=300)"></textarea>
+                <textarea class="code-input" id="in-state" spellcheck="false" placeholder="# state=DISABLED y config(state=NORMAL)\nfrom tkinter import *\nventana = Tk()"></textarea>
                 <div class="ex-actions">
-                    <button class="btn btn-primary" onclick="corregir('canvas')">✅ Corregir</button>
-                    <button class="btn btn-ghost" onclick="limpiar('canvas')">Limpiar</button>
+                    <button class="btn btn-primary" onclick="corregir('state')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('state')">Limpiar</button>
                 </div>
-                <div class="result" id="res-canvas"></div>
+                <div class="result" id="res-state"></div>
             </div>
         </article>
-
-        <!-- 6 -->
+        <!-- 19 -->
         <article class="card">
-            <h3><span class="num">6</span> Música de fondo con pygame</h3>
-            <p class="concept">
-                Pygame trae un reproductor de sonido (<code class="inline">mixer</code>) que puede sonar
-                mientras la ventana sigue andando: perfecto para ponerle música a
-                <em>LasTablas</em>.
-            </p>
-            <div class="syntax">
-                <span class="syntax-label">Sintaxis</span>
-                import pygame<br>
-                pygame.mixer.init()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 1) enciende audio<br>
-                pygame.mixer.music.load("musica.mp3")&nbsp;# 2) carga<br>
-                pygame.mixer.music.play(-1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 3) loop infinito
-            </div>
-            <pre><code><span class="kw">import</span> pygame
-
-<span class="fn">pygame.mixer.init</span>()                        <span class="cmt"># 1) enciende el sistema de audio</span>
-musica_tablas = <span class="str">"musica_tablas.mp3"</span>          <span class="cmt"># archivo en la MISMA carpeta</span>
-<span class="fn">pygame.mixer.music.load</span>(musica_tablas)      <span class="cmt"># 2) carga el archivo</span>
-pygame.mixer.music.play(-<span class="nu">1</span>)                 <span class="cmt"># 3) reproduce en LOOP infinito</span></code></pre>
-            <table class="datos">
-                <tr><th>Línea</th><th>Qué hace</th></tr>
-                <tr><td><code class="inline">pygame.mixer.init()</code></td><td>prepara el hardware de audio (una sola vez)</td></tr>
-                <tr><td><code class="inline">music.load(archivo)</code></td><td>carga mp3/wav/ogg a memoria</td></tr>
-                <tr><td><code class="inline">music.play(-1)</code></td><td>reproduce y repite para SIEMPRE (-1 = loop infinito)</td></tr>
-                <tr><td><code class="inline">music.play(3)</code></td><td>suena 3 veces y para</td></tr>
-                <tr><td><code class="inline">music.stop()</code></td><td>corta la reproducción</td></tr>
-            </table>
-            <div class="okbox">
-                <strong>¿Por qué -1?</strong> El argumento es "cuántas veces repetir". Con 0 suena una
-                vez, con 3 suena tres veces, con -1 el ciclo nunca termina: música de fondo eterna.
-            </div>
-            <div class="alerta">
-                <strong>Errores típicos:</strong>
-                <ul class="explain" style="margin-top:.3rem;">
-                    <li>No llamar <code class="inline">init()</code> antes de load/play.</li>
-                    <li>Ruta mal escrita: el archivo debe estar junto al .py (o pasar la ruta completa).</li>
-                    <li>Formato no soportado: probá mp3 u ogg.</li>
-                </ul>
-            </div>
-            <div class="buenas">
-                <strong>Idea integradora:</strong> podés combinar todo: botón "Música ON/OFF" con
-                <code class="inline">command=lambda: pygame.mixer.music.stop()</code> o con una función
-                propia que alterne.
-            </div>
-
-            <div class="exercise">
-                <h4>✍️ Ejercicio: efecto de sonido</h4>
-                <p class="ex-goal">
-                    Importá <code class="inline">pygame</code>, inicializá el mixer con
-                    <code class="inline">pygame.mixer.init()</code>, cargá un archivo
-                    <code class="inline">.wav</code> en una variable con
-                    <code class="inline">pygame.mixer.Sound()</code> y reproducilo una vez con
-                    <code class="inline">.play()</code>.
-                </p>
-                <textarea class="code-input" id="in-musica" spellcheck="false" placeholder="# pygame + efecto de sonido&#10;import pygame"></textarea>
-                <div class="ex-actions">
-                    <button class="btn btn-primary" onclick="corregir('musica')">✅ Corregir</button>
-                    <button class="btn btn-ghost" onclick="limpiar('musica')">Limpiar</button>
-                </div>
-                <div class="result" id="res-musica"></div>
-            </div>
-        </article>
-
-        <!-- 7 -->
-        <article class="card">
-            <h3><span class="num">7</span> Formulario con base de datos (MySQL)</h3>
+            <h3><span class="num">19</span> Formulario con base de datos (MySQL)</h3>
             <p class="concept">
                 Meta final: una ventana donde cargar un alumno (nombre + curso),
                 <strong>ENVIARLO</strong> a MySQL y después <strong>MOSTRAR</strong> lo guardado.
@@ -1078,6 +949,158 @@ ventana.<span class="fn">mainloop</span>()                             <span cla
                 <div class="result" id="res-mysql"></div>
             </div>
         </article>
+        <!-- 20 -->
+        <article class="card">
+            <h3><span class="num">20</span> Canvas: dibujar, poner imagen y animar</h3>
+            <p class="concept">
+                El <strong>Canvas</strong> es un lienzo donde se colocan formas e imágenes, y cada
+                objeto queda identificado por un <strong>id</strong> para poder moverlo después.
+                Es el escenario del sapo de <em>LasTablas.py</em>.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis</span>
+                canvas = Canvas(ventana, width=1500, height=90)<br>
+                sapo = canvas.create_image(100, 55, image=img_Tk)<br>
+                canvas.coords(sapo, x, y)&nbsp;&nbsp;# mover
+            </div>
+
+            <div class="sub">Crear lienzo e imagen</div>
+            <pre><code><span class="kw">from</span> PIL <span class="kw">import</span> Image, ImageTk
+
+canvas = <span class="fn">Canvas</span>(frame5, width=<span class="nu">1500</span>, height=<span class="nu">90</span>)
+canvas.pack()
+
+img = Image.open(<span class="str">"Sapo.jfif"</span>).resize((<span class="nu">100</span>,<span class="nu">100</span>))
+img_Tk = ImageTk.PhotoImage(img)
+
+sapo = canvas.create_image(<span class="nu">100</span>, <span class="nu">55</span>, image=img_Tk)</code></pre>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                <code class="inline">create_image(x, y, image=...)</code> devuelve el
+                <strong>id</strong> del objeto (acá, <code class="inline">sapo</code>). Ese id es el que
+                se usa después para moverlo.
+            </p>
+
+            <div class="sub">Moverlo en cada vuelta</div>
+            <pre><code><span class="cmt"># Mueve la imagen a la nueva posición</span>
+canvas.coords(sapo, x, ALTO // <span class="nu">2</span>)</code></pre>
+            <p style="font-size:.93rem;margin:.2rem 0 .6rem;">
+                <code class="inline">coords(id, x, y)</code> teletransporta el objeto a esa posición.
+                Cambiar las coordenadas muchas veces seguidas = animación.
+            </p>
+
+            <div class="sub">La animación completa: rebote izquierda-derecha</div>
+            <pre><code>x, direccion = <span class="nu">100</span>, <span class="nu">1</span>            <span class="cmt"># direccion 1=derecha, -1=izquierda</span>
+
+<span class="kw">def</span> <span class="fn">mover</span>():
+    <span class="kw">global</span> x, direccion
+    x += <span class="nu">10</span> * direccion           <span class="cmt"># avanza 10 px por vuelta</span>
+    <span class="kw">if</span> x &lt;= <span class="nu">100</span> <span class="kw">or</span> x &gt; <span class="nu">1300</span> - <span class="nu">100</span>:
+        direccion *= -<span class="nu">1</span>           <span class="cmt"># tocó un borde: invierte el sentido</span>
+    canvas.coords(sapo, x, ALTO // <span class="nu">2</span>)
+    base.after(<span class="nu">30</span>, mover)          <span class="cmt"># re-agenda: ~33 cuadros por segundo</span>
+
+<span class="fn">mover</span>()                            <span class="cmt"># primera llamada: arranca el loop</span></code></pre>
+            <ul class="explain">
+                <li><code class="inline">x += 10 * direccion</code>: suma si dirección vale 1, resta si vale -1.</li>
+                <li>El <code class="inline">if</code> de bordes multiplica la dirección por -1: rebota.</li>
+                <li><code class="inline">after(30, mover)</code> re-agenda: el mismo patrón del cronómetro de la Parte 1.</li>
+                <li><code class="inline">global</code> es obligatorio para modificar <code class="inline">x</code> y <code class="inline">direccion</code> dentro de la función.</li>
+            </ul>
+
+            <div class="alerta">
+                <strong>Error clásico con imágenes:</strong> guardar <code class="inline">img_Tk</code>
+                solo dentro de una función hace que la imagen desaparezca (el recolector la borra).
+                Guardala en una variable global.
+            </div>
+            <div class="buenas">
+                <strong>Buena práctica:</strong> nombrá el id con algo que se entienda
+                (<code class="inline">sapo</code>, <code class="inline">pelota</code>), así
+                <code class="inline">coords(sapo, ...)</code> se lee solo.
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Ejercicio: la pelota que rebota</h4>
+                <p class="ex-goal">
+                    Creá un <code class="inline">Canvas</code> y dibujá una pelota con
+                    <code class="inline">create_oval()</code> guardando su id. Definí
+                    <code class="inline">mover()</code> con <code class="inline">global y</code> que
+                    cambie la posición vertical, actualice el dibujo con
+                    <code class="inline">canvas.coords(...)</code> y se re-agende con
+                    <code class="inline">after(30, mover)</code>. Cerrá con
+                    <code class="inline">mainloop()</code>.
+                </p>
+                <textarea class="code-input" id="in-canvas" spellcheck="false" placeholder="# Canvas + coords + after&#10;from tkinter import *&#10;ventana = Tk()&#10;canvas = Canvas(ventana, width=300, height=300)"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('canvas')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('canvas')">Limpiar</button>
+                </div>
+                <div class="result" id="res-canvas"></div>
+            </div>
+        </article>
+        <!-- 21 -->
+        <article class="card">
+            <h3><span class="num">21</span> Música de fondo con pygame</h3>
+            <p class="concept">
+                Pygame trae un reproductor de sonido (<code class="inline">mixer</code>) que puede sonar
+                mientras la ventana sigue andando: perfecto para ponerle música a
+                <em>LasTablas</em>.
+            </p>
+            <div class="syntax">
+                <span class="syntax-label">Sintaxis</span>
+                import pygame<br>
+                pygame.mixer.init()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 1) enciende audio<br>
+                pygame.mixer.music.load("musica.mp3")&nbsp;# 2) carga<br>
+                pygame.mixer.music.play(-1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# 3) loop infinito
+            </div>
+            <pre><code><span class="kw">import</span> pygame
+
+<span class="fn">pygame.mixer.init</span>()                        <span class="cmt"># 1) enciende el sistema de audio</span>
+musica_tablas = <span class="str">"musica_tablas.mp3"</span>          <span class="cmt"># archivo en la MISMA carpeta</span>
+<span class="fn">pygame.mixer.music.load</span>(musica_tablas)      <span class="cmt"># 2) carga el archivo</span>
+pygame.mixer.music.play(-<span class="nu">1</span>)                 <span class="cmt"># 3) reproduce en LOOP infinito</span></code></pre>
+            <table class="datos">
+                <tr><th>Línea</th><th>Qué hace</th></tr>
+                <tr><td><code class="inline">pygame.mixer.init()</code></td><td>prepara el hardware de audio (una sola vez)</td></tr>
+                <tr><td><code class="inline">music.load(archivo)</code></td><td>carga mp3/wav/ogg a memoria</td></tr>
+                <tr><td><code class="inline">music.play(-1)</code></td><td>reproduce y repite para SIEMPRE (-1 = loop infinito)</td></tr>
+                <tr><td><code class="inline">music.play(3)</code></td><td>suena 3 veces y para</td></tr>
+                <tr><td><code class="inline">music.stop()</code></td><td>corta la reproducción</td></tr>
+            </table>
+            <div class="okbox">
+                <strong>¿Por qué -1?</strong> El argumento es "cuántas veces repetir". Con 0 suena una
+                vez, con 3 suena tres veces, con -1 el ciclo nunca termina: música de fondo eterna.
+            </div>
+            <div class="alerta">
+                <strong>Errores típicos:</strong>
+                <ul class="explain" style="margin-top:.3rem;">
+                    <li>No llamar <code class="inline">init()</code> antes de load/play.</li>
+                    <li>Ruta mal escrita: el archivo debe estar junto al .py (o pasar la ruta completa).</li>
+                    <li>Formato no soportado: probá mp3 u ogg.</li>
+                </ul>
+            </div>
+            <div class="buenas">
+                <strong>Idea integradora:</strong> podés combinar todo: botón "Música ON/OFF" con
+                <code class="inline">command=lambda: pygame.mixer.music.stop()</code> o con una función
+                propia que alterne.
+            </div>
+
+            <div class="exercise">
+                <h4>✍️ Ejercicio: efecto de sonido</h4>
+                <p class="ex-goal">
+                    Importá <code class="inline">pygame</code>, inicializá el mixer con
+                    <code class="inline">pygame.mixer.init()</code>, cargá un archivo
+                    <code class="inline">.wav</code> en una variable con
+                    <code class="inline">pygame.mixer.Sound()</code> y reproducilo una vez con
+                    <code class="inline">.play()</code>.
+                </p>
+                <textarea class="code-input" id="in-musica" spellcheck="false" placeholder="# pygame + efecto de sonido&#10;import pygame"></textarea>
+                <div class="ex-actions">
+                    <button class="btn btn-primary" onclick="corregir('musica')">✅ Corregir</button>
+                    <button class="btn btn-ghost" onclick="limpiar('musica')">Limpiar</button>
+                </div>
+                <div class="result" id="res-musica"></div>
+            </div>
+        </article>
 
         <!-- Progreso -->
         <div class="progress-card" id="progreso">
@@ -1087,7 +1110,7 @@ ventana.<span class="fn">mainloop</span>()                             <span cla
             </p>
             <div class="progress-top">
                 <div class="score-bar"><div class="score-fill" id="progreso-barra" style="width:0%"></div></div>
-                <span class="progress-pct" id="progreso-texto">0 de 9 completos</span>
+                <span class="progress-pct" id="progreso-texto">0 de 11 completos</span>
             </div>
             <ul class="progress-list" id="progreso-lista"></ul>
             <div class="quiz-actions">
@@ -1096,7 +1119,6 @@ ventana.<span class="fn">mainloop</span>()                             <span cla
         </div>
     </section>
 
-    <!-- ================= SECCIÓN 2 ================= -->
     <section id="quiz">
         <h2 class="section-title">SECCIÓN 2 · Autoevaluación</h2>
         <p class="section-sub">
@@ -1715,14 +1737,25 @@ window.reiniciarQuiz = function (contId, bannerId) {
             { d: 'Calcula el promedio con sum() y división', f: function (c) { return /\bsum\s*\(/.test(c) && /\//.test(c); } },
             { d: 'Muestra resultados con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
         ],
-        tkinter2: [
-            { d: 'Define una función con parámetro (def ...(tarea))', f: function (c) { return /\bdef\s+\w+\s*\(\s*\w+\s*\)/.test(c); } },
+        texto: [
             { d: 'Crea un widget Text', f: function (c) { return /\btext\s*\(/.test(c); } },
+            { d: 'Empaqueta el widget con pack()', f: function (c) { return /\.pack\s*\(/.test(c); } },
             { d: 'Inserta al final con insert(END, ...)', f: function (c) { return /insert\s*\(\s*end/.test(c); } },
             { d: 'Agrega un salto de línea con \\n', f: function (c) { return /\\n/.test(c); } },
+            { d: 'Cierra con mainloop()', f: function (c) { return /\bmainloop\s*\(/.test(c); } }
+        ],
+        lambda1: [
+            { d: 'Define una función con parámetro', f: function (c) { return /\bdef\s+\w+\s*\(\s*\w+\s*\)/.test(c); } },
             { d: 'Conecta el botón con command=lambda', f: function (c) { return /\bbutton\s*\([^)]*command\s*=\s*lambda/.test(c); } },
             { d: 'La lambda llama a la función con un dato', f: function (c) { return /lambda\s*:\s*\w+\s*\(\s*["'][^"']+["']\s*\)/.test(c); } },
-            { d: 'Cierra con mainloop()', f: function (c) { return /\bmainloop\s*\(\s*\)/.test(c); } }
+            { d: 'Cierra con mainloop()', f: function (c) { return /\bmainloop\s*\(/.test(c); } }
+        ],
+        state: [
+            { d: 'Crea un botón con state=DISABLED', f: function (c) { return /\bbutton\s*\([^)]*state\s*=\s*disabled/.test(c); } },
+            { d: 'Define una función para habilitar', f: function (c) { return /\bdef\s+\w+\s*\(/.test(c); } },
+            { d: 'Habilita con config(state=NORMAL)', f: function (c) { return /\.config\s*\(\s*state\s*=\s*normal/.test(c); } },
+            { d: 'Conecta el botón con command', f: function (c) { return /\bbutton\s*\([^)]*command\s*=/.test(c); } },
+            { d: 'Cierra con mainloop()', f: function (c) { return /\bmainloop\s*\(/.test(c); } }
         ],
         canvas: [
             { d: 'Crea el lienzo con Canvas(...)', f: function (c) { return /\bcanvas\s*\(/.test(c); } },
@@ -1833,13 +1866,15 @@ window.reiniciarQuiz = function (contId, bannerId) {
 
     /* ---------- Progreso ---------- */
     var TEMAS = [
-        { id: 'listas', nombre: '1. Listas' },
-        { id: 'tuplas', nombre: '2. Tuplas' },
-        { id: 'diccionarios', nombre: '3. Diccionarios' },
-        { id: 'tkinter2', nombre: '4. Text, state y lambda' },
-        { id: 'canvas', nombre: '5. Canvas y animación' },
-        { id: 'musica', nombre: '6. Música con pygame' },
-        { id: 'mysql', nombre: '7. Formulario + MySQL' },
+        { id: 'listas', nombre: '13. Listas' },
+        { id: 'tuplas', nombre: '14. Tuplas' },
+        { id: 'diccionarios', nombre: '15. Diccionarios' },
+        { id: 'texto', nombre: '16. Tkinter · Text' },
+        { id: 'lambda1', nombre: '17. Tkinter · lambda' },
+        { id: 'state', nombre: '18. Tkinter · state' },
+        { id: 'mysql', nombre: '19. Formulario + MySQL' },
+        { id: 'canvas', nombre: '20. Canvas y animación' },
+        { id: 'musica', nombre: '21. Música con pygame' },
         { id: 'cursos', nombre: 'Actividad final · Lista de cursos' },
         { id: 'mysql2', nombre: 'Actividad final · Guardar en MySQL' }
     ];

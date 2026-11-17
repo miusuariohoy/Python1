@@ -2,16 +2,16 @@
    CONFIGURACIÓN DEL RECUPERATORIO · EVALUACIÓN 1
    ------------------------------------------------------------
    Se carga después de config.js y antes de app.js.
-   Mismos temas que la Evaluación 1, con consignas distintas.
+   Mismos temas que la Evaluación Final, con consignas distintas.
    ============================================================ */
 
 window.CONFIG.EXAMEN = {
     id: 'python-1-recu',
-    titulo: 'Recuperatorio · Parte 1 · Programación Estructurada',
+    titulo: 'Recuperatorio de Evaluación Final · Programación Estructurada',
     materia: 'Programación'
 };
 
-/* Clave de acceso propia del recuperatorio (la Evaluación 1 usa "Python1"). */
+/* Clave de acceso propia del recuperatorio (la Evaluación Final usa "Python1"). */
 window.CONFIG.CLAVE_ACCESO = 'recu1';
 
 /* Parte C: 2 actividades de 1,5 puntos cada una (total 3). */

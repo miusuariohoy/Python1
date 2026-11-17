@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuarta Evaluación · Programación Estructurada</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ================= PUERTA DE ACCESO ================= -->
+<div class="acceso" id="acceso">
+    <form class="acceso-caja" id="form-acceso" autocomplete="off">
+        <span class="badge-acceso">Acceso restringido</span>
+        <h1>Cuarta Evaluación</h1>
+        <p>Ingresá la clave que te dio el docente para comenzar.</p>
+        <input type="password" id="clave" placeholder="Clave de acceso" required>
+        <button type="submit" class="btn btn-primario" style="width:100%">Entrar</button>
+        <p class="acceso-error" id="acceso-error"></p>
+        <p class="acceso-volver"><a href="parte2.html">← Volver a la guía</a></p>
+    </form>
+</div>
+
+<!-- ================= APP ================= -->
+<div id="app" hidden>
+
+<header class="hero">
+    <div class="contenedor">
+        <span class="badge">Cuarta evaluación · Temas 13 a 15</span>
+        <h1>Listas, tuplas y diccionarios</h1>
+        <p class="subtitulo">
+            Listas, tuplas y diccionarios. 11 consignas, 10 puntos y corrección automática.
+        </p>
+        <div class="nav-rapida">
+            <a href="#parte-a" class="btn-enlace">Parte A · Opción múltiple</a>
+            <a href="#parte-b" class="btn-enlace">Parte B · Salidas</a>
+            <a href="#parte-c" class="btn-enlace">Parte C · Código</a>
+            <a href="#resultado" class="btn-enlace">Resultado</a>
+        </div>
+    </div>
+</header>
+
+<main class="contenedor">
+
+    <!-- ================= INSTRUCCIONES ================= -->
+    <section class="bloque">
+        <div class="tarjeta">
+            <h3>Antes de empezar</h3>
+            <ul>
+                <li>Leé cada consigna con atención y respondé <strong>todas</strong> las preguntas.</li>
+                <li>En la <strong>Parte A</strong> marcá una sola opción por pregunta.</li>
+                <li>En la <strong>Parte B</strong> escribí la salida exacta del programa. Si son varias líneas, separalas con un espacio.</li>
+                <li>En la <strong>Parte C</strong> escribí el código completo en Python. El corrector revisa la estructura, no ejecuta el programa.</li>
+                <li>Podés realizar la evaluación <strong>más de una vez</strong>. Cada envío queda registrado con tu apellido, nombre, día y hora.</li>
+                <li>Al terminar, presioná <strong>Corregir y enviar</strong>. Vas a ver el puntaje y la explicación de cada respuesta.</li>
+            </ul>
+
+            <table class="tabla-puntos">
+                <thead>
+                    <tr><th>Parte</th><th>Consigna</th><th>Puntos</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>A</td><td>5 preguntas de opción múltiple</td><td>5</td></tr>
+                    <tr><td>B</td><td>4 predicciones de salida</td><td>2</td></tr>
+                    <tr><td>C</td><td>2 ejercicios de código</td><td>3</td></tr>
+                    <tr><td colspan="2"><strong>Total</strong></td><td><strong>10</strong></td></tr>
+                </tbody>
+            </table>
+
+            <div class="datos-alumno">
+                <label>Apellido
+                    <input type="text" id="alumno-apellido" placeholder="Tu apellido" autocomplete="off">
+                </label>
+                <label>Nombre
+                    <input type="text" id="alumno-nombre" placeholder="Tu nombre" autocomplete="off">
+                </label>
+                <label>Curso
+                    <input type="text" id="alumno-curso" placeholder="Ej.: 5.º 2.ª" autocomplete="off">
+                </label>
+                <label>Materia
+                    <input type="text" id="alumno-materia" placeholder="Ej.: Programación" autocomplete="off">
+                </label>
+            </div>
+
+            <p class="nota">
+                Tiempo sugerido: <strong>45 minutos</strong>. Intentá resolver sin ejecutar el código:
+                el objetivo es interpretar la lógica del programa.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================= PARTE A ================= -->
+    <section class="bloque" id="parte-a">
+        <div class="encabezado-seccion">
+            <span class="numero-paso">A</span>
+            <div>
+                <h2>Opción múltiple</h2>
+                <p>5 preguntas · 1 punto cada una · marcá una sola respuesta.</p>
+            </div>
+        </div>
+
+        <article class="pregunta mc" data-correcta="a">
+            <p class="enunciado"><span class="num-preg">1</span> ¿Qué muestra <code>numeros[0]</code> si <code>numeros = [4, 7, 9]</code>?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a1" value="a"> <code>4</code></label>
+                <label data-op="b"><input type="radio" name="a1" value="b"> <code>7</code></label>
+                <label data-op="c"><input type="radio" name="a1" value="c"> <code>9</code></label>
+                <label data-op="d"><input type="radio" name="a1" value="d"> Da error</label>
+            </div>
+            <p class="explicacion">La numeración empieza en <strong>0</strong>: la posición 0 guarda el primer valor, 4.</p>
+        </article>
+        <article class="pregunta mc" data-correcta="c">
+            <p class="enunciado"><span class="num-preg">2</span> ¿Qué devuelve <code>len(cursos)</code> si <code>cursos = ["1A", "2A"]</code>?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a2" value="a"> <code>"1A"</code></label>
+                <label data-op="b"><input type="radio" name="a2" value="b"> <code>1</code></label>
+                <label data-op="c"><input type="radio" name="a2" value="c"> <code>2</code></label>
+                <label data-op="d"><input type="radio" name="a2" value="d"> <code>3</code></label>
+            </div>
+            <p class="explicacion"><code>len()</code> devuelve la <strong>cantidad de elementos</strong>: hay dos cursos.</p>
+        </article>
+        <article class="pregunta mc" data-correcta="b">
+            <p class="enunciado"><span class="num-preg">3</span> ¿Cómo agregás <code>"café"</code> al final de la lista <code>compras</code>?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a3" value="a"> <code>compras.add("café")</code></label>
+                <label data-op="b"><input type="radio" name="a3" value="b"> <code>compras.append("café")</code></label>
+                <label data-op="c"><input type="radio" name="a3" value="c"> <code>compras = compras + café</code></label>
+                <label data-op="d"><input type="radio" name="a3" value="d"> <code>compras.insert("café")</code></label>
+            </div>
+            <p class="explicacion"><code>append()</code> agrega un elemento al final de la lista.</p>
+        </article>
+        <article class="pregunta mc" data-correcta="d">
+            <p class="enunciado"><span class="num-preg">4</span> ¿Cuál de estas líneas define una <strong>tupla</strong>?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a4" value="a"> <code>punto = [3, 4]</code></label>
+                <label data-op="b"><input type="radio" name="a4" value="b"> <code>punto = {"x": 3}</code></label>
+                <label data-op="c"><input type="radio" name="a4" value="c"> <code>punto = {3, 4}</code></label>
+                <label data-op="d"><input type="radio" name="a4" value="d"> <code>punto = (3, 4)</code></label>
+            </div>
+            <p class="explicacion">La tupla usa <strong>paréntesis</strong> y no se puede modificar después.</p>
+        </article>
+        <article class="pregunta mc" data-correcta="a">
+            <p class="enunciado"><span class="num-preg">5</span> Con <code>persona = {"nombre": "Ana", "edad": 17}</code>, ¿cómo leés el nombre?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a5" value="a"> <code>persona["nombre"]</code></label>
+                <label data-op="b"><input type="radio" name="a5" value="b"> <code>persona[0]</code></label>
+                <label data-op="c"><input type="radio" name="a5" value="c"> <code>persona.nombre()</code></label>
+                <label data-op="d"><input type="radio" name="a5" value="d"> <code>persona["Ana"]</code></label>
+            </div>
+            <p class="explicacion">En un diccionario se accede por <strong>clave</strong> entre corchetes: <code>persona["nombre"]</code>.</p>
+        </article>
+    </section>
+
+    <!-- ================= PARTE B ================= -->
+    <section class="bloque" id="parte-b">
+        <div class="encabezado-seccion">
+            <span class="numero-paso">B</span>
+            <div>
+                <h2>Predicción de salidas</h2>
+                <p>4 programas · 0,5 puntos cada uno · escribí lo que muestra cada uno.</p>
+            </div>
+        </div>
+
+        <article class="pregunta salida" data-aceptadas="2">
+            <p class="enunciado"><span class="num-preg">6</span> ¿Qué muestra este programa?</p>
+            <pre><code>numeros = [1, 2, 3]
+print(numeros[1])</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b1" autocomplete="off" placeholder="Escribí la salida">
+            </label>
+            <p class="explicacion"><code>numeros[1]</code> es el segundo elemento: <strong>2</strong>.</p>
+        </article>
+        <article class="pregunta salida" data-aceptadas="2">
+            <p class="enunciado"><span class="num-preg">7</span> ¿Qué muestra este programa?</p>
+            <pre><code>compras = [&quot;pan&quot;, &quot;leche&quot;]
+print(len(compras))</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b2" autocomplete="off" placeholder="Escribí la salida">
+            </label>
+            <p class="explicacion">Hay dos productos en la lista: <strong>2</strong>.</p>
+        </article>
+        <article class="pregunta salida" data-aceptadas="7">
+            <p class="enunciado"><span class="num-preg">8</span> ¿Qué muestra este programa?</p>
+            <pre><code>punto = (3, 4)
+x, y = punto
+print(x + y)</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b3" autocomplete="off" placeholder="Escribí la salida">
+            </label>
+            <p class="explicacion">El desempaquetado da x = 3 e y = 4; la suma es <strong>7</strong>.</p>
+        </article>
+        <article class="pregunta salida" data-aceptadas="14">
+            <p class="enunciado"><span class="num-preg">9</span> ¿Qué muestra este programa?</p>
+            <pre><code>notas = {&quot;ana&quot;: 8}
+notas[&quot;luis&quot;] = 6
+print(notas[&quot;ana&quot;] + notas[&quot;luis&quot;])</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b4" autocomplete="off" placeholder="Escribí la salida">
+            </label>
+            <p class="explicacion">Se agregó la clave "luis" y 8 + 6 es <strong>14</strong>.</p>
+        </article>
+    </section>
+
+    <!-- ================= PARTE C ================= -->
+    <section class="bloque" id="parte-c">
+        <div class="encabezado-seccion">
+            <span class="numero-paso">C</span>
+            <div>
+                <h2>Ejercicios de código</h2>
+                <p>2 programas · 1,5 puntos cada uno · se corrige la estructura del código.</p>
+            </div>
+        </div>
+
+        <article class="pregunta codigo" data-ejercicio="c1">
+            <p class="enunciado"><span class="num-preg">10</span> Escribí un programa que cree una lista <code>compras</code> con <strong>3 productos</strong>, muestre el primero con <code>[0]</code>, muestre la cantidad con <code>len()</code>, agregue <code>"café"</code> con <code>append()</code> y recorra la lista con un <code>for</code> mostrando cada producto.</p>
+            <textarea class="editor" id="c1" spellcheck="false" placeholder="compras = [...]&#10;print(compras[0])&#10;..."></textarea>
+            <div class="resultado-codigo" id="res-c1"></div>
+            <details class="solucion">
+                <summary>Ver una solución de referencia</summary>
+                <pre><code>compras = [&quot;pan&quot;, &quot;leche&quot;, &quot;huevos&quot;]
+print(compras[0])
+print(len(compras))
+compras.append(&quot;café&quot;)
+for producto in compras:
+    print(producto)</code></pre>
+            </details>
+        </article>
+        <article class="pregunta codigo" data-ejercicio="c2">
+            <p class="enunciado"><span class="num-preg">11</span> Creá un diccionario <code>notas</code> con <strong>dos alumnos</strong> y sus notas. Mostrá la nota de uno por su clave, agregá un tercer alumno y recorré todo con <code>.items()</code> mostrando cada par con <code>print()</code>.</p>
+            <textarea class="editor" id="c2" spellcheck="false" placeholder="notas = {...}&#10;print(notas[...])&#10;..."></textarea>
+            <div class="resultado-codigo" id="res-c2"></div>
+            <details class="solucion">
+                <summary>Ver una solución de referencia</summary>
+                <pre><code>notas = {&quot;ana&quot;: 8, &quot;luis&quot;: 6}
+print(notas[&quot;ana&quot;])
+notas[&quot;eva&quot;] = 9
+for nombre, nota in notas.items():
+    print(nombre, nota)</code></pre>
+            </details>
+        </article>
+    </section>
+
+    <!-- ================= RESULTADO ================= -->
+    <div class="acciones no-print">
+        <button type="button" class="btn btn-primario" id="btn-corregir">✅ Corregir y enviar</button>
+        <button type="button" class="btn btn-secundario" id="btn-reiniciar">🔄 Reiniciar</button>
+        <button type="button" class="btn btn-secundario" id="btn-imprimir">🖨️ Imprimir</button>
+    </div>
+
+    <div class="aviso-envio" id="aviso-envio" role="status"></div>
+
+    <section class="resultado" id="resultado" aria-live="polite">
+        <div class="puntaje-grande"><span id="puntaje-total">0</span><small> / 10 puntos</small></div>
+        <div class="barra"><div class="barra-fill" id="barra-fill"></div></div>
+        <p id="mensaje">Corregí la evaluación para ver tu puntaje.</p>
+        <div class="desglose">
+            <span>Parte A: <b id="puntos-a">0</b> / 5</span>
+            <span>Parte B: <b id="puntos-b">0</b> / 2</span>
+            <span>Parte C: <b id="puntos-c">0</b> / 3</span>
+        </div>
+        <div class="resumen-errores" id="resumen-errores"></div>
+        <p class="nota no-print" id="nota-resultado" style="display:none;">
+            Las respuestas correctas y las soluciones de referencia ya están visibles en cada consigna.
+        </p>
+        <p class="estado-envio" id="estado-envio"></p>
+        <div class="enviar-fallback no-print" id="enviar-fallback">
+            <button type="button" class="btn btn-secundario btn-chico" id="btn-copiar">📋 Copiar resultado</button>
+            <button type="button" class="btn btn-secundario btn-chico" id="btn-descargar">⬇️ Descargar comprobante</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>Cuarta evaluación interactiva · Python · Listas, tuplas y diccionarios · 10 puntos</p>
+    </footer>
+
+</main>
+</div>
+
+<script src="config.js?v=6"></script>
+<script src="config-cuarta.js?v=1"></script>
+<script src="app.js?v=6"></script>
+</body>
+</html>

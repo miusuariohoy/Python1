@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quinta Evaluación · Programación Estructurada</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ================= PUERTA DE ACCESO ================= -->
+<div class="acceso" id="acceso">
+    <form class="acceso-caja" id="form-acceso" autocomplete="off">
+        <span class="badge-acceso">Acceso restringido</span>
+        <h1>Quinta Evaluación</h1>
+        <p>Ingresá la clave que te dio el docente para comenzar.</p>
+        <input type="password" id="clave" placeholder="Clave de acceso" required>
+        <button type="submit" class="btn btn-primario" style="width:100%">Entrar</button>
+        <p class="acceso-error" id="acceso-error"></p>
+        <p class="acceso-volver"><a href="parte2.html">← Volver a la guía</a></p>
+    </form>
+</div>
+
+<!-- ================= APP ================= -->
+<div id="app" hidden>
+
+<header class="hero">
+    <div class="contenedor">
+        <span class="badge">Quinta evaluación · Temas 16 a 18</span>
+        <h1>Tkinter avanzado: Text, lambda y state</h1>
+        <p class="subtitulo">
+            Text, lambda y state. 11 consignas, 10 puntos y corrección automática.
+        </p>
+        <div class="nav-rapida">
+            <a href="#parte-a" class="btn-enlace">Parte A · Opción múltiple</a>
+            <a href="#parte-b" class="btn-enlace">Parte B · Salidas</a>
+            <a href="#parte-c" class="btn-enlace">Parte C · Código</a>
+            <a href="#resultado" class="btn-enlace">Resultado</a>
+        </div>
+    </div>
+</header>
+
+<main class="contenedor">
+
+    <!-- ================= INSTRUCCIONES ================= -->
+    <section class="bloque">
+        <div class="tarjeta">
+            <h3>Antes de empezar</h3>
+            <ul>
+                <li>Leé cada consigna con atención y respondé <strong>todas</strong> las preguntas.</li>
+                <li>En la <strong>Parte A</strong> marcá una sola opción por pregunta.</li>
+                <li>En la <strong>Parte B</strong> escribí la salida exacta del programa. Si son varias líneas, separalas con un espacio.</li>
+                <li>En la <strong>Parte C</strong> escribí el código completo en Python. El corrector revisa la estructura, no ejecuta el programa.</li>
+                <li>Podés realizar la evaluación <strong>más de una vez</strong>. Cada envío queda registrado con tu apellido, nombre, día y hora.</li>
+                <li>Al terminar, presioná <strong>Corregir y enviar</strong>. Vas a ver el puntaje y la explicación de cada respuesta.</li>
+            </ul>
+
+            <table class="tabla-puntos">
+                <thead>
+                    <tr><th>Parte</th><th>Consigna</th><th>Puntos</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>A</td><td>5 preguntas de opción múltiple</td><td>5</td></tr>
+                    <tr><td>B</td><td>4 predicciones de salida</td><td>2</td></tr>
+                    <tr><td>C</td><td>2 ejercicios de código</td><td>3</td></tr>
+                    <tr><td colspan="2"><strong>Total</strong></td><td><strong>10</strong></td></tr>
+                </tbody>
+            </table>
+
+            <div class="datos-alumno">
+                <label>Apellido
+                    <input type="text" id="alumno-apellido" placeholder="Tu apellido" autocomplete="off">
+                </label>
+                <label>Nombre
+                    <input type="text" id="alumno-nombre" placeholder="Tu nombre" autocomplete="off">
+                </label>
+                <label>Curso
+                    <input type="text" id="alumno-curso" placeholder="Ej.: 5.º 2.ª" autocomplete="off">
+                </label>
+                <label>Materia
+                    <input type="text" id="alumno-materia" placeholder="Ej.: Programación" autocomplete="off">
+                </label>
+            </div>
+
+            <p class="nota">
+                Tiempo sugerido: <strong>45 minutos</strong>. Intentá resolver sin ejecutar el código:
+                el objetivo es interpretar la lógica del programa.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================= PARTE A ================= -->
+    <section class="bloque" id="parte-a">
+        <div class="encabezado-seccion">
+            <span class="numero-paso">A</span>
+            <div>
+                <h2>Opción múltiple</h2>
+                <p>5 preguntas · 1 punto cada una · marcá una sola respuesta.</p>
+            </div>
+        </div>
+
+        <article class="pregunta mc" data-correcta="b">
+            <p class="enunciado"><span class="num-preg">1</span> ¿Cómo se borra <strong>todo</strong> el contenido de un widget <code>Text</code>?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a1" value="a"> <code>texto.delete(0, END)</code></label>
+                <label data-op="b"><input type="radio" name="a1" value="b"> <code>texto.delete("1.0", END)</code></label>
+                <label data-op="c"><input type="radio" name="a1" value="c"> <code>texto.clear()</code></label>
+                <label data-op="d"><input type="radio" name="a1" value="d"> <code>texto = ""</code></label>
+            </div>
+            <p class="explicacion">Text usa notación línea.carácter: <code>"1.0"</code> es línea 1, carácter 0.</p>
+        </article>
+        <article class="pregunta mc" data-correcta="a">
+            <p class="enunciado"><span class="num-preg">2</span> ¿Qué es una <strong>lambda</strong> en Python?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a2" value="a"> Una mini-función sin nombre, de una sola expresión.</label>
+                <label data-op="b"><input type="radio" name="a2" value="b"> Un widget para mostrar texto.</label>
+                <label data-op="c"><input type="radio" name="a2" value="c"> Una lista que no se puede modificar.</label>
+                <label data-op="d"><input type="radio" name="a2" value="d"> Una forma de cerrar la ventana.</label>
+            </div>
+            <p class="explicacion"><code>lambda x: x * 2</code> equivale a una función <code>def</code> que devuelve <code>x * 2</code>.</p>
+        </article>
+        <article class="pregunta mc" data-correcta="c">
+            <p class="enunciado"><span class="num-preg">3</span> Con <code>command=lambda: mostrar_tabla(7)</code>, ¿cuándo se ejecuta <code>mostrar_tabla(7)</code>?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a3" value="a"> Al crear el botón.</label>
+                <label data-op="b"><input type="radio" name="a3" value="b"> Nunca, porque la lambda no se llama.</label>
+                <label data-op="c"><input type="radio" name="a3" value="c"> Al hacer click, con el número 7.</label>
+                <label data-op="d"><input type="radio" name="a3" value="d"> Al cerrar la ventana.</label>
+            </div>
+            <p class="explicacion">Tkinter guarda la mini-función y la llama recién en el click, con el dato incluido.</p>
+        </article>
+        <article class="pregunta mc" data-correcta="d">
+            <p class="enunciado"><span class="num-preg">4</span> ¿Qué significa <code>state=DISABLED</code> en un botón?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a4" value="a"> El botón se oculta.</label>
+                <label data-op="b"><input type="radio" name="a4" value="b"> El botón se ejecuta dos veces.</label>
+                <label data-op="c"><input type="radio" name="a4" value="c"> El botón cambia de texto.</label>
+                <label data-op="d"><input type="radio" name="a4" value="d"> El botón queda bloqueado y no responde.</label>
+            </div>
+            <p class="explicacion">El control se muestra gris y no responde hasta que se habilita con <code>state=NORMAL</code>.</p>
+        </article>
+        <article class="pregunta mc" data-correcta="b">
+            <p class="enunciado"><span class="num-preg">5</span> ¿Cómo volvés a habilitar un botón bloqueado?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a5" value="a"> <code>boton.state = NORMAL</code></label>
+                <label data-op="b"><input type="radio" name="a5" value="b"> <code>boton.config(state=NORMAL)</code></label>
+                <label data-op="c"><input type="radio" name="a5" value="c"> <code>boton.enable()</code></label>
+                <label data-op="d"><input type="radio" name="a5" value="d"> <code>boton.pack(state=NORMAL)</code></label>
+            </div>
+            <p class="explicacion">La forma correcta es <code>boton.config(state=NORMAL)</code>.</p>
+        </article>
+    </section>
+
+    <!-- ================= PARTE B ================= -->
+    <section class="bloque" id="parte-b">
+        <div class="encabezado-seccion">
+            <span class="numero-paso">B</span>
+            <div>
+                <h2>Predicción de salidas</h2>
+                <p>4 programas · 0,5 puntos cada uno · escribí lo que muestra cada uno.</p>
+            </div>
+        </div>
+
+        <article class="pregunta salida" data-aceptadas="12">
+            <p class="enunciado"><span class="num-preg">6</span> ¿Qué muestra este programa?</p>
+            <pre><code>doble = lambda x: x * 2
+print(doble(6))</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b1" autocomplete="off" placeholder="Escribí la salida">
+            </label>
+            <p class="explicacion">La lambda devuelve 6 × 2: <strong>12</strong>.</p>
+        </article>
+        <article class="pregunta salida" data-aceptadas="7">
+            <p class="enunciado"><span class="num-preg">7</span> ¿Qué muestra este programa?</p>
+            <pre><code>suma = lambda a, b: a + b
+print(suma(3, 4))</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b2" autocomplete="off" placeholder="Escribí la salida">
+            </label>
+            <p class="explicacion">La lambda recibe dos parámetros y devuelve 3 + 4: <strong>7</strong>.</p>
+        </article>
+        <article class="pregunta salida" data-aceptadas="5">
+            <p class="enunciado"><span class="num-preg">8</span> ¿Qué muestra este programa?</p>
+            <pre><code>texto = &quot;hola\n&quot;
+print(len(texto))</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b3" autocomplete="off" placeholder="Escribí la salida">
+            </label>
+            <p class="explicacion">El salto de línea <code>\n</code> cuenta como un carácter: 4 letras + 1 = <strong>5</strong>.</p>
+        </article>
+        <article class="pregunta salida" data-aceptadas="disabled">
+            <p class="enunciado"><span class="num-preg">9</span> ¿Qué muestra este programa?</p>
+            <pre><code>estado = &quot;disabled&quot;
+print(estado.upper())</code></pre>
+            <label class="campo-salida">Salida:
+                <input type="text" id="b4" autocomplete="off" placeholder="Escribí la salida">
+            </label>
+            <p class="explicacion"><code>upper()</code> devuelve <strong>DISABLED</strong> (se acepta en minúsculas).</p>
+        </article>
+    </section>
+
+    <!-- ================= PARTE C ================= -->
+    <section class="bloque" id="parte-c">
+        <div class="encabezado-seccion">
+            <span class="numero-paso">C</span>
+            <div>
+                <h2>Ejercicios de código</h2>
+                <p>2 programas · 1,5 puntos cada uno · se corrige la estructura del código.</p>
+            </div>
+        </div>
+
+        <article class="pregunta codigo" data-ejercicio="c1">
+            <p class="enunciado"><span class="num-preg">10</span> Creá una ventana con un widget <code>Text</code> empaquetado con <code>pack()</code> y definí <code>agregar(tarea)</code> que inserte la tarea al final con <code>insert(END, ...)</code> y un salto de línea <code>\n</code>. Cerrá con <code>mainloop()</code>.</p>
+            <textarea class="editor" id="c1" spellcheck="false" placeholder="from tkinter import *&#10;ventana = Tk()&#10;texto = ..."></textarea>
+            <div class="resultado-codigo" id="res-c1"></div>
+            <details class="solucion">
+                <summary>Ver una solución de referencia</summary>
+                <pre><code>from tkinter import *
+
+ventana = Tk()
+texto = Text(ventana)
+texto.pack()
+
+def agregar(tarea):
+    texto.insert(END, tarea + &quot;\n&quot;)
+
+agregar(&quot;Comprar pan&quot;)
+ventana.mainloop()</code></pre>
+            </details>
+        </article>
+        <article class="pregunta codigo" data-ejercicio="c2">
+            <p class="enunciado"><span class="num-preg">11</span> Definí <code>saludar(nombre)</code> con un parámetro y un <code>Button</code> con <code>command=lambda: saludar("Ana")</code>. Además creá un botón <code>Guardar</code> con <code>state=DISABLED</code> y una función que lo habilite con <code>config(state=NORMAL)</code>, conectada con <code>command</code>. Cerrá con <code>mainloop()</code>.</p>
+            <textarea class="editor" id="c2" spellcheck="false" placeholder="from tkinter import *&#10;def saludar(nombre):&#10;    ...&#10;boton = Button(... state=...)"></textarea>
+            <div class="resultado-codigo" id="res-c2"></div>
+            <details class="solucion">
+                <summary>Ver una solución de referencia</summary>
+                <pre><code>from tkinter import *
+
+ventana = Tk()
+
+boton_guardar = Button(ventana, text=&quot;Guardar&quot;, state=DISABLED)
+boton_guardar.pack()
+
+def habilitar():
+    boton_guardar.config(state=NORMAL)
+
+Button(ventana, text=&quot;Habilitar&quot;, command=habilitar).pack()
+
+def saludar(nombre):
+    print(nombre)
+
+Button(ventana, text=&quot;Ana&quot;, command=lambda: saludar(&quot;Ana&quot;)).pack()
+
+ventana.mainloop()</code></pre>
+            </details>
+        </article>
+    </section>
+
+    <!-- ================= RESULTADO ================= -->
+    <div class="acciones no-print">
+        <button type="button" class="btn btn-primario" id="btn-corregir">✅ Corregir y enviar</button>
+        <button type="button" class="btn btn-secundario" id="btn-reiniciar">🔄 Reiniciar</button>
+        <button type="button" class="btn btn-secundario" id="btn-imprimir">🖨️ Imprimir</button>
+    </div>
+
+    <div class="aviso-envio" id="aviso-envio" role="status"></div>
+
+    <section class="resultado" id="resultado" aria-live="polite">
+        <div class="puntaje-grande"><span id="puntaje-total">0</span><small> / 10 puntos</small></div>
+        <div class="barra"><div class="barra-fill" id="barra-fill"></div></div>
+        <p id="mensaje">Corregí la evaluación para ver tu puntaje.</p>
+        <div class="desglose">
+            <span>Parte A: <b id="puntos-a">0</b> / 5</span>
+            <span>Parte B: <b id="puntos-b">0</b> / 2</span>
+            <span>Parte C: <b id="puntos-c">0</b> / 3</span>
+        </div>
+        <div class="resumen-errores" id="resumen-errores"></div>
+        <p class="nota no-print" id="nota-resultado" style="display:none;">
+            Las respuestas correctas y las soluciones de referencia ya están visibles en cada consigna.
+        </p>
+        <p class="estado-envio" id="estado-envio"></p>
+        <div class="enviar-fallback no-print" id="enviar-fallback">
+            <button type="button" class="btn btn-secundario btn-chico" id="btn-copiar">📋 Copiar resultado</button>
+            <button type="button" class="btn btn-secundario btn-chico" id="btn-descargar">⬇️ Descargar comprobante</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>Quinta evaluación interactiva · Python · Text, lambda y state · 10 puntos</p>
+    </footer>
+
+</main>
+</div>
+
+<script src="config.js?v=6"></script>
+<script src="config-quinta.js?v=1"></script>
+<script src="app.js?v=6"></script>
+</body>
+</html>
