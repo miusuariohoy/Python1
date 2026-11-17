@@ -243,44 +243,26 @@ print(doble(5) + 1)</code></pre>
         </div>
 
         <article class="pregunta codigo" data-ejercicio="c1">
-            <p class="enunciado"><span class="num-preg">10</span>
-                Pedí una <strong>temperatura</strong> en grados Celsius con <code>input()</code>,
-                guardala como entero en la variable <code>temp</code> y mostrá un mensaje con un
-                <strong>f-string</strong>: <code>Hace frío</code> si <code>temp &lt; 10</code>,
-                <code>Clima templado</code> si <code>temp &lt;= 25</code>, y
-                <code>Hace calor</code> si es mayor a 25. Usá <code>if / elif / else</code>.</p>
-            <textarea class="editor" id="c1" spellcheck="false" placeholder="temp = int(input(...))&#10;if temp &lt; 10:&#10;    print(f'...')&#10;elif ..."></textarea>
+            <p class="enunciado"><span class="num-preg">10</span> Pedí una <strong>temperatura</strong> con <code>input()</code> y guardala en <code>temp</code> con <code>int()</code>. Si es menor que <strong>10</strong> mostrá <code>"Frío"</code>, si no mostrá <code>"Templado"</code>. Usá <code>if / else</code>.</p>
+            <textarea class="editor" id="c1" spellcheck="false" placeholder="temp = int(input(...))&#10;if temp &lt; 10:&#10;    print(&quot;Frío&quot;)&#10;else:&#10;    print(&quot;Templado&quot;)"></textarea>
             <div class="resultado-codigo" id="res-c1"></div>
             <details class="solucion">
                 <summary>Ver una solución de referencia</summary>
                 <pre><code>temp = int(input("Temperatura: "))
-if temp &lt; 10:
-    print(f"Hace frío: {temp} °C")
-elif temp &lt;= 25:
-    print(f"Clima templado: {temp} °C")
+if temp < 10:
+    print("Frío")
 else:
-    print(f"Hace calor: {temp} °C")</code></pre>
+    print("Templado")</code></pre>
             </details>
         </article>
-
         <article class="pregunta codigo" data-ejercicio="c2">
-            <p class="enunciado"><span class="num-preg">11</span>
-                Pedí un número entero y guardalo en <code>n</code>. Con un <code>while</code>
-                y un <strong>acumulador</strong>, sumá los números <strong>pares</strong> del
-                <code>1</code> al <code>n</code> inclusive y mostrá el total. Usá <code>i</code>
-                como contador y <code>suma</code> como acumulador.</p>
-            <textarea class="editor" id="c2" spellcheck="false" placeholder="n = int(input(...))&#10;suma = 0&#10;i = 1&#10;while i &lt;= n:&#10;    ..."></textarea>
+            <p class="enunciado"><span class="num-preg">11</span> Usá un <code>for</code> con <code>range(1, 6)</code> para mostrar los números del <strong>1 al 5</strong>, uno por línea, con <code>print()</code>.</p>
+            <textarea class="editor" id="c2" spellcheck="false" placeholder="for i in range(1, 6):&#10;    print(i)"></textarea>
             <div class="resultado-codigo" id="res-c2"></div>
             <details class="solucion">
                 <summary>Ver una solución de referencia</summary>
-                <pre><code>n = int(input("Número: "))
-suma = 0
-i = 1
-while i &lt;= n:
-    if i % 2 == 0:
-        suma += i
-    i += 1
-print(f"Total: {suma}")</code></pre>
+                <pre><code>for i in range(1, 6):
+    print(i)</code></pre>
             </details>
         </article>
     </section>

@@ -240,33 +240,23 @@ print(len(notas))</code></pre>
         </div>
 
         <article class="pregunta codigo" data-ejercicio="c1">
-            <p class="enunciado"><span class="num-preg">10</span>
-                Escribí un programa que pida el <strong>nombre</strong> y la <strong>edad</strong> de una persona,
-                convierta la edad a entero y muestre un mensaje como:
-                <code>Hola Ana, tenés 17 años</code>. Usá un <strong>f-string</strong>.</p>
-            <textarea class="editor" id="c1" spellcheck="false" placeholder="nombre = input(...)&#10;edad = int(input(...))&#10;print(f'...')"></textarea>
+            <p class="enunciado"><span class="num-preg">10</span> Pedí tu <strong>nombre</strong> con <code>input()</code> y mostralo con un <code>f-string</code>: <code>Hola, Ana</code>.</p>
+            <textarea class="editor" id="c1" spellcheck="false" placeholder="nombre = input(&quot;Nombre: &quot;)&#10;print(f&quot;Hola, {nombre}&quot;)"></textarea>
             <div class="resultado-codigo" id="res-c1"></div>
             <details class="solucion">
                 <summary>Ver una solución de referencia</summary>
                 <pre><code>nombre = input("Nombre: ")
-edad = int(input("Edad: "))
-print(f"Hola {nombre}, tenés {edad} años")</code></pre>
+print(f"Hola, {nombre}")</code></pre>
             </details>
         </article>
-
         <article class="pregunta codigo" data-ejercicio="c2">
-            <p class="enunciado"><span class="num-preg">11</span>
-                Escribí un programa que muestre los números del <strong>1 al 10</strong> (uno por línea)
-                y al final imprima la <strong>suma total</strong>, que debe dar 55. Usá un acumulador.</p>
-            <textarea class="editor" id="c2" spellcheck="false" placeholder="suma = 0&#10;for i in range(...):&#10;    ..."></textarea>
+            <p class="enunciado"><span class="num-preg">11</span> Pedí un <strong>número</strong>, convertilo con <code>int()</code> y mostrá su <strong>doble</strong> con <code>print()</code>.</p>
+            <textarea class="editor" id="c2" spellcheck="false" placeholder="n = int(input(...))&#10;print(n * 2)"></textarea>
             <div class="resultado-codigo" id="res-c2"></div>
             <details class="solucion">
                 <summary>Ver una solución de referencia</summary>
-                <pre><code>suma = 0
-for i in range(1, 11):
-    print(i)
-    suma += i
-print("Suma total:", suma)</code></pre>
+                <pre><code>n = int(input("Número: "))
+print(n * 2)</code></pre>
             </details>
         </article>
     </section>

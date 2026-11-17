@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quinta Evaluación · Programación Estructurada</title>
+    <title>Tercera Evaluación · Parte 2 · Programación Estructurada</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
 <div class="acceso" id="acceso">
     <form class="acceso-caja" id="form-acceso" autocomplete="off">
         <span class="badge-acceso">Acceso restringido</span>
-        <h1>Quinta Evaluación</h1>
+        <h1>Tercera Evaluación · Parte 2</h1>
         <p>Ingresá la clave que te dio el docente para comenzar.</p>
         <input type="password" id="clave" placeholder="Clave de acceso" required>
         <button type="submit" class="btn btn-primario" style="width:100%">Entrar</button>
@@ -29,10 +29,10 @@
 
 <header class="hero">
     <div class="contenedor">
-        <span class="badge">Quinta evaluación · Temas 16 a 18</span>
-        <h1>Tkinter avanzado: Text, lambda y state</h1>
+        <span class="badge">Tercera evaluación · Parte 2 · Tema 19</span>
+        <h1>Formulario con base de datos (MySQL)</h1>
         <p class="subtitulo">
-            Text, lambda y state. 11 consignas, 10 puntos y corrección automática.
+            formulario con MySQL. 11 consignas, 10 puntos y corrección automática.
         </p>
         <div class="nav-rapida">
             <a href="#parte-a" class="btn-enlace">Parte A · Opción múltiple</a>
@@ -103,54 +103,54 @@
         </div>
 
         <article class="pregunta mc" data-correcta="b">
-            <p class="enunciado"><span class="num-preg">1</span> ¿Cómo se borra <strong>todo</strong> el contenido de un widget <code>Text</code>?</p>
+            <p class="enunciado"><span class="num-preg">1</span> ¿Qué módulo se importa para conectarse a MySQL desde Python?</p>
             <div class="opciones">
-                <label data-op="a"><input type="radio" name="a1" value="a"> <code>texto.delete(0, END)</code></label>
-                <label data-op="b"><input type="radio" name="a1" value="b"> <code>texto.delete("1.0", END)</code></label>
-                <label data-op="c"><input type="radio" name="a1" value="c"> <code>texto.clear()</code></label>
-                <label data-op="d"><input type="radio" name="a1" value="d"> <code>texto = ""</code></label>
+                <label data-op="a"><input type="radio" name="a1" value="a"> <code>import sqlite3</code></label>
+                <label data-op="b"><input type="radio" name="a1" value="b"> <code>import mysql.connector</code></label>
+                <label data-op="c"><input type="radio" name="a1" value="c"> <code>import tkinter.mysql</code></label>
+                <label data-op="d"><input type="radio" name="a1" value="d"> <code>import pymysql.connect</code></label>
             </div>
-            <p class="explicacion">Text usa notación línea.carácter: <code>"1.0"</code> es línea 1, carácter 0.</p>
-        </article>
-        <article class="pregunta mc" data-correcta="a">
-            <p class="enunciado"><span class="num-preg">2</span> ¿Qué es una <strong>lambda</strong> en Python?</p>
-            <div class="opciones">
-                <label data-op="a"><input type="radio" name="a2" value="a"> Una mini-función sin nombre, de una sola expresión.</label>
-                <label data-op="b"><input type="radio" name="a2" value="b"> Un widget para mostrar texto.</label>
-                <label data-op="c"><input type="radio" name="a2" value="c"> Una lista que no se puede modificar.</label>
-                <label data-op="d"><input type="radio" name="a2" value="d"> Una forma de cerrar la ventana.</label>
-            </div>
-            <p class="explicacion"><code>lambda x: x * 2</code> equivale a una función <code>def</code> que devuelve <code>x * 2</code>.</p>
+            <p class="explicacion">El módulo que se usa en la guía es <code>mysql.connector</code>.</p>
         </article>
         <article class="pregunta mc" data-correcta="c">
-            <p class="enunciado"><span class="num-preg">3</span> Con <code>command=lambda: mostrar_tabla(7)</code>, ¿cuándo se ejecuta <code>mostrar_tabla(7)</code>?</p>
+            <p class="enunciado"><span class="num-preg">2</span> ¿Qué hace <code>cursor.execute(consulta, valores)</code>?</p>
             <div class="opciones">
-                <label data-op="a"><input type="radio" name="a3" value="a"> Al crear el botón.</label>
-                <label data-op="b"><input type="radio" name="a3" value="b"> Nunca, porque la lambda no se llama.</label>
-                <label data-op="c"><input type="radio" name="a3" value="c"> Al hacer click, con el número 7.</label>
-                <label data-op="d"><input type="radio" name="a3" value="d"> Al cerrar la ventana.</label>
+                <label data-op="a"><input type="radio" name="a2" value="a"> Cierra la conexión.</label>
+                <label data-op="b"><input type="radio" name="a2" value="b"> Crea la ventana del formulario.</label>
+                <label data-op="c"><input type="radio" name="a2" value="c"> Ejecuta la consulta SQL con los valores.</label>
+                <label data-op="d"><input type="radio" name="a2" value="d"> Muestra un mensaje de error.</label>
             </div>
-            <p class="explicacion">Tkinter guarda la mini-función y la llama recién en el click, con el dato incluido.</p>
+            <p class="explicacion"><code>execute()</code> envía la consulta a la base de datos con los valores de los <code>%s</code>.</p>
+        </article>
+        <article class="pregunta mc" data-correcta="a">
+            <p class="enunciado"><span class="num-preg">3</span> ¿Cómo se confirman los cambios en la base de datos?</p>
+            <div class="opciones">
+                <label data-op="a"><input type="radio" name="a3" value="a"> <code>conexion.commit()</code></label>
+                <label data-op="b"><input type="radio" name="a3" value="b"> <code>conexion.close()</code></label>
+                <label data-op="c"><input type="radio" name="a3" value="c"> <code>cursor.clear()</code></label>
+                <label data-op="d"><input type="radio" name="a3" value="d"> <code>conexion.execute()</code></label>
+            </div>
+            <p class="explicacion"><code>commit()</code> guarda definitivamente los cambios. Sin él, se descartan.</p>
         </article>
         <article class="pregunta mc" data-correcta="d">
-            <p class="enunciado"><span class="num-preg">4</span> ¿Qué significa <code>state=DISABLED</code> en un botón?</p>
+            <p class="enunciado"><span class="num-preg">4</span> ¿Qué marcador se usa para los valores en una consulta con <code>execute()</code>?</p>
             <div class="opciones">
-                <label data-op="a"><input type="radio" name="a4" value="a"> El botón se oculta.</label>
-                <label data-op="b"><input type="radio" name="a4" value="b"> El botón se ejecuta dos veces.</label>
-                <label data-op="c"><input type="radio" name="a4" value="c"> El botón cambia de texto.</label>
-                <label data-op="d"><input type="radio" name="a4" value="d"> El botón queda bloqueado y no responde.</label>
+                <label data-op="a"><input type="radio" name="a4" value="a"> <code>{}</code></label>
+                <label data-op="b"><input type="radio" name="a4" value="b"> <code>?</code></label>
+                <label data-op="c"><input type="radio" name="a4" value="c"> <code>@valor</code></label>
+                <label data-op="d"><input type="radio" name="a4" value="d"> <code>%s</code></label>
             </div>
-            <p class="explicacion">El control se muestra gris y no responde hasta que se habilita con <code>state=NORMAL</code>.</p>
+            <p class="explicacion">Se usan huecos <code>%s</code> y se pasan los valores en una tupla.</p>
         </article>
         <article class="pregunta mc" data-correcta="b">
-            <p class="enunciado"><span class="num-preg">5</span> ¿Cómo volvés a habilitar un botón bloqueado?</p>
+            <p class="enunciado"><span class="num-preg">5</span> ¿Para qué sirve <code>try / except</code> en el formulario?</p>
             <div class="opciones">
-                <label data-op="a"><input type="radio" name="a5" value="a"> <code>boton.state = NORMAL</code></label>
-                <label data-op="b"><input type="radio" name="a5" value="b"> <code>boton.config(state=NORMAL)</code></label>
-                <label data-op="c"><input type="radio" name="a5" value="c"> <code>boton.enable()</code></label>
-                <label data-op="d"><input type="radio" name="a5" value="d"> <code>boton.pack(state=NORMAL)</code></label>
+                <label data-op="a"><input type="radio" name="a5" value="a"> Para repetir el formulario.</label>
+                <label data-op="b"><input type="radio" name="a5" value="b"> Para atrapar errores y avisar sin cerrar el programa.</label>
+                <label data-op="c"><input type="radio" name="a5" value="c"> Para ordenar los datos.</label>
+                <label data-op="d"><input type="radio" name="a5" value="d"> Para conectarse sin contraseña.</label>
             </div>
-            <p class="explicacion">La forma correcta es <code>boton.config(state=NORMAL)</code>.</p>
+            <p class="explicacion">Si falla la conexión o la consulta, <code>except</code> permite mostrar un aviso con <code>messagebox</code>.</p>
         </article>
     </section>
 
@@ -164,41 +164,40 @@
             </div>
         </div>
 
-        <article class="pregunta salida" data-aceptadas="12">
+        <article class="pregunta salida" data-aceptadas="SELECT * FROM alumnos">
             <p class="enunciado"><span class="num-preg">6</span> ¿Qué muestra este programa?</p>
-            <pre><code>doble = lambda x: x * 2
-print(doble(6))</code></pre>
+            <pre><code>consulta = &quot;SELECT * FROM alumnos&quot;
+print(consulta)</code></pre>
             <label class="campo-salida">Salida:
                 <input type="text" id="b1" autocomplete="off" placeholder="Escribí la salida">
             </label>
-            <p class="explicacion">La lambda devuelve 6 × 2: <strong>12</strong>.</p>
+            <p class="explicacion">La variable guarda ese texto y <code>print</code> lo muestra: <strong>SELECT * FROM alumnos</strong>.</p>
         </article>
-        <article class="pregunta salida" data-aceptadas="7">
+        <article class="pregunta salida" data-aceptadas="1">
             <p class="enunciado"><span class="num-preg">7</span> ¿Qué muestra este programa?</p>
-            <pre><code>suma = lambda a, b: a + b
-print(suma(3, 4))</code></pre>
+            <pre><code>valores = (&quot;Ana&quot;,)
+print(len(valores))</code></pre>
             <label class="campo-salida">Salida:
                 <input type="text" id="b2" autocomplete="off" placeholder="Escribí la salida">
             </label>
-            <p class="explicacion">La lambda recibe dos parámetros y devuelve 3 + 4: <strong>7</strong>.</p>
+            <p class="explicacion">Es una tupla de un solo elemento: <strong>1</strong>.</p>
         </article>
-        <article class="pregunta salida" data-aceptadas="5">
+        <article class="pregunta salida" data-aceptadas="INSERT INTO">
             <p class="enunciado"><span class="num-preg">8</span> ¿Qué muestra este programa?</p>
-            <pre><code>texto = &quot;hola\n&quot;
-print(len(texto))</code></pre>
+            <pre><code>print(&quot;INSERT&quot; + &quot; INTO&quot;)</code></pre>
             <label class="campo-salida">Salida:
                 <input type="text" id="b3" autocomplete="off" placeholder="Escribí la salida">
             </label>
-            <p class="explicacion">El salto de línea <code>\n</code> cuenta como un carácter: 4 letras + 1 = <strong>5</strong>.</p>
+            <p class="explicacion">La concatenación une los dos textos: <strong>INSERT INTO</strong>.</p>
         </article>
-        <article class="pregunta salida" data-aceptadas="disabled">
+        <article class="pregunta salida" data-aceptadas="commit">
             <p class="enunciado"><span class="num-preg">9</span> ¿Qué muestra este programa?</p>
-            <pre><code>estado = &quot;disabled&quot;
-print(estado.upper())</code></pre>
+            <pre><code>accion = &quot;commit&quot;
+print(accion.upper())</code></pre>
             <label class="campo-salida">Salida:
                 <input type="text" id="b4" autocomplete="off" placeholder="Escribí la salida">
             </label>
-            <p class="explicacion"><code>upper()</code> devuelve <strong>DISABLED</strong> (se acepta en minúsculas).</p>
+            <p class="explicacion"><code>upper()</code> devuelve <strong>COMMIT</strong> (se acepta en minúsculas).</p>
         </article>
     </section>
 
@@ -213,47 +212,27 @@ print(estado.upper())</code></pre>
         </div>
 
         <article class="pregunta codigo" data-ejercicio="c1">
-            <p class="enunciado"><span class="num-preg">10</span> Creá una ventana con un widget <code>Text</code> empaquetado con <code>pack()</code> y definí <code>agregar(tarea)</code> que inserte la tarea al final con <code>insert(END, ...)</code> y un salto de línea <code>\n</code>. Cerrá con <code>mainloop()</code>.</p>
-            <textarea class="editor" id="c1" spellcheck="false" placeholder="from tkinter import *&#10;ventana = Tk()&#10;texto = ..."></textarea>
+            <p class="enunciado"><span class="num-preg">10</span> Importá <code>mysql.connector</code>, abrí la conexión con <code>connect(...)</code> y cerrala con <code>close()</code>.</p>
+            <textarea class="editor" id="c1" spellcheck="false" placeholder="import mysql.connector&#10;conexion = mysql.connector.connect(host=&quot;localhost&quot;, user=&quot;root&quot;, password=&quot;&quot;, database=&quot;escuela&quot;)&#10;conexion.close()"></textarea>
             <div class="resultado-codigo" id="res-c1"></div>
             <details class="solucion">
                 <summary>Ver una solución de referencia</summary>
-                <pre><code>from tkinter import *
-
-ventana = Tk()
-texto = Text(ventana)
-texto.pack()
-
-def agregar(tarea):
-    texto.insert(END, tarea + &quot;\n&quot;)
-
-agregar(&quot;Comprar pan&quot;)
-ventana.mainloop()</code></pre>
+                <pre><code>import mysql.connector
+conexion = mysql.connector.connect(host="localhost", user="root", password="", database="escuela")
+conexion.close()</code></pre>
             </details>
         </article>
         <article class="pregunta codigo" data-ejercicio="c2">
-            <p class="enunciado"><span class="num-preg">11</span> Definí <code>saludar(nombre)</code> con un parámetro y un <code>Button</code> con <code>command=lambda: saludar("Ana")</code>. Además creá un botón <code>Guardar</code> con <code>state=DISABLED</code> y una función que lo habilite con <code>config(state=NORMAL)</code>, conectada con <code>command</code>. Cerrá con <code>mainloop()</code>.</p>
-            <textarea class="editor" id="c2" spellcheck="false" placeholder="from tkinter import *&#10;def saludar(nombre):&#10;    ...&#10;boton = Button(... state=...)"></textarea>
+            <p class="enunciado"><span class="num-preg">11</span> Creá una ventana Tkinter con un <code>Entry</code>, tomá el texto con <code>.get()</code> y mostralo con <code>print()</code>.</p>
+            <textarea class="editor" id="c2" spellcheck="false" placeholder="from tkinter import *&#10;ventana = Tk()&#10;entrada = Entry(ventana)&#10;entrada.pack()&#10;print(entrada.get())&#10;ventana.mainloop()"></textarea>
             <div class="resultado-codigo" id="res-c2"></div>
             <details class="solucion">
                 <summary>Ver una solución de referencia</summary>
                 <pre><code>from tkinter import *
-
 ventana = Tk()
-
-boton_guardar = Button(ventana, text=&quot;Guardar&quot;, state=DISABLED)
-boton_guardar.pack()
-
-def habilitar():
-    boton_guardar.config(state=NORMAL)
-
-Button(ventana, text=&quot;Habilitar&quot;, command=habilitar).pack()
-
-def saludar(nombre):
-    print(nombre)
-
-Button(ventana, text=&quot;Ana&quot;, command=lambda: saludar(&quot;Ana&quot;)).pack()
-
+entrada = Entry(ventana)
+entrada.pack()
+print(entrada.get())
 ventana.mainloop()</code></pre>
             </details>
         </article>
@@ -289,14 +268,14 @@ ventana.mainloop()</code></pre>
     </section>
 
     <footer>
-        <p>Quinta evaluación interactiva · Python · Text, lambda y state · 10 puntos</p>
+        <p>Tercera evaluación interactiva · Parte 2 · Python · formulario con MySQL · 10 puntos</p>
     </footer>
 
 </main>
 </div>
 
 <script src="config.js?v=6"></script>
-<script src="config-quinta.js?v=1"></script>
+<script src="config-tercera2.js?v=1"></script>
 <script src="app.js?v=6"></script>
 </body>
 </html>

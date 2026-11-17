@@ -238,34 +238,26 @@ print(elegido)</code></pre>
         </div>
 
         <article class="pregunta codigo" data-ejercicio="c1">
-            <p class="enunciado"><span class="num-preg">10</span>
-                Definí una función <code>doble(n)</code> que <strong>devuelva</strong> <code>n * 2</code> con
-                <code>return</code>. Guardá el resultado de <code>doble(8)</code> en una variable y mostralo
-                con <code>print()</code>.</p>
-            <textarea class="editor" id="c1" spellcheck="false" placeholder="def doble(n):&#10;    return ...&#10;&#10;resultado = ...&#10;print(resultado)"></textarea>
+            <p class="enunciado"><span class="num-preg">10</span> Definí una función <code>doble(n)</code> que devuelva <code>n * 2</code> con <code>return</code>. Llamala con <code>doble(8)</code> y mostrá el resultado.</p>
+            <textarea class="editor" id="c1" spellcheck="false" placeholder="def doble(n):&#10;    return n * 2&#10;&#10;print(doble(8))"></textarea>
             <div class="resultado-codigo" id="res-c1"></div>
             <details class="solucion">
                 <summary>Ver una solución de referencia</summary>
                 <pre><code>def doble(n):
     return n * 2
 
-resultado = doble(8)
-print(resultado)</code></pre>
+print(doble(8))</code></pre>
             </details>
         </article>
-
         <article class="pregunta codigo" data-ejercicio="c2">
-            <p class="enunciado"><span class="num-preg">11</span>
-                Escribí un programa que pida un número y lo convierta con <code>int()</code> dentro de un
-                <code>try</code>. Si la conversión funciona, mostrá <strong>"Número válido"</strong>.
-                Si falla, atrapá el <code>ValueError</code> y mostrá <strong>"No es un número"</strong>.</p>
-            <textarea class="editor" id="c2" spellcheck="false" placeholder="try:&#10;    numero = int(input(...))&#10;    print(...)&#10;except ValueError:&#10;    print(...)"></textarea>
+            <p class="enunciado"><span class="num-preg">11</span> Pedí un número con <code>input()</code>, convertilo con <code>int()</code> dentro de un <code>try</code>. Si falla, mostrá <code>"No es un número"</code> con <code>except ValueError</code>.</p>
+            <textarea class="editor" id="c2" spellcheck="false" placeholder="try:&#10;    n = int(input(...))&#10;    print(n)&#10;except ValueError:&#10;    print(&quot;No es un número&quot;)"></textarea>
             <div class="resultado-codigo" id="res-c2"></div>
             <details class="solucion">
                 <summary>Ver una solución de referencia</summary>
                 <pre><code>try:
-    numero = int(input("Número: "))
-    print("Número válido")
+    n = int(input("Número: "))
+    print(n)
 except ValueError:
     print("No es un número")</code></pre>
             </details>

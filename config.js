@@ -53,3 +53,21 @@ window.CONFIG = {
         token: ''
     }
 };
+
+
+/* Requisitos simples de la Parte C para la Evaluación Final. */
+window.CONFIG.EJERCICIOS = {
+    c1: [
+        { d: 'Pide el nombre con input()', f: function (c) { return /\binput\s*\(/.test(c); } },
+        { d: 'Muestra un saludo con f-string', f: function (c) { return /\bf\s*["']/.test(c); } },
+        { d: 'Incluye el nombre entre llaves', f: function (c) { return /\{[^}]*nombre[^}]*\}/.test(c); } },
+        { d: 'Muestra el saludo con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
+    ],
+    c2: [
+        { d: 'Pide un número con input()', f: function (c) { return /\binput\s*\(/.test(c); } },
+        { d: 'Lo convierte con int()', f: function (c) { return /\bint\s*\(/.test(c); } },
+        { d: 'Muestra el doble con print()', f: function (c) {
+            return /\bprint\s*\(\s*[a-z_]\w*\s*\*\s*2\s*\)/.test(c);
+        } }
+    ]
+};
