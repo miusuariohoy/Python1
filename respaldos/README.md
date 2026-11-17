@@ -44,18 +44,25 @@ múltiple, 4 de salida y 2 de código), pero los dos ejercicios de código son
 | `CLAVES.md` | Claves de acceso vigentes de cada evaluación. |
 | `respaldos/` | Copia de todas las evaluaciones y sus configuraciones. |
 
-La guía abre las evaluaciones desde la barra de menú:
+Cada guía abre solo sus evaluaciones desde su barra de menú.
+
+**Menú de la Parte 1** (`index.html`):
 
 - Primera evaluación → `https://miusuariohoy.github.io/Python1/primera-evaluacion.html`
 - Segunda evaluación → `https://miusuariohoy.github.io/Python1/segunda-evaluacion.html`
 - Tercera evaluación → `https://miusuariohoy.github.io/Python1/tercera-evaluacion.html`
+- Evaluación Final → `https://miusuariohoy.github.io/Python1/evaluacion.html`
+- Recuperatorio de Evaluación Final → `https://miusuariohoy.github.io/Python1/recuperatorio.html`
+- Parte 2 (guía) → `https://miusuariohoy.github.io/Python1/parte2.html`
+
+**Menú de la Parte 2** (`parte2.html`):
+
+- Evaluación Parte 2 → `https://miusuariohoy.github.io/Python1/evaluacion-parte2.html`
 - Primera evaluación · Parte 2 → `https://miusuariohoy.github.io/Python1/primera2-evaluacion.html`
 - Segunda evaluación · Parte 2 → `https://miusuariohoy.github.io/Python1/segunda2-evaluacion.html`
 - Tercera evaluación · Parte 2 → `https://miusuariohoy.github.io/Python1/tercera2-evaluacion.html`
-- Evaluación Final → `https://miusuariohoy.github.io/Python1/evaluacion.html`
-- Recuperatorio de Evaluación Final → `https://miusuariohoy.github.io/Python1/recuperatorio.html`
-- Parte 2 → `https://miusuariohoy.github.io/Python1/evaluacion-parte2.html`
-- PSeInt → `https://miusuariohoy.github.io/pseint/examenes/`
+
+PSeInt → `https://miusuariohoy.github.io/pseint/examenes/`
 
 ## Publicar (una sola vez)
 
