@@ -21,7 +21,7 @@ múltiple, 4 de salida y 2 de código), pero los dos ejercicios de código son
 | `index.html` | Guía de la Parte 1: 12 temas, autoevaluación y simuladores. |
 | `parte2.html` | Parte 2 de la guía: temas 13 a 21 (listas, tuplas, diccionarios, Text, lambda, state, MySQL, Canvas y pygame). |
 | `primera-evaluacion.html` | **Primera evaluación** de la Parte 1 (temas 1 a 4). |
-| `segunda-evaluacion.html` | **Segunda evaluación** de la Parte 1 (temas 2, 5, 6 y 7). Conserva su ejercicio de tabla de multiplicar. |
+| `segunda-evaluacion.html` | **Segunda evaluación** de la Parte 1 (temas 2, 5, 6 y 7). Incluye un ejercicio de estructura de función con `while`. |
 | `tercera-evaluacion.html` | **Tercera evaluación** de la Parte 1 (temas 8 a 12). |
 | `primera2-evaluacion.html` | **Primera evaluación · Parte 2** (temas 13, 14 y 15). |
 | `segunda2-evaluacion.html` | **Segunda evaluación · Parte 2** (temas 16, 17 y 18). |

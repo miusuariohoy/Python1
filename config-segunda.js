@@ -15,31 +15,12 @@ window.CONFIG.EXAMEN = {
 /* Clave de acceso propia de la Segunda Evaluación. */
 window.CONFIG.CLAVE_ACCESO = 'VNHE81B4Bc';
 
-/* Parte C: 2 actividades de 1,5 puntos cada una (total 3). */
-window.CONFIG.PUNTOS_EJERCICIO = 1.5;
+/* Parte C: 1 actividad de 3 puntos (total 3). */
+window.CONFIG.PUNTOS_EJERCICIO = 3;
 
 window.CONFIG.EJERCICIOS = {
-    /* Actividad 1 · input, int, for y tabla de multiplicar. */
+    /* Actividad 1 · estructura de función sin parámetro con while. */
     c1: [
-        { d: 'Pide un número con input()', f: function (c) { return /\binput\s*\(/.test(c); } },
-        { d: 'Convierte el número con int()', f: function (c) { return /\bint\s*\(/.test(c); } },
-        { d: 'Usa un bucle for', f: function (c) { return /\bfor\b/.test(c); } },
-        { d: 'Recorre del 1 al 10 con range(1, 11)', f: function (c) {
-            return /\brange\s*\(\s*1\s*,\s*(?:11|10\s*\+\s*1)\s*\)/.test(c);
-        } },
-        { d: 'Multiplica el número por la variable del for', f: function (c) {
-            var m = /\bfor\s+([a-z_]\w*)\s+in\s+/.exec(c);
-            if (!m) return false;
-            var v = m[1];
-            return new RegExp('(\\*[^\\n]*\\b' + v + '\\b|\\b' + v + '\\b[^\\n]*\\*)').test(c);
-        } },
-        { d: 'Muestra cada resultado con print()', f: function (c) {
-            return /\bprint\s*\(/.test(c) && (c.match(/\bprint\s*\(/g) || []).length >= 1;
-        } }
-    ],
-
-    /* Actividad 2 · función sin parámetro con while. */
-    c2: [
         { d: 'Define contar() sin parámetros', f: function (c) {
             return /\bdef\s+contar\s*\(\s*\)\s*:/.test(c);
         } },

@@ -33,7 +33,7 @@
         <h1>Bucles y funciones sin parámetro</h1>
         <p class="subtitulo">
             Entrada de datos, bucle for, bucle while y funciones sin parámetro.
-            11 consignas, 10 puntos y corrección automática.
+            10 consignas, 10 puntos y corrección automática.
         </p>
         <div class="nav-rapida">
             <a href="#parte-a" class="btn-enlace">Parte A · Opción múltiple</a>
@@ -66,7 +66,7 @@
                 <tbody>
                     <tr><td>A</td><td>5 preguntas de opción múltiple</td><td>5</td></tr>
                     <tr><td>B</td><td>4 predicciones de salida</td><td>2</td></tr>
-                    <tr><td>C</td><td>2 ejercicios de código</td><td>3</td></tr>
+                    <tr><td>C</td><td>1 ejercicio de código</td><td>3</td></tr>
                     <tr><td colspan="2"><strong>Total</strong></td><td><strong>10</strong></td></tr>
                 </tbody>
             </table>
@@ -233,31 +233,17 @@ saludar()</code></pre>
         <div class="encabezado-seccion">
             <span class="numero-paso">C</span>
             <div>
-                <h2>Ejercicios de código</h2>
-                <p>2 programas · 1,5 puntos cada uno · se corrige la estructura del código.</p>
+                <h2>Ejercicio de código</h2>
+                <p>1 programa · 3 puntos · se corrige la estructura de una función.</p>
             </div>
         </div>
 
         <article class="pregunta codigo" data-ejercicio="c1">
             <p class="enunciado"><span class="num-preg">10</span>
-                Escribí un programa que pida un <strong>número</strong>, lo convierta a entero y muestre su
-                <strong>tabla de multiplicar del 1 al 10</strong> usando un <code>for</code>.</p>
-            <textarea class="editor" id="c1" spellcheck="false" placeholder="n = int(input(...))&#10;for i in range(1, 11):&#10;    print(...)"></textarea>
+                Escribí la estructura de una función <code>contar()</code> <strong>sin parámetros</strong> que
+                muestre los números del <strong>1 al 5</strong> usando un <code>while</code>. Después llamala una vez.</p>
+            <textarea class="editor" id="c1" spellcheck="false" placeholder="def contar():&#10;    i = 1&#10;    while ...:&#10;        ...&#10;&#10;contar()"></textarea>
             <div class="resultado-codigo" id="res-c1"></div>
-            <details class="solucion">
-                <summary>Ver una solución de referencia</summary>
-                <pre><code>n = int(input("Número: "))
-for i in range(1, 11):
-    print(f"{n} x {i} = {n * i}")</code></pre>
-            </details>
-        </article>
-
-        <article class="pregunta codigo" data-ejercicio="c2">
-            <p class="enunciado"><span class="num-preg">11</span>
-                Definí una función <code>contar()</code> <strong>sin parámetros</strong> que muestre los números
-                del <strong>1 al 5</strong> usando un <code>while</code>. Después llamala una vez.</p>
-            <textarea class="editor" id="c2" spellcheck="false" placeholder="def contar():&#10;    i = 1&#10;    while ...:&#10;        ..."></textarea>
-            <div class="resultado-codigo" id="res-c2"></div>
             <details class="solucion">
                 <summary>Ver una solución de referencia</summary>
                 <pre><code>def contar():
@@ -308,7 +294,7 @@ contar()</code></pre>
 </div>
 
 <script src="config.js?v=6"></script>
-<script src="config-segunda.js?v=2"></script>
+<script src="config-segunda.js?v=3"></script>
 <script src="app.js?v=6"></script>
 </body>
 </html>
