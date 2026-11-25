@@ -28,7 +28,10 @@ window.CONFIG.EJERCICIOS = {
             return /\brange\s*\(\s*1\s*,\s*(?:11|10\s*\+\s*1)\s*\)/.test(c);
         } },
         { d: 'Multiplica el número por la variable del for', f: function (c) {
-            return /\*/.test(c) && /\bi\b/.test(c);
+            var m = /\bfor\s+([a-z_]\w*)\s+in\s+/.exec(c);
+            if (!m) return false;
+            var v = m[1];
+            return new RegExp('(\\*[^\\n]*\\b' + v + '\\b|\\b' + v + '\\b[^\\n]*\\*)').test(c);
         } },
         { d: 'Muestra cada resultado con print()', f: function (c) {
             return /\bprint\s*\(/.test(c) && (c.match(/\bprint\s*\(/g) || []).length >= 1;
@@ -40,7 +43,11 @@ window.CONFIG.EJERCICIOS = {
         { d: 'Define contar() sin parámetros', f: function (c) {
             return /\bdef\s+contar\s*\(\s*\)\s*:/.test(c);
         } },
-        { d: 'Usa un bucle while', f: function (c) { return /\bwhile\b[^\n]*:/.test(c); } },
+        { d: 'Usa un bucle while dentro de la función', f: function (c) {
+            var def = /\bdef\s+contar\s*\(\s*\)\s*:/.exec(c);
+            if (!def) return false;
+            return /\bwhile\b[^\n]*:/.test(c.slice(def.index + def[0].length));
+        } },
         { d: 'Inicializa el contador en 1', f: function (c) {
             return /\b[a-z_]\w*\s*=\s*1\b/.test(c);
         } },
@@ -53,7 +60,8 @@ window.CONFIG.EJERCICIOS = {
         } },
         { d: 'Muestra el contador con print()', f: function (c) { return /\bprint\s*\(/.test(c); } },
         { d: 'Llama a contar() después de definirla', f: function (c) {
-            return (c.match(/\bcontar\s*\(\s*\)/g) || []).length >= 2;
+            var sinDefinicion = c.replace(/\bdef\s+contar\s*\(\s*\)\s*:/, '');
+            return /\bcontar\s*\(\s*\)/.test(sinDefinicion);
         } }
     ]
 };
