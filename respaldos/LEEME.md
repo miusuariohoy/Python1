@@ -5,16 +5,16 @@ para funcionar. Fecha de la copia: **17/11/2026**.
 
 ## Evaluaciones incluidas
 
-- `primera-evaluacion.html` + `config-primera.js` (clave `Primera1`).
-- `segunda-evaluacion.html` + `config-segunda.js` (clave `Segunda1`).
-- `tercera-evaluacion.html` + `config-tercera.js` (clave `Tercera1`).
-- `primera2-evaluacion.html` + `config-primera2.js` (clave `Primera2`, temas 13 a 15).
-- `segunda2-evaluacion.html` + `config-segunda2.js` (clave `Segunda2`, temas 16 a 18).
-- `tercera2-evaluacion.html` + `config-tercera2.js` (clave `Tercera2`, tema 19).
-- `evaluacion.html` + `config.js` (Evaluación Final, clave `Python1`).
+- `primera-evaluacion.html` + `config-primera.js` (clave `3dOUuFiex0`).
+- `segunda-evaluacion.html` + `config-segunda.js` (clave `VNHE81B4Bc`).
+- `tercera-evaluacion.html` + `config-tercera.js` (clave `PkLoYhDySQ`).
+- `primera2-evaluacion.html` + `config-primera2.js` (clave `1G7DxCsLac`, temas 13 a 15).
+- `segunda2-evaluacion.html` + `config-segunda2.js` (clave `7vmDNKbIK1`, temas 16 a 18).
+- `tercera2-evaluacion.html` + `config-tercera2.js` (clave `aH2jb8adig`, tema 19).
+- `evaluacion.html` + `config.js` (Evaluación Final, clave `665R62mEXE`).
 - `recuperatorio.html` + `config-recuperatorio1.js` (Recuperatorio de
-  Evaluación Final, clave `recu1`).
-- `evaluacion-parte2.html` + `config-parte2.js` (clave `pro2`). Sin cambios.
+  Evaluación Final, clave `cQmEMIGqZr`).
+- `evaluacion-parte2.html` + `config-parte2.js` (clave `xaZkz84B6E`). Sin cambios.
 - `evaluacion-pseint.html` + `config-pseint.js`.
 
 Todas mantienen 11 consignas; los dos ejercicios de código son cortos y

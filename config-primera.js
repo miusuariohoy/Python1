@@ -13,7 +13,7 @@ window.CONFIG.EXAMEN = {
 };
 
 /* Clave de acceso propia de la Primera Evaluación. */
-window.CONFIG.CLAVE_ACCESO = 'Primera1';
+window.CONFIG.CLAVE_ACCESO = '3dOUuFiex0';
 
 /* Parte C: 2 actividades de 1,5 puntos cada una (total 3). */
 window.CONFIG.PUNTOS_EJERCICIO = 1.5;

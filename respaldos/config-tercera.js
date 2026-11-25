@@ -13,7 +13,7 @@ window.CONFIG.EXAMEN = {
 };
 
 /* Clave de acceso propia de la Tercera Evaluación. */
-window.CONFIG.CLAVE_ACCESO = 'Tercera1';
+window.CONFIG.CLAVE_ACCESO = 'PkLoYhDySQ';
 
 /* Parte C: 2 actividades de 1,5 puntos cada una (total 3). */
 window.CONFIG.PUNTOS_EJERCICIO = 1.5;

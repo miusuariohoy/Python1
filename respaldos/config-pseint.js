@@ -13,7 +13,7 @@ window.CONFIG.EXAMEN = {
 };
 
 /* Clave de acceso propia de la evaluación de PSeInt. */
-window.CONFIG.CLAVE_ACCESO = 'pseint';
+window.CONFIG.CLAVE_ACCESO = 'NNtMpP4xzJ';
 
 /* Parte C: 3 actividades cortas de 1 punto cada una (total 3). */
 window.CONFIG.PUNTOS_EJERCICIO = 1;

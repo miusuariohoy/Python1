@@ -108,16 +108,16 @@ Para cambiar el canal o las claves, hay que regenerar el par en `inform/claves/`
 ## Cómo probar
 
 1. Abrí la evaluación que corresponda desde el menú de la guía e ingresá su clave:
-   - Primera evaluación: clave **`Primera1`**
-   - Segunda evaluación: clave **`Segunda1`**
-   - Tercera evaluación: clave **`Tercera1`**
-   - Primera evaluación · Parte 2: clave **`Primera2`**
-   - Segunda evaluación · Parte 2: clave **`Segunda2`**
-   - Tercera evaluación · Parte 2: clave **`Tercera2`**
-   - Evaluación Final: clave **`Python1`**
-   - Recuperatorio de Evaluación Final: clave **`recu1`**
-   - Parte 2: clave **`pro2`**
-   - PSeInt: clave **`pseint`**
+   - Primera evaluación: clave **`3dOUuFiex0`**
+   - Segunda evaluación: clave **`VNHE81B4Bc`**
+   - Tercera evaluación: clave **`PkLoYhDySQ`**
+   - Primera evaluación · Parte 2: clave **`1G7DxCsLac`**
+   - Segunda evaluación · Parte 2: clave **`7vmDNKbIK1`**
+   - Tercera evaluación · Parte 2: clave **`aH2jb8adig`**
+   - Evaluación Final: clave **`665R62mEXE`**
+   - Recuperatorio de Evaluación Final: clave **`cQmEMIGqZr`**
+   - Parte 2: clave **`xaZkz84B6E`**
+   - PSeInt: clave **`NNtMpP4xzJ`**
 2. Completá apellido, nombre y curso.
 3. Respondé y presioná **Corregir y enviar**.
 4. En el repo `inform`: pestaña **Actions** → **Recoger resultados** →
@@ -147,14 +147,14 @@ Cada evaluación tiene su propia configuración, clave e `id`:
 
 | Página | Configuración | Clave | `id` | Temas |
 | --- | --- | --- | --- | --- |
-| `primera-evaluacion.html` | `config-primera.js` | `Primera1` | `python-1-primera` | 1 a 4 |
-| `segunda-evaluacion.html` | `config-segunda.js` | `Segunda1` | `python-1-segunda` | 2, 5, 6 y 7 |
-| `tercera-evaluacion.html` | `config-tercera.js` | `Tercera1` | `python-1-tercera` | 8 a 12 |
-| `primera2-evaluacion.html` | `config-primera2.js` | `Primera2` | `python-2-primera` | 13, 14 y 15 |
-| `segunda2-evaluacion.html` | `config-segunda2.js` | `Segunda2` | `python-2-segunda` | 16, 17 y 18 |
-| `tercera2-evaluacion.html` | `config-tercera2.js` | `Tercera2` | `python-2-tercera` | 19 |
-| `evaluacion.html` | `config.js` | `Python1` | `python-1` | Evaluación Final |
-| `recuperatorio.html` | `config-recuperatorio1.js` | `recu1` | `python-1-recu` | Recuperatorio |
+| `primera-evaluacion.html` | `config-primera.js` | `3dOUuFiex0` | `python-1-primera` | 1 a 4 |
+| `segunda-evaluacion.html` | `config-segunda.js` | `VNHE81B4Bc` | `python-1-segunda` | 2, 5, 6 y 7 |
+| `tercera-evaluacion.html` | `config-tercera.js` | `PkLoYhDySQ` | `python-1-tercera` | 8 a 12 |
+| `primera2-evaluacion.html` | `config-primera2.js` | `1G7DxCsLac` | `python-2-primera` | 13, 14 y 15 |
+| `segunda2-evaluacion.html` | `config-segunda2.js` | `7vmDNKbIK1` | `python-2-segunda` | 16, 17 y 18 |
+| `tercera2-evaluacion.html` | `config-tercera2.js` | `aH2jb8adig` | `python-2-tercera` | 19 |
+| `evaluacion.html` | `config.js` | `665R62mEXE` | `python-1` | Evaluación Final |
+| `recuperatorio.html` | `config-recuperatorio1.js` | `cQmEMIGqZr` | `python-1-recu` | Recuperatorio |
 
 Todas usan 5 preguntas de opción múltiple (5 puntos), 4 salidas (2 puntos) y
 2 ejercicios de código simples (1,5 puntos cada uno), con un total de 10

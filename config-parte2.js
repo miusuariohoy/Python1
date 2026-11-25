@@ -13,7 +13,7 @@ window.CONFIG.EXAMEN = {
 };
 
 /* Clave de acceso propia de la Parte 2 (la Parte 1 usa "pro1"). */
-window.CONFIG.CLAVE_ACCESO = 'pro2';
+window.CONFIG.CLAVE_ACCESO = 'xaZkz84B6E';
 
 /* Parte C: 3 actividades cortas de 1 punto cada una (total 3). */
 window.CONFIG.PUNTOS_EJERCICIO = 1;

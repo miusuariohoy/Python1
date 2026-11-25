@@ -6,21 +6,21 @@ copias entregadas en el repo `inform`) está al principio de `inform/README.md`.
 
 | N.º | Evaluación | Página | Configuración | Clave | `id` del examen |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Primera evaluación (temas 1 a 4) | `primera-evaluacion.html` | `config-primera.js` | `Primera1` | `python-1-primera` |
-| 2 | Segunda evaluación (temas 2, 5, 6 y 7) | `segunda-evaluacion.html` | `config-segunda.js` | `Segunda1` | `python-1-segunda` |
-| 3 | Tercera evaluación (temas 8 a 12) | `tercera-evaluacion.html` | `config-tercera.js` | `Tercera1` | `python-1-tercera` |
-| 4 | Primera evaluación · Parte 2 (temas 13, 14 y 15) | `primera2-evaluacion.html` | `config-primera2.js` | `Primera2` | `python-2-primera` |
-| 5 | Segunda evaluación · Parte 2 (temas 16, 17 y 18) | `segunda2-evaluacion.html` | `config-segunda2.js` | `Segunda2` | `python-2-segunda` |
-| 6 | Tercera evaluación · Parte 2 (tema 19) | `tercera2-evaluacion.html` | `config-tercera2.js` | `Tercera2` | `python-2-tercera` |
-| 7 | Evaluación Final (Parte 1) | `evaluacion.html` | `config.js` | `Python1` | `python-1` |
-| 8 | Recuperatorio de Evaluación Final | `recuperatorio.html` | `config-recuperatorio1.js` | `recu1` | `python-1-recu` |
+| 1 | Primera evaluación (temas 1 a 4) | `primera-evaluacion.html` | `config-primera.js` | `3dOUuFiex0` | `python-1-primera` |
+| 2 | Segunda evaluación (temas 2, 5, 6 y 7) | `segunda-evaluacion.html` | `config-segunda.js` | `VNHE81B4Bc` | `python-1-segunda` |
+| 3 | Tercera evaluación (temas 8 a 12) | `tercera-evaluacion.html` | `config-tercera.js` | `PkLoYhDySQ` | `python-1-tercera` |
+| 4 | Primera evaluación · Parte 2 (temas 13, 14 y 15) | `primera2-evaluacion.html` | `config-primera2.js` | `1G7DxCsLac` | `python-2-primera` |
+| 5 | Segunda evaluación · Parte 2 (temas 16, 17 y 18) | `segunda2-evaluacion.html` | `config-segunda2.js` | `7vmDNKbIK1` | `python-2-segunda` |
+| 6 | Tercera evaluación · Parte 2 (tema 19) | `tercera2-evaluacion.html` | `config-tercera2.js` | `aH2jb8adig` | `python-2-tercera` |
+| 7 | Evaluación Final (Parte 1) | `evaluacion.html` | `config.js` | `665R62mEXE` | `python-1` |
+| 8 | Recuperatorio de Evaluación Final | `recuperatorio.html` | `config-recuperatorio1.js` | `cQmEMIGqZr` | `python-1-recu` |
 
 ## Evaluaciones de otras materias
 
 | Evaluación | Página | Configuración | Clave | `id` del examen |
 | --- | --- | --- | --- | --- |
-| Evaluación Parte 2 | `evaluacion-parte2.html` | `config-parte2.js` | `pro2` | `python-2` |
-| PSeInt | repo [`pseint`](https://github.com/miusuariohoy/pseint) | — | `pseint` | — |
+| Evaluación Parte 2 | `evaluacion-parte2.html` | `config-parte2.js` | `xaZkz84B6E` | `python-2` |
+| PSeInt | repo [`pseint`](https://github.com/miusuariohoy/pseint) | — | `NNtMpP4xzJ` | — |
 
 ## Estructura de las evaluaciones
 

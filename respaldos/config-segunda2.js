@@ -12,7 +12,7 @@ window.CONFIG.EXAMEN = {
 };
 
 /* Clave de acceso propia de la Segunda Evaluación · Parte 2. */
-window.CONFIG.CLAVE_ACCESO = 'Segunda2';
+window.CONFIG.CLAVE_ACCESO = '7vmDNKbIK1';
 
 /* Parte C: 2 actividades de 1,5 puntos cada una (total 3). */
 window.CONFIG.PUNTOS_EJERCICIO = 1.5;
