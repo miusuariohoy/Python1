@@ -8,7 +8,7 @@
     var cfg = window.CONFIG || {};
     var EXAMEN = cfg.EXAMEN || { id: 'python-1', titulo: 'Programación Estructurada', materia: 'Programación' };
 
-    var MAX_PUNTOS = 10;
+    var PUNTOS_POR_MC = cfg.PUNTOS_POR_MC || 1;
     var PUNTOS_POR_SALIDA = 0.5;
     var PUNTOS_POR_EJERCICIO = cfg.PUNTOS_EJERCICIO || 1.5;
 
@@ -127,6 +127,11 @@
         ]
     };
 
+    function maxA() { return $$('.mc').length * PUNTOS_POR_MC; }
+    function maxB() { return $$('.salida').length * PUNTOS_POR_SALIDA; }
+    function maxC() { return Object.keys(EJERCICIOS).length * PUNTOS_POR_EJERCICIO; }
+    function maxTotal() { return maxA() + maxB() + maxC(); }
+
     /* ---------- Evaluación ---------- */
     function evaluar() {
         var puntosA = 0, puntosB = 0, puntosC = 0;
@@ -160,7 +165,7 @@
             if (primero) respuestas.mc[primero.name] = elegida || '';
 
             if (elegida === correcta) {
-                puntosA++;
+                puntosA += PUNTOS_POR_MC;
                 pregunta.classList.add('correcta');
             } else {
                 pregunta.classList.add('incorrecta');
@@ -251,7 +256,7 @@
         $('#puntos-a').textContent = puntosA;
         $('#puntos-b').textContent = formatear(redondear(puntosB));
         $('#puntos-c').textContent = formatear(redondear(puntosC));
-        $('#barra-fill').style.width = (total / MAX_PUNTOS * 100) + '%';
+        $('#barra-fill').style.width = (total / maxTotal() * 100) + '%';
 
         var mensaje;
         if (total >= 9) mensaje = '🌟 Excelente. Dominás los fundamentos de la programación estructurada.';
@@ -691,9 +696,9 @@
             'Materia: ' + a.materia + '\n' +
             'Fecha y hora: ' + fechaLegible(ultimoPayload ? ultimoPayload.momento : new Date().toISOString()) + '\n' +
             'NOTA: ' + formatear(ultimoResultado.total) + ' / 10\n' +
-            'Parte A: ' + ultimoResultado.puntosA + ' / 5\n' +
-            'Parte B: ' + formatear(ultimoResultado.puntosB) + ' / 2\n' +
-            'Parte C: ' + formatear(ultimoResultado.puntosC) + ' / 3\n' +
+            'Parte A: ' + formatear(ultimoResultado.puntosA) + ' / ' + formatear(maxA()) + '\n' +
+            'Parte B: ' + formatear(ultimoResultado.puntosB) + ' / ' + formatear(maxB()) + '\n' +
+            'Parte C: ' + formatear(ultimoResultado.puntosC) + ' / ' + formatear(maxC()) + '\n' +
             'Errores: ' + (ultimoResultado.erroresTexto || 'Sin errores') + '\n\n' +
             ultimoResultado.detalle;
     }

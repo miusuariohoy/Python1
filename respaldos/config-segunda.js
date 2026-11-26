@@ -15,8 +15,8 @@ window.CONFIG.EXAMEN = {
 /* Clave de acceso propia de la Segunda Evaluación. */
 window.CONFIG.CLAVE_ACCESO = 'VNHE81B4Bc';
 
-/* Parte C: 1 actividad de 3 puntos (total 3). */
-window.CONFIG.PUNTOS_EJERCICIO = 3;
+/* Parte C: 1 actividad de 4 puntos (total 4). */
+window.CONFIG.PUNTOS_EJERCICIO = 4;
 
 window.CONFIG.EJERCICIOS = {
     /* Actividad 1 · estructura de función sin parámetro con while. */
@@ -33,7 +33,7 @@ window.CONFIG.EJERCICIOS = {
             return /\b[a-z_]\w*\s*=\s*1\b/.test(c);
         } },
         { d: 'Repite mientras el contador sea <= 5', f: function (c) {
-            return /<=\s*5\b/.test(c) || /<\s*6\b/.test(c);
+            return /\bwhile\b\s*\(?\s*[a-z_]\w*\s*(?:<=\s*5|<\s*6)\s*\)?\s*:/.test(c);
         } },
         { d: 'Aumenta el contador con += 1 o = ... + 1', f: function (c) {
             return /\b[a-z_]\w*\s*\+=\s*1\b/.test(c) ||

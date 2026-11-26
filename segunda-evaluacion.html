@@ -33,7 +33,7 @@
         <h1>Bucles y funciones sin parámetro</h1>
         <p class="subtitulo">
             Entrada de datos, bucle for, bucle while y funciones sin parámetro.
-            10 consignas, 10 puntos y corrección automática.
+            9 consignas, 10 puntos y corrección automática.
         </p>
         <div class="nav-rapida">
             <a href="#parte-a" class="btn-enlace">Parte A · Opción múltiple</a>
@@ -64,9 +64,9 @@
                     <tr><th>Parte</th><th>Consigna</th><th>Puntos</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>A</td><td>5 preguntas de opción múltiple</td><td>5</td></tr>
+                    <tr><td>A</td><td>4 preguntas de opción múltiple</td><td>4</td></tr>
                     <tr><td>B</td><td>4 predicciones de salida</td><td>2</td></tr>
-                    <tr><td>C</td><td>1 ejercicio de código</td><td>3</td></tr>
+                    <tr><td>C</td><td>1 ejercicio de código</td><td>4</td></tr>
                     <tr><td colspan="2"><strong>Total</strong></td><td><strong>10</strong></td></tr>
                 </tbody>
             </table>
@@ -99,7 +99,7 @@
             <span class="numero-paso">A</span>
             <div>
                 <h2>Opción múltiple</h2>
-                <p>5 preguntas · 1 punto cada una · marcá una sola respuesta.</p>
+                <p>4 preguntas · 1 punto cada una · marcá una sola respuesta.</p>
             </div>
         </div>
 
@@ -125,19 +125,6 @@
                 <label data-op="d"><input type="radio" name="a2" value="d"> 4 vueltas: 0, 1, 2 y 3.</label>
             </div>
             <p class="explicacion"><code>range(3)</code> equivale a <code>range(0, 3)</code>: genera 0, 1 y 2 (tres vueltas).</p>
-        </article>
-
-        <article class="pregunta mc" data-correcta="a">
-            <p class="enunciado"><span class="num-preg">3</span>
-                Querés mostrar 5, 4, 3, 2 y 1 con un <code>while</code>. ¿Qué condición usarías si el contador
-                arranca en 5 y baja de a uno?</p>
-            <div class="opciones">
-                <label data-op="a"><input type="radio" name="a3" value="a"> <code>while i &gt;= 1:</code></label>
-                <label data-op="b"><input type="radio" name="a3" value="b"> <code>while i &lt;= 5:</code></label>
-                <label data-op="c"><input type="radio" name="a3" value="c"> <code>while i == 0:</code></label>
-                <label data-op="d"><input type="radio" name="a3" value="d"> <code>while i = 1:</code></label>
-            </div>
-            <p class="explicacion">Si el contador baja, la condición debe permitir los valores 5, 4, 3, 2 y 1: <code>i &gt;= 1</code>. Cuando llega a 0, el ciclo termina.</p>
         </article>
 
         <article class="pregunta mc" data-correcta="a">
@@ -179,12 +166,13 @@
         <article class="pregunta salida" data-aceptadas="0 1 2">
             <p class="enunciado"><span class="num-preg">6</span>
                 ¿Qué muestra este programa?</p>
-            <pre><code>for i in range(3):
+            <pre><code>i = 0
+for i in range(3):
     print(i)</code></pre>
             <label class="campo-salida">Salida:
                 <input type="text" id="b1" autocomplete="off" placeholder="Separá los valores con espacios">
             </label>
-            <p class="explicacion"><code>range(3)</code> genera 0, 1 y 2. La salida es <strong>0 1 2</strong> (uno por línea).</p>
+            <p class="explicacion">Primero se inicializa <code>i = 0</code>; después <code>range(3)</code> genera 0, 1 y 2. La salida es <strong>0 1 2</strong> (uno por línea).</p>
         </article>
 
         <article class="pregunta salida" data-aceptadas="10">
@@ -234,7 +222,7 @@ saludar()</code></pre>
             <span class="numero-paso">C</span>
             <div>
                 <h2>Ejercicio de código</h2>
-                <p>1 programa · 3 puntos · se corrige la estructura de una función.</p>
+                <p>1 programa · 4 puntos · se corrige la estructura de una función.</p>
             </div>
         </div>
 
@@ -271,9 +259,9 @@ contar()</code></pre>
         <div class="barra"><div class="barra-fill" id="barra-fill"></div></div>
         <p id="mensaje">Corregí la evaluación para ver tu puntaje.</p>
         <div class="desglose">
-            <span>Parte A: <b id="puntos-a">0</b> / 5</span>
+            <span>Parte A: <b id="puntos-a">0</b> / 4</span>
             <span>Parte B: <b id="puntos-b">0</b> / 2</span>
-            <span>Parte C: <b id="puntos-c">0</b> / 3</span>
+            <span>Parte C: <b id="puntos-c">0</b> / 4</span>
         </div>
         <div class="resumen-errores" id="resumen-errores"></div>
         <p class="nota no-print" id="nota-resultado" style="display:none;">
@@ -294,7 +282,7 @@ contar()</code></pre>
 </div>
 
 <script src="config.js?v=6"></script>
-<script src="config-segunda.js?v=3"></script>
-<script src="app.js?v=6"></script>
+<script src="config-segunda.js?v=4"></script>
+<script src="app.js?v=7"></script>
 </body>
 </html>
