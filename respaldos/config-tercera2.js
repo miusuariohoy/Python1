@@ -26,7 +26,8 @@ window.CONFIG.EJERCICIOS = {
 
     c2: [
         { d: 'Importa tkinter', f: function (c) { return /from\s+tkinter\s+import/.test(c); } },
-        { d: 'Crea un Entry', f: function (c) { return /\bentry\s*\(/.test(c); } },
+        { d: 'Escribe Entry con mayúscula (Entry)', f: function (c, original) { return /\bEntry\s*\(/.test(original || c); } },
+        { d: 'Pasa la ventana como padre: Entry(ventana, ...)', f: function (c, original) { return /\bEntry\s*\(\s*ventana\b/i.test(original || c); } },
         { d: 'Lee el texto con get()', f: function (c) { return /\.get\s*\(\s*\)/.test(c); } },
         { d: 'Muestra el dato con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
     ]

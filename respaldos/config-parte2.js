@@ -23,7 +23,8 @@ window.CONFIG.EJERCICIOS = {
        Se aceptan las dos formas: todo en una línea o repartido en tres. */
     c1: [
         { d: 'Crea la ventana con Tk()', f: function (c) { return /tk\s*\(\s*\)/.test(c); } },
-        { d: 'Crea un Label', f: function (c, original) { return /\bLabel\s*\(\s*ventana\b/.test(original || c); } },
+        { d: 'Escribe Label con mayúscula (Label)', f: function (c, original) { return /\bLabel\s*\(/.test(original || c); } },
+        { d: 'Pasa la ventana como padre: Label(ventana, ...)', f: function (c, original) { return /\bLabel\s*\(\s*ventana\b/i.test(original || c); } },
         { d: 'El label dice "Hola"', f: function (c) { return /["']hola["']/.test(c); } },
         { d: 'Configura el fondo amarillo (bg="yellow" o background)', f: function (c) {
             return /\b(?:bg|background)\s*=\s*["'](?:yellow|#ffff00)["']/.test(c) ||
@@ -41,8 +42,9 @@ window.CONFIG.EJERCICIOS = {
         { d: 'Define la función def cambiar():', f: function (c) { return /def\s+cambiar\s*\(\s*\)\s*:/.test(c); } },
         { d: 'Cambia el texto con .config(text=...)', f: function (c) { return /\.config\s*\([^)]*text\s*=/.test(c); } },
         { d: 'El texto nuevo dice "Apretaste"', f: function (c) { return /apretaste/.test(c); } },
-        { d: 'Crea un Button', f: function (c) { return /button\s*\(/.test(c); } },
-        { d: 'Conecta el botón con command=cambiar (sin paréntesis)', f: function (c) { return /command\s*=\s*(?:cambiar\s*(?!\s*\()|lambda\s*:\s*cambiar\s*\(\s*\))/.test(c); } },
+        { d: 'Escribe Button con mayúscula (Button)', f: function (c, original) { return /\bButton\s*\(/.test(original || c); } },
+        { d: 'Pasa la ventana como padre: Button(ventana, ...)', f: function (c, original) { return /\bButton\s*\(\s*ventana\b/i.test(original || c); } },
+        { d: 'Conecta el botón con command=cambiar (sin paréntesis)', f: function (c, original) { return /\bButton\s*\(\s*ventana\b[^)]*command\s*=\s*(?:cambiar\s*(?!\s*\()|lambda\s*:\s*cambiar\s*\(\s*\))/i.test(original || c); } },
         { d: 'Cierra con mainloop()', f: function (c) { return /mainloop\s*\(\s*\)/.test(c); } }
     ],
 

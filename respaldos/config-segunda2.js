@@ -21,10 +21,9 @@ window.CONFIG.EJERCICIOS = {
     c1: [
         { d: 'Importa tkinter', f: function (c) { return /from\s+tkinter\s+import/.test(c); } },
         { d: 'Crea la ventana con Tk()', f: function (c) { return /\btk\s*\(\s*\)/.test(c); } },
-        { d: 'Crea un Label con text=', f: function (c, original) {
-            var o = original || c;
-            return /\bLabel\s*\(\s*ventana\b/.test(o) && /text\s*=/.test(o);
-        } },
+        { d: 'Escribe Label con mayúscula (Label)', f: function (c, original) { return /\bLabel\s*\(/.test(original || c); } },
+        { d: 'Pasa la ventana como padre: Label(ventana, ...)', f: function (c, original) { return /\bLabel\s*\(\s*ventana\b/i.test(original || c); } },
+        { d: 'Crea un Label con text=', f: function (c) { return /text\s*=/.test(c) && /[\"']hola[\"']/.test(c); } },
         { d: 'Empaqueta con pack()', f: function (c) { return /\.pack\s*\(/.test(c); } },
         { d: 'Cierra con mainloop()', f: function (c) { return /\bmainloop\s*\(/.test(c); } }
     ],
@@ -34,8 +33,9 @@ window.CONFIG.EJERCICIOS = {
             return /\bdef\s+saludar\s*\(\s*\)\s*:/.test(c);
         } },
         { d: 'Muestra un saludo con print()', f: function (c) { return /\bprint\s*\(/.test(c); } },
-        { d: 'Crea un Button', f: function (c) { return /\bbutton\s*\(/.test(c); } },
-        { d: 'Conecta con command=lambda', f: function (c) { return /\bcommand\s*=\s*lambda/.test(c); } },
+        { d: 'Escribe Button con mayúscula (Button)', f: function (c, original) { return /\bButton\s*\(/.test(original || c); } },
+        { d: 'Pasa la ventana como padre: Button(ventana, ...)', f: function (c, original) { return /\bButton\s*\(\s*ventana\b/i.test(original || c); } },
+        { d: 'Conecta con command=lambda', f: function (c, original) { return /\bButton\s*\(\s*ventana\b[^)]*command\s*=\s*lambda/i.test(original || c); } },
         { d: 'Cierra con mainloop()', f: function (c) { return /\bmainloop\s*\(/.test(c); } }
     ]
 };

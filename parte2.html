@@ -1738,7 +1738,8 @@ window.reiniciarQuiz = function (contId, bannerId) {
             { d: 'Muestra resultados con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
         ],
         texto: [
-            { d: 'Crea un widget Text', f: function (c) { return /\btext\s*\(/.test(c); } },
+            { d: 'Escribe Text con mayúscula (Text)', f: function (c, original) { return /\bText\s*\(/.test(original || c); } },
+            { d: 'Pasa la ventana como padre: Text(ventana, ...)', f: function (c, original) { return /\bText\s*\(\s*ventana\b/i.test(original || c); } },
             { d: 'Empaqueta el widget con pack()', f: function (c) { return /\.pack\s*\(/.test(c); } },
             { d: 'Inserta al final con insert(END, ...)', f: function (c) { return /insert\s*\(\s*end/.test(c); } },
             { d: 'Agrega un salto de línea con \\n', f: function (c) { return /\\n/.test(c); } },
@@ -1746,19 +1747,24 @@ window.reiniciarQuiz = function (contId, bannerId) {
         ],
         lambda1: [
             { d: 'Define una función con parámetro', f: function (c) { return /\bdef\s+\w+\s*\(\s*\w+\s*\)/.test(c); } },
-            { d: 'Conecta el botón con command=lambda', f: function (c) { return /\bbutton\s*\([^)]*command\s*=\s*lambda/.test(c); } },
+            { d: 'Escribe Button con mayúscula (Button)', f: function (c, original) { return /\bButton\s*\(/.test(original || c); } },
+            { d: 'Pasa la ventana como padre: Button(ventana, ...)', f: function (c, original) { return /\bButton\s*\(\s*ventana\b/i.test(original || c); } },
+            { d: 'Conecta el botón con command=lambda', f: function (c, original) { return /\bButton\s*\(\s*ventana\b[^)]*command\s*=\s*lambda/i.test(original || c); } },
             { d: 'La lambda llama a la función con un dato', f: function (c) { return /lambda\s*:\s*\w+\s*\(\s*["'][^"']+["']\s*\)/.test(c); } },
             { d: 'Cierra con mainloop()', f: function (c) { return /\bmainloop\s*\(/.test(c); } }
         ],
         state: [
-            { d: 'Crea un botón con state=DISABLED', f: function (c) { return /\bbutton\s*\([^)]*state\s*=\s*disabled/.test(c); } },
+            { d: 'Escribe Button con mayúscula (Button)', f: function (c, original) { return /\bButton\s*\(/.test(original || c); } },
+            { d: 'Pasa la ventana como padre: Button(ventana, ...)', f: function (c, original) { return /\bButton\s*\(\s*ventana\b/i.test(original || c); } },
+            { d: 'Crea un botón con state=DISABLED', f: function (c, original) { return /\bButton\s*\(\s*ventana\b[^)]*state\s*=\s*disabled/i.test(original || c); } },
             { d: 'Define una función para habilitar', f: function (c) { return /\bdef\s+\w+\s*\(/.test(c); } },
             { d: 'Habilita con config(state=NORMAL)', f: function (c) { return /\.config\s*\(\s*state\s*=\s*normal/.test(c); } },
-            { d: 'Conecta el botón con command', f: function (c) { return /\bbutton\s*\([^)]*command\s*=/.test(c); } },
+            { d: 'Conecta el botón con command', f: function (c, original) { return /\bButton\s*\(\s*ventana\b[^)]*command\s*=/i.test(original || c); } },
             { d: 'Cierra con mainloop()', f: function (c) { return /\bmainloop\s*\(/.test(c); } }
         ],
         canvas: [
-            { d: 'Crea el lienzo con Canvas(...)', f: function (c) { return /\bcanvas\s*\(/.test(c); } },
+            { d: 'Escribe Canvas con mayúscula (Canvas)', f: function (c, original) { return /\bCanvas\s*\(/.test(original || c); } },
+            { d: 'Pasa la ventana como padre: Canvas(ventana, ...)', f: function (c, original) { return /\bCanvas\s*\(\s*ventana\b/i.test(original || c); } },
             { d: 'Dibuja la pelota con create_oval()', f: function (c) { return /create_oval\s*\(/.test(c); } },
             { d: 'Guarda el id que devuelve create_oval', f: function (c) { return /\b[a-z_]\w*\s*=\s*\w+\.create_oval/.test(c); } },
             { d: 'Mueve el objeto con .coords()', f: function (c) { return /\.coords\s*\(/.test(c); } },
@@ -1801,6 +1807,10 @@ window.reiniciarQuiz = function (contId, bannerId) {
             { d: 'Importa mysql.connector', f: function (c) { return /import\s+mysql\.connector/.test(c); } },
             { d: 'Define la función conectar()', f: function (c) { return /\bdef\s+conectar\s*\(\s*\)/.test(c); } },
             { d: 'Usa connect(...) con los datos de acceso', f: function (c) { return /\.connect\s*\(/.test(c); } },
+            { d: 'Escribe Entry con mayúscula (Entry)', f: function (c, original) { return /\bEntry\s*\(/.test(original || c); } },
+            { d: 'Pasa la ventana como padre: Entry(ventana, ...)', f: function (c, original) { return /\bEntry\s*\(\s*ventana\b/i.test(original || c); } },
+            { d: 'Escribe Button con mayúscula (Button)', f: function (c, original) { return /\bButton\s*\(/.test(original || c); } },
+            { d: 'Pasa la ventana como padre: Button(ventana, ...)', f: function (c, original) { return /\bButton\s*\(\s*ventana\b/i.test(original || c); } },
             { d: 'Lee el Entry con .get()', f: function (c) { return /\.get\s*\(\s*\)/.test(c); } },
             { d: 'Usa INSERT INTO', f: function (c) { return /\binsert\s+into\b/.test(c); } },
             { d: 'Deja huecos %s para los valores', f: function (c) { return /%s/.test(c); } },
