@@ -301,11 +301,14 @@
 
     /* ---------- Datos del alumno ---------- */
     function datosAlumno() {
+        var dni = '';
+        try { dni = localStorage.getItem('py_alumno_dni') || ''; } catch (e) { /* sin storage */ }
         return {
             apellido: $('#alumno-apellido').value.trim(),
             nombre: $('#alumno-nombre').value.trim(),
             curso: $('#alumno-curso').value.trim(),
-            materia: ($('#alumno-materia').value.trim() || EXAMEN.materia)
+            materia: ($('#alumno-materia').value.trim() || EXAMEN.materia),
+            dni: dni
         };
     }
 
@@ -340,6 +343,7 @@
             apellido: a.apellido,
             nombre: a.nombre,
             curso: a.curso,
+            dni: a.dni,
             nota: res.total,
             puntosA: res.puntosA,
             puntosB: res.puntosB,
@@ -693,6 +697,7 @@
             'Apellido: ' + a.apellido + '\n' +
             'Nombre: ' + a.nombre + '\n' +
             'Curso: ' + a.curso + '\n' +
+            'DNI: ' + (a.dni || '—') + '\n' +
             'Materia: ' + a.materia + '\n' +
             'Fecha y hora: ' + fechaLegible(ultimoPayload ? ultimoPayload.momento : new Date().toISOString()) + '\n' +
             'NOTA: ' + formatear(ultimoResultado.total) + ' / 10\n' +

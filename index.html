@@ -322,9 +322,44 @@
             pre{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
             .code-input{min-height:90px;}
         }
+            /* ---------- Acceso por DNI y entrega de resoluciones ---------- */
+        #acceso-dni { position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; background:rgba(15,23,42,.72); padding:18px; }
+        #acceso-dni[hidden] { display:none; }
+        .dni-caja { background:#fff; border-radius:16px; max-width:440px; width:100%; padding:26px; box-shadow:0 18px 45px rgba(0,0,0,.25); }
+        .dni-caja h2 { margin:0 0 8px; font-size:1.3rem; }
+        .dni-caja p { margin:0 0 16px; color:var(--muted); font-size:.94rem; }
+        .dni-caja input { width:100%; padding:11px 12px; border:1px solid var(--border); border-radius:9px; font:inherit; margin-bottom:8px; }
+        .dni-error { color:var(--bad); font-size:.88rem; min-height:1.2em; margin-bottom:10px; }
+        .barra-alumno { position:fixed; right:14px; bottom:14px; z-index:60; display:flex; align-items:center; gap:10px; background:#0f172a; color:#fff; padding:9px 13px; border-radius:999px; font-size:.85rem; box-shadow:0 6px 18px rgba(0,0,0,.25); }
+        .barra-alumno[hidden] { display:none; }
+        .barra-alumno button { background:#fff; color:#0f172a; border:0; border-radius:999px; padding:5px 10px; font:inherit; cursor:pointer; }
+        .entrega { margin-top:14px; padding-top:12px; border-top:1px dashed var(--border); }
+        .entrega-ayuda { margin:0 0 9px; font-size:.88rem; color:var(--muted); }
+        .entrega-row { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+        .entrega-row input[type=file] { max-width:230px; font-size:.84rem; }
+        .entrega-estado { font-size:.86rem; color:var(--muted); }
+        .entrega-estado.ok { color:var(--ok); font-weight:600; }
+        .entrega-estado.fail { color:var(--bad); font-weight:600; }
     </style>
 </head>
-<body>
+<body data-sitio="python1">
+<div id="acceso-dni" hidden>
+    <div class="dni-caja">
+        <h2>Ingresá con tu DNI</h2>
+        <p>Tu DNI queda guardado en este navegador. Cada resolución o evaluación que envíes queda registrada con fecha y hora.</p>
+        <form id="form-dni">
+            <input id="dni" type="text" inputmode="numeric" autocomplete="off" placeholder="DNI (sin puntos)" maxlength="11">
+            <div id="dni-error" class="dni-error"></div>
+            <button class="btn btn-primary" type="submit">Ingresar</button>
+        </form>
+    </div>
+</div>
+
+<div id="barra-alumno" class="barra-alumno" hidden>
+    <span id="dni-badge"></span>
+    <button id="cambiar-dni" type="button">Cambiar DNI</button>
+</div>
+
 
 <header class="hero">
     <h1>Fundamentos de Programación con Python</h1>
@@ -415,6 +450,15 @@ aprobado = <span class="kw">True</span>     <span class="cmt"># bool  (verdadero
                     <button class="btn btn-ghost" onclick="limpiar('variables')">Limpiar</button>
                 </div>
                 <div class="result" id="res-variables"></div>
+
+            <div class="entrega" data-entrega="variables" data-codigo="in-variables">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
         </article>
 
@@ -513,6 +557,15 @@ time.<span class="fn">sleep</span>(<span class="nu">2</span>)          <span cla
                     <button class="btn btn-ghost" onclick="limpiar('entrada')">Limpiar</button>
                 </div>
                 <div class="result" id="res-entrada"></div>
+
+            <div class="entrega" data-entrega="entrada" data-codigo="in-entrada">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
         </article>
 
@@ -627,6 +680,15 @@ time.<span class="fn">sleep</span>(<span class="nu">2</span>)          <span cla
                     <button class="btn btn-ghost" onclick="limpiar('decisiones')">Limpiar</button>
                 </div>
                 <div class="result" id="res-decisiones"></div>
+
+            <div class="entrega" data-entrega="decisiones" data-codigo="in-decisiones">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
         </article>
 
@@ -709,6 +771,15 @@ total = total + <span class="nu">2000</span>    <span class="cmt"># suma un ques
                     <button class="btn btn-ghost" onclick="limpiar('contador-1')">Limpiar</button>
                 </div>
                 <div class="result" id="res-contador-1"></div>
+
+            <div class="entrega" data-entrega="contador-1" data-codigo="in-contador-1">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
 
             <div class="exercise">
@@ -725,6 +796,15 @@ total = total + <span class="nu">2000</span>    <span class="cmt"># suma un ques
                     <button class="btn btn-ghost" onclick="limpiar('contador-2')">Limpiar</button>
                 </div>
                 <div class="result" id="res-contador-2"></div>
+
+            <div class="entrega" data-entrega="contador-2" data-codigo="in-contador-2">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
         </article>
 
@@ -790,6 +870,15 @@ total = total + <span class="nu">2000</span>    <span class="cmt"># suma un ques
                     <button class="btn btn-ghost" onclick="limpiar('for-1')">Limpiar</button>
                 </div>
                 <div class="result" id="res-for-1"></div>
+
+            <div class="entrega" data-entrega="for-1" data-codigo="in-for-1">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
 
             <div class="exercise">
@@ -805,6 +894,15 @@ total = total + <span class="nu">2000</span>    <span class="cmt"># suma un ques
                     <button class="btn btn-ghost" onclick="limpiar('for-2')">Limpiar</button>
                 </div>
                 <div class="result" id="res-for-2"></div>
+
+            <div class="entrega" data-entrega="for-2" data-codigo="in-for-2">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
         </article>
 
@@ -881,6 +979,15 @@ numero = <span class="fn">int</span>(<span class="fn">input</span>(<span class="
                     <button class="btn btn-ghost" onclick="limpiar('while-1')">Limpiar</button>
                 </div>
                 <div class="result" id="res-while-1"></div>
+
+            <div class="entrega" data-entrega="while-1" data-codigo="in-while-1">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
 
             <div class="exercise">
@@ -896,6 +1003,15 @@ numero = <span class="fn">int</span>(<span class="fn">input</span>(<span class="
                     <button class="btn btn-ghost" onclick="limpiar('while-2')">Limpiar</button>
                 </div>
                 <div class="result" id="res-while-2"></div>
+
+            <div class="entrega" data-entrega="while-2" data-codigo="in-while-2">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
         </article>
 
@@ -950,6 +1066,15 @@ numero = <span class="fn">int</span>(<span class="fn">input</span>(<span class="
                     <button class="btn btn-ghost" onclick="limpiar('funcion-sin-1')">Limpiar</button>
                 </div>
                 <div class="result" id="res-funcion-sin-1"></div>
+
+            <div class="entrega" data-entrega="funcion-sin-1" data-codigo="in-funcion-sin-1">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
 
             <div class="exercise">
@@ -965,6 +1090,15 @@ numero = <span class="fn">int</span>(<span class="fn">input</span>(<span class="
                     <button class="btn btn-ghost" onclick="limpiar('funcion-sin-2')">Limpiar</button>
                 </div>
                 <div class="result" id="res-funcion-sin-2"></div>
+
+            <div class="entrega" data-entrega="funcion-sin-2" data-codigo="in-funcion-sin-2">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
         </article>
 
@@ -1030,6 +1164,15 @@ numero = <span class="fn">int</span>(<span class="fn">input</span>(<span class="
                     <button class="btn btn-ghost" onclick="limpiar('funcion-con-1')">Limpiar</button>
                 </div>
                 <div class="result" id="res-funcion-con-1"></div>
+
+            <div class="entrega" data-entrega="funcion-con-1" data-codigo="in-funcion-con-1">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
 
             <div class="exercise">
@@ -1045,6 +1188,15 @@ numero = <span class="fn">int</span>(<span class="fn">input</span>(<span class="
                     <button class="btn btn-ghost" onclick="limpiar('funcion-con-2')">Limpiar</button>
                 </div>
                 <div class="result" id="res-funcion-con-2"></div>
+
+            <div class="entrega" data-entrega="funcion-con-2" data-codigo="in-funcion-con-2">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
         </article>
 
@@ -1128,6 +1280,15 @@ resultado = <span class="fn">sumar</span>(<span class="nu">4</span>, <span class
                     <button class="btn btn-ghost" onclick="limpiar('return-1')">Limpiar</button>
                 </div>
                 <div class="result" id="res-return-1"></div>
+
+            <div class="entrega" data-entrega="return-1" data-codigo="in-return-1">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
 
             <div class="exercise">
@@ -1144,6 +1305,15 @@ resultado = <span class="fn">sumar</span>(<span class="nu">4</span>, <span class
                     <button class="btn btn-ghost" onclick="limpiar('return-2')">Limpiar</button>
                 </div>
                 <div class="result" id="res-return-2"></div>
+
+            <div class="entrega" data-entrega="return-2" data-codigo="in-return-2">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
         </article>
 
@@ -1225,6 +1395,15 @@ ventana.mainloop()</code></pre>
                     <button class="btn btn-ghost" onclick="limpiar('tkinter-1')">Limpiar</button>
                 </div>
                 <div class="result" id="res-tkinter-1"></div>
+
+            <div class="entrega" data-entrega="tkinter-1" data-codigo="in-tkinter-1">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
 
             <div class="exercise">
@@ -1244,6 +1423,15 @@ ventana.mainloop()</code></pre>
                     <button class="btn btn-ghost" onclick="limpiar('tkinter-2')">Limpiar</button>
                 </div>
                 <div class="result" id="res-tkinter-2"></div>
+
+            <div class="entrega" data-entrega="tkinter-2" data-codigo="in-tkinter-2">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
         </article>
 
@@ -1310,6 +1498,15 @@ ventana.mainloop()</code></pre>
                     <button class="btn btn-ghost" onclick="limpiar('try-1')">Limpiar</button>
                 </div>
                 <div class="result" id="res-try-1"></div>
+
+            <div class="entrega" data-entrega="try-1" data-codigo="in-try-1">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
 
             <div class="exercise">
@@ -1325,6 +1522,15 @@ ventana.mainloop()</code></pre>
                     <button class="btn btn-ghost" onclick="limpiar('try-2')">Limpiar</button>
                 </div>
                 <div class="result" id="res-try-2"></div>
+
+            <div class="entrega" data-entrega="try-2" data-codigo="in-try-2">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
         </article>
 
@@ -1382,6 +1588,15 @@ elegido = random.<span class="fn">choice</span>(nombres)
                     <button class="btn btn-ghost" onclick="limpiar('random-1')">Limpiar</button>
                 </div>
                 <div class="result" id="res-random-1"></div>
+
+            <div class="entrega" data-entrega="random-1" data-codigo="in-random-1">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
 
             <div class="exercise">
@@ -1396,6 +1611,15 @@ elegido = random.<span class="fn">choice</span>(nombres)
                     <button class="btn btn-ghost" onclick="limpiar('random-2')">Limpiar</button>
                 </div>
                 <div class="result" id="res-random-2"></div>
+
+            <div class="entrega" data-entrega="random-2" data-codigo="in-random-2">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
         </article>
 
@@ -1728,6 +1952,15 @@ a = <span class="nu">10</span>
                     <button class="btn btn-ghost" onclick="limpiar('menu')">Limpiar</button>
                 </div>
                 <div class="result" id="res-menu"></div>
+
+            <div class="entrega" data-entrega="menu" data-codigo="in-menu">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
 
             <div class="exercise">
@@ -1743,6 +1976,15 @@ a = <span class="nu">10</span>
                     <button class="btn btn-ghost" onclick="limpiar('promedios')">Limpiar</button>
                 </div>
                 <div class="result" id="res-promedios"></div>
+
+            <div class="entrega" data-entrega="promedios" data-codigo="in-promedios">
+                <p class="entrega-ayuda">✍️ Escribí la resolución en <strong>Sublime Text</strong>, copiá el programa y pegalo en la caja de arriba (también podés cargar el archivo <code class="inline">.py</code>). Después tocá <strong>Enviar resolución</strong>.</p>
+                <div class="entrega-row">
+                    <input class="entrega-archivo" type="file" accept=".py,text/plain">
+                    <button class="btn btn-primary btn-chico entrega-enviar" type="button">📤 Enviar resolución</button>
+                    <span class="entrega-estado"></span>
+                </div>
+            </div>
             </div>
         </div>
     </section>
@@ -2395,6 +2637,8 @@ window.reiniciarQuiz = function (contId, bannerId) {
 })();
 </script>
 
+<script src="config.js?v=1"></script>
+<script src="entregas.js?v=1"></script>
 </body>
 </html>
 

@@ -31,7 +31,8 @@ múltiple, 4 de salida y 2 de código), pero los dos ejercicios de código son
 | `evaluacion-parte2.html` | Evaluación original de la **Parte 2** (12 consignas). Sin cambios. |
 | `evaluacion-pseint.html` | Evaluación de PSeInt (copia local; se publica en el repo `pseint`). |
 | `styles.css` | Estilos de las evaluaciones. |
-| `app.js` | Acceso, corrección, envío y reinicio para el siguiente alumno. |
+| `app.js` | Acceso, corrección, envío y reinicio para el siguiente alumno. Incluye el DNI guardado en el navegador. |
+| `entregas.js` | Acceso con DNI y envío cifrado de la resolución de cada ejercicio de las dos guías. |
 | `config.js` | Configuración general, clave de la Evaluación Final y requisitos simples de su Parte C. |
 | `config-primera.js` | Examen y requisitos de código de la Primera evaluación. |
 | `config-segunda.js` | Examen y requisitos de código de la Segunda evaluación. |
@@ -43,6 +44,18 @@ múltiple, 4 de salida y 2 de código), pero los dos ejercicios de código son
 | `config-parte2.js` | Examen y requisitos de código de la Parte 2. Sin cambios. |
 | `CLAVES.md` | Claves de acceso vigentes de cada evaluación. |
 | `respaldos/` | Copia de todas las evaluaciones y sus configuraciones. |
+
+## Entrega de actividades con DNI
+
+Al abrir `index.html` o `parte2.html`, el alumno ingresa una sola vez con su
+**DNI** (7 a 9 números). Queda guardado en ese navegador y también se adjunta a
+las evaluaciones, junto con la nota y los errores.
+
+Debajo de **cada ejercicio** hay un lugar para entregarlo: el alumno escribe la
+resolución en **Sublime Text**, la copia y la pega en la caja del ejercicio (o
+carga el `.py` con «Cargar .py»), y toca **Enviar resolución**. El envío va
+cifrado por `ntfy.sh` y `inform` lo guarda con DNI, actividad, fecha y hora, sin
+nota (es una entrega, no una evaluación).
 
 Cada guía abre solo sus evaluaciones desde su barra de menú.
 
