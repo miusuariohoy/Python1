@@ -221,7 +221,7 @@
 
             var items = checks.map(function (check) {
                 var paso = false;
-                try { paso = check.f(codigo); } catch (e) { paso = false; }
+                try { paso = check.f(codigo, area.value); } catch (e) { paso = false; }
                 if (paso) aprobados++;
                 return '<li class="' + (paso ? 'ok' : 'fail') + '">' +
                     (paso ? '✔' : '✘') + ' ' + check.d + '</li>';
@@ -243,7 +243,7 @@
             lineas.push(n + ') Ejercicio de código (' + formatear(redondear(puntos)) + ' / ' + PUNTOS_POR_EJERCICIO + ' puntos)');
             checks.forEach(function (check) {
                 var paso = false;
-                try { paso = check.f(codigo); } catch (e) { paso = false; }
+                try { paso = check.f(codigo, area.value); } catch (e) { paso = false; }
                 lineas.push('   ' + (paso ? 'OK: ' : 'FALTA: ') + check.d);
             });
             lineas.push('   Código enviado:');

@@ -23,7 +23,7 @@ window.CONFIG.EJERCICIOS = {
        Se aceptan las dos formas: todo en una línea o repartido en tres. */
     c1: [
         { d: 'Crea la ventana con Tk()', f: function (c) { return /tk\s*\(\s*\)/.test(c); } },
-        { d: 'Crea un Label', f: function (c) { return /label\s*\(/.test(c); } },
+        { d: 'Crea un Label', f: function (c, original) { return /\bLabel\s*\(\s*ventana\b/.test(original || c); } },
         { d: 'El label dice "Hola"', f: function (c) { return /["']hola["']/.test(c); } },
         { d: 'Configura el fondo amarillo (bg="yellow" o background)', f: function (c) {
             return /\b(?:bg|background)\s*=\s*["'](?:yellow|#ffff00)["']/.test(c) ||

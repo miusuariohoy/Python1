@@ -1828,7 +1828,7 @@ window.reiniciarQuiz = function (contId, bannerId) {
         var ok = 0;
         var items = checks.map(function (ch) {
             var passed = false;
-            try { passed = ch.f(code); } catch (e) { passed = false; }
+            try { passed = ch.f(code, input.value); } catch (e) { passed = false; }
             if (passed) ok++;
             return '<li class="' + (passed ? 'ok' : 'fail') + '">' +
                 (passed ? '✔' : '✘') + ' ' + ch.d + '</li>';

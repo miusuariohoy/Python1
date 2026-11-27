@@ -21,8 +21,9 @@ window.CONFIG.EJERCICIOS = {
     c1: [
         { d: 'Importa tkinter', f: function (c) { return /from\s+tkinter\s+import/.test(c); } },
         { d: 'Crea la ventana con Tk()', f: function (c) { return /\btk\s*\(\s*\)/.test(c); } },
-        { d: 'Crea un Label con text=', f: function (c) {
-            return /\blabel\s*\(/.test(c) && /text\s*=/.test(c);
+        { d: 'Crea un Label con text=', f: function (c, original) {
+            var o = original || c;
+            return /\bLabel\s*\(\s*ventana\b/.test(o) && /text\s*=/.test(o);
         } },
         { d: 'Empaqueta con pack()', f: function (c) { return /\.pack\s*\(/.test(c); } },
         { d: 'Cierra con mainloop()', f: function (c) { return /\bmainloop\s*\(/.test(c); } }

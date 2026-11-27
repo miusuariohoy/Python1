@@ -2161,7 +2161,8 @@ window.reiniciarQuiz = function (contId, bannerId) {
         'tkinter-1': [
             { d: 'Importa tkinter', f: function (c) { return /from\s+tkinter\s+import|import\s+tkinter/.test(c); } },
             { d: 'Crea la ventana con Tk()', f: function (c) { return /\btk\s*\(\s*\)/.test(c); } },
-            { d: 'Agrega un Label', f: function (c) { return /\blabel\s*\(/.test(c); } },
+            { d: 'Escribe Label con mayúscula (Label)', f: function (c, original) { return /\bLabel\s*\(/.test(original || c); } },
+            { d: 'Pasa la ventana como padre: Label(ventana, ...)', f: function (c, original) { return /\bLabel\s*\(\s*ventana\b/.test(original || c); } },
             { d: 'El Label dice "Hola"', f: function (c) { return /["']hola["']/.test(c); } },
             { d: 'Muestra el Label con pack()', f: function (c) { return /\.pack\s*\(/.test(c); } },
             { d: 'Cierra con mainloop()', f: function (c) { return /\bmainloop\s*\(\s*\)/.test(c); } }
@@ -2251,7 +2252,7 @@ window.reiniciarQuiz = function (contId, bannerId) {
         var ok = 0;
         var items = checks.map(function (ch) {
             var passed = false;
-            try { passed = ch.f(code); } catch (e) { passed = false; }
+            try { passed = ch.f(code, input.value); } catch (e) { passed = false; }
             if (passed) ok++;
             return '<li class="' + (passed ? 'ok' : 'fail') + '">' +
                 (passed ? '✔' : '✘') + ' ' + ch.d + '</li>';
