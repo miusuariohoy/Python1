@@ -20,13 +20,13 @@ window.CONFIG.PUNTOS_EJERCICIO = 1.5;
 
 window.CONFIG.EJERCICIOS = {
     c1: [
-        { d: 'Define doble(n) con un parámetro', f: function (c) {
-            return /\bdef\s+doble\s*\(\s*[a-z_]\w*\s*\)\s*:/.test(c);
+        { d: 'Define triple(n) con un parámetro', f: function (c) {
+            return /\bdef\s+triple\s*\(\s*[a-z_]\w*\s*\)\s*:/.test(c);
         } },
-        { d: 'Devuelve el parámetro multiplicado por 2', f: function (c) {
-            return /\breturn\s+[a-z_]\w*\s*\*\s*2\b/.test(c);
+        { d: 'Devuelve el parámetro multiplicado por 3', f: function (c) {
+            return /\breturn\s+[a-z_]\w*\s*\*\s*3\b/.test(c);
         } },
-        { d: 'Llama a doble(8)', f: function (c) { return /\bdoble\s*\(\s*8\s*\)/.test(c); } },
+        { d: 'Llama a triple(6)', f: function (c) { return /\btriple\s*\(\s*6\s*\)/.test(c); } },
         { d: 'Muestra el resultado con print()', f: function (c) { return /\bprint\s*\(/.test(c); } }
     ],
 

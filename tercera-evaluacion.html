@@ -200,17 +200,18 @@ saludar("Ana")</code></pre>
             <p class="explicacion"><code>print</code> separa los valores con un espacio: <strong>Hola Ana</strong>.</p>
         </article>
 
-        <article class="pregunta salida" data-aceptadas="error">
+        <article class="pregunta salida" data-aceptadas="36">
             <p class="enunciado"><span class="num-preg">8</span>
                 ¿Qué muestra este programa?</p>
             <pre><code>try:
-    print(int("hola"))
+    numero = int("12")
+    print(numero * 3)
 except ValueError:
-    print("error")</code></pre>
+    print("No se pudo convertir")</code></pre>
             <label class="campo-salida">Salida:
                 <input type="text" id="b3" autocomplete="off" placeholder="Escribí la salida">
             </label>
-            <p class="explicacion"><code>int("hola")</code> produce un <code>ValueError</code>; el <code>except</code> lo atrapa y muestra <strong>error</strong>.</p>
+            <p class="explicacion"><code>int("12")</code> convierte correctamente; por eso se ejecuta el <code>try</code>, se calcula <code>12 * 3</code> y se muestra <strong>36</strong>. El <code>except</code> no se usa.</p>
         </article>
 
         <article class="pregunta salida" data-aceptadas="ana">
@@ -238,20 +239,20 @@ print(elegido)</code></pre>
         </div>
 
         <article class="pregunta codigo" data-ejercicio="c1">
-            <p class="enunciado"><span class="num-preg">10</span> Definí una función <code>doble(n)</code> que devuelva <code>n * 2</code> con <code>return</code>. Llamala con <code>doble(8)</code> y mostrá el resultado.</p>
-            <textarea class="editor" id="c1" spellcheck="false" placeholder="def doble(n):&#10;    return n * 2&#10;&#10;print(doble(8))"></textarea>
+            <p class="enunciado"><span class="num-preg">10</span> Definí una función <code>triple(n)</code> que devuelva <code>n * 3</code> con <code>return</code>. Llamala con <code>triple(6)</code> y mostrá el resultado.</p>
+            <textarea class="editor" id="c1" spellcheck="false"></textarea>
             <div class="resultado-codigo" id="res-c1"></div>
             <details class="solucion">
                 <summary>Ver una solución de referencia</summary>
-                <pre><code>def doble(n):
-    return n * 2
+                <pre><code>def triple(n):
+    return n * 3
 
-print(doble(8))</code></pre>
+print(triple(6))</code></pre>
             </details>
         </article>
         <article class="pregunta codigo" data-ejercicio="c2">
             <p class="enunciado"><span class="num-preg">11</span> Pedí un número con <code>input()</code>, convertilo con <code>int()</code> dentro de un <code>try</code>. Si falla, mostrá <code>"No es un número"</code> con <code>except ValueError</code>.</p>
-            <textarea class="editor" id="c2" spellcheck="false" placeholder="try:&#10;    n = int(input(...))&#10;    print(n)&#10;except ValueError:&#10;    print(&quot;No es un número&quot;)"></textarea>
+            <textarea class="editor" id="c2" spellcheck="false"></textarea>
             <div class="resultado-codigo" id="res-c2"></div>
             <details class="solucion">
                 <summary>Ver una solución de referencia</summary>
@@ -301,7 +302,7 @@ except ValueError:
 </div>
 
 <script src="config.js?v=6"></script>
-<script src="config-tercera.js?v=1"></script>
+<script src="config-tercera.js?v=2"></script>
 <script src="app.js?v=6"></script>
 </body>
 </html>
