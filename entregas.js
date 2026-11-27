@@ -1,16 +1,18 @@
 /* ============================================================
    ENTREGAS DE ACTIVIDADES · GUÍAS DE PYTHON
    ------------------------------------------------------------
-   El alumno entra con su DNI, escribe la resolución en Sublime Text
-   y la pega en la caja del ejercicio (o carga el .py). El código se
-   cifra con la misma clave pública que las evaluaciones y se publica
-   en ntfy.sh. El repo privado "inform" lo recoge y guarda con DNI,
-   actividad, fecha y hora.
+   El alumno entra con DNI, apellido, nombre y curso, escribe la
+   resolución en Sublime Text y la pega en la caja del ejercicio
+   (o carga el .py). El código se cifra con la misma clave pública que
+   las evaluaciones y se publica en ntfy.sh. El repo privado "inform"
+   lo recoge y guarda con DNI, apellido, nombre, curso, actividad,
+   fecha y hora. Esos datos también se usan en las evaluaciones.
    ============================================================ */
 (function () {
     'use strict';
 
     var CLAVE_DNI = 'py_alumno_dni';
+    var CLAVE_PERFIL = 'py_alumno_perfil_';
     var CLAVE_ENTREGAS = 'py_entregas_';
     var cfg = window.CONFIG || {};
 
@@ -25,6 +27,23 @@
 
     function guardarDni(valor) {
         try { localStorage.setItem(CLAVE_DNI, valor); } catch (e) { /* sin storage */ }
+    }
+
+    function leerPerfil(valor) {
+        try {
+            var raw = localStorage.getItem(CLAVE_PERFIL + valor);
+            return raw ? JSON.parse(raw) : {};
+        } catch (e) { return {}; }
+    }
+
+    function guardarPerfil(valor, datos) {
+        try {
+            localStorage.setItem(CLAVE_PERFIL + valor, JSON.stringify({
+                apellido: datos.apellido,
+                nombre: datos.nombre,
+                curso: datos.curso
+            }));
+        } catch (e) { /* sin storage */ }
     }
 
     function leerEntregas() {
@@ -139,7 +158,11 @@
         var badge = $('#dni-badge');
         var valor = dni();
         if (barra) barra.hidden = !valor;
-        if (badge) badge.textContent = valor ? 'DNI ••••' + valor.slice(-4) : '';
+        if (!badge) return;
+        if (!valor) { badge.textContent = ''; return; }
+        var p = leerPerfil(valor);
+        var nombre = [p.apellido, p.nombre].filter(Boolean).join(', ');
+        badge.textContent = (nombre ? nombre + ' · ' : '') + 'DNI ••••' + valor.slice(-4);
     }
 
     function initAcceso() {
@@ -147,26 +170,54 @@
         var form = $('#form-dni');
         if (!overlay || !form) { actualizarBarra(); return; }
 
+        var campoDni = $('#dni');
+        var campoApellido = $('#dni-apellido');
+        var campoNombre = $('#dni-nombre');
+        var campoCurso = $('#dni-curso');
+        var error = $('#dni-error');
+
         overlay.hidden = !!dni();
         actualizarBarra();
 
+        if (campoDni) {
+            campoDni.addEventListener('input', function () {
+                var valor = campoDni.value.replace(/[\s.\-]/g, '');
+                if (!/^\d{7,9}$/.test(valor)) return;
+                var p = leerPerfil(valor);
+                if (campoApellido && p.apellido) campoApellido.value = p.apellido;
+                if (campoNombre && p.nombre) campoNombre.value = p.nombre;
+                if (campoCurso && p.curso) campoCurso.value = p.curso;
+            });
+        }
+
         form.addEventListener('submit', function (ev) {
             ev.preventDefault();
-            var campo = $('#dni');
-            var error = $('#dni-error');
-            var valor = campo.value.replace(/[\s.\-]/g, '');
+            var valor = campoDni.value.replace(/[\s.\-]/g, '');
             if (!/^\d{7,9}$/.test(valor)) {
                 error.textContent = 'Ingresá un DNI de 7 a 9 números, sin puntos.';
-                campo.focus();
+                campoDni.focus();
+                return;
+            }
+            var datos = {
+                apellido: campoApellido ? campoApellido.value.trim() : '',
+                nombre: campoNombre ? campoNombre.value.trim() : '',
+                curso: campoCurso ? campoCurso.value.trim() : ''
+            };
+            if (!datos.apellido || !datos.nombre || !datos.curso) {
+                error.textContent = 'Completá apellido, nombre y curso.';
+                if (!datos.apellido && campoApellido) campoApellido.focus();
+                else if (!datos.nombre && campoNombre) campoNombre.focus();
+                else if (campoCurso) campoCurso.focus();
                 return;
             }
             guardarDni(valor);
+            guardarPerfil(valor, datos);
             overlay.hidden = true;
             error.textContent = '';
             actualizarBarra();
         });
 
-        var cambiar = $('#cambiar-dni');
+        var cambiar = $('#cambiar-datos');
         if (cambiar) {
             cambiar.addEventListener('click', function () {
                 try { localStorage.removeItem(CLAVE_DNI); } catch (e) { /* nada */ }
@@ -238,10 +289,13 @@
 
             boton.addEventListener('click', function () {
                 var codigo = area.value.trim();
-                if (!dni()) {
+                var perfil = leerPerfil(dni());
+                if (!dni() || !perfil.apellido || !perfil.nombre || !perfil.curso) {
                     var overlay = $('#acceso-dni');
                     if (overlay) overlay.hidden = false;
-                    estado('Ingresá tu DNI antes de enviar.', 'fail', bloque);
+                    var aviso = $('#dni-error');
+                    if (aviso) aviso.textContent = 'Ingresá DNI, apellido, nombre y curso antes de enviar.';
+                    estado('Completá tus datos antes de enviar.', 'fail', bloque);
                     return;
                 }
                 if (!codigo) {
@@ -258,9 +312,9 @@
                     titulo: 'Actividad · ' + titulo + ' · Guía de Python',
                     materia: 'Programación',
                     dni: dni(),
-                    apellido: 'DNI',
-                    nombre: dni(),
-                    curso: 'Guía ' + sitio,
+                    apellido: perfil.apellido,
+                    nombre: perfil.nombre,
+                    curso: perfil.curso,
                     actividad: id,
                     tema: titulo,
                     codigo: codigo.slice(0, 20000),

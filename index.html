@@ -329,6 +329,7 @@
         .dni-caja h2 { margin:0 0 8px; font-size:1.3rem; }
         .dni-caja p { margin:0 0 16px; color:var(--muted); font-size:.94rem; }
         .dni-caja input { width:100%; padding:11px 12px; border:1px solid var(--border); border-radius:9px; font:inherit; margin-bottom:8px; }
+        .dni-caja label { display:block; font-size:.85rem; font-weight:600; margin:10px 0 3px; }
         .dni-error { color:var(--bad); font-size:.88rem; min-height:1.2em; margin-bottom:10px; }
         .barra-alumno { position:fixed; right:14px; bottom:14px; z-index:60; display:flex; align-items:center; gap:10px; background:#0f172a; color:#fff; padding:9px 13px; border-radius:999px; font-size:.85rem; box-shadow:0 6px 18px rgba(0,0,0,.25); }
         .barra-alumno[hidden] { display:none; }
@@ -345,10 +346,17 @@
 <body data-sitio="python1">
 <div id="acceso-dni" hidden>
     <div class="dni-caja">
-        <h2>Ingresá con tu DNI</h2>
-        <p>Tu DNI queda guardado en este navegador. Cada resolución o evaluación que envíes queda registrada con fecha y hora.</p>
+        <h2>Ingresá tus datos</h2>
+        <p>Entrá con DNI, apellido, nombre y curso. Quedan guardados en este navegador y se usan en las entregas y en las evaluaciones, junto con la fecha y hora.</p>
         <form id="form-dni">
-            <input id="dni" type="text" inputmode="numeric" autocomplete="off" placeholder="DNI (sin puntos)" maxlength="11">
+            <label for="dni">DNI (sin puntos)</label>
+            <input id="dni" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej.: 30123456" maxlength="11">
+            <label for="dni-apellido">Apellido</label>
+            <input id="dni-apellido" type="text" autocomplete="off" placeholder="Tu apellido">
+            <label for="dni-nombre">Nombre</label>
+            <input id="dni-nombre" type="text" autocomplete="off" placeholder="Tu nombre">
+            <label for="dni-curso">Curso</label>
+            <input id="dni-curso" type="text" autocomplete="off" placeholder="Ej.: 5.º 2.ª">
             <div id="dni-error" class="dni-error"></div>
             <button class="btn btn-primary" type="submit">Ingresar</button>
         </form>
@@ -357,7 +365,7 @@
 
 <div id="barra-alumno" class="barra-alumno" hidden>
     <span id="dni-badge"></span>
-    <button id="cambiar-dni" type="button">Cambiar DNI</button>
+    <button id="cambiar-datos" type="button">Cambiar datos</button>
 </div>
 
 
@@ -2638,7 +2646,7 @@ window.reiniciarQuiz = function (contId, bannerId) {
 </script>
 
 <script src="config.js?v=1"></script>
-<script src="entregas.js?v=1"></script>
+<script src="entregas.js?v=2"></script>
 </body>
 </html>
 

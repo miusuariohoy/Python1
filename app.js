@@ -299,17 +299,54 @@
         };
     }
 
-    /* ---------- Datos del alumno ---------- */
+    /* ---------- Datos del alumno (compartidos con las guías) ---------- */
+    var CLAVE_DNI = 'py_alumno_dni';
+    var CLAVE_PERFIL = 'py_alumno_perfil_';
+
+    function dniGuardado() {
+        try { return localStorage.getItem(CLAVE_DNI) || ''; } catch (e) { return ''; }
+    }
+
+    function leerPerfil(dni) {
+        try {
+            var raw = localStorage.getItem(CLAVE_PERFIL + dni);
+            return raw ? JSON.parse(raw) : {};
+        } catch (e) { return {}; }
+    }
+
+    function guardarPerfil(dni, datos) {
+        try {
+            localStorage.setItem(CLAVE_PERFIL + dni, JSON.stringify({
+                apellido: datos.apellido,
+                nombre: datos.nombre,
+                curso: datos.curso
+            }));
+        } catch (e) { /* sin storage */ }
+    }
+
+    function rellenarPerfil() {
+        var dni = dniGuardado();
+        if (!dni) return;
+        var perfil = leerPerfil(dni);
+        [['#alumno-apellido', perfil.apellido],
+         ['#alumno-nombre', perfil.nombre],
+         ['#alumno-curso', perfil.curso]].forEach(function (par) {
+            var el = $(par[0]);
+            if (el && !el.value.trim() && par[1]) el.value = par[1];
+        });
+    }
+
     function datosAlumno() {
-        var dni = '';
-        try { dni = localStorage.getItem('py_alumno_dni') || ''; } catch (e) { /* sin storage */ }
-        return {
+        var dni = dniGuardado();
+        var a = {
             apellido: $('#alumno-apellido').value.trim(),
             nombre: $('#alumno-nombre').value.trim(),
             curso: $('#alumno-curso').value.trim(),
             materia: ($('#alumno-materia').value.trim() || EXAMEN.materia),
             dni: dni
         };
+        if (dni && a.apellido && a.nombre && a.curso) guardarPerfil(dni, a);
+        return a;
     }
 
     function validarAlumno() {
@@ -757,6 +794,7 @@
         $('#acceso').hidden = true;
         $('#app').hidden = false;
         $('#alumno-materia').value = EXAMEN.materia;
+        rellenarPerfil();
         var primero = $('#alumno-apellido');
         if (primero) primero.focus();
     }
