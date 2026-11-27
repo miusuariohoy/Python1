@@ -35,7 +35,12 @@ window.CONFIG.EJERCICIOS = {
         { d: 'Muestra un saludo con print()', f: function (c) { return /\bprint\s*\(/.test(c); } },
         { d: 'Escribe Button con mayúscula (Button)', f: function (c, original) { return /\bButton\s*\(/.test(original || c); } },
         { d: 'Pasa la ventana como padre: Button(ventana, ...)', f: function (c, original) { return /\bButton\s*\(\s*ventana\b/i.test(original || c); } },
-        { d: 'Conecta con command=lambda', f: function (c, original) { return /\bButton\s*\(\s*ventana\b[^)]*command\s*=\s*lambda/i.test(original || c); } },
+        { d: 'Conecta con command=lambda', f: function (c, original) {
+            var o = original || c;
+            return /\bButton\s*\(\s*ventana\b[^\n]*command\s*=\s*lambda/i.test(o) ||
+                       /\.config\s*\([^\n]*command\s*=\s*lambda/i.test(o) ||
+                       /\[\s*[\"']command[\"']\s*\]\s*=\s*lambda/i.test(o);
+        } },
         { d: 'Cierra con mainloop()', f: function (c) { return /\bmainloop\s*\(/.test(c); } }
     ]
 };

@@ -44,7 +44,12 @@ window.CONFIG.EJERCICIOS = {
         { d: 'El texto nuevo dice "Apretaste"', f: function (c) { return /apretaste/.test(c); } },
         { d: 'Escribe Button con mayúscula (Button)', f: function (c, original) { return /\bButton\s*\(/.test(original || c); } },
         { d: 'Pasa la ventana como padre: Button(ventana, ...)', f: function (c, original) { return /\bButton\s*\(\s*ventana\b/i.test(original || c); } },
-        { d: 'Conecta el botón con command=cambiar (sin paréntesis)', f: function (c, original) { return /\bButton\s*\(\s*ventana\b[^)]*command\s*=\s*(?:cambiar\s*(?!\s*\()|lambda\s*:\s*cambiar\s*\(\s*\))/i.test(original || c); } },
+        { d: 'Conecta el botón con command=cambiar (sin paréntesis)', f: function (c, original) {
+            var o = original || c;
+            return /\bButton\s*\(\s*ventana\b[^\n]*command\s*=\s*(?:cambiar\s*(?!\s*\()|lambda\s*:\s*cambiar\s*\(\s*\))/i.test(o) ||
+                       /\.config\s*\([^\n]*command\s*=\s*(?:cambiar\s*(?!\s*\()|lambda\s*:\s*cambiar\s*\(\s*\))/i.test(o) ||
+                       /\[\s*[\"']command[\"']\s*\]\s*=\s*(?:cambiar\s*(?!\s*\()|lambda\s*:\s*cambiar\s*\(\s*\))/i.test(o);
+        } },
         { d: 'Cierra con mainloop()', f: function (c) { return /mainloop\s*\(\s*\)/.test(c); } }
     ],
 

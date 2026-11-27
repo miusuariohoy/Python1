@@ -2175,8 +2175,17 @@ window.reiniciarQuiz = function (contId, bannerId) {
             { d: 'Pasa la ventana como padre: Label(ventana, ...)', f: function (c, original) { return /\bLabel\s*\(\s*ventana\b/i.test(original || c); } },
             { d: 'Escribe Button con mayúscula (Button)', f: function (c, original) { return /\bButton\s*\(/.test(original || c); } },
             { d: 'Pasa la ventana como padre: Button(ventana, ...)', f: function (c, original) { return /\bButton\s*\(\s*ventana\b/i.test(original || c); } },
-            { d: 'Conecta el botón con command=', f: function (c, original) { return /\bButton\s*\(\s*ventana\b[^)]*command\s*=/i.test(original || c); } },
-            { d: 'Pasa la función SIN paréntesis en command', f: function (c) { return /command\s*=\s*[a-z_]\w*\s*[,)]/.test(c); } },
+            { d: 'Conecta el botón con command=', f: function (c, original) {
+                var o = original || c;
+                return /\bButton\s*\(\s*ventana\b[^\n]*command\s*=/i.test(o) ||
+                           /\.config\s*\([^\n]*command\s*=/i.test(o) ||
+                           /\[\s*[\"']command[\"']\s*\]\s*=/i.test(o);
+            } },
+            { d: 'Pasa la función SIN paréntesis en command', f: function (c, original) {
+            var o = original || c;
+            return /command\s*=\s*[a-z_]\w*\s*[,)]/i.test(o) ||
+                   /\[\s*["']command["']\s*\]\s*=\s*[a-z_]\w*\s*(?:$|[,)])/im.test(o);
+        } },
             { d: 'Define una función para el botón', f: function (c) { return /\bdef\s+[a-z_]\w*\s*\(\s*\)\s*:/.test(c); } },
             { d: 'Lee el campo con .get()', f: function (c) { return /\.get\s*\(\s*\)/.test(c); } },
             { d: 'Actualiza el Label con .config()', f: function (c) { return /\.config\s*\(/.test(c); } },
