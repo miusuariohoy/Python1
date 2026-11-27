@@ -200,18 +200,18 @@ saludar("Ana")</code></pre>
             <p class="explicacion"><code>print</code> separa los valores con un espacio: <strong>Hola Ana</strong>.</p>
         </article>
 
-        <article class="pregunta salida" data-aceptadas="36">
+        <article class="pregunta salida" data-aceptadas="Edad inválida">
             <p class="enunciado"><span class="num-preg">8</span>
                 ¿Qué muestra este programa?</p>
             <pre><code>try:
-    numero = int("12")
-    print(numero * 3)
+    edad = int("dieciséis")
+    print(edad)
 except ValueError:
-    print("No se pudo convertir")</code></pre>
+    print("Edad inválida")</code></pre>
             <label class="campo-salida">Salida:
                 <input type="text" id="b3" autocomplete="off" placeholder="Escribí la salida">
             </label>
-            <p class="explicacion"><code>int("12")</code> convierte correctamente; por eso se ejecuta el <code>try</code>, se calcula <code>12 * 3</code> y se muestra <strong>36</strong>. El <code>except</code> no se usa.</p>
+            <p class="explicacion"><code>int("dieciséis")</code> no puede convertir el texto a entero y produce un <code>ValueError</code>. El <code>except</code> lo atrapa y muestra <strong>Edad inválida</strong>.</p>
         </article>
 
         <article class="pregunta salida" data-aceptadas="ana">
